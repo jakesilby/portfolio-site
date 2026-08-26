@@ -156,6 +156,7 @@
 
   /* --- Color: accent --- */
   --accent-primary: var(--color-orange-4);
+  --text-accent: var(--color-orange-5); /* added for homepage build: hero eyebrow color — same primitive as --bg-accent, aliased separately since a bg token shouldn't be reused for text */
 
   /* --- Color: borders --- */
   --border-divider: var(--color-forest-0);
@@ -174,6 +175,9 @@
   --padding-card-y: var(--space-36);
   --padding-section-y: var(--space-96);
   --padding-image: var(--space-56);
+
+  /* --- Layout --- */
+  --layout-max-width: 1200px; /* added for homepage build: content container width, no Figma frame value available for this so picked a standard desktop content width */
 }
 
 

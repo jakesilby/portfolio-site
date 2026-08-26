@@ -1,0 +1,189 @@
+/* Shared chrome: site-header, site-footer, project-row.
+ * Loaded on every page that uses these components — never modify a copy
+ * per page, edit here.
+ */
+
+/* --- Site header --- */
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--gap-stack);
+  padding: var(--space-32) var(--padding-section-x) 0;
+}
+
+.site-header__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-inline);
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.site-header__brand-mark {
+  color: var(--accent-primary);
+}
+
+.site-header__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-inline);
+}
+
+.nav-pill {
+  display: inline-block;
+  padding: var(--gap-inline) var(--gap-stack);
+  border: 1px solid var(--border-default);
+  border-radius: var(--space-4);
+  color: var(--text-primary);
+  text-decoration: none;
+  background: transparent;
+}
+
+.nav-pill[data-nav='work'] {
+  background: var(--bg-accent);
+  border-color: var(--bg-accent);
+  color: var(--text-inverse);
+}
+
+/* --- Site footer --- */
+
+.site-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--gap-stack);
+  padding: var(--padding-section-y) var(--padding-section-x) var(--space-48);
+}
+
+.site-footer__copy {
+  color: var(--text-label);
+}
+
+.site-footer__links {
+  display: flex;
+  gap: var(--gap-footer-links);
+}
+
+.site-footer__links a {
+  color: var(--text-label);
+  text-decoration: none;
+}
+
+.site-footer__links a:hover {
+  color: var(--text-primary);
+}
+
+/* --- Project row --- */
+
+.project-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-card);
+  padding: var(--padding-card-y) var(--padding-section-x);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--border-divider);
+}
+
+.project-row:hover {
+  background: var(--bg-inverse);
+  color: var(--text-inverse);
+}
+
+.project-row__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--padding-section-x);
+  align-items: start;
+}
+
+.project-row__image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+  background: var(--bg-placeholder);
+  padding: var(--padding-image);
+}
+
+.project-row__image-inner {
+  width: 100%;
+  height: 100%;
+  background: var(--bg-page);
+}
+
+.project-row__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--gap-card);
+}
+
+.project-row__title-group {
+  display: flex;
+  align-items: baseline;
+  gap: var(--gap-inline);
+}
+
+.project-row__index {
+  color: var(--text-muted);
+}
+
+.project-row:hover .project-row__index {
+  color: currentColor;
+}
+
+.project-row__title {
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.project-row:hover .project-row__title {
+  color: currentColor;
+}
+
+.project-row__meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--gap-tight);
+}
+
+.project-row__year {
+  color: var(--text-label);
+}
+
+.project-row:hover .project-row__year {
+  color: currentColor;
+}
+
+.badge {
+  display: inline-block;
+  padding: var(--gap-tight) var(--gap-inline);
+  border: 1px solid var(--border-muted);
+  border-radius: var(--space-4);
+  color: var(--text-label);
+}
+
+.project-row:hover .badge {
+  color: currentColor;
+  border-color: currentColor;
+}
+
+.project-row__description {
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.project-row:hover .project-row__description {
+  color: currentColor;
+}
+
+@media (max-width: 720px) {
+  .project-row {
+    grid-template-columns: 1fr;
+  }
+}

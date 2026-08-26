@@ -7,30 +7,49 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Spline+Sans+Mono:wght@400;500&family=Barlow:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components/components.css">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
-      height: 100%;
       background: var(--bg-page);
       color: var(--text-primary);
+      font-family: var(--font-family-sans);
     }
     body {
+      max-width: var(--layout-max-width);
+      margin: 0 auto;
+    }
+    .hero {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
       gap: var(--gap-stack);
-      padding: var(--padding-section-x);
+      padding: var(--padding-section-y) var(--padding-section-x);
     }
-    .wordmark { color: var(--text-primary); }
-    .tagline { color: var(--text-secondary); max-width: 32rem; }
-    .status { color: var(--text-label); }
+    .hero__eyebrow {
+      color: var(--text-accent);
+    }
+    .hero__tagline {
+      color: var(--text-primary);
+    }
+    .section-label {
+      color: var(--text-label);
+      padding: 0 var(--padding-section-x) var(--padding-card-y);
+      border-bottom: 1px dashed var(--border-divider);
+    }
   </style>
 </head>
-<body>
-  <p class="type-wordmark wordmark">Jake Silby</p>
-  <p class="type-tagline tagline">testing the deploy pipeline.</p>
-  <p class="type-meta status">Case studies coming soon</p>
+<body data-page="work">
+  <script src="components/nav.js"></script>
+
+  <section class="hero">
+    <p class="hero__eyebrow type-eyebrow">Hello, I'm Jake Silby</p>
+    <p class="hero__tagline type-tagline">A systems-oriented product designer based in Brooklyn, NY.</p>
+  </section>
+
+  <p class="section-label type-section-label">Selected Work ↓</p>
+
+  <script src="components/project-row.js"></script>
+
+  <script src="components/footer.js"></script>
 </body>
 </html>
