@@ -183,7 +183,17 @@
 }
 
 @media (max-width: 720px) {
-  .project-row {
+  .project-row__body {
     grid-template-columns: 1fr;
+  }
+
+  .project-row__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--gap-stack);
+  }
+
+  .project-row__meta {
+    align-items: flex-start;
   }
 }
