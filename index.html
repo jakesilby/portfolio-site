@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jake Silby — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Spline+Sans+Mono:wght@400;500&family=Barlow:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%;
+      background: var(--bg-page);
+      color: var(--text-primary);
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: var(--gap-stack);
+      padding: var(--padding-section-x);
+    }
+    .wordmark { color: var(--text-primary); }
+    .tagline { color: var(--text-secondary); max-width: 32rem; }
+    .status { color: var(--text-label); }
+  </style>
+</head>
+<body>
+  <p class="type-wordmark wordmark">Jake Silby</p>
+  <p class="type-tagline tagline">Design systems, tokens, and the bridge between design and code.</p>
+  <p class="type-meta status">Case studies coming soon</p>
+</body>
+</html>

@@ -1,0 +1,306 @@
+/*
+ * Portfolio Design Tokens
+ * Source of truth for every color, spacing, and type value on the site.
+ * Never write a raw hex/px value in a page or component — reference a token.
+ * Mirrors the Pulse Design System's token architecture: primitives → semantic aliases.
+ * A third "mapped" tier (component-scoped tokens like --button-bg) can be added
+ * as real components get built — add it there, not as one-off inline values.
+ *
+ * Generated from the Figma file's Variables (Color Primitives, Color, Spacing
+ * Primitives, Spacing collections) — values pulled directly from the Plugin API,
+ * not eyeballed from a screenshot.
+ */
+
+:root {
+
+  /* ============================================================
+   * PRIMITIVES — raw values, tied to no meaning. Never reference
+   * these directly in components; go through the semantic layer below.
+   * ============================================================ */
+
+  /* --- Color primitives: brown --- */
+  --color-brown-0: #f3b29b;
+  --color-brown-0-5: #e4a38d;
+  --color-brown-1: #d5957e;
+  --color-brown-1-5: #c58670;
+  --color-brown-2: #b67861;
+  --color-brown-3: #985a45;
+  --color-brown-4: #793d28;
+  --color-brown-5: #5b200b;
+  --color-brown-6: #491a09;
+  --color-brown-7: #371307;
+  --color-brown-8: #240d04;
+  --color-brown-8-5: #1b0a03;
+  --color-brown-9: #120602;
+  --color-brown-9-5: #090301;
+  --color-brown-10: #000000;
+
+  /* --- Color primitives: orange --- */
+  --color-orange-0: #ffffff;
+  --color-orange-0-5: #fdeee7;
+  --color-orange-1: #fcdccf;
+  --color-orange-1-5: #facbb7;
+  --color-orange-2: #f8ba9f;
+  --color-orange-3: #f59770;
+  --color-orange-4: #f17540;
+  --color-orange-5: #ee5210;
+  --color-orange-6: #be420d;
+  --color-orange-7: #8f310a;
+  --color-orange-8: #5f2106;
+  --color-orange-8-5: #471905;
+  --color-orange-9: #301003;
+  --color-orange-9-5: #180802;
+  --color-orange-10: #000000;
+
+  /* --- Color primitives: sage --- */
+  --color-sage-0: #ffffff;
+  --color-sage-0-5: #fbfbfb;
+  --color-sage-1: #f6f8f6;
+  --color-sage-1-5: #f2f4f2;
+  --color-sage-2: #edf1ed;
+  --color-sage-3: #e4e9e5;
+  --color-sage-4: #dbe2dc;
+  --color-sage-5: #d2dbd3;
+  --color-sage-6: #b4beb5;
+  --color-sage-7: #96a197;
+  --color-sage-8: #778479;
+  --color-sage-8-5: #68766a;
+  --color-sage-9: #59675b;
+  --color-sage-9-5: #4a594c;
+  --color-sage-10: #3b4a3d;
+
+  /* --- Color primitives: forest --- */
+  --color-forest-0: #b7d8bc;
+  --color-forest-0-5: #a8c9ad;
+  --color-forest-1: #9aba9f;
+  --color-forest-1-5: #8bab90;
+  --color-forest-2: #7c9c81;
+  --color-forest-3: #5f7f64;
+  --color-forest-4: #416146;
+  --color-forest-5: #244329;
+  --color-forest-6: #1d3621;
+  --color-forest-7: #162819;
+  --color-forest-8: #0e1b10;
+  --color-forest-8-5: #0b140c;
+  --color-forest-9: #070d08;
+  --color-forest-9-5: #040704;
+  --color-forest-10: #000000;
+
+  /* --- Spacing primitives --- */
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-36: 36px;
+  --space-48: 48px;
+  --space-56: 56px;
+  --space-96: 96px;
+
+  /* --- Typography primitives --- */
+  --font-family-serif: 'Playfair Display', serif;
+  --font-family-mono: 'Spline Sans Mono', monospace;
+  --font-family-sans: 'Barlow', sans-serif;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  --font-size-11: 11px;
+  --font-size-13: 13px;
+  --font-size-16: 16px;
+  --font-size-18: 18px;
+  --font-size-20: 20px;
+  --font-size-24: 24px;
+  --font-size-32: 32px;
+  --font-size-48: 48px; /* added for case study page titles */
+
+  --line-height-16: 16px;
+  --line-height-20: 20px;
+  --line-height-24: 24px;
+  --line-height-32: 32px;
+  --line-height-36: 36px;
+  --line-height-48: 48px;
+  --line-height-56: 56px; /* added for case study page titles */
+
+  --letter-spacing-none: 0px;
+  --letter-spacing-tight-sm: -0.8px;
+  --letter-spacing-tight-md: -1.2px;
+  --letter-spacing-tight-lg: -1.6px; /* added for case study page titles */
+  --letter-spacing-wide-sm: 0.88px;
+  --letter-spacing-wide-md: 1.04px;
+  --letter-spacing-wide-lg: 1.1px;
+
+
+  /* ============================================================
+   * SEMANTIC ALIASES — roles, composed from primitives. Components
+   * reference these, not the raw primitive scale above.
+   * ============================================================ */
+
+  /* --- Color: backgrounds --- */
+  --bg-page: var(--color-sage-1);
+  --bg-canvas: var(--color-sage-0-5); /* the site's root/base background (behind everything) — not meant as a visible section tone on its own */
+  --bg-accent: var(--color-orange-5);
+  --bg-inverse: var(--color-orange-9);
+  --bg-placeholder: var(--color-sage-6);
+  --bg-section-alt: var(--color-sage-5); /* added for case study pages: a deliberately distinct alternate section tone, clearly differentiated from bg-page (unlike bg-canvas, which is nearly identical to bg-page and reads as a mistake when used for section alternation) */
+
+  /* --- Color: text --- */
+  --text-primary: var(--color-brown-7);
+  --text-secondary: var(--color-orange-9-5);
+  --text-inverse: var(--color-sage-1);
+  --text-muted: var(--color-sage-6);
+  --text-label: var(--color-sage-9-5); /* was color-sage-7 (#96a197): failed WCAG AA at ~2.5:1 against every light background on the site. sage-9-5 passes AAA (~7:1) while staying visibly muted. Fixes "Selected Work ↓" on the homepage too. */
+
+  /* --- Color: accent --- */
+  --accent-primary: var(--color-orange-4);
+
+  /* --- Color: borders --- */
+  --border-divider: var(--color-forest-0);
+  --border-muted: var(--color-sage-6);
+  --border-default: var(--color-orange-9-5);
+
+  /* --- Spacing: gaps --- */
+  --gap-tight: var(--space-4);
+  --gap-inline: var(--space-8);
+  --gap-stack: var(--space-16);
+  --gap-card: var(--space-24);
+  --gap-footer-links: var(--space-32);
+
+  /* --- Spacing: padding --- */
+  --padding-section-x: var(--space-48);
+  --padding-card-y: var(--space-36);
+  --padding-section-y: var(--space-96);
+  --padding-image: var(--space-56);
+}
+
+
+/* ============================================================
+ * TYPOGRAPHY — COMPOSITE TOKENS
+ * fontSize/lineHeight/fontWeight can't be expressed as a single CSS
+ * custom property (same limitation the Pulse tokens.css documented
+ * for its 30 skipped composite tokens) — compose the primitives above
+ * into a class per role instead. These classes ARE the type-scale
+ * tokens; treat them as the source of truth the same way you'd treat
+ * a custom property.
+ * ============================================================ */
+
+.type-wordmark {
+  font-family: var(--font-family-serif);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-18);
+  line-height: var(--line-height-36);
+  letter-spacing: var(--letter-spacing-none);
+}
+
+.type-nav-label {
+  font-family: var(--font-family-mono);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-11);
+  line-height: var(--line-height-16);
+  letter-spacing: var(--letter-spacing-wide-lg);
+  text-transform: uppercase;
+}
+
+.type-eyebrow {
+  font-family: var(--font-family-mono);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-16);
+  line-height: var(--line-height-20);
+  letter-spacing: var(--letter-spacing-wide-md);
+  text-transform: uppercase;
+}
+.type-eyebrow strong,
+.type-eyebrow .emphasis {
+  font-weight: var(--font-weight-semibold);
+}
+
+.type-tagline {
+  font-family: var(--font-family-serif);
+  font-style: italic;
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-24);
+  line-height: var(--line-height-36);
+  letter-spacing: var(--letter-spacing-none);
+}
+
+.type-section-label {
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-24);
+  line-height: var(--line-height-32);
+  letter-spacing: var(--letter-spacing-tight-sm);
+}
+
+.type-meta {
+  font-family: var(--font-family-mono);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-13);
+  line-height: var(--line-height-20);
+  letter-spacing: var(--letter-spacing-wide-md);
+  text-transform: uppercase;
+}
+
+.type-case-title {
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-extrabold);
+  font-size: var(--font-size-32);
+  line-height: var(--line-height-48);
+  letter-spacing: var(--letter-spacing-tight-md);
+}
+
+.type-label-secondary {
+  font-family: var(--font-family-mono);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-11);
+  line-height: var(--line-height-16);
+  letter-spacing: var(--letter-spacing-wide-sm);
+  text-transform: uppercase;
+}
+
+.type-description {
+  font-family: var(--font-family-serif);
+  font-style: italic;
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-20);
+  line-height: var(--line-height-24);
+  letter-spacing: var(--letter-spacing-none);
+}
+
+/* --- Case study page additions (introduced while building the Pulse
+ * case study page; not present on the homepage) --- */
+
+.type-page-title {
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-extrabold);
+  font-size: var(--font-size-48);
+  line-height: var(--line-height-56);
+  letter-spacing: var(--letter-spacing-tight-lg);
+}
+
+.type-body {
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-16);
+  line-height: var(--line-height-24);
+  letter-spacing: var(--letter-spacing-none);
+}
+.type-body strong,
+.type-body .lead-in {
+  font-weight: var(--font-weight-semibold);
+}
+
+
+/* ============================================================
+ * COMPONENT INTENT (not yet built) — documented here so it isn't
+ * lost before the ProjectRow component exists in code.
+ * ============================================================ */
+
+/*
+.project-row:hover {
+  background: var(--bg-inverse);
+  color: var(--text-inverse);
+}
+*/
