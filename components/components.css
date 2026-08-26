@@ -23,7 +23,9 @@
 }
 
 .site-header__brand-mark {
-  color: var(--accent-primary);
+  display: block;
+  width: var(--space-16);
+  height: var(--space-16);
 }
 
 .site-header__nav {

@@ -96,6 +96,7 @@
   --space-48: 48px;
   --space-56: 56px;
   --space-96: 96px;
+  --space-160: 160px; /* added for homepage build: experimenting with hero vertical padding, see --padding-hero-y */
 
   /* --- Typography primitives --- */
   --font-family-serif: 'Playfair Display', serif;
@@ -175,6 +176,7 @@
   --padding-card-y: var(--space-36);
   --padding-section-y: var(--space-96);
   --padding-image: var(--space-56);
+  --padding-hero-y: var(--space-160); /* experiment: Figma specs --padding-section-y (96px) here, but it read too tight at real browser size. Scoped to .hero only — other sections stay on the Figma-spec value. Revisit after side-by-side comparison. */
 
   /* --- Layout --- */
   --layout-max-width: 1200px; /* added for homepage build: content container width, no Figma frame value available for this so picked a standard desktop content width */
