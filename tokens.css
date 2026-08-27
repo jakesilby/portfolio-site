@@ -173,6 +173,7 @@
   /* --- Spacing primitives --- */
   --space-4: 4px;
   --space-8: 8px;
+  --space-12: 12px; /* hero heading/subhead gap — confirmed against live Figma (196:383); doesn't match any existing gap step */
   --space-16: 16px;
   --space-24: 24px;
   --space-32: 32px;
@@ -180,8 +181,9 @@
   --space-48: 48px;
   --space-56: 56px;
   --space-96: 96px;
+  --space-128: 128px; /* hero panel padding, current — replaces 200px; confirmed against live Figma (196:383) */
   --space-160: 160px;
-  --space-200: 200px; /* hero panel padding — confirmed against live Figma (196:382), paired with the 64px headline resize as one deliberate pass */
+  --space-200: 200px; /* superseded by --space-128 for --padding-hero-y — kept in case another section needs it */
 
   /* --- Typography primitives --- */
   --font-family-serif: 'Playfair Display', serif;
@@ -201,9 +203,10 @@
   --font-size-20: 20px;
   --font-size-24: 24px;
   --font-size-32: 32px;
+  --font-size-40: 40px; /* hero headline, current — confirmed against live Figma (196:383) */
   --font-size-48: 48px; /* added for case study page titles */
-  --font-size-64: 64px; /* hero headline — confirmed against live Figma (196:382); supersedes the earlier untested 72px */
-  --font-size-72: 72px; /* no longer used by .type-hero-heading — kept in case another hero-scale treatment needs it */
+  --font-size-64: 64px; /* superseded — .type-hero-heading moved from Barlow/64px back to Playfair/40px. Kept in case a future treatment needs it again. */
+  --font-size-72: 72px; /* unused — kept from an earlier hero iteration in case another hero-scale treatment needs it */
 
   --line-height-16: 16px;
   --line-height-20: 20px;
@@ -234,7 +237,7 @@
   --bg-page: var(--color-greenwhite-0);
   --bg-canvas: var(--color-greenwhite-0-5); /* the site's root/base background (behind everything) — not meant as a visible section tone on its own */
   --bg-accent: var(--color-cosmos-4);
-  --bg-inverse: var(--color-orange-9); /* NOT migrated — still legacy orange. Used by ProjectRow hover; revisit if/when that state gets redesigned */
+  --bg-inverse: var(--color-cosmos-9); /* MIGRATED — was legacy orange/9 across every prior version. Now matches the actual ProjectRow hover design (Figma node 232:21). */
   --bg-placeholder: var(--color-greenwhite-4);
   --bg-placeholder-fill: var(--color-greenwhite-1); /* NEW — inner tone for the two-tone case-study image placeholder */
   --bg-section-alt: var(--color-sage-5); /* NOT migrated — still legacy sage. Used on case study pages, which haven't been redesigned yet */
@@ -246,8 +249,10 @@
   --text-inverse: var(--color-cosmos-9);
   --text-muted: var(--color-sage-6); /* NOT migrated — still legacy sage */
   --text-label: var(--color-elm-8);
-  --text-hero-eyebrow: var(--color-cosmos-8-5); /* NEW */
+  --text-hero-eyebrow: var(--color-cosmos-8-5); /* NEW — status unclear as of the latest hero revision, see chat note */
   --text-hero-heading: var(--color-cosmos-9-5); /* NEW */
+  --text-hero-subhead: var(--color-greenwhite-8); /* NEW — the hero's second line ("I am a product designer..."), confirmed against live Figma (196:383) */
+  --text-on-inverse: var(--color-greenwhite-1); /* NEW — foreground (text + border) on top of bg-inverse, e.g. ProjectRow hover */
 
   /* --- Color: accent --- */
   --accent-primary: var(--color-cosmos-7);
@@ -262,6 +267,7 @@
   /* --- Spacing: gaps --- */
   --gap-tight: var(--space-4);
   --gap-inline: var(--space-8);
+  --gap-hero-text: var(--space-12); /* NEW — gap between the hero heading and subhead, confirmed against live Figma (196:383) */
   --gap-stack: var(--space-16);
   --gap-card: var(--space-24);
   --gap-footer-links: var(--space-32);
@@ -271,7 +277,7 @@
   --padding-card-y: var(--space-36);
   --padding-section-y: var(--space-96);
   --padding-image: var(--space-56);
-  --padding-hero-y: var(--space-200); /* updated from 160px — confirmed against live Figma (196:382); the two changed together as one pass, not a drift. Prior 160px was browser-tested against a too-tight 96px in an earlier session, so this does override that — flagged in chat, not a silent overwrite. */
+  --padding-hero-y: var(--space-128); /* updated from 200px — confirmed against live Figma (196:383). This is the third value for this token (96 → 160 → 200 → 128); if hero padding changes again, verify against Figma before assuming drift. */
 }
 
 
@@ -334,15 +340,27 @@
 }
 
 .type-hero-heading {
-  /* NEW — 2026 homepage hero headline. Barlow ExtraBold, replaces the italic
-   * serif .type-tagline treatment in this one spot only — .type-tagline is
-   * unchanged and still correct everywhere else it's used. Font size confirmed
-   * at 64px against live Figma (196:382), not the original 72px. */
-  font-family: var(--font-family-sans);
-  font-weight: var(--font-weight-extrabold);
-  font-size: var(--font-size-64);
-  line-height: var(--line-height-76);
+  /* Updated — reverted from Barlow ExtraBold/64px back to Playfair Display
+   * Regular/40px, confirmed against live Figma (196:383). This is the second
+   * full typographic reversal on this exact class; the hero treatment is
+   * still actively being iterated on, verify against Figma before trusting
+   * this file if it's been a while since the last sync. */
+  font-family: var(--font-family-serif);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-40);
+  line-height: var(--line-height-56);
   letter-spacing: var(--letter-spacing-tight-xl);
+}
+
+.type-hero-subhead {
+  /* NEW — the hero's second line. Playfair Display Regular, confirmed
+   * against live Figma (196:383). Color comes from --text-hero-subhead,
+   * not --text-hero-eyebrow — this is a distinct role. */
+  font-family: var(--font-family-serif);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-20);
+  line-height: var(--line-height-24);
+  letter-spacing: var(--letter-spacing-none);
 }
 
 .type-tagline {
