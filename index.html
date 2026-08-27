@@ -21,12 +21,6 @@
       gap: var(--gap-hero-text);
       background: var(--bg-hero);
       padding: var(--padding-hero-y) var(--padding-section-x);
-      mask-image: radial-gradient(circle at 50% 50%, black 0%, black 35%, transparent 80%);
-      -webkit-mask-image: radial-gradient(circle at 50% 50%, black 0%, black 35%, transparent 80%);
-      mask-repeat: no-repeat;
-      -webkit-mask-repeat: no-repeat;
-      mask-position: center;
-      -webkit-mask-position: center;
     }
     .hero-panel__heading {
       color: var(--text-hero-heading);
@@ -37,6 +31,12 @@
 
     @media (prefers-reduced-motion: no-preference) {
       .hero-panel {
+        mask-image: radial-gradient(circle at 50% 50%, black 0%, black 35%, transparent 80%);
+        -webkit-mask-image: radial-gradient(circle at 50% 50%, black 0%, black 35%, transparent 80%);
+        mask-repeat: no-repeat;
+        -webkit-mask-repeat: no-repeat;
+        mask-position: center;
+        -webkit-mask-position: center;
         animation: hero-panel-bloom 1100ms cubic-bezier(0.22, 1, 0.36, 1) both;
       }
       .hero-panel__heading {
@@ -55,8 +55,8 @@
         -webkit-mask-size: 8%;
       }
       to {
-        mask-size: 160%;
-        -webkit-mask-size: 160%;
+        mask-size: 400%;
+        -webkit-mask-size: 400%;
       }
     }
 
