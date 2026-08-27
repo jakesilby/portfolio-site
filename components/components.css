@@ -29,6 +29,20 @@
   height: var(--space-16);
 }
 
+.site-header__brand-text-wrap {
+  display: grid;
+}
+
+.site-header__brand-text {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transition: opacity 500ms ease-in-out;
+}
+
+.site-header__brand-text.is-active {
+  opacity: 1;
+}
+
 .site-header__nav {
   display: flex;
   align-items: center;
