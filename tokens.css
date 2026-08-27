@@ -15,6 +15,13 @@
  * / sage / forest remain in place because --bg-inverse, --bg-section-alt, and
  * --text-muted (used on case study pages / ProjectRow hover) haven't been
  * migrated to the new palette yet — don't delete them until those are addressed.
+ *
+ * v2 — restored --layout-max-width and --space-160 (--padding-hero-y), both
+ * dropped by mistake in v1's wholesale file replacement rather than a deliberate
+ * change. --text-accent was NOT restored — --text-hero-eyebrow is its intended
+ * successor, scoped to the not-yet-built .hero-panel structure. Migrate
+ * .hero__eyebrow to .type-hero-eyebrow when the hero panel gets built; don't
+ * bring --text-accent back.
  */
 
 :root {
@@ -160,6 +167,9 @@
   --color-elm-9-5: #030a0d;
   --color-elm-10: #000000;
 
+  /* --- Layout primitives --- */
+  --layout-max-width: 1200px;
+
   /* --- Spacing primitives --- */
   --space-4: 4px;
   --space-8: 8px;
@@ -170,6 +180,7 @@
   --space-48: 48px;
   --space-56: 56px;
   --space-96: 96px;
+  --space-160: 160px;
 
   /* --- Typography primitives --- */
   --font-family-serif: 'Playfair Display', serif;
@@ -258,7 +269,7 @@
   --padding-card-y: var(--space-36);
   --padding-section-y: var(--space-96);
   --padding-image: var(--space-56);
-  --padding-hero-y: var(--space-96); /* review against Figma — hero panel padding may differ from standard section padding */
+  --padding-hero-y: var(--space-160); /* confirmed 160px in a prior session — 96px measured too tight in-browser, don't re-litigate */
 }
 
 
