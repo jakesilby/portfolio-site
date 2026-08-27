@@ -19,21 +19,22 @@
       max-width: var(--layout-max-width);
       margin: 0 auto;
     }
-    .hero {
+    .hero-panel {
       display: flex;
       flex-direction: column;
       gap: var(--gap-stack);
+      background: var(--bg-hero);
       padding: var(--padding-hero-y) var(--padding-section-x);
     }
-    .hero__eyebrow {
-      color: var(--text-accent);
+    .hero-panel__eyebrow {
+      color: var(--text-hero-eyebrow);
     }
-    .hero__tagline {
-      color: var(--text-primary);
+    .hero-panel__heading {
+      color: var(--text-hero-heading);
     }
     .section-label {
       color: var(--text-label);
-      padding: 0 var(--padding-section-x) var(--padding-card-y);
+      padding: var(--padding-section-x);
       border-bottom: 1px dashed var(--border-divider);
     }
   </style>
@@ -41,9 +42,9 @@
 <body data-page="work">
   <script src="components/nav.js"></script>
 
-  <section class="hero">
-    <p class="hero__eyebrow type-eyebrow">Hello, I'm <strong>Jake Silby</strong></p>
-    <p class="hero__tagline type-tagline">A systems-oriented product designer based in Brooklyn, NY.</p>
+  <section class="hero-panel">
+    <p class="hero-panel__eyebrow type-hero-eyebrow">Hello, I’m <strong>Jake Silby</strong></p>
+    <p class="hero-panel__heading type-hero-heading">A product designer based in Brooklyn, NY.</p>
   </section>
 
   <p class="section-label type-section-label">Selected Work ↓</p>
