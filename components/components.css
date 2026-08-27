@@ -10,8 +10,9 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: var(--gap-stack);
-  padding: var(--space-32) var(--padding-section-x) 0;
+  gap: var(--gap-inline);
+  height: 80px;
+  padding: 0 var(--padding-section-x);
 }
 
 .site-header__brand {

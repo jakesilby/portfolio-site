@@ -286,10 +286,14 @@
  * ============================================================ */
 
 .type-wordmark {
-  font-family: var(--font-family-serif);
+  /* Corrected — was font-family-serif/line-height-36, neither matched the
+   * actual "Welcome" nav layer in Figma (confirmed: Barlow Bold 18px,
+   * line-height 20px). This was wrong in tokens.css before any of the
+   * 2026 homepage work; unrelated to the cosmos/greenwhite/elm migration. */
+  font-family: var(--font-family-sans);
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-18);
-  line-height: var(--line-height-36);
+  line-height: var(--line-height-20);
   letter-spacing: var(--letter-spacing-none);
 }
 
