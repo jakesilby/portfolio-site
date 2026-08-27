@@ -173,7 +173,7 @@
   /* --- Spacing primitives --- */
   --space-4: 4px;
   --space-8: 8px;
-  --space-12: 12px; /* hero heading/subhead gap — confirmed against live Figma (196:383); doesn't match any existing gap step */
+  --space-12: 12px; /* restored — dropped by mistake in v6, still in live use via --gap-hero-text */
   --space-16: 16px;
   --space-24: 24px;
   --space-32: 32px;
@@ -181,9 +181,10 @@
   --space-48: 48px;
   --space-56: 56px;
   --space-96: 96px;
-  --space-128: 128px; /* hero panel padding, current — replaces 200px; confirmed against live Figma (196:383) */
+  --space-128: 128px; /* superseded — kept in case another section needs it */
   --space-160: 160px;
-  --space-200: 200px; /* superseded by --space-128 for --padding-hero-y — kept in case another section needs it */
+  --space-180: 180px; /* superseded — this is Figma's actual measured value (196:383), but --padding-hero-y was deliberately overridden to --space-160 instead. Kept in case it goes back. */
+  --space-200: 200px; /* superseded — kept in case another section needs it */
 
   /* --- Typography primitives --- */
   --font-family-serif: 'Playfair Display', serif;
@@ -209,6 +210,7 @@
   --font-size-72: 72px; /* unused — kept from an earlier hero iteration in case another hero-scale treatment needs it */
 
   --line-height-16: 16px;
+  --line-height-18: 18px; /* "Selected Work" label, current — confirmed against live Figma (196:383) */
   --line-height-20: 20px;
   --line-height-24: 24px;
   --line-height-32: 32px;
@@ -267,7 +269,7 @@
   /* --- Spacing: gaps --- */
   --gap-tight: var(--space-4);
   --gap-inline: var(--space-8);
-  --gap-hero-text: var(--space-12); /* NEW — gap between the hero heading and subhead, confirmed against live Figma (196:383) */
+  --gap-hero-text: var(--space-12); /* restored — dropped by mistake in v6. Added by Claude Code during the hero panel build (Prompt 4), not present in any version I generated before that — I had no visibility into it until this was flagged. */
   --gap-stack: var(--space-16);
   --gap-card: var(--space-24);
   --gap-footer-links: var(--space-32);
@@ -277,7 +279,7 @@
   --padding-card-y: var(--space-36);
   --padding-section-y: var(--space-96);
   --padding-image: var(--space-56);
-  --padding-hero-y: var(--space-128); /* updated from 200px — confirmed against live Figma (196:383). This is the third value for this token (96 → 160 → 200 → 128); if hero padding changes again, verify against Figma before assuming drift. */
+  --padding-hero-y: var(--space-160); /* deliberate override, not a Figma value — Figma's node 196:383 measures 180px, but 160px was chosen instead before committing. Fifth value for this token (96 → 160 → 200 → 128 → 180 → 160); if it changes again, verify against Figma before assuming drift, and note whether it's an intentional override like this one. */
 }
 
 
@@ -373,10 +375,15 @@
 }
 
 .type-section-label {
+  /* Updated — font-size 24→16, line-height 32→18, confirmed against live
+   * Figma (196:383) on the "Selected Work" text, which is bound to
+   * text/primary there. letter-spacing (tight-sm, -0.8px) was already
+   * correct and is unchanged. If this class is used anywhere besides
+   * "Selected Work", confirm before applying — see prompt. */
   font-family: var(--font-family-sans);
   font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-24);
-  line-height: var(--line-height-32);
+  font-size: var(--font-size-16);
+  line-height: var(--line-height-18);
   letter-spacing: var(--letter-spacing-tight-sm);
 }
 
