@@ -21,6 +21,12 @@
       gap: var(--gap-hero-text);
       background: var(--bg-hero);
       padding: var(--padding-hero-y) var(--padding-section-x);
+      mask-image: radial-gradient(circle at 50% 50%, black 0%, black 35%, transparent 80%);
+      -webkit-mask-image: radial-gradient(circle at 50% 50%, black 0%, black 35%, transparent 80%);
+      mask-repeat: no-repeat;
+      -webkit-mask-repeat: no-repeat;
+      mask-position: center;
+      -webkit-mask-position: center;
     }
     .hero-panel__heading {
       color: var(--text-hero-heading);
@@ -31,7 +37,7 @@
 
     @media (prefers-reduced-motion: no-preference) {
       .hero-panel {
-        animation: hero-panel-wipe 850ms cubic-bezier(0.16, 1, 0.3, 1) both;
+        animation: hero-panel-bloom 1100ms cubic-bezier(0.22, 1, 0.36, 1) both;
       }
       .hero-panel__heading {
         animation: hero-text-in 420ms ease-out both;
@@ -43,9 +49,15 @@
       }
     }
 
-    @keyframes hero-panel-wipe {
-      from { clip-path: inset(0 100% 0 0); }
-      to { clip-path: inset(0 0 0 0); }
+    @keyframes hero-panel-bloom {
+      from {
+        mask-size: 8%;
+        -webkit-mask-size: 8%;
+      }
+      to {
+        mask-size: 160%;
+        -webkit-mask-size: 160%;
+      }
     }
 
     @keyframes hero-text-in {
