@@ -7,8 +7,8 @@ navScript.insertAdjacentHTML('afterend', `
     <span class="site-header__brand-text type-wordmark">Welcome</span>
   </a>
   <nav class="site-header__nav" aria-label="Primary">
-    <a class="nav-pill type-nav-label" data-nav="work" href="/">01 / Work</a>
-    <a class="nav-pill type-nav-label" data-nav="about" href="#">02 / About</a>
+    <a class="nav-pill type-nav-label" data-nav="work" href="/">Work</a>
+    <a class="nav-pill type-nav-label" data-nav="about" href="#">About</a>
   </nav>
 </header>
 `);

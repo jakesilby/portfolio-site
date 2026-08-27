@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jake Silby — Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Spline+Sans+Mono:wght@400;500&family=Barlow:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Spline+Sans+Mono:wght@400;500&family=Barlow:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="tokens.css">
   <link rel="stylesheet" href="components/components.css">
   <style>
@@ -15,22 +15,18 @@
       color: var(--text-primary);
       font-family: var(--font-family-sans);
     }
-    body {
-      max-width: var(--layout-max-width);
-      margin: 0 auto;
-    }
     .hero-panel {
       display: flex;
       flex-direction: column;
-      gap: var(--gap-stack);
+      gap: var(--gap-hero-text);
       background: var(--bg-hero);
       padding: var(--padding-hero-y) var(--padding-section-x);
     }
-    .hero-panel__eyebrow {
-      color: var(--text-hero-eyebrow);
-    }
     .hero-panel__heading {
       color: var(--text-hero-heading);
+    }
+    .hero-panel__subhead {
+      color: var(--text-hero-subhead);
     }
     .section-label {
       color: var(--text-label);
@@ -43,8 +39,8 @@
   <script src="components/nav.js"></script>
 
   <section class="hero-panel">
-    <p class="hero-panel__eyebrow type-hero-eyebrow">Hello, I’m <strong>Jake Silby</strong></p>
-    <p class="hero-panel__heading type-hero-heading">A product designer based in Brooklyn, NY.</p>
+    <p class="hero-panel__heading type-hero-heading">Hi, I’m Jake</p>
+    <p class="hero-panel__subhead type-hero-subhead">I am a product designer based in Brooklyn, NY.</p>
   </section>
 
   <p class="section-label type-section-label">Selected Work ↓</p>

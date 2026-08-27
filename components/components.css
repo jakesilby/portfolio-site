@@ -39,7 +39,7 @@
   display: inline-block;
   padding: var(--gap-inline) var(--gap-stack);
   border: 1px solid var(--border-accent);
-  border-radius: var(--space-4);
+  border-radius: 0;
   color: var(--text-primary);
   text-decoration: none;
   background: transparent;
@@ -93,7 +93,7 @@
 
 .project-row:hover {
   background: var(--bg-inverse);
-  color: var(--text-inverse);
+  color: var(--text-on-inverse);
 }
 
 .project-row__body {
