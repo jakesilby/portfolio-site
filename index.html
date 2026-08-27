@@ -29,42 +29,6 @@
       color: var(--text-hero-subhead);
     }
 
-    @media (prefers-reduced-motion: no-preference) {
-      .hero-panel {
-        animation: hero-panel-dissolve 500ms ease-out both;
-      }
-      .hero-panel__heading {
-        animation: hero-text-in 550ms ease-in-out both;
-        animation-delay: 300ms;
-      }
-      .hero-panel__subhead {
-        animation: hero-text-in 500ms ease-in-out both;
-        animation-delay: 300ms;
-      }
-    }
-
-    @keyframes hero-panel-dissolve {
-      from {
-        opacity: 0;
-        filter: blur(8px);
-      }
-      to {
-        opacity: 1;
-        filter: blur(0);
-      }
-    }
-
-    @keyframes hero-text-in {
-      from {
-        opacity: 0;
-        transform: translateY(8px) scale(0.98);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
     .section-label {
       color: var(--text-primary);
       padding: var(--padding-section-x);
