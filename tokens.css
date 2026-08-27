@@ -9,6 +9,12 @@
  * Generated from the Figma file's Variables (Color Primitives, Color, Spacing
  * Primitives, Spacing collections) — values pulled directly from the Plugin API,
  * not eyeballed from a screenshot.
+ *
+ * 2026 homepage direction: cosmos / greenwhite / smaltblue / elm are the active
+ * primitives for the homepage (see --bg-hero, --text-hero-* below). brown / orange
+ * / sage / forest remain in place because --bg-inverse, --bg-section-alt, and
+ * --text-muted (used on case study pages / ProjectRow hover) haven't been
+ * migrated to the new palette yet — don't delete them until those are addressed.
  */
 
 :root {
@@ -18,7 +24,7 @@
    * these directly in components; go through the semantic layer below.
    * ============================================================ */
 
-  /* --- Color primitives: brown --- */
+  /* --- Color primitives: brown (legacy — still backs --bg-inverse/text-muted paths) --- */
   --color-brown-0: #f3b29b;
   --color-brown-0-5: #e4a38d;
   --color-brown-1: #d5957e;
@@ -35,7 +41,7 @@
   --color-brown-9-5: #090301;
   --color-brown-10: #000000;
 
-  /* --- Color primitives: orange --- */
+  /* --- Color primitives: orange (legacy — still backs --bg-inverse) --- */
   --color-orange-0: #ffffff;
   --color-orange-0-5: #fdeee7;
   --color-orange-1: #fcdccf;
@@ -52,7 +58,7 @@
   --color-orange-9-5: #180802;
   --color-orange-10: #000000;
 
-  /* --- Color primitives: sage --- */
+  /* --- Color primitives: sage (legacy — still backs --bg-section-alt/--text-muted) --- */
   --color-sage-0: #ffffff;
   --color-sage-0-5: #fbfbfb;
   --color-sage-1: #f6f8f6;
@@ -69,7 +75,7 @@
   --color-sage-9-5: #4a594c;
   --color-sage-10: #3b4a3d;
 
-  /* --- Color primitives: forest --- */
+  /* --- Color primitives: forest (legacy) --- */
   --color-forest-0: #b7d8bc;
   --color-forest-0-5: #a8c9ad;
   --color-forest-1: #9aba9f;
@@ -86,6 +92,74 @@
   --color-forest-9-5: #040704;
   --color-forest-10: #000000;
 
+  /* --- Color primitives: cosmos (active — 2026 homepage accent family) --- */
+  --color-cosmos-0: #fff2f1;
+  --color-cosmos-0-5: #fdf0f0;
+  --color-cosmos-1: #fbeeee;
+  --color-cosmos-1-5: #f9edec;
+  --color-cosmos-2: #f7ebea;
+  --color-cosmos-3: #f5e5e5;
+  --color-cosmos-4: #f7dddc;
+  --color-cosmos-5: #fecfcd;
+  --color-cosmos-6: #fc7973;
+  --color-cosmos-7: #fa2219;
+  --color-cosmos-8: #b40b04;
+  --color-cosmos-8-5: #870803;
+  --color-cosmos-9: #5a0502;
+  --color-cosmos-9-5: #2d0301;
+  --color-cosmos-10: #000000;
+
+  /* --- Color primitives: greenwhite (active — 2026 homepage neutral family) --- */
+  --color-greenwhite-0: #f8f8f6;
+  --color-greenwhite-0-5: #f5f6f4;
+  --color-greenwhite-1: #f3f4f1;
+  --color-greenwhite-1-5: #f1f2ef;
+  --color-greenwhite-2: #eff0ed;
+  --color-greenwhite-3: #ebece9;
+  --color-greenwhite-4: #e7e8e3;
+  --color-greenwhite-5: #e4e6dd;
+  --color-greenwhite-6: #bbc0a9;
+  --color-greenwhite-7: #919a75;
+  --color-greenwhite-8: #62684c;
+  --color-greenwhite-8-5: #494e39;
+  --color-greenwhite-9: #313426;
+  --color-greenwhite-9-5: #181a13;
+  --color-greenwhite-10: #000000;
+
+  /* --- Color primitives: smaltblue (active — 2026 homepage, border/interactive only so far) --- */
+  --color-smaltblue-0: #cee2e0;
+  --color-smaltblue-0-5: #c4d7d6;
+  --color-smaltblue-1: #bacdcb;
+  --color-smaltblue-1-5: #afc2c1;
+  --color-smaltblue-2: #a5b8b6;
+  --color-smaltblue-3: #8ea6a4;
+  --color-smaltblue-4: #719996;
+  --color-smaltblue-5: #548d88;
+  --color-smaltblue-6: #43716d;
+  --color-smaltblue-7: #325552;
+  --color-smaltblue-8: #223836;
+  --color-smaltblue-8-5: #192a29;
+  --color-smaltblue-9: #111c1b;
+  --color-smaltblue-9-5: #080e0e;
+  --color-smaltblue-10: #000000;
+
+  /* --- Color primitives: elm (active — 2026 homepage, hero surface + body ink) --- */
+  --color-elm-0: #b4dbea;
+  --color-elm-0-5: #a8cedd;
+  --color-elm-1: #9cc2d1;
+  --color-elm-1-5: #8fb5c3;
+  --color-elm-2: #83a8b7;
+  --color-elm-3: #6292a5;
+  --color-elm-4: #437b91;
+  --color-elm-5: #23657f;
+  --color-elm-6: #1c5166;
+  --color-elm-7: #153d4c;
+  --color-elm-8: #0e2833;
+  --color-elm-8-5: #0a1e26;
+  --color-elm-9: #071419;
+  --color-elm-9-5: #030a0d;
+  --color-elm-10: #000000;
+
   /* --- Spacing primitives --- */
   --space-4: 4px;
   --space-8: 8px;
@@ -96,7 +170,6 @@
   --space-48: 48px;
   --space-56: 56px;
   --space-96: 96px;
-  --space-160: 160px; /* added for homepage build: experimenting with hero vertical padding, see --padding-hero-y */
 
   /* --- Typography primitives --- */
   --font-family-serif: 'Playfair Display', serif;
@@ -117,6 +190,7 @@
   --font-size-24: 24px;
   --font-size-32: 32px;
   --font-size-48: 48px; /* added for case study page titles */
+  --font-size-72: 72px; /* added for the 2026 homepage hero headline */
 
   --line-height-16: 16px;
   --line-height-20: 20px;
@@ -125,14 +199,17 @@
   --line-height-36: 36px;
   --line-height-48: 48px;
   --line-height-56: 56px; /* added for case study page titles */
+  --line-height-76: 76px; /* added for the 2026 homepage hero headline */
 
   --letter-spacing-none: 0px;
   --letter-spacing-tight-sm: -0.8px;
   --letter-spacing-tight-md: -1.2px;
   --letter-spacing-tight-lg: -1.6px; /* added for case study page titles */
+  --letter-spacing-tight-xl: -1.5px; /* added for the 2026 homepage hero headline */
   --letter-spacing-wide-sm: 0.88px;
   --letter-spacing-wide-md: 1.04px;
   --letter-spacing-wide-lg: 1.1px;
+  --letter-spacing-wide-xl: 1.5px; /* added for the 2026 homepage hero eyebrow */
 
 
   /* ============================================================
@@ -141,28 +218,33 @@
    * ============================================================ */
 
   /* --- Color: backgrounds --- */
-  --bg-page: var(--color-sage-1);
-  --bg-canvas: var(--color-sage-0-5); /* the site's root/base background (behind everything) — not meant as a visible section tone on its own */
-  --bg-accent: var(--color-orange-5);
-  --bg-inverse: var(--color-orange-9);
-  --bg-placeholder: var(--color-sage-6);
-  --bg-section-alt: var(--color-sage-5); /* added for case study pages: a deliberately distinct alternate section tone, clearly differentiated from bg-page (unlike bg-canvas, which is nearly identical to bg-page and reads as a mistake when used for section alternation) */
+  --bg-page: var(--color-greenwhite-0);
+  --bg-canvas: var(--color-greenwhite-0-5); /* the site's root/base background (behind everything) — not meant as a visible section tone on its own */
+  --bg-accent: var(--color-cosmos-4);
+  --bg-inverse: var(--color-orange-9); /* NOT migrated — still legacy orange. Used by ProjectRow hover; revisit if/when that state gets redesigned */
+  --bg-placeholder: var(--color-greenwhite-4);
+  --bg-placeholder-fill: var(--color-greenwhite-1); /* NEW — inner tone for the two-tone case-study image placeholder */
+  --bg-section-alt: var(--color-sage-5); /* NOT migrated — still legacy sage. Used on case study pages, which haven't been redesigned yet */
+  --bg-hero: var(--color-elm-0); /* NEW — the 2026 homepage hero panel */
 
   /* --- Color: text --- */
-  --text-primary: var(--color-brown-7);
-  --text-secondary: var(--color-orange-9-5);
-  --text-inverse: var(--color-sage-1);
-  --text-muted: var(--color-sage-6);
-  --text-label: var(--color-sage-9-5); /* was color-sage-7 (#96a197): failed WCAG AA at ~2.5:1 against every light background on the site. sage-9-5 passes AAA (~7:1) while staying visibly muted. Fixes "Selected Work ↓" on the homepage too. */
+  --text-primary: var(--color-cosmos-9-5);
+  --text-secondary: var(--color-elm-9);
+  --text-inverse: var(--color-cosmos-9);
+  --text-muted: var(--color-sage-6); /* NOT migrated — still legacy sage */
+  --text-label: var(--color-elm-8);
+  --text-hero-eyebrow: var(--color-cosmos-8-5); /* NEW */
+  --text-hero-heading: var(--color-cosmos-9-5); /* NEW */
 
   /* --- Color: accent --- */
-  --accent-primary: var(--color-orange-4);
-  --text-accent: var(--color-orange-5); /* added for homepage build: hero eyebrow color — same primitive as --bg-accent, aliased separately since a bg token shouldn't be reused for text */
+  --accent-primary: var(--color-cosmos-7);
 
   /* --- Color: borders --- */
-  --border-divider: var(--color-forest-0);
-  --border-muted: var(--color-sage-6);
-  --border-default: var(--color-orange-9-5);
+  --border-divider: var(--color-greenwhite-6);
+  --border-muted: var(--color-greenwhite-7);
+  --border-default: var(--color-elm-9-5);
+  --border-accent: var(--color-cosmos-9); /* NEW — nav pill button outline */
+  --border-interactive: var(--color-smaltblue-7); /* NEW — smaltblue's first assigned role */
 
   /* --- Spacing: gaps --- */
   --gap-tight: var(--space-4);
@@ -176,10 +258,7 @@
   --padding-card-y: var(--space-36);
   --padding-section-y: var(--space-96);
   --padding-image: var(--space-56);
-  --padding-hero-y: var(--space-160); /* experiment: Figma specs --padding-section-y (96px) here, but it read too tight at real browser size. Scoped to .hero only — other sections stay on the Figma-spec value. Revisit after side-by-side comparison. */
-
-  /* --- Layout --- */
-  --layout-max-width: 1200px; /* added for homepage build: content container width, no Figma frame value available for this so picked a standard desktop content width */
+  --padding-hero-y: var(--space-96); /* review against Figma — hero panel padding may differ from standard section padding */
 }
 
 
@@ -221,6 +300,31 @@
 .type-eyebrow strong,
 .type-eyebrow .emphasis {
   font-weight: var(--font-weight-semibold);
+}
+
+.type-hero-eyebrow {
+  /* NEW — 2026 homepage hero. Same family as .type-eyebrow, larger and wider-tracked. */
+  font-family: var(--font-family-mono);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-18);
+  line-height: var(--line-height-20);
+  letter-spacing: var(--letter-spacing-wide-xl);
+  text-transform: uppercase;
+}
+.type-hero-eyebrow strong,
+.type-hero-eyebrow .emphasis {
+  font-weight: var(--font-weight-semibold);
+}
+
+.type-hero-heading {
+  /* NEW — 2026 homepage hero headline. Barlow ExtraBold, replaces the italic
+   * serif .type-tagline treatment in this one spot only — .type-tagline is
+   * unchanged and still correct everywhere else it's used. */
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-extrabold);
+  font-size: var(--font-size-72);
+  line-height: var(--line-height-76);
+  letter-spacing: var(--letter-spacing-tight-xl);
 }
 
 .type-tagline {
@@ -310,3 +414,22 @@
   color: var(--text-inverse);
 }
 */
+
+/*
+ * Hero panel (2026 homepage) — not yet built in code. Reference:
+ * Figma node 196:382 ("Combo — Portica / Bossanova", now on the
+ * cosmos/greenwhite/smaltblue/elm palette).
+ *
+ * .hero-panel {
+ *   background: var(--bg-hero);
+ *   padding: var(--padding-hero-y) var(--padding-section-x);
+ * }
+ * .hero-panel__eyebrow  { color: var(--text-hero-eyebrow); }
+ * .hero-panel__heading  { color: var(--text-hero-heading); }
+ * .hero-panel__ellipse  { background: var(--accent-primary); }
+ * .nav-button {
+ *   background: var(--bg-accent);
+ *   color: var(--text-inverse);
+ *   border: 1px solid var(--border-accent);
+ * }
+ */
