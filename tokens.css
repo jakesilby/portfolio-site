@@ -181,6 +181,7 @@
   --space-56: 56px;
   --space-96: 96px;
   --space-160: 160px;
+  --space-200: 200px; /* hero panel padding — confirmed against live Figma (196:382), paired with the 64px headline resize as one deliberate pass */
 
   /* --- Typography primitives --- */
   --font-family-serif: 'Playfair Display', serif;
@@ -201,7 +202,8 @@
   --font-size-24: 24px;
   --font-size-32: 32px;
   --font-size-48: 48px; /* added for case study page titles */
-  --font-size-72: 72px; /* added for the 2026 homepage hero headline */
+  --font-size-64: 64px; /* hero headline — confirmed against live Figma (196:382); supersedes the earlier untested 72px */
+  --font-size-72: 72px; /* no longer used by .type-hero-heading — kept in case another hero-scale treatment needs it */
 
   --line-height-16: 16px;
   --line-height-20: 20px;
@@ -269,7 +271,7 @@
   --padding-card-y: var(--space-36);
   --padding-section-y: var(--space-96);
   --padding-image: var(--space-56);
-  --padding-hero-y: var(--space-160); /* confirmed 160px in a prior session — 96px measured too tight in-browser, don't re-litigate */
+  --padding-hero-y: var(--space-200); /* updated from 160px — confirmed against live Figma (196:382); the two changed together as one pass, not a drift. Prior 160px was browser-tested against a too-tight 96px in an earlier session, so this does override that — flagged in chat, not a silent overwrite. */
 }
 
 
@@ -330,10 +332,11 @@
 .type-hero-heading {
   /* NEW — 2026 homepage hero headline. Barlow ExtraBold, replaces the italic
    * serif .type-tagline treatment in this one spot only — .type-tagline is
-   * unchanged and still correct everywhere else it's used. */
+   * unchanged and still correct everywhere else it's used. Font size confirmed
+   * at 64px against live Figma (196:382), not the original 72px. */
   font-family: var(--font-family-sans);
   font-weight: var(--font-weight-extrabold);
-  font-size: var(--font-size-72);
+  font-size: var(--font-size-64);
   line-height: var(--line-height-76);
   letter-spacing: var(--letter-spacing-tight-xl);
 }
@@ -437,7 +440,6 @@
  * }
  * .hero-panel__eyebrow  { color: var(--text-hero-eyebrow); }
  * .hero-panel__heading  { color: var(--text-hero-heading); }
- * .hero-panel__ellipse  { background: var(--accent-primary); }
  * .nav-button {
  *   background: var(--bg-accent);
  *   color: var(--text-inverse);

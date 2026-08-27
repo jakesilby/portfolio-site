@@ -37,7 +37,7 @@
 .nav-pill {
   display: inline-block;
   padding: var(--gap-inline) var(--gap-stack);
-  border: 1px solid var(--border-default);
+  border: 1px solid var(--border-accent);
   border-radius: var(--space-4);
   color: var(--text-primary);
   text-decoration: none;
