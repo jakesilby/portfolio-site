@@ -239,7 +239,7 @@
   --bg-page: var(--color-greenwhite-0);
   --bg-canvas: var(--color-greenwhite-0-5); /* the site's root/base background (behind everything) — not meant as a visible section tone on its own */
   --bg-accent: var(--color-cosmos-4);
-  --bg-inverse: var(--color-cosmos-9); /* MIGRATED — was legacy orange/9 across every prior version. Now matches the actual ProjectRow hover design (Figma node 232:21). */
+  --bg-inverse: var(--color-greenwhite-5); /* MIGRATED — was cosmos/9 (a dark, near-black red). ProjectRow hover redesigned to a light tint with no text-color change; confirmed against live Figma (239:186). Despite the name, no longer a "dark inverse" background — see --text-on-inverse's note below. */
   --bg-placeholder: var(--color-greenwhite-4);
   --bg-placeholder-fill: var(--color-greenwhite-1); /* NEW — inner tone for the two-tone case-study image placeholder */
   --bg-section-alt: var(--color-sage-5); /* NOT migrated — still legacy sage. Used on case study pages, which haven't been redesigned yet */
@@ -254,7 +254,7 @@
   --text-hero-eyebrow: var(--color-cosmos-8-5); /* NEW — status unclear as of the latest hero revision, see chat note */
   --text-hero-heading: var(--color-cosmos-9-5); /* NEW */
   --text-hero-subhead: var(--color-greenwhite-8); /* NEW — the hero's second line ("I am a product designer..."), confirmed against live Figma (196:383) */
-  --text-on-inverse: var(--color-greenwhite-1); /* NEW — foreground (text + border) on top of bg-inverse, e.g. ProjectRow hover */
+  --text-on-inverse: var(--color-greenwhite-1); /* UNUSED as of the ProjectRow hover redesign (239:186) — hover no longer changes text/border color, only background. Kept in case a genuinely dark inverse surface comes back. */
 
   /* --- Color: accent --- */
   --accent-primary: var(--color-cosmos-7);
