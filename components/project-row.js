@@ -54,4 +54,28 @@ const projectRowsHtml = projectRows
   })
   .join('');
 
-document.currentScript.insertAdjacentHTML('afterend', `<div class="project-row-list">${projectRowsHtml}</div>`);
+const projectRowScript = document.currentScript;
+
+projectRowScript.insertAdjacentHTML('afterend', `<div class="project-row-list">${projectRowsHtml}</div>`);
+
+(function observeProjectRows() {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (reduceMotion || !('IntersectionObserver' in window)) return;
+
+  const rows = projectRowScript.nextElementSibling.querySelectorAll('.project-row');
+  rows.forEach((row) => row.classList.add('js-stagger'));
+
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        obs.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.15 }
+  );
+
+  rows.forEach((row) => observer.observe(row));
+})();

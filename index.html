@@ -28,6 +28,37 @@
     .hero-panel__subhead {
       color: var(--text-hero-subhead);
     }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-panel {
+        animation: hero-panel-wipe 850ms cubic-bezier(0.16, 1, 0.3, 1) both;
+      }
+      .hero-panel__heading {
+        animation: hero-text-in 420ms ease-out both;
+        animation-delay: 300ms;
+      }
+      .hero-panel__subhead {
+        animation: hero-text-in 380ms ease-out both;
+        animation-delay: 450ms;
+      }
+    }
+
+    @keyframes hero-panel-wipe {
+      from { clip-path: inset(0 100% 0 0); }
+      to { clip-path: inset(0 0 0 0); }
+    }
+
+    @keyframes hero-text-in {
+      from {
+        opacity: 0;
+        transform: translateY(8px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
     .section-label {
       color: var(--text-primary);
       padding: var(--padding-section-x);
