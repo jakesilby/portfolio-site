@@ -107,7 +107,6 @@
 
 .project-row:hover {
   background: var(--bg-inverse);
-  color: var(--text-on-inverse);
 }
 
 .project-row__body {
@@ -149,17 +148,9 @@
   color: var(--text-muted);
 }
 
-.project-row:hover .project-row__index {
-  color: currentColor;
-}
-
 .project-row__title {
   color: var(--text-primary);
   margin: 0;
-}
-
-.project-row:hover .project-row__title {
-  color: currentColor;
 }
 
 .project-row__meta {
@@ -173,10 +164,6 @@
   color: var(--text-label);
 }
 
-.project-row:hover .project-row__year {
-  color: currentColor;
-}
-
 .badge {
   display: inline-block;
   padding: var(--gap-tight) var(--gap-inline);
@@ -185,18 +172,9 @@
   color: var(--text-label);
 }
 
-.project-row:hover .badge {
-  color: currentColor;
-  border-color: currentColor;
-}
-
 .project-row__description {
   color: var(--text-primary);
   margin: 0;
-}
-
-.project-row:hover .project-row__description {
-  color: currentColor;
 }
 
 @media (max-width: 720px) {
