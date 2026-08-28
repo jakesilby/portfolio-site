@@ -55,7 +55,7 @@
   display: inline-block;
   padding: var(--gap-inline) var(--gap-stack);
   border: 1px solid var(--border-accent);
-  border-radius: 0;
+  border-radius: var(--radius-full);
   color: var(--text-primary);
   text-decoration: none;
   background: transparent;
