@@ -170,6 +170,9 @@
   /* --- Layout primitives --- */
   --layout-max-width: 1200px;
 
+  /* --- Radius primitives --- */
+  --radius-full: 99px; /* pill/fully-rounded — safely larger than half the height of anything it's applied to */
+
   /* --- Spacing primitives --- */
   --space-4: 4px;
   --space-8: 8px;

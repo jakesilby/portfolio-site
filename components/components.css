@@ -36,11 +36,13 @@
 .site-header__brand-text {
   grid-area: 1 / 1;
   opacity: 0;
-  transition: opacity 500ms ease-in-out;
+  filter: blur(6px);
+  transition: opacity 900ms ease-in-out, filter 900ms ease-in-out;
 }
 
 .site-header__brand-text.is-active {
   opacity: 1;
+  filter: blur(0);
 }
 
 .site-header__nav {
@@ -53,7 +55,7 @@
   display: inline-block;
   padding: var(--gap-inline) var(--gap-stack);
   border: 1px solid var(--border-accent);
-  border-radius: 0;
+  border-radius: var(--radius-full);
   color: var(--text-primary);
   text-decoration: none;
   background: transparent;
@@ -63,6 +65,27 @@
   background: var(--bg-accent);
   border-color: var(--bg-accent);
   color: var(--text-inverse);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .nav-pill {
+    transition: transform 350ms cubic-bezier(0.34, 1.15, 0.64, 1);
+  }
+
+  .nav-pill:hover {
+    transform: scale(1.025);
+  }
+
+  .nav-pill:active {
+    transform: scale(0.97);
+    transition-duration: 120ms;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-pill:hover {
+    border-color: var(--accent-primary);
+  }
 }
 
 /* --- Site footer --- */
@@ -175,6 +198,54 @@
 .project-row__description {
   color: var(--text-primary);
   margin: 0;
+}
+
+/* Scroll-triggered stagger reveal — .js-stagger is added by project-row.js
+ * only when IntersectionObserver is available and the user hasn't asked
+ * for reduced motion, so this never leaves content stuck invisible if JS
+ * fails to run. .is-visible is added once per row, on first intersection,
+ * and never removed — the reveal fires exactly once. */
+@media (prefers-reduced-motion: no-preference) {
+  .project-row.js-stagger .project-row__index,
+  .project-row.js-stagger .badge,
+  .project-row.js-stagger .project-row__description {
+    opacity: 0;
+    transition: opacity 340ms ease-out;
+  }
+
+  .project-row.js-stagger .project-row__title,
+  .project-row.js-stagger .project-row__image {
+    opacity: 0;
+    filter: blur(4px);
+    transition: opacity 340ms ease-out, transform 340ms ease-out, filter 340ms ease-out;
+  }
+
+  .project-row.js-stagger .project-row__title {
+    transform: translateY(6px);
+  }
+
+  .project-row.js-stagger .project-row__image {
+    transform: scale(0.98);
+  }
+
+  .project-row.js-stagger.is-visible .project-row__index,
+  .project-row.js-stagger.is-visible .badge,
+  .project-row.js-stagger.is-visible .project-row__description {
+    opacity: 1;
+  }
+
+  .project-row.js-stagger.is-visible .project-row__title,
+  .project-row.js-stagger.is-visible .project-row__image {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+
+  .project-row.js-stagger.is-visible .project-row__index { transition-delay: 0ms; }
+  .project-row.js-stagger.is-visible .project-row__title { transition-delay: 60ms; }
+  .project-row.js-stagger.is-visible .badge { transition-delay: 120ms; }
+  .project-row.js-stagger.is-visible .project-row__image { transition-delay: 180ms; }
+  .project-row.js-stagger.is-visible .project-row__description { transition-delay: 240ms; }
 }
 
 @media (max-width: 720px) {
