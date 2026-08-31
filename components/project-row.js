@@ -5,6 +5,8 @@ const projectRows = [
     title: 'OnePulse Connect Design System',
     description: 'A solo-built token and component system, taken from scattered Figma files to a governed architecture and bridged into code.',
     href: '#',
+    image: 'images/onepulse-case-study.webp',
+    imageAlt: 'OnePulse Connect design system documentation: the Data Table component page, showing row-state specs (default, hover, focus, selected, disabled) alongside a sample table of patient and medication data.',
   },
   {
     year: '2026',
@@ -32,6 +34,9 @@ const projectRows = [
 const projectRowsHtml = projectRows
   .map((row, i) => {
     const index = String(i + 1).padStart(2, '0');
+    const imageInner = row.image
+      ? `<img class="project-row__image-inner" src="${row.image}" alt="${row.imageAlt}" loading="lazy">`
+      : `<div class="project-row__image-inner"></div>`;
     return `
 <a class="project-row" href="${row.href}">
   <div class="project-row__header">
@@ -46,7 +51,7 @@ const projectRowsHtml = projectRows
   </div>
   <div class="project-row__body">
     <div class="project-row__image">
-      <div class="project-row__image-inner"></div>
+      ${imageInner}
     </div>
     <p class="project-row__description type-description">${row.description}</p>
   </div>
