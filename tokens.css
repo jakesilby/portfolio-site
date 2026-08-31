@@ -190,7 +190,7 @@
   --space-200: 200px; /* superseded — kept in case another section needs it */
 
   /* --- Typography primitives --- */
-  --font-family-serif: 'Playfair Display', serif;
+  --font-family-serif: 'Cormorant Garamond', serif; /* changed from Playfair Display. Cascades to every composite class below that references it — no other edits needed here. */
   --font-family-mono: 'Spline Sans Mono', monospace;
   --font-family-sans: 'Barlow', sans-serif;
 
@@ -242,7 +242,7 @@
   --bg-page: var(--color-greenwhite-0);
   --bg-canvas: var(--color-greenwhite-0-5); /* the site's root/base background (behind everything) — not meant as a visible section tone on its own */
   --bg-accent: var(--color-cosmos-4);
-  --bg-inverse: var(--color-greenwhite-5); /* MIGRATED — was cosmos/9 (a dark, near-black red). ProjectRow hover redesigned to a light tint with no text-color change; confirmed against live Figma (239:186). Despite the name, no longer a "dark inverse" background — see --text-on-inverse's note below. */
+  --bg-inverse: var(--color-greenwhite-5); /* confirmed against Figma node 239:186 — the light-tint hover redesign, not the earlier dark cosmos-9 version this was mistakenly left at */
   --bg-placeholder: var(--color-greenwhite-4);
   --bg-placeholder-fill: var(--color-greenwhite-1); /* NEW — inner tone for the two-tone case-study image placeholder */
   --bg-section-alt: var(--color-sage-5); /* NOT migrated — still legacy sage. Used on case study pages, which haven't been redesigned yet */
