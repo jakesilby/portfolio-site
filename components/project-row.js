@@ -45,8 +45,8 @@ const projectRowsHtml = projectRows
       <h3 class="project-row__title type-case-title">${row.title}</h3>
     </div>
     <div class="project-row__meta">
-      <span class="project-row__year type-meta">${row.year}</span>
       <span class="badge type-label-secondary">${row.type}</span>
+      <span class="project-row__year type-meta">${row.year}</span>
     </div>
   </div>
   <div class="project-row__body">

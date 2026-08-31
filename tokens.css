@@ -172,6 +172,7 @@
 
   /* --- Radius primitives --- */
   --radius-full: 99px; /* pill/fully-rounded — safely larger than half the height of anything it's applied to */
+  --radius-md: var(--space-8); /* case-study row image corners, confirmed against Figma */
 
   /* --- Spacing primitives --- */
   --space-4: 4px;
@@ -258,6 +259,7 @@
   --text-hero-heading: var(--color-cosmos-9-5); /* NEW */
   --text-hero-subhead: var(--color-greenwhite-8); /* NEW — the hero's second line ("I am a product designer..."), confirmed against live Figma (196:383) */
   --text-on-inverse: var(--color-greenwhite-1); /* UNUSED as of the ProjectRow hover redesign (239:186) — hover no longer changes text/border color, only background. Kept in case a genuinely dark inverse surface comes back. */
+  --text-tag: var(--color-greenwhite-8);
 
   /* --- Color: accent --- */
   --accent-primary: var(--color-cosmos-7);
@@ -281,8 +283,11 @@
   --padding-section-x: var(--space-48);
   --padding-card-y: var(--space-36);
   --padding-section-y: var(--space-96);
-  --padding-image: var(--space-56);
+  --padding-image: var(--space-32);
   --padding-hero-y: var(--space-160); /* deliberate override, not a Figma value — Figma's node 196:383 measures 180px, but 160px was chosen instead before committing. Fifth value for this token (96 → 160 → 200 → 128 → 180 → 160); if it changes again, verify against Figma before assuming drift, and note whether it's an intentional override like this one. */
+
+  /* --- Shadows --- */
+  --shadow-card: 0 2px 4px rgba(0, 0, 0, 0.1), 0 15px 9px rgba(0, 0, 0, 0.05), 0 41px 11px rgba(0, 0, 0, 0.02); /* 3-layer approximation of Figma's 5-stacked-shadow card spec — reads the same visually. Applied via CSS instead of baked into image assets so it stays themeable and doesn't bleed into the source PNG/WebP crop. */
 }
 
 
