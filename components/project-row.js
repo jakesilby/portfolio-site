@@ -6,7 +6,7 @@ const projectRows = [
     description: 'A solo-built token and component system, taken from scattered Figma files to a governed architecture and bridged into code.',
     href: '#',
     image: 'images/onepulse-case-study.webp',
-    imageAlt: 'OnePulse Connect design system documentation: the Data Table component page, showing row-state specs (default, hover, focus, selected, disabled) alongside a sample table of patient and medication data.',
+    imageAlt: 'Screenshot of the Data Table component page from the OnePulse Connect design system.',
   },
   {
     year: '2026',
