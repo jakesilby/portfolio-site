@@ -191,7 +191,7 @@
   --space-200: 200px; /* superseded — kept in case another section needs it */
 
   /* --- Typography primitives --- */
-  --font-family-serif: 'Cormorant Garamond', serif; /* changed from Playfair Display. Cascades to every composite class below that references it — no other edits needed here. */
+  --font-family-serif: 'Cormorant Infant', serif; /* changed again from Cormorant Garamond — same superfamily, distinct family. Cascades to every composite class below. */
   --font-family-mono: 'Spline Sans Mono', monospace;
   --font-family-sans: 'Barlow', sans-serif;
 
