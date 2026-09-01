@@ -1,7 +1,185 @@
-/* Shared chrome: site-header, site-footer, project-row.
+/* Shared chrome: site-header, site-footer, project-row, case-header.
  * Loaded on every page that uses these components — never modify a copy
  * per page, edit here.
  */
+
+/* --- Case header (case study pages — back-link only, no wordmark/nav) --- */
+
+.case-header {
+  display: flex;
+  align-items: center;
+  padding: var(--space-24) var(--padding-section-x);
+  background: var(--bg-page);
+}
+
+.case-header__back {
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+
+/* --- Case study numbered section (01 The Problem, 02 Why This Matters, ...) —
+ * repeats identically across every numbered section on a case study page,
+ * confirmed against Figma node 44:2. */
+
+.case-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-section);
+  padding: var(--padding-section-x);
+  background: var(--bg-page);
+}
+
+.case-section--alt {
+  background: var(--bg-canvas);
+}
+
+.case-section__index {
+  color: var(--accent-primary);
+}
+
+.case-section__heading {
+  color: var(--text-primary);
+}
+
+.case-section__body {
+  color: var(--text-primary);
+  max-width: 760px;
+}
+
+/* --- Stat Grid (case study "At a Glance") --- */
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--gap-card);
+  width: 100%;
+}
+
+.stat-tile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-inline);
+  padding: var(--gap-inline);
+  background: var(--bg-surface);
+}
+
+.stat-tile__value {
+  color: var(--text-primary);
+}
+
+.stat-tile__label {
+  color: var(--text-label);
+}
+
+/* --- Problem Diagram (scattered files -> shared token system illustration,
+ * case study "The Problem" section only — bespoke, not a reusable pattern) --- */
+
+.problem-diagram {
+  display: flex;
+  align-items: center;
+  gap: var(--space-32);
+  padding: var(--gap-stack);
+  background: var(--bg-surface);
+}
+
+.problem-diagram__group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  gap: var(--gap-stack);
+  padding: var(--gap-stack);
+}
+
+.problem-diagram__thumbs {
+  position: relative;
+  width: 270px;
+  height: 220px;
+}
+
+.problem-diagram__thumb-wrap {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.problem-diagram__thumb-wrap--a {
+  left: 0;
+  top: 61px;
+  width: 160px;
+  height: 108px;
+  transform: rotate(7deg);
+}
+
+.problem-diagram__thumb-wrap--b {
+  left: 112px;
+  top: 0;
+  width: 157px;
+  height: 103px;
+  transform: rotate(-5deg);
+}
+
+.problem-diagram__thumb-wrap--c {
+  left: 67px;
+  top: 119px;
+  width: 156px;
+  height: 100px;
+  transform: rotate(4deg);
+}
+
+.problem-diagram__card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 90px;
+  padding: var(--space-32) var(--gap-stack);
+  background: var(--bg-canvas);
+  border: 1px solid var(--border-muted);
+  border-radius: var(--space-4);
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.problem-diagram__caption {
+  width: 220px;
+  text-align: center;
+}
+
+.problem-diagram__caption--primary {
+  color: var(--text-primary);
+}
+
+.problem-diagram__caption--label {
+  color: var(--text-label);
+}
+
+.problem-diagram__arrow {
+  flex-shrink: 0;
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-extrabold);
+  font-size: var(--font-size-32);
+  color: var(--accent-primary);
+}
+
+.problem-diagram__image-frame {
+  position: relative;
+  width: 280px;
+  height: 220px;
+}
+
+.problem-diagram__image {
+  position: absolute;
+  left: 0;
+  top: 22px;
+  width: 280px;
+  height: 175px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-thumbnail);
+}
 
 /* --- Site header --- */
 
@@ -177,6 +355,7 @@
   color: var(--text-primary);
   margin: 0;
   font-size: var(--font-size-24);
+  letter-spacing: var(--letter-spacing-tight-xs2);
 }
 
 .project-row__meta {
@@ -269,5 +448,14 @@
 
   .project-row__meta {
     align-items: flex-start;
+  }
+
+  .stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .problem-diagram {
+    max-width: 100%;
+    overflow-x: auto;
   }
 }

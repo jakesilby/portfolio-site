@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OnePulse Connect Design System — Jake Silby</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&family=Spline+Sans+Mono:wght@400;500&family=Barlow:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components/components.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      background: var(--bg-page);
+      color: var(--text-primary);
+      font-family: var(--font-family-sans);
+    }
+
+    .case-title-block {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-stack);
+      background: var(--bg-page);
+      padding: var(--space-24) var(--padding-section-x) var(--padding-section-x);
+    }
+
+    .case-title-block__eyebrow {
+      color: var(--accent-primary);
+    }
+
+    .case-title-block__title {
+      color: var(--text-primary);
+      max-width: 956px;
+    }
+
+    .case-title-block__description {
+      color: var(--text-secondary);
+      max-width: 760px;
+    }
+
+    .case-title-block__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--gap-card);
+      color: var(--text-label);
+    }
+
+    .case-hero {
+      display: flex;
+      justify-content: center;
+      background: var(--bg-page);
+      padding: 0 var(--padding-section-x) var(--padding-section-x);
+    }
+
+    .case-hero__placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      background: var(--bg-placeholder);
+      border-radius: var(--radius-md);
+      padding: var(--space-48) var(--space-24);
+    }
+
+    .case-hero__frame {
+      width: 700px;
+      max-width: 100%;
+      aspect-ratio: 700 / 437;
+      background: var(--bg-page);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-card);
+    }
+
+    .at-a-glance {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--gap-card);
+      background: var(--bg-page);
+      padding: var(--padding-section-x);
+    }
+
+    .at-a-glance__label {
+      color: var(--text-label);
+    }
+  </style>
+</head>
+<body data-page="case-study">
+  <script src="components/case-header.js"></script>
+
+  <section class="case-title-block">
+    <p class="case-title-block__eyebrow type-label-secondary">CASE STUDY</p>
+    <h1 class="case-title-block__title type-page-title">OnePulse Connect Design System</h1>
+    <p class="case-title-block__description type-tagline">I solo-built a design token and component system for a medically integrated dispensing platform used by physician practices, with a focus on neurology — taking it from scattered Figma files to a governed architecture, then bridging it into code.</p>
+    <div class="case-title-block__meta type-meta">
+      <span>ROLE: DESIGN SYSTEMS (SOLO)</span>
+      <span>TIMEFRAME: 2025–2026</span>
+      <span>STACK: FIGMA → CLAUDE CODE</span>
+    </div>
+  </section>
+
+  <section class="case-hero">
+    <div class="case-hero__placeholder">
+      <div class="case-hero__frame"></div>
+    </div>
+  </section>
+
+  <section class="at-a-glance">
+    <p class="at-a-glance__label type-label-secondary">AT A GLANCE</p>
+    <div class="stat-grid">
+      <div class="stat-tile">
+        <p class="stat-tile__value type-case-title">SOLO</p>
+        <p class="stat-tile__label type-meta">ARCHITECTURE, TOKENS &amp; COMPONENTS — NO DEDICATED ENGINEERING TEAM</p>
+      </div>
+      <div class="stat-tile">
+        <p class="stat-tile__value type-case-title">25 / 16 / 3</p>
+        <p class="stat-tile__label type-meta">ATOMS / PATTERNS / GLOBALS IN THE CODED LIBRARY</p>
+      </div>
+      <div class="stat-tile">
+        <p class="stat-tile__value type-case-title">2–3 + ENG</p>
+        <p class="stat-tile__label type-meta">DESIGNERS ACTIVELY USING THE SYSTEM, PLUS ENGINEERING</p>
+      </div>
+      <div class="stat-tile">
+        <p class="stat-tile__value type-case-title">1</p>
+        <p class="stat-tile__label type-meta">PRODUCTION COLOR-DRIFT BUG FOUND, FIXED, AND SHIPPED</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-section case-section--alt">
+    <p class="case-section__index type-meta">01</p>
+    <h2 class="case-section__heading type-section-heading">The Problem</h2>
+    <p class="case-section__body type-body"><strong>No shared source of truth existed.</strong> When I joined, OnePulse Connect had a component library, but it was scattered across different Figma files, with no consistent naming and no shared token source. There was no single place designers or engineers could go to see how a chip, a card, or a table was supposed to look or behave.</p>
+    <div class="problem-diagram">
+      <div class="problem-diagram__group">
+        <div class="problem-diagram__thumbs">
+          <div class="problem-diagram__thumb-wrap problem-diagram__thumb-wrap--a">
+            <div class="problem-diagram__card type-label-secondary">FILE A</div>
+          </div>
+          <div class="problem-diagram__thumb-wrap problem-diagram__thumb-wrap--b">
+            <div class="problem-diagram__card type-label-secondary">FILE B</div>
+          </div>
+          <div class="problem-diagram__thumb-wrap problem-diagram__thumb-wrap--c">
+            <div class="problem-diagram__card type-label-secondary">FILE C</div>
+          </div>
+        </div>
+        <p class="problem-diagram__caption problem-diagram__caption--label type-label-secondary">SCATTERED ACROSS FIGMA FILES, NO SHARED NAMING</p>
+      </div>
+      <span class="problem-diagram__arrow">→</span>
+      <div class="problem-diagram__group">
+        <div class="problem-diagram__image-frame">
+          <img class="problem-diagram__image" src="images/ds_colors.webp" alt="OnePulse Connect design system Colors foundation page, showing the full primitive color palette rows.">
+        </div>
+        <p class="problem-diagram__caption problem-diagram__caption--primary type-label-secondary">ONE SHARED TOKEN &amp; COMPONENT SYSTEM</p>
+      </div>
+    </div>
+    <p class="case-section__body type-body"><strong>I set out to fix that at the source:</strong> a token and component system other designers could work from directly in Figma, with clear rules for states, variants, and usage.</p>
+  </section>
+
+  <section class="case-section">
+    <p class="case-section__index type-meta">02</p>
+    <h2 class="case-section__heading type-section-heading">Why This Matters</h2>
+    <p class="case-section__body type-body"><strong>Inconsistency here is a safety risk.</strong> The screens carry prescriber NPIs, drug NDCs, claim statuses, copay amounts, prior authorization steps. Without a shared library, the same status can look different depending on which screen a pharmacist or technician is looking at. Misreading a status on a controlled substance order or a claim isn't a small mistake.</p>
+    <p class="case-section__body type-body"><strong>The platform runs at real scale.</strong> OnePulse Connect serves more than 2,000 provider locations across 29 states, managing nearly $1 billion in drug and supplies inventory.</p>
+    <p class="case-section__body type-body"><strong>A shared system was the only way to close that gap for good.</strong> Ad hoc fixes on individual screens would have left the same risk sitting everywhere else.</p>
+  </section>
+</body>
+</html>

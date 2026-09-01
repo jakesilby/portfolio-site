@@ -3,7 +3,7 @@ const projectRows = [
     year: '2026',
     type: 'Design Systems',
     title: 'OnePulse Connect Design System',
-    description: 'A solo-built token and component system, taken from scattered Figma files to a governed architecture and bridged into code.',
+    description: "I built OnePulse Connect's token and component system solo — from scattered, undocumented Figma files to the shared source of truth design and engineering now build from.",
     href: '#',
     image: 'images/onepulse-case-study.webp',
     imageAlt: 'Screenshot of the Data Table component page from the OnePulse Connect design system.',

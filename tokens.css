@@ -167,6 +167,10 @@
   --color-elm-9-5: #030a0d;
   --color-elm-10: #000000;
 
+  /* --- Color primitives: white (case-study surface fill — not part of any
+   * family scale, an unbound literal white in Figma, not a variable) --- */
+  --color-white: #ffffff;
+
   /* --- Layout primitives --- */
   --layout-max-width: 1200px;
 
@@ -179,6 +183,7 @@
   --space-8: 8px;
   --space-12: 12px; /* restored — dropped by mistake in v6, still in live use via --gap-hero-text */
   --space-16: 16px;
+  --space-20: 20px;
   --space-24: 24px;
   --space-32: 32px;
   --space-36: 36px;
@@ -187,11 +192,11 @@
   --space-96: 96px;
   --space-128: 128px; /* superseded — kept in case another section needs it */
   --space-160: 160px;
-  --space-180: 180px; /* superseded — this is Figma's actual measured value (196:383), but --padding-hero-y was deliberately overridden to --space-160 instead. Kept in case it goes back. */
+  --space-180: 180px; /* hero panel padding, current — confirmed against live Figma (196:383). Third revision to this value; see chat history if it changes again. */
   --space-200: 200px; /* superseded — kept in case another section needs it */
 
   /* --- Typography primitives --- */
-  --font-family-serif: 'Cormorant Infant', serif; /* changed again from Cormorant Garamond — same superfamily, distinct family. Cascades to every composite class below. */
+  --font-family-serif: 'EB Garamond', serif; /* changed again from Cormorant Infant. Cascades to every composite class below. */
   --font-family-mono: 'Spline Sans Mono', monospace;
   --font-family-sans: 'Barlow', sans-serif;
 
@@ -225,6 +230,7 @@
 
   --letter-spacing-none: 0px;
   --letter-spacing-tight-sm: -0.8px;
+  --letter-spacing-tight-xs2: -1px; /* case study titles (.project-row__title), confirmed against live Figma — sits between tight-sm (-0.8) and tight-md (-1.2). Named awkwardly (xs2) to avoid conflicting with the existing tight/wide naming scale, which isn't strictly ordered (see tight-lg/-xl below) — consider a full naming pass on this scale at some point. */
   --letter-spacing-tight-md: -1.2px;
   --letter-spacing-tight-lg: -1.6px; /* added for case study page titles */
   --letter-spacing-tight-xl: -1.5px; /* added for the 2026 homepage hero headline */
@@ -241,13 +247,14 @@
 
   /* --- Color: backgrounds --- */
   --bg-page: var(--color-greenwhite-0);
-  --bg-canvas: var(--color-greenwhite-0-5); /* the site's root/base background (behind everything) — not meant as a visible section tone on its own */
+  --bg-canvas: var(--color-greenwhite-1-5); /* corrected from greenwhite-0-5 (#f5f6f4) to greenwhite-1-5 (#f1f2ef) — confirmed against live Figma variables on node 44:2 ("The Problem" section fill), the token's first actual usage anywhere in the codebase */
   --bg-accent: var(--color-cosmos-4);
-  --bg-inverse: var(--color-greenwhite-5); /* confirmed against Figma node 239:186 — the light-tint hover redesign, not the earlier dark cosmos-9 version this was mistakenly left at */
+  --bg-inverse: var(--color-greenwhite-5); /* confirmed against Figma node 239:186 — the light-tint hover redesign. Was previously cosmos-9 (dark, node 232:21) — my own local copy of this file was never updated when that fix was given to Claude Code directly, which is likely why it regressed. */
   --bg-placeholder: var(--color-greenwhite-4);
   --bg-placeholder-fill: var(--color-greenwhite-1); /* NEW — inner tone for the two-tone case-study image placeholder */
   --bg-section-alt: var(--color-sage-5); /* NOT migrated — still legacy sage. Used on case study pages, which haven't been redesigned yet */
   --bg-hero: var(--color-elm-0); /* NEW — the 2026 homepage hero panel */
+  --bg-surface: var(--color-white); /* NEW — card/tile fill that sits a shade brighter than bg-page, e.g. At a Glance stat tiles */
 
   /* --- Color: text --- */
   --text-primary: var(--color-cosmos-9-5);
@@ -258,7 +265,7 @@
   --text-hero-eyebrow: var(--color-cosmos-8-5); /* NEW — status unclear as of the latest hero revision, see chat note */
   --text-hero-heading: var(--color-cosmos-9-5); /* NEW */
   --text-hero-subhead: var(--color-greenwhite-8); /* NEW — the hero's second line ("I am a product designer..."), confirmed against live Figma (196:383) */
-  --text-on-inverse: var(--color-greenwhite-1); /* UNUSED as of the ProjectRow hover redesign (239:186) — hover no longer changes text/border color, only background. Kept in case a genuinely dark inverse surface comes back. */
+  --text-on-inverse: var(--color-greenwhite-1); /* NEW — foreground (text + border) on top of bg-inverse, e.g. ProjectRow hover */
   --text-tag: var(--color-greenwhite-8);
 
   /* --- Color: accent --- */
@@ -276,6 +283,7 @@
   --gap-inline: var(--space-8);
   --gap-hero-text: var(--space-12); /* restored — dropped by mistake in v6. Added by Claude Code during the hero panel build (Prompt 4), not present in any version I generated before that — I had no visibility into it until this was flagged. */
   --gap-stack: var(--space-16);
+  --gap-section: var(--space-20); /* NEW — gap between index/heading/paragraphs within a numbered case-study section */
   --gap-card: var(--space-24);
   --gap-footer-links: var(--space-32);
 
@@ -288,6 +296,7 @@
 
   /* --- Shadows --- */
   --shadow-card: 0 2px 4px rgba(0, 0, 0, 0.1), 0 15px 9px rgba(0, 0, 0, 0.05), 0 41px 11px rgba(0, 0, 0, 0.02); /* 3-layer approximation of Figma's 5-stacked-shadow card spec — reads the same visually. Applied via CSS instead of baked into image assets so it stays themeable and doesn't bleed into the source PNG/WebP crop. */
+  --shadow-thumbnail: 0 1px 2px rgba(0, 0, 0, 0.1), 0 8px 5px rgba(0, 0, 0, 0.05), 0 14px 5px rgba(0, 0, 0, 0.02); /* NEW — same 3-layer approximation approach as --shadow-card, scaled down for smaller inline thumbnails (e.g. the Problem Diagram's ds_colors image), confirmed against a distinct, tighter 5-layer spec on node 45:2 */
 }
 
 
@@ -439,6 +448,17 @@
   font-size: var(--font-size-48);
   line-height: var(--line-height-56);
   letter-spacing: var(--letter-spacing-tight-lg);
+}
+
+.type-section-heading {
+  /* NEW — numbered case-study section headings ("01 The Problem"), confirmed
+   * against Figma. Distinct from .type-section-label (16px, "Selected Work"
+   * on the homepage) despite the similar name — different scale, different role. */
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-24);
+  line-height: var(--line-height-32);
+  letter-spacing: var(--letter-spacing-tight-sm);
 }
 
 .type-body {
