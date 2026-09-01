@@ -63,12 +63,14 @@
     }
 
     .case-hero__frame {
+      display: block;
       width: 700px;
       max-width: 100%;
       aspect-ratio: 700 / 437;
       background: var(--bg-page);
       border-radius: var(--radius-md);
       box-shadow: var(--shadow-card);
+      object-fit: cover;
     }
 
     .at-a-glance {
@@ -101,7 +103,7 @@
 
   <section class="case-hero">
     <div class="case-hero__placeholder">
-      <div class="case-hero__frame"></div>
+      <img class="case-hero__frame" src="images/onepulse-case-study.webp" alt="Screenshot of the Data Table component page from the OnePulse Connect design system." loading="lazy">
     </div>
   </section>
 
