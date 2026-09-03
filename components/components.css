@@ -47,6 +47,90 @@
   max-width: 760px;
 }
 
+/* --- Case study bulleted rules list (e.g. Reasoning & Governance's
+ * "standing rules" list) — a real <ul>, not literal bullet characters in
+ * <p> tags like Figma's own authoring, for semantics. --- */
+
+.case-rules-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-section);
+  width: 736px;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.case-rules-list__item {
+  position: relative;
+  padding-left: var(--gap-stack);
+  color: var(--text-primary);
+}
+
+.case-rules-list__item::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+}
+
+/* --- Case study inline visual (bg-placeholder wrapper, no radius on the
+ * wrapper itself; inner image gets radius + object-fit, no shadow) — reused
+ * across every real-screenshot block on a case study page. Each usage sets
+ * its own aspect-ratio via a modifier, since that varies per image. --- */
+
+.case-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 760px;
+  max-width: 100%;
+  padding: var(--space-24);
+  background: var(--bg-placeholder);
+}
+
+.case-visual__image {
+  display: block;
+  width: 100%;
+  max-width: 712px;
+  height: auto;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+}
+
+/* --- Case study dashed placeholder (shared "not built yet" treatment —
+ * covers both LIVE EMBED and CLIP gaps, visually distinct from
+ * .case-visual's solid bg-placeholder fill so it doesn't read as a missing
+ * static asset). Each usage sets its own width/height via a modifier. --- */
+
+.case-dashed-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-24);
+  background: transparent;
+  border: 2px dashed var(--border-muted);
+  border-radius: var(--radius-md);
+}
+
+.case-dashed-placeholder__label {
+  color: var(--text-primary);
+  text-align: center;
+}
+
+/* --- Case study vertical image stack (a group of .case-visual/
+ * .case-dashed-placeholder blocks stacked with a consistent 20px gap —
+ * Data Table Screenshots, Production Screenshots) --- */
+
+.case-image-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-section);
+  width: 760px;
+  max-width: 100%;
+}
+
 /* --- Stat Grid (case study "At a Glance") --- */
 
 .stat-grid {
@@ -181,6 +265,118 @@
   box-shadow: var(--shadow-thumbnail);
 }
 
+/* --- Token Chain (case study "Token Architecture" live embed) — three
+ * connected cards showing a primitive/alias/mapped-token chain resolving to
+ * the same color; hovering any card highlights all three via :has(), no JS
+ * interaction needed. Confirmed against Figma node 353:108. --- */
+
+.token-chain-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 760px;
+  max-width: 100%;
+  padding: var(--space-24);
+  background: var(--bg-placeholder);
+}
+
+.token-chain {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1px var(--gap-card);
+  width: 100%;
+}
+
+.token-chain__card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1 0 0;
+  min-width: 0;
+  min-height: 110px;
+  gap: var(--gap-stack);
+  padding: var(--space-16) var(--space-8);
+  background: var(--bg-page);
+  border: 1px solid var(--border-divider);
+  border-radius: var(--radius-md);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .token-chain__card {
+    transition: border-color 200ms ease-out;
+  }
+}
+
+.token-chain:has(.token-chain__card:hover) .token-chain__card {
+  border-color: var(--border-highlight);
+}
+
+.token-chain__swatch {
+  display: block;
+  width: var(--space-24);
+  height: var(--space-24);
+  background: var(--color-pulse-teal-700);
+  border-radius: var(--space-4);
+}
+
+.token-chain__text {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  min-width: 0;
+  gap: var(--gap-inline);
+}
+
+.token-chain__label,
+.token-chain__name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.token-chain__label {
+  color: var(--color-teal-label);
+}
+
+.token-chain__name {
+  color: var(--text-primary);
+}
+
+.token-chain__arrow {
+  display: flex;
+  flex-shrink: 0;
+  width: 14px;
+  height: 14.7279px;
+  color: var(--accent-primary-dark);
+}
+
+.token-chain__arrow svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.token-chain__caption {
+  width: 760px;
+  max-width: 100%;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 600px) {
+  .token-chain {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+  }
+
+  .token-chain__arrow {
+    align-self: center;
+    transform: rotate(90deg);
+  }
+}
+
 /* --- Site header --- */
 
 .site-header {
@@ -230,19 +426,24 @@
 }
 
 .nav-pill {
+  /* Reworked — border-radius back to 0 (square, reverses the earlier
+   * rounded-pill decision), padding uniform 8px (was 8px/16px), border
+   * moved off the shared base and onto the active [data-nav='work'] state
+   * only, confirmed against Figma node 378:160. */
   display: inline-block;
-  padding: var(--gap-inline) var(--gap-stack);
-  border: 1px solid var(--border-accent);
-  border-radius: var(--radius-full);
+  padding: var(--gap-inline);
+  border: none;
+  border-radius: 0;
   color: var(--text-primary);
   text-decoration: none;
   background: transparent;
 }
 
 .nav-pill[data-nav='work'] {
-  background: var(--bg-accent);
-  border-color: var(--bg-accent);
-  color: var(--text-inverse);
+  /* Active-tab treatment: bottom border only, 2px, cosmos-6 — reuses
+   * --border-highlight (defined for the Token Architecture hover border,
+   * same color). No fill, no inverse text — both removed per redesign. */
+  border-bottom: 2px solid var(--border-highlight);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -260,12 +461,6 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .nav-pill:hover {
-    border-color: var(--accent-primary);
-  }
-}
-
 /* --- Site footer --- */
 
 .site-footer {
@@ -279,6 +474,7 @@
 
 .site-footer__copy {
   color: var(--text-label);
+  text-transform: none; /* .type-meta normally uppercases; the copyright line stays mixed-case, confirmed against Figma node 48:15 */
 }
 
 .site-footer__links {
@@ -457,5 +653,113 @@
   .problem-diagram {
     max-width: 100%;
     overflow-x: auto;
+  }
+}
+
+/* --- Lightbox (shared — click any real case-study image for a larger
+ * version). One instance injected per page by lightbox.js; any <img> with
+ * a data-lightbox-src attribute is a trigger. --- */
+
+[data-lightbox-src] {
+  cursor: zoom-in;
+}
+
+[data-lightbox-src]:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+body.lightbox-open {
+  overflow: hidden;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-48);
+  visibility: hidden;
+  opacity: 0;
+}
+
+.lightbox.is-open {
+  visibility: visible;
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .lightbox {
+    transition: opacity 200ms ease-out, visibility 0s linear 200ms;
+  }
+
+  .lightbox.is-open {
+    transition: opacity 200ms ease-out, visibility 0s linear 0s;
+  }
+}
+
+.lightbox__backdrop {
+  position: absolute;
+  inset: 0;
+  background: var(--bg-backdrop);
+}
+
+.lightbox__content {
+  position: relative;
+  display: flex;
+  max-width: 100%;
+  max-height: 100%;
+  transform: scale(0.96);
+}
+
+.lightbox.is-open .lightbox__content {
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .lightbox__content {
+    transition: transform 200ms ease-out;
+  }
+}
+
+.lightbox__image {
+  display: block;
+  max-width: 100%;
+  max-height: calc(100vh - var(--space-96));
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+}
+
+.lightbox__close {
+  position: fixed;
+  top: var(--space-24);
+  right: var(--space-24);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--space-48);
+  height: var(--space-48);
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-32);
+  line-height: 1;
+  color: var(--color-white);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+}
+
+.lightbox__close:hover,
+.lightbox__close:focus-visible {
+  background: color-mix(in srgb, var(--color-white) 15%, transparent);
+}
+
+@media (max-width: 600px) {
+  .lightbox {
+    padding: var(--space-24);
   }
 }

@@ -171,12 +171,25 @@
    * family scale, an unbound literal white in Figma, not a variable) --- */
   --color-white: #ffffff;
 
+  /* --- Illustrative color: OnePulse Connect's own pulse-teal-700, used only
+   * in the Token Architecture live embed to demonstrate that primitive,
+   * semantic alias, and mapped token all resolve to the same value. This is
+   * data being illustrated (the case study subject's palette), not a
+   * portfolio design token — kept separate from the primitive families
+   * above. Confirmed exact via the real Figma node (353:108, Token Example
+   * swatch fill) — the earlier #2c6164 pixel-sampled from
+   * images/ds_figmavariables.png was a different, unrelated screenshot;
+   * no discrepancy remains. */
+  --color-pulse-teal-700: #0c6265;
+  --color-teal-label: #006566; /* NEW — Token Architecture live-embed card label text (PRIMITIVE/SEMANTIC ALIAS/MAPPED TOKEN), confirmed against Figma node 353:108. Unbound literal in Figma (not aliased to any variable there), same as --color-pulse-teal-700 above. */
+
   /* --- Layout primitives --- */
   --layout-max-width: 1200px;
 
   /* --- Radius primitives --- */
   --radius-full: 99px; /* pill/fully-rounded — safely larger than half the height of anything it's applied to */
   --radius-md: var(--space-8); /* case-study row image corners, confirmed against Figma */
+  --radius-lg: var(--space-16); /* NEW — homepage hero card + glow corners, confirmed against Figma node 378:160 (381:486/381:487) */
 
   /* --- Spacing primitives --- */
   --space-4: 4px;
@@ -207,7 +220,9 @@
   --font-weight-extrabold: 800;
 
   --font-size-11: 11px;
+  --font-size-12: 12px; /* NEW — Token Architecture live-embed card label/name text, confirmed against Figma node 353:108 */
   --font-size-13: 13px;
+  --font-size-14: 14px; /* NEW — homepage nav wordmark ("Welcome"), confirmed against Figma node 378:160 */
   --font-size-16: 16px;
   --font-size-18: 18px;
   --font-size-20: 20px;
@@ -233,7 +248,7 @@
   --letter-spacing-tight-xs2: -1px; /* case study titles (.project-row__title), confirmed against live Figma — sits between tight-sm (-0.8) and tight-md (-1.2). Named awkwardly (xs2) to avoid conflicting with the existing tight/wide naming scale, which isn't strictly ordered (see tight-lg/-xl below) — consider a full naming pass on this scale at some point. */
   --letter-spacing-tight-md: -1.2px;
   --letter-spacing-tight-lg: -1.6px; /* added for case study page titles */
-  --letter-spacing-tight-xl: -1.5px; /* added for the 2026 homepage hero headline */
+  --letter-spacing-tight-xl: -1.5px; /* superseded — .type-hero-heading moved to --letter-spacing-tight-xs2 (-1px), confirmed against Figma node 378:160. Kept in case another treatment needs -1.5px again. */
   --letter-spacing-wide-sm: 0.88px;
   --letter-spacing-wide-md: 1.04px;
   --letter-spacing-wide-lg: 1.1px;
@@ -255,6 +270,7 @@
   --bg-section-alt: var(--color-sage-5); /* NOT migrated — still legacy sage. Used on case study pages, which haven't been redesigned yet */
   --bg-hero: var(--color-elm-0); /* NEW — the 2026 homepage hero panel */
   --bg-surface: var(--color-white); /* NEW — card/tile fill that sits a shade brighter than bg-page, e.g. At a Glance stat tiles */
+  --bg-backdrop: color-mix(in srgb, var(--color-elm-10) 80%, transparent); /* NEW — lightbox/modal backdrop, computed from the elm-10 black primitive via color-mix() instead of a hardcoded rgba() */
 
   /* --- Color: text --- */
   --text-primary: var(--color-cosmos-9-5);
@@ -270,6 +286,7 @@
 
   /* --- Color: accent --- */
   --accent-primary: var(--color-cosmos-7);
+  --accent-primary-dark: var(--color-cosmos-8); /* NEW — Token Architecture live-embed arrow icon fill, confirmed against Figma node 353:108's exported SVG asset (#b40b04) */
 
   /* --- Color: borders --- */
   --border-divider: var(--color-greenwhite-6);
@@ -277,6 +294,7 @@
   --border-default: var(--color-elm-9-5);
   --border-accent: var(--color-cosmos-9); /* NEW — nav pill button outline */
   --border-interactive: var(--color-smaltblue-7); /* NEW — smaltblue's first assigned role */
+  --border-highlight: var(--color-cosmos-6); /* NEW — Token Architecture live-embed card hover border. Stated by the user as #FC7973/cosmos-6; not confirmed via Figma (hover states aren't captured in a static node export), but cosmos-6 is a real existing primitive. */
 
   /* --- Spacing: gaps --- */
   --gap-tight: var(--space-4);
@@ -285,14 +303,22 @@
   --gap-stack: var(--space-16);
   --gap-section: var(--space-20); /* NEW — gap between index/heading/paragraphs within a numbered case-study section */
   --gap-card: var(--space-24);
-  --gap-footer-links: var(--space-32);
+  --gap-footer-links: var(--space-24); /* corrected from --space-32 (32px) — confirmed against live Figma node 48:15 (the shared Footer component, also used on the homepage). This changes the homepage footer's link spacing too, since it's the same shared component. */
 
   /* --- Spacing: padding --- */
   --padding-section-x: var(--space-48);
   --padding-card-y: var(--space-36);
   --padding-section-y: var(--space-96);
   --padding-image: var(--space-32);
-  --padding-hero-y: var(--space-160); /* deliberate override, not a Figma value — Figma's node 196:383 measures 180px, but 160px was chosen instead before committing. Fifth value for this token (96 → 160 → 200 → 128 → 180 → 160); if it changes again, verify against Figma before assuming drift, and note whether it's an intentional override like this one. */
+  --padding-hero-y: var(--space-160); /* superseded — the full-bleed hero-panel this backed was replaced by the floating hero card (see --hero-section-padding-y below), confirmed against Figma node 378:160. Kept in case a future full-bleed hero treatment needs it again. */
+
+  /* --- Spacing: mapped (component-scoped) — one-off positioning values that
+   * belong to a single component's exact Figma geometry, not the general
+   * spacing rhythm scale above. Per CLAUDE.md's third token tier. --- */
+  --hero-section-padding-y: 80px; /* NEW — homepage hero section vertical padding, confirmed against Figma node 378:160 */
+  --hero-card-offset-top: 14px; /* NEW — hero card's absolute top offset within its wrapper, confirmed against Figma node 381:487 */
+  --hero-card-offset-left: 17px; /* NEW — hero card's absolute left offset within its wrapper, confirmed against Figma node 381:487 */
+  --hero-card-glow-offset-left: 3px; /* NEW — glow layer's absolute left offset within the wrapper (top offset is 0), confirmed against Figma node 381:486 */
 
   /* --- Shadows --- */
   --shadow-card: 0 2px 4px rgba(0, 0, 0, 0.1), 0 15px 9px rgba(0, 0, 0, 0.05), 0 41px 11px rgba(0, 0, 0, 0.02); /* 3-layer approximation of Figma's 5-stacked-shadow card spec — reads the same visually. Applied via CSS instead of baked into image assets so it stays themeable and doesn't bleed into the source PNG/WebP crop. */
@@ -311,14 +337,12 @@
  * ============================================================ */
 
 .type-wordmark {
-  /* Corrected — was font-family-serif/line-height-36, neither matched the
-   * actual "Welcome" nav layer in Figma (confirmed: Barlow Bold 18px,
-   * line-height 20px). This was wrong in tokens.css before any of the
-   * 2026 homepage work; unrelated to the cosmos/greenwhite/elm migration. */
+  /* Updated — font-size 18→14px, line-height 20→16px, confirmed against
+   * Figma node 378:160 (nav redesign). Family/weight/letter-spacing unchanged. */
   font-family: var(--font-family-sans);
   font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-18);
-  line-height: var(--line-height-20);
+  font-size: var(--font-size-14);
+  line-height: var(--line-height-16);
   letter-spacing: var(--letter-spacing-none);
 }
 
@@ -359,16 +383,17 @@
 }
 
 .type-hero-heading {
-  /* Updated — reverted from Barlow ExtraBold/64px back to Playfair Display
-   * Regular/40px, confirmed against live Figma (196:383). This is the second
-   * full typographic reversal on this exact class; the hero treatment is
-   * still actively being iterated on, verify against Figma before trusting
-   * this file if it's been a while since the last sync. */
+  /* Updated — line-height 56→48px, letter-spacing -1.5px→-1px (now
+   * --letter-spacing-tight-xs2, an exact reuse), confirmed against Figma
+   * node 378:160 (hero card redesign, node 381:488). Font-family/weight/
+   * size unchanged (serif regular 40px). This is at least the third
+   * revision to this class; the hero treatment has iterated repeatedly —
+   * verify against Figma before trusting this file if it's been a while. */
   font-family: var(--font-family-serif);
   font-weight: var(--font-weight-regular);
   font-size: var(--font-size-40);
-  line-height: var(--line-height-56);
-  letter-spacing: var(--letter-spacing-tight-xl);
+  line-height: var(--line-height-48);
+  letter-spacing: var(--letter-spacing-tight-xs2);
 }
 
 .type-hero-subhead {
@@ -383,11 +408,15 @@
 }
 
 .type-tagline {
+  /* Corrected — was 24px/36px, Figma's Title Block description (44:5) is
+   * now 20px with line-height: normal (a deliberate "auto" choice, not a
+   * fixed value). Only used here, so updated directly rather than adding
+   * an override. */
   font-family: var(--font-family-serif);
   font-style: italic;
   font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-24);
-  line-height: var(--line-height-36);
+  font-size: var(--font-size-20);
+  line-height: normal;
   letter-spacing: var(--letter-spacing-none);
 }
 
@@ -426,6 +455,20 @@
   font-weight: var(--font-weight-regular);
   font-size: var(--font-size-11);
   line-height: var(--line-height-16);
+  letter-spacing: var(--letter-spacing-wide-sm);
+  text-transform: uppercase;
+}
+
+.type-token-name {
+  /* NEW — Token Architecture live-embed card label/name text, confirmed
+   * against Figma node 353:108. Medium weight (not regular), 12px (no
+   * existing class matched), line-height "normal" is a deliberate Figma
+   * choice (leading-[normal], not a fixed px value) so it's left as the
+   * literal CSS keyword rather than forced onto the line-height scale. */
+  font-family: var(--font-family-mono);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-12);
+  line-height: normal;
   letter-spacing: var(--letter-spacing-wide-sm);
   text-transform: uppercase;
 }
