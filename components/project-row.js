@@ -5,8 +5,14 @@ const projectRows = [
     title: 'OnePulse Connect Design System',
     description: "I built OnePulse Connect's token and component system solo — from scattered, undocumented Figma files to the shared source of truth design and engineering now build from.",
     href: '#',
-    image: 'images/onepulse-case-study.webp',
-    imageAlt: 'Screenshot of the Data Table component page from the OnePulse Connect design system.',
+    video: {
+      poster: 'videos/ds_siteoverview_poster.jpg',
+      sources: [
+        { src: 'videos/ds_siteoverview.webm', type: 'video/webm' },
+        { src: 'videos/ds_siteoverview.mp4', type: 'video/mp4' },
+      ],
+    },
+    imageAlt: "OnePulse Connect component library: clicking through the sidebar to load Alert, Data Table, Dialog, and Chip in the documentation viewer.",
   },
   {
     year: '2026',
@@ -34,7 +40,11 @@ const projectRows = [
 const projectRowsHtml = projectRows
   .map((row, i) => {
     const index = String(i + 1).padStart(2, '0');
-    const imageInner = row.image
+    const imageInner = row.video
+      ? `<video class="project-row__image-inner project-row__image-inner--siteoverview" poster="${row.video.poster}" autoplay muted loop playsinline aria-label="${row.imageAlt}">${row.video.sources
+          .map((s) => `<source src="${s.src}" type="${s.type}">`)
+          .join('')}</video>`
+      : row.image
       ? `<img class="project-row__image-inner" src="${row.image}" alt="${row.imageAlt}" loading="lazy">`
       : `<div class="project-row__image-inner"></div>`;
     return `

@@ -69,7 +69,7 @@
       display: block;
       width: 700px;
       max-width: 100%;
-      aspect-ratio: 700 / 437;
+      aspect-ratio: 1600 / 1000;
       background: var(--bg-page);
       border-radius: var(--radius-md);
       box-shadow: var(--shadow-card);
@@ -124,10 +124,8 @@
       transform-origin: center;
     }
 
-    .case-dashed-placeholder--sidebar-clip {
-      width: 760px;
-      max-width: 100%;
-      min-height: 240px;
+    .case-clip-video--siteoverview {
+      aspect-ratio: 1600 / 1000;
     }
 
     .case-visual__image--patientprofile,
@@ -152,7 +150,10 @@
 
   <section class="case-hero">
     <div class="case-hero__placeholder">
-      <img class="case-hero__frame" src="images/onepulse-case-study.webp" alt="Screenshot of the Data Table component page from the OnePulse Connect design system." loading="lazy" data-lightbox-src="images/large/ds-datatable-hero.webp" tabindex="0" role="button">
+      <video class="case-hero__frame" poster="videos/ds_siteoverview_poster.jpg" autoplay muted loop playsinline aria-label="OnePulse Connect component library: clicking through the sidebar to load Alert, Data Table, Dialog, and Chip in the documentation viewer.">
+        <source src="videos/ds_siteoverview.webm" type="video/webm">
+        <source src="videos/ds_siteoverview.mp4" type="video/mp4">
+      </video>
     </div>
   </section>
 
@@ -241,7 +242,7 @@
     <p class="case-section__body type-body"><strong>The real work was in the rules underneath the visual layer:</strong> 15 grid cell content types (checkbox, chip, numeric, avatar & name, link, button group, and more), so any column is typed correctly instead of every table inventing its own formatting. Disabled rows cascade: every child component (links, chips, checkboxes, buttons) inherits the disabled state, so a disabled row can't leave a clickable action behind by accident. Tree rows go one level deep, and pagination treats a parent-plus-children group as a single unit that never splits across pages. Custom checkbox/radio styling is built off native input state, keeping focus and keyboard behavior intact.</p>
     <div class="case-image-stack">
       <div class="case-visual">
-        <div class="case-clip-video" data-clip-video data-clip-keyframes='[{"time":0,"scale":1.12,"x":41.6,"y":14.7},{"time":1,"scale":1.12,"x":41.6,"y":14.7},{"time":2,"scale":1.00,"x":0,"y":0},{"time":3,"scale":1.00,"x":0,"y":0},{"time":4,"scale":1.03,"x":42.3,"y":-7.8},{"time":5,"scale":1.05,"x":42.3,"y":-3.3},{"time":6,"scale":1.05,"x":0,"y":-7.4},{"time":12,"scale":1.05,"x":0,"y":-7.4},{"time":13,"scale":1.00,"x":0,"y":0},{"time":14,"scale":1.00,"x":0,"y":0},{"time":15,"scale":1.12,"x":41.6,"y":14.7}]' data-clip-rate-keyframes='[{"time":0,"rate":1},{"time":1.5,"rate":2.5},{"time":3.5,"rate":1},{"time":5,"rate":1.8},{"time":6.35,"rate":1},{"time":6.6,"rate":3.5},{"time":11.6,"rate":1},{"time":12.1,"rate":2.5},{"time":14,"rate":1},{"time":14.6,"rate":3}]'>
+        <div class="case-clip-video" data-clip-video data-clip-keyframes='[{"time":0,"scale":1.12,"x":41.6,"y":14.7},{"time":1,"scale":1.12,"x":41.6,"y":14.7},{"time":2,"scale":1.00,"x":0,"y":0},{"time":3,"scale":1.00,"x":0,"y":0},{"time":4,"scale":1.03,"x":42.3,"y":-7.8},{"time":5,"scale":1.05,"x":42.3,"y":-3.3},{"time":6,"scale":1.02,"x":0,"y":-7.4},{"time":12,"scale":1.02,"x":0,"y":-7.4},{"time":13,"scale":1.00,"x":0,"y":0},{"time":14,"scale":1.00,"x":0,"y":0},{"time":15,"scale":1.12,"x":41.6,"y":14.7}]' data-clip-rate-keyframes='[{"time":0,"rate":1},{"time":1.5,"rate":2.5},{"time":3.5,"rate":1},{"time":5,"rate":1.8},{"time":6.35,"rate":1},{"time":6.6,"rate":3.5},{"time":11.6,"rate":1},{"time":12.1,"rate":2.5},{"time":14,"rate":1},{"time":14.6,"rate":3}]'>
           <video class="case-clip-video__media" poster="videos/ds_datatable_rowstates.jpg" muted loop playsinline aria-label="OnePulse Connect Data Table: expanding a tree row and cycling hover, selected, and disabled row states.">
             <source src="videos/ds_datatable_rowstates.webm" type="video/webm">
             <source src="videos/ds_datatable_rowstates.mp4" type="video/mp4">
@@ -252,7 +253,6 @@
         <img class="case-visual__image case-visual__image--celltypevariants" src="images/ds_datatable_celltypevariants.webp" alt="OnePulse Connect Data Table Cell Type Variants documentation, listing every supported grid cell type — text and sublabel, text label, numeric, date and time, avatar and name, avatar and link, link, chip, numeric badge, checkbox, radio, button group, button, overflow menu, and icon actions — with an example rendering of each." data-lightbox-src="images/large/ds-datatable-celltypevariants.webp" tabindex="0" role="button">
       </div>
     </div>
-    <script src="components/clip-video.js"></script>
     <p class="case-section__body type-body"><strong>Every gap got flagged explicitly.</strong> Where a token assignment couldn't be verified against Figma dev mode, it's marked [NEEDS VERIFICATION], over a hundred times across the docs.</p>
   </section>
 
@@ -294,9 +294,15 @@
     <p class="case-section__body type-body"><strong>Most of the system made it into code:</strong> 25 atoms and 16 patterns exist as real, working HTML/CSS pages with their own documentation, in a structured repo with a live browsable site. All 3 globals have a presence in that same repo, but Inline Drawer is the clearest gap. It's more time-intensive to translate than scoped for, and it's still only partially built.</p>
     <p class="case-section__body type-body"><strong>Every gap got logged explicitly.</strong> Missing shadow tokens, expiring asset URLs, undocumented layout details: each one recorded with the decision made to fill it, dozens of entries deep on components like Data Table alone.</p>
     <p class="case-section__body type-body"><strong>React and Storybook never happened.</strong> That was meant to be the next step, building on a largely-complete vanilla library.</p>
-    <div class="case-dashed-placeholder case-dashed-placeholder--sidebar-clip">
-      <p class="case-dashed-placeholder__label type-meta">CLIP — CLICK A COMPONENT IN THE SIDEBAR AND WATCH THE VIEWER PANE LOAD IT</p>
+    <div class="case-visual">
+      <div class="case-clip-video case-clip-video--siteoverview" data-clip-video>
+        <video class="case-clip-video__media" poster="videos/ds_siteoverview_poster.jpg" muted loop playsinline aria-label="OnePulse Connect component library: clicking through the sidebar to load Alert, Data Table, Dialog, and Chip in the documentation viewer.">
+          <source src="videos/ds_siteoverview.webm" type="video/webm">
+          <source src="videos/ds_siteoverview.mp4" type="video/mp4">
+        </video>
+      </div>
     </div>
+    <script src="components/clip-video.js"></script>
   </section>
 
   <section class="case-section">

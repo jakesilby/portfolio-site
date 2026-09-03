@@ -530,6 +530,13 @@
   box-shadow: var(--shadow-card);
 }
 
+.project-row__image-inner--siteoverview {
+  /* NEW — explicit aspect-ratio so the row doesn't flash/reflow before the
+   * video's own intrinsic size is known, matching ds_siteoverview.mp4's
+   * real 1600x1000 encode. */
+  aspect-ratio: 1600 / 1000;
+}
+
 .project-row__header {
   display: flex;
   align-items: center;

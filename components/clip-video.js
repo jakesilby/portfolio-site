@@ -1,4 +1,10 @@
 (function () {
+  // Toggle to revert instantly without ripping the camera logic out —
+  // false plays every clip at native 100% scale/position, no transform
+  // applied at all. Playback-rate pacing is a separate concern and stays
+  // active regardless of this flag.
+  const CAMERA_ENABLED = false;
+
   function easeOutCubic(t) {
     return 1 - Math.pow(1 - t, 3);
   }
@@ -29,8 +35,15 @@
     video.style.transform = `scale(${frame.scale}) translate(${frame.x}%, ${frame.y}%)`;
   }
 
-  // Rate schedule is a step function, not interpolated — playback rate should
-  // snap at each boundary (real clicks stay crisp at 1x) rather than ramp.
+  // Rate schedule is a step function, not interpolated — the *target* rate
+  // snaps at each boundary. Acceleration edges (slow->fast) apply that
+  // target instantly (measured clean via requestVideoFrameCallback — pure
+  // frame-skipping, no hiccup). Deceleration edges landing on 1x (fast->1x,
+  // right before each real click) measured a genuine ~33-66ms elongated-
+  // frame hitch when applied instantly, so those ramp video.playbackRate
+  // smoothly over RAMP_MS of real time instead of stepping.
+  const RAMP_MS = 150;
+
   function getRate(time, schedule) {
     let rate = schedule[0].rate;
     for (let i = 0; i < schedule.length; i++) {
@@ -65,17 +78,46 @@
         video.playbackRate = rateSchedule[0].rate;
       }
 
-      if ((keyframes && keyframes.length) || (rateSchedule && rateSchedule.length)) {
-        if (keyframes && keyframes.length) applyFrame(video, keyframes[0]);
+      if ((CAMERA_ENABLED && keyframes && keyframes.length) || (rateSchedule && rateSchedule.length)) {
+        if (CAMERA_ENABLED && keyframes && keyframes.length) applyFrame(video, keyframes[0]);
 
-        function updateCamera() {
+        let currentTargetRate = rateSchedule && rateSchedule.length ? rateSchedule[0].rate : 1;
+        let rampStart = null;
+        let rampFrom = null;
+        let rampTo = null;
+
+        function updateRate(timestamp) {
+          const targetRate = getRate(video.currentTime, rateSchedule);
+          if (targetRate !== currentTargetRate) {
+            const isDeceleration = targetRate === 1 && currentTargetRate > targetRate;
+            currentTargetRate = targetRate;
+            if (isDeceleration) {
+              rampStart = timestamp;
+              rampFrom = video.playbackRate;
+              rampTo = targetRate;
+            } else {
+              rampStart = null;
+              video.playbackRate = targetRate;
+            }
+          }
+          if (rampStart !== null) {
+            const elapsed = timestamp - rampStart;
+            if (elapsed >= RAMP_MS) {
+              video.playbackRate = rampTo;
+              rampStart = null;
+            } else {
+              video.playbackRate = rampFrom + (rampTo - rampFrom) * (elapsed / RAMP_MS);
+            }
+          }
+        }
+
+        function updateCamera(timestamp) {
           if (!video.paused && !video.ended) {
-            if (keyframes && keyframes.length) {
+            if (CAMERA_ENABLED && keyframes && keyframes.length) {
               applyFrame(video, getFrame(video.currentTime, keyframes));
             }
             if (rateSchedule && rateSchedule.length) {
-              const rate = getRate(video.currentTime, rateSchedule);
-              if (video.playbackRate !== rate) video.playbackRate = rate;
+              updateRate(timestamp);
             }
             requestAnimationFrame(updateCamera);
           }
