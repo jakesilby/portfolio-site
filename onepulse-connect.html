@@ -69,7 +69,7 @@
       display: block;
       width: 700px;
       max-width: 100%;
-      aspect-ratio: 1600 / 1000;
+      aspect-ratio: 1600 / 986;
       background: var(--bg-page);
       border-radius: var(--radius-md);
       box-shadow: var(--shadow-card);
@@ -125,7 +125,7 @@
     }
 
     .case-clip-video--siteoverview {
-      aspect-ratio: 1600 / 1000;
+      aspect-ratio: 1600 / 986;
     }
 
     .case-visual__image--patientprofile,
@@ -140,7 +140,7 @@
   <section class="case-title-block">
     <p class="case-title-block__eyebrow type-label-secondary">CASE STUDY</p>
     <h1 class="case-title-block__title type-page-title">OnePulse Connect Design System</h1>
-    <p class="case-title-block__description type-tagline">I solo-built a design token and component system for a medically integrated dispensing platform used by physician practices, with a focus on neurology — taking it from scattered Figma files to a governed architecture, then bridging it into code.</p>
+    <p class="case-title-block__description type-tagline">I built the design token and component system the team's three designers, myself included, used as the standard. I audited it against the live app and found three conflicting reds already shipped into production, one hardcoded straight into a button no token file accounted for.</p>
     <div class="case-title-block__meta type-meta">
       <span>ROLE: DESIGN SYSTEMS (SOLO)</span>
       <span>TIMEFRAME: 2025–2026</span>
@@ -162,7 +162,7 @@
     <div class="stat-grid">
       <div class="stat-tile">
         <p class="stat-tile__value type-case-title">SOLO</p>
-        <p class="stat-tile__label type-meta">ARCHITECTURE, TOKENS &amp; COMPONENTS — NO DEDICATED ENGINEERING TEAM</p>
+        <p class="stat-tile__label type-meta">ARCHITECTURE, TOKENS &amp; COMPONENTS, NO DEDICATED ENGINEERING TEAM</p>
       </div>
       <div class="stat-tile">
         <p class="stat-tile__value type-case-title">25 / 16 / 3</p>
@@ -182,7 +182,7 @@
   <section class="case-section case-section--alt">
     <p class="case-section__index type-meta">01</p>
     <h2 class="case-section__heading type-section-heading">The Problem</h2>
-    <p class="case-section__body type-body"><strong>No shared source of truth existed.</strong> When I joined, OnePulse Connect had a component library, but it was scattered across different Figma files, with no consistent naming and no shared token source. There was no single place designers or engineers could go to see how a chip, a card, or a table was supposed to look or behave.</p>
+    <p class="case-section__body type-body"><strong>No shared source of truth existed.</strong> OnePulse Connect had a component library when I joined, spread across different Figma files with no consistent naming and no shared token source. There was no single place designers or engineers could go to see how a chip, a card, or a table was supposed to look or behave.</p>
     <div class="problem-diagram">
       <div class="problem-diagram__group">
         <div class="problem-diagram__thumbs">
@@ -212,7 +212,7 @@
   <section class="case-section">
     <p class="case-section__index type-meta">02</p>
     <h2 class="case-section__heading type-section-heading">Why This Matters</h2>
-    <p class="case-section__body type-body"><strong>Inconsistency here is a safety risk.</strong> The screens carry prescriber NPIs, drug NDCs, claim statuses, copay amounts, prior authorization steps. Without a shared library, the same status can look different depending on which screen a pharmacist or technician is looking at. Misreading a status on a controlled substance order or a claim isn't a small mistake.</p>
+    <p class="case-section__body type-body"><strong>Inconsistency here is a safety risk.</strong> The screens carry prescriber NPIs, drug NDCs, claim statuses, copay amounts, prior authorization steps. Without a shared library, the same status can look different depending on which screen a pharmacist or technician is looking at. Misreading a status on a controlled substance order risks the wrong drug reaching the wrong patient.</p>
     <p class="case-section__body type-body"><strong>The platform runs at real scale.</strong> OnePulse Connect serves more than 2,000 provider locations across 29 states, managing nearly $1 billion in drug and supplies inventory.</p>
     <p class="case-section__body type-body"><strong>A shared system was the only way to close that gap for good.</strong> Ad hoc fixes on individual screens would have left the same risk sitting everywhere else.</p>
   </section>
@@ -220,7 +220,7 @@
   <section class="case-section case-section--alt">
     <p class="case-section__index type-meta">03</p>
     <h2 class="case-section__heading type-section-heading">Token Architecture</h2>
-    <p class="case-section__body type-body"><strong>No tokens existed at the start.</strong> Colors, spacing, and typography were all hardcoded, decided fresh every time. I built a three-layer system as the foundation everything else sits on: primitives (raw values, no meaning attached), semantic aliases (primitives assigned a role, so "pulse-teal-500" becomes "primary"), and mapped tokens (aliases resolved into the specific tokens components actually consume, like bg-fill-default or fg-fill).</p>
+    <p class="case-section__body type-body"><strong>No tokens existed at the start.</strong> Every screen hardcoded its own colors, spacing, and typography, decided fresh each time. I built a three-layer system as the foundation everything else sits on: primitives (raw values, no meaning attached), semantic aliases (primitives assigned a role, so "pulse-teal-500" becomes "primary"), and mapped tokens (aliases resolved into the specific tokens components actually consume, like bg-fill-default or fg-fill).</p>
     <p class="case-section__body type-body"><strong>Components only ever reference the mapped layer, never a raw value.</strong> Change a primitive or alias and everything downstream updates without touching a single component file. It also became an enforceable rule for Claude Code: never hardcode hex values, always pull from tokens.css.</p>
     <p class="case-section__body type-body"><strong>The result:</strong> 671 lines of fully resolved tokens.css, documented section by section: primitives, aliases, applied tokens by accent, action, component, text, surface, then typography, spacing, radius, border width, elevation.</p>
     <script src="components/token-chain.js"></script>
@@ -232,14 +232,14 @@
   <section class="case-section">
     <p class="case-section__index type-meta">04</p>
     <h2 class="case-section__heading type-section-heading">Component Documentation</h2>
-    <p class="case-section__body type-body"><strong>25 atoms and 16 patterns are fully documented</strong> with variant axes, states, token bindings, and usage guidelines. The 3 global components exist in the coded library as well, but not to the same level of completion. Inline Drawer is the clearest gap: it didn't make it fully into code (more on that below).</p>
-    <p class="case-section__body type-body"><strong>Tab Group is the clearest example of a component built to solve a real problem.</strong> In Orders, a single drug can have multiple NDCs that regulatory and administrative rules require to stay together, never split across separate tabs the way different drugs are. Tab Group was built to keep those NDCs grouped under one drug, a gap caught during design before it ever shipped as a problem.</p>
+    <p class="case-section__body type-body"><strong>I fully documented 25 atoms and 16 patterns.</strong> The 3 global components exist in the coded library as well, but not to the same level of completion. Inline Drawer is the clearest gap: it didn't make it fully into code (more on that below).</p>
+    <p class="case-section__body type-body"><strong>Tab Group is the clearest example of a component built to solve a real problem.</strong> In Orders, a single drug can have multiple NDCs that regulatory and administrative rules require to stay together, never split across separate tabs the way different drugs are. I built Tab Group to keep those NDCs grouped under one drug, a gap caught during design before it ever shipped as a problem.</p>
     <div class="case-visual">
       <img class="case-visual__image case-visual__image--tabgroup" src="images/ds_tabgroup.webp" alt="OnePulse Connect Tab Group component showing NDC-grouped tabs for a single drug, Atorvastatin, with dosage and quantity variants as separate tabs and a summary line below the active tab." data-lightbox-src="images/large/ds-tabgroup.webp" tabindex="0" role="button">
     </div>
-    <p class="case-section__body type-body"><strong>That documentation lives at the component level in Figma, alongside the token file.</strong> Every component includes its purpose, when to use it and when not to, an explanation of each property, layout behavior, common usage patterns, dos and don'ts, and accessibility considerations. This is what made the system usable by other designers without me in the room, and the code translation worked from it later.</p>
+    <p class="case-section__body type-body"><strong>That documentation lives at the component level in Figma, alongside the token file.</strong> Every component includes its purpose, when to use it and when not to, an explanation of each property, layout behavior, common usage patterns, dos and don'ts, and accessibility considerations. Other designers used the system without me in the room because the documentation covered purpose, states, and usage directly, and the code translation worked from it later.</p>
     <p class="case-section__body type-body"><strong>The same instinct shaped Data Table, the system's most consequential component.</strong> OnePulse Connect's core workflows (orders, claims, dispensing, inventory) all live in dense tables. I built two table types, Single Row and Tree Row, designed around AG Grid's capabilities from the start, since that's the framework engineering builds with.</p>
-    <p class="case-section__body type-body"><strong>The real work was in the rules underneath the visual layer:</strong> 15 grid cell content types (checkbox, chip, numeric, avatar & name, link, button group, and more), so any column is typed correctly instead of every table inventing its own formatting. Disabled rows cascade: every child component (links, chips, checkboxes, buttons) inherits the disabled state, so a disabled row can't leave a clickable action behind by accident. Tree rows go one level deep, and pagination treats a parent-plus-children group as a single unit that never splits across pages. Custom checkbox/radio styling is built off native input state, keeping focus and keyboard behavior intact.</p>
+    <p class="case-section__body type-body"><strong>The real work was in the rules underneath the visual layer:</strong> 15 grid cell content types (checkbox, chip, numeric, avatar & name, link, button group, and more), so any column is typed correctly instead of every table inventing its own formatting. Disabled rows cascade: every child component (links, chips, checkboxes, buttons) inherits the disabled state, so a disabled row can't leave a clickable action behind by accident. Tree rows go one level deep, and pagination treats a parent-plus-children group as a single unit that never splits across pages. I built custom checkbox/radio styling off native input state, keeping focus and keyboard behavior intact.</p>
     <div class="case-image-stack">
       <div class="case-visual">
         <div class="case-clip-video" data-clip-video data-clip-keyframes='[{"time":0,"scale":1.12,"x":41.6,"y":14.7},{"time":1,"scale":1.12,"x":41.6,"y":14.7},{"time":2,"scale":1.00,"x":0,"y":0},{"time":3,"scale":1.00,"x":0,"y":0},{"time":4,"scale":1.03,"x":42.3,"y":-7.8},{"time":5,"scale":1.05,"x":42.3,"y":-3.3},{"time":6,"scale":1.02,"x":0,"y":-7.4},{"time":12,"scale":1.02,"x":0,"y":-7.4},{"time":13,"scale":1.00,"x":0,"y":0},{"time":14,"scale":1.00,"x":0,"y":0},{"time":15,"scale":1.12,"x":41.6,"y":14.7}]' data-clip-rate-keyframes='[{"time":0,"rate":1},{"time":1.5,"rate":2.5},{"time":3.5,"rate":1},{"time":5,"rate":1.8},{"time":6.35,"rate":1},{"time":6.6,"rate":3.5},{"time":11.6,"rate":1},{"time":12.1,"rate":2.5},{"time":14,"rate":1},{"time":14.6,"rate":3}]'>
@@ -253,14 +253,15 @@
         <img class="case-visual__image case-visual__image--celltypevariants" src="images/ds_datatable_celltypevariants.webp" alt="OnePulse Connect Data Table Cell Type Variants documentation, listing every supported grid cell type — text and sublabel, text label, numeric, date and time, avatar and name, avatar and link, link, chip, numeric badge, checkbox, radio, button group, button, overflow menu, and icon actions — with an example rendering of each." data-lightbox-src="images/large/ds-datatable-celltypevariants.webp" tabindex="0" role="button">
       </div>
     </div>
-    <p class="case-section__body type-body"><strong>Every gap got flagged explicitly.</strong> Where a token assignment couldn't be verified against Figma dev mode, it's marked [NEEDS VERIFICATION], over a hundred times across the docs.</p>
+    <p class="case-section__body type-body"><strong>I flagged every gap explicitly.</strong> I mark a token assignment [NEEDS VERIFICATION] when it can't be verified against Figma dev mode, done over a hundred times across the docs.</p>
   </section>
 
   <section class="case-section case-section--alt">
     <p class="case-section__index type-meta">05</p>
     <h2 class="case-section__heading type-section-heading">Adoption in Production</h2>
-    <p class="case-section__body type-body"><strong>The system held up under real product complexity.</strong> A few other designers built directly from it, and it reached into engineering too. The Patient Profile/Orders view uses status chips to show a prescription's real lifecycle state, like In Progress, Dispensed, Active, and Pending. The Processing/Assessments view combines cards, chips, and progress tracking across a multi-step clinical workflow.</p>
-    <p class="case-section__body type-body"><strong>The clearest proof came later:</strong> auditing the production codebase directly against the token system, I found real drift: a mismatched red color ramp, stale hardcoded hex values, a drifted info palette, inconsistent border-radius values. I traced the root cause, corrected it at the source, and got the fix reviewed and merged into the production app. Full story below.</p>
+    <p class="case-section__body type-body"><strong>By the end, all three designers on the team, myself included, built from this system in Figma as their default.</strong> New flows, one-off screens, static files: all of it came from the same shared components and tokens, not recreated individually each time.</p>
+    <p class="case-section__body type-body"><strong>The coded library showed a different pattern this early.</strong> Adoption of the coded component library for rapid prototyping was just beginning as I wrote this case study: real, but nowhere near the norm the Figma system had become.</p>
+    <p class="case-section__body type-body"><strong>The clearest proof of the system's value came from auditing it against what had already shipped.</strong></p>
     <div class="case-image-stack">
       <div class="case-visual">
         <img class="case-visual__image case-visual__image--patientprofile" src="images/ds_patientprofile_example.webp" alt="OnePulse Connect Patient Profile Orders view for patient Sarah Chen, showing a medications table with status chips like In Progress, Active, Pending, and Dispensed alongside prescriber and copay details." data-lightbox-src="images/large/ds-patientprofile-example.webp" tabindex="0" role="button">
@@ -274,12 +275,11 @@
   <section class="case-section case-section--alt">
     <p class="case-section__index type-meta">06</p>
     <h2 class="case-section__heading type-section-heading">Reasoning &amp; Governance</h2>
-    <p class="case-section__body type-body"><strong>The clearest example of this system's reasoning came from an investigation.</strong> Auditing the production codebase, I found three different reds in three different places: the token file, the component library, a hardcoded value in a live button. None agreed.</p>
+    <p class="case-section__body type-body"><strong>The clearest example of this system's reasoning came from an investigation.</strong> Auditing the production codebase, I found three different reds in three different places (the token file, the component library, a hardcoded value in a live button), and none of them agreed.</p>
     <p class="case-section__body type-body"><strong>I traced it to source instead of guessing.</strong> The component library's red matched Figma directly; the token file's value had no clear origin anywhere else. That ruled out treating the token file as correct by default. Confirmed against Figma, corrected the token file at the source.</p>
     <p class="case-section__body type-body"><strong>The fix surfaced something bigger:</strong> the app wasn't consistently reading from the token system at all. Part of the codebase referenced raw primitives directly instead of the semantic layer meant to sit between design intent and implementation. I corrected that too, wiring the reference back to the proper layer so future token changes reach the app automatically. The fix went through review and shipped to production.</p>
     <p class="case-section__body type-body"><strong>That same instinct, trace it, don't guess, shows up in smaller standing rules too:</strong></p>
     <ul class="case-rules-list">
-      <li class="case-rules-list__item type-body"><strong>AI-generated content gets triaged.</strong> A genuine gap gets flagged and logged. Anything that looks plausible but isn't grounded in the design system gets removed outright. This check keeps invented patterns out of a medically integrated product's design language.</li>
       <li class="case-rules-list__item type-body"><strong>“(Required)” instead of an asterisk</strong> on required fields, since a word doesn't depend on the reader already knowing a convention.</li>
       <li class="case-rules-list__item type-body"><strong>Disabled buttons use a distinct token set built specifically for the disabled state.</strong> Getting this wrong in a clinical tool means a disabled action can read as available.</li>
     </ul>
@@ -288,12 +288,13 @@
   <section class="case-section">
     <p class="case-section__index type-meta">07</p>
     <h2 class="case-section__heading type-section-heading">The Design-to-Code Bridge</h2>
-    <p class="case-section__body type-body"><strong>This part of the project served two purposes.</strong> It was a hands-on way to learn AI-assisted development, directing implementation rather than writing every line by hand. It was also meant to be genuinely useful on its own: a coded component library designers and PMs could pull from directly for fast, consistent prototyping instead of redrawing screens by hand each time.</p>
-    <p class="case-section__body type-body"><strong>Figma was finished first; the code translation reached most of the way there.</strong></p>
+    <p class="case-section__body type-body"><strong>This part of the project served two purposes.</strong> Claude Code translated the Figma system into working code, but not blindly. There were moments it pulled from older, outdated token values instead of the current source of truth in tokens.css. I checked its output against tokens.css directly rather than assume it was current, and corrected the references when they didn't match. The same instinct that caught three conflicting reds in production applied here too: trace it, don't guess. I also meant it to be useful on its own: a coded component library designers and PMs could pull from directly for fast, consistent prototyping instead of redrawing screens by hand each time.</p>
+    <p class="case-section__body type-body"><strong>This same discipline extended to AI-generated copy:</strong> I triage it the same way. I flag and log a genuine gap. I remove anything that looks plausible but isn't grounded in the design system.</p>
+    <p class="case-section__body type-body"><strong>I finished Figma first; the code translation reached most of the way there.</strong></p>
     <p class="case-section__body type-body"><strong>The gap this closes:</strong> designers had a polished Figma library, but every prototype meant redrawing screens by hand, and every engineering handoff meant re-translating specs into code. I used Claude Code to bring the system into CSS/HTML directly: working components designers could pull for prototyping, and a faithful reference for an eventual React/Storybook conversion.</p>
-    <p class="case-section__body type-body"><strong>Most of the system made it into code:</strong> 25 atoms and 16 patterns exist as real, working HTML/CSS pages with their own documentation, in a structured repo with a live browsable site. All 3 globals have a presence in that same repo, but Inline Drawer is the clearest gap. It's more time-intensive to translate than scoped for, and it's still only partially built.</p>
-    <p class="case-section__body type-body"><strong>Every gap got logged explicitly.</strong> Missing shadow tokens, expiring asset URLs, undocumented layout details: each one recorded with the decision made to fill it, dozens of entries deep on components like Data Table alone.</p>
-    <p class="case-section__body type-body"><strong>React and Storybook never happened.</strong> That was meant to be the next step, building on a largely-complete vanilla library.</p>
+    <p class="case-section__body type-body"><strong>Most of the system made it into code:</strong> 25 atoms and 16 patterns exist as real, working HTML/CSS pages with their own documentation, in a structured repo with a live browsable site. All 3 globals have a presence in that same repo, but Inline Drawer is the clearest gap, more time-intensive to translate than scoped for; I've only partially built it.</p>
+    <p class="case-section__body type-body"><strong>I logged every gap explicitly.</strong> Missing shadow tokens, expiring asset URLs, undocumented layout details: each one recorded with the decision made to fill it, dozens of entries deep on components like Data Table alone.</p>
+    <p class="case-section__body type-body"><strong>React and Storybook never happened.</strong> I meant that to be the next step, building on a largely-complete vanilla library.</p>
     <div class="case-visual">
       <div class="case-clip-video case-clip-video--siteoverview" data-clip-video>
         <video class="case-clip-video__media" poster="videos/ds_siteoverview_poster.jpg" muted loop playsinline aria-label="OnePulse Connect component library: clicking through the sidebar to load Alert, Data Table, Dialog, and Chip in the documentation viewer.">
@@ -310,6 +311,7 @@
     <h2 class="case-section__heading type-section-heading">What's Next</h2>
     <p class="case-section__body type-body"><strong>Two kinds of remaining work.</strong> Scoped and known: finish the remaining global components (including Inline Drawer), close out flagged NEEDS VERIFICATION and gap-log items. Bigger step: convert the vanilla library into React and get it into Storybook, so engineering has the same source of truth designers already have in Figma.</p>
     <p class="case-section__body type-body"><strong>I don't have the resources to finish Inline Drawer for this case study.</strong> Its cost outgrew its scope partway through, and I chose to stop rather than force it.</p>
+    <p class="case-section__body type-body"><strong>This project left me with a working, base-level understanding of design systems and what it takes to translate one into code.</strong> It also pushed me toward wanting to go deeper into front-end and design engineering next. Closing the Storybook and React gap this case study left open is high on that list.</p>
   </section>
 
   <script src="components/footer.js"></script>
