@@ -286,7 +286,6 @@
   --text-hero-eyebrow: var(--color-cosmos-8-5); /* NEW — status unclear as of the latest hero revision, see chat note */
   --text-hero-heading: var(--color-cosmos-9-5); /* NEW */
   --text-hero-subhead: var(--color-greenwhite-8); /* NEW — the hero's second line ("I am a product designer..."), confirmed against live Figma (196:383) */
-  --text-on-inverse: var(--color-greenwhite-1); /* NEW — foreground (text + border) on top of bg-inverse, e.g. ProjectRow hover */
   --text-tag: var(--color-greenwhite-8);
 
   /* --- Color: accent --- */

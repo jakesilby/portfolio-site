@@ -33,7 +33,7 @@ Content and layout stay separate. A case study is a content file rendered throug
 - BEM-style class naming (matches the Pulse library conventions).
 - Every shared component (nav, footer, case-study template, any repeated card/section pattern) lives in `/components/` and is used everywhere it appears — never copy-pasted and modified per page.
 - Responsive by default — build mobile-first or check mobile at the same time as desktop, not as a separate pass at the end.
-- **ProjectRow hover state:** the homepage case-study rows need a dark hover state — background swaps to `bg/inverse`, text swaps to `text/inverse` (already modeled as a full frame in the Figma file, outside the main homepage frame, for reference). Implement as a `:hover` state driven by the same tokens, not a separate hardcoded style.
+- **ProjectRow hover state:** background swaps to `--bg-inverse`; text stays `--text-primary` (does not swap to an inverse text color). `--bg-inverse` was deliberately repointed from a dark color to a light tint in a later Figma revision — this is that revision's intended behavior, not an unfinished implementation. Driven by the same tokens, not a separate hardcoded style.
 
 ## Case study visuals: static vs. clip
 

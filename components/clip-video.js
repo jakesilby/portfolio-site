@@ -1,40 +1,4 @@
 (function () {
-  // Toggle to revert instantly without ripping the camera logic out —
-  // false plays every clip at native 100% scale/position, no transform
-  // applied at all. Playback-rate pacing is a separate concern and stays
-  // active regardless of this flag.
-  const CAMERA_ENABLED = false;
-
-  function easeOutCubic(t) {
-    return 1 - Math.pow(1 - t, 3);
-  }
-
-  function getFrame(time, keyframes) {
-    const first = keyframes[0];
-    const last = keyframes[keyframes.length - 1];
-    if (time <= first.time) return first;
-    if (time >= last.time) return last;
-
-    for (let i = 0; i < keyframes.length - 1; i++) {
-      const a = keyframes[i];
-      const b = keyframes[i + 1];
-      if (time >= a.time && time <= b.time) {
-        const span = b.time - a.time;
-        const t = span === 0 ? 1 : easeOutCubic((time - a.time) / span);
-        return {
-          scale: a.scale + (b.scale - a.scale) * t,
-          x: a.x + (b.x - a.x) * t,
-          y: a.y + (b.y - a.y) * t,
-        };
-      }
-    }
-    return last;
-  }
-
-  function applyFrame(video, frame) {
-    video.style.transform = `scale(${frame.scale}) translate(${frame.x}%, ${frame.y}%)`;
-  }
-
   // Rate schedule is a step function, not interpolated — the *target* rate
   // snaps at each boundary. Acceleration edges (slow->fast) apply that
   // target instantly (measured clean via requestVideoFrameCallback — pure
@@ -70,13 +34,6 @@
     if (!video) return;
 
     if (!reduceMotion) {
-      let keyframes = null;
-      try {
-        keyframes = JSON.parse(wrap.getAttribute('data-clip-keyframes') || 'null');
-      } catch (e) {
-        keyframes = null;
-      }
-
       let rateSchedule = null;
       try {
         rateSchedule = JSON.parse(wrap.getAttribute('data-clip-rate-keyframes') || 'null');
@@ -86,12 +43,8 @@
 
       if (rateSchedule && rateSchedule.length) {
         video.playbackRate = rateSchedule[0].rate;
-      }
 
-      if ((CAMERA_ENABLED && keyframes && keyframes.length) || (rateSchedule && rateSchedule.length)) {
-        if (CAMERA_ENABLED && keyframes && keyframes.length) applyFrame(video, keyframes[0]);
-
-        let currentTargetRate = rateSchedule && rateSchedule.length ? rateSchedule[0].rate : 1;
+        let currentTargetRate = rateSchedule[0].rate;
         let rampStart = null;
         let rampFrom = null;
         let rampTo = null;
@@ -121,18 +74,13 @@
           }
         }
 
-        function updateCamera(timestamp) {
+        function tick(timestamp) {
           if (!video.paused && !video.ended) {
-            if (CAMERA_ENABLED && keyframes && keyframes.length) {
-              applyFrame(video, getFrame(video.currentTime, keyframes));
-            }
-            if (rateSchedule && rateSchedule.length) {
-              updateRate(timestamp);
-            }
-            requestAnimationFrame(updateCamera);
+            updateRate(timestamp);
+            requestAnimationFrame(tick);
           }
         }
-        video.addEventListener('play', () => requestAnimationFrame(updateCamera));
+        video.addEventListener('play', () => requestAnimationFrame(tick));
       }
     }
 

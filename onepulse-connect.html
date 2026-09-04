@@ -102,11 +102,6 @@
       aspect-ratio: 712 / 479;
     }
 
-    .case-dashed-placeholder--clip {
-      width: 100%;
-      min-height: 260px;
-    }
-
     .case-clip-video {
       position: relative;
       width: 100%;
@@ -243,7 +238,7 @@
     <p class="case-section__body type-body"><strong>The real work was in the rules underneath the visual layer:</strong> 15 grid cell content types (checkbox, chip, numeric, avatar & name, link, button group, and more), so any column is typed correctly instead of every table inventing its own formatting. Disabled rows cascade: every child component (links, chips, checkboxes, buttons) inherits the disabled state, so a disabled row can't leave a clickable action behind by accident. Tree rows go one level deep, and pagination treats a parent-plus-children group as a single unit that never splits across pages. I built custom checkbox/radio styling off native input state, keeping focus and keyboard behavior intact.</p>
     <div class="case-image-stack">
       <div class="case-visual">
-        <div class="case-clip-video" data-clip-video data-clip-keyframes='[{"time":0,"scale":1.12,"x":41.6,"y":14.7},{"time":1,"scale":1.12,"x":41.6,"y":14.7},{"time":2,"scale":1.00,"x":0,"y":0},{"time":3,"scale":1.00,"x":0,"y":0},{"time":4,"scale":1.03,"x":42.3,"y":-7.8},{"time":5,"scale":1.05,"x":42.3,"y":-3.3},{"time":6,"scale":1.02,"x":0,"y":-7.4},{"time":12,"scale":1.02,"x":0,"y":-7.4},{"time":13,"scale":1.00,"x":0,"y":0},{"time":14,"scale":1.00,"x":0,"y":0},{"time":15,"scale":1.12,"x":41.6,"y":14.7}]' data-clip-rate-keyframes='[{"time":0,"rate":1},{"time":1.5,"rate":2.5},{"time":3.5,"rate":1},{"time":5,"rate":1.8},{"time":6.35,"rate":1},{"time":6.6,"rate":3.5},{"time":11.6,"rate":1},{"time":12.1,"rate":2.5},{"time":14,"rate":1},{"time":14.6,"rate":3}]'>
+        <div class="case-clip-video" data-clip-video data-clip-rate-keyframes='[{"time":0,"rate":1},{"time":1.5,"rate":2.5},{"time":3.5,"rate":1},{"time":5,"rate":1.8},{"time":6.35,"rate":1},{"time":6.6,"rate":3.5},{"time":11.6,"rate":1},{"time":12.1,"rate":2.5},{"time":14,"rate":1},{"time":14.6,"rate":3}]'>
           <video class="case-clip-video__media" poster="videos/ds_datatable_rowstates.jpg" muted loop playsinline aria-label="OnePulse Connect Data Table: expanding a tree row and cycling hover, selected, and disabled row states.">
             <source src="videos/ds_datatable_rowstates.webm" type="video/webm">
             <source src="videos/ds_datatable_rowstates.mp4" type="video/mp4">
