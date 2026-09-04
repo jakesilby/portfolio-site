@@ -35,7 +35,10 @@
 }
 
 .case-section__index {
-  color: var(--accent-primary);
+  color: var(--accent-primary-dark); /* accent-primary fails 4.5:1 as text against both
+   * bg-page and bg-canvas (3.72:1 / 3.52:1) — accent-primary-dark clears both at 6.6:1
+   * and 6.25:1. Reused, not invented — same token already used for the Token
+   * Architecture arrow icon. */
 }
 
 .case-section__heading {
@@ -44,7 +47,9 @@
 
 .case-section__body {
   color: var(--text-primary);
-  max-width: 760px;
+  max-width: 640px; /* was 760px — rendered ~95 chars/line at this type
+   * scale, well past the ~80ch readability guideline; 640px lands at
+   * ~80 chars/line. */
 }
 
 /* --- Case study bulleted rules list (e.g. Reasoning & Governance's
@@ -152,8 +157,28 @@
   color: var(--text-primary);
 }
 
+/* --- Featured stat tile: the color-drift-bug tile only, confirmed against
+ * Figma — exclusive to this one tile, not a general stat-tile state. --- */
+
+.stat-tile--featured {
+  background: var(--bg-accent-tint);
+  border: 1px solid var(--accent-primary);
+  border-radius: var(--radius-md);
+}
+
+.stat-tile--featured .stat-tile__value {
+  color: var(--accent-primary-dark); /* accent-primary fails 4.5:1 on bg-accent-tint
+   * (3.50:1) — accent-primary-dark clears it at 6.21:1. */
+}
+
 .stat-tile__label {
   color: var(--text-label);
+  text-transform: none; /* overrides .type-meta's uppercase — these are full
+   * sentences (up to 64 chars), not short labels; all-caps hurts readability
+   * at that length. */
+  letter-spacing: var(--letter-spacing-none); /* wide tracking only reads
+   * correctly on all-caps text — leaving it in place after removing
+   * uppercase left oddly wide-spaced sentence case. */
 }
 
 /* --- Problem Diagram (scattered files -> shared token system illustration,
@@ -230,6 +255,10 @@
 .problem-diagram__caption {
   width: 220px;
   text-align: center;
+  text-transform: none; /* overrides .type-label-secondary's uppercase —
+   * these run up to 46 chars, long enough that all-caps hurts readability. */
+  letter-spacing: var(--letter-spacing-none); /* same reasoning — wide
+   * tracking belongs to all-caps text, not the sentence case above. */
 }
 
 .problem-diagram__caption--primary {
@@ -261,8 +290,9 @@
   width: 280px;
   height: 175px;
   object-fit: cover;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-thumbnail);
+  border: 1px solid var(--accent-primary);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-resolved);
 }
 
 /* --- Token Chain (case study "Token Architecture" live embed) — three
@@ -430,7 +460,10 @@
    * rounded-pill decision), padding uniform 8px (was 8px/16px), border
    * moved off the shared base and onto the active [data-nav='work'] state
    * only, confirmed against Figma node 378:160. */
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px; /* WCAG 2.5.5 minimum tap target — visible padding stays
+   * at the Figma-confirmed 8px; this only grows the invisible hit area. */
   padding: var(--gap-inline);
   border: none;
   border-radius: 0;
@@ -448,7 +481,9 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .nav-pill {
-    transition: transform 350ms cubic-bezier(0.34, 1.15, 0.64, 1);
+    transition: transform 350ms cubic-bezier(0.165, 0.84, 0.44, 1); /* was an
+     * overshoot/bounce curve (0.34, 1.15, 0.64, 1) — swapped for ease-out-quart,
+     * a smooth deceleration instead of a springy snap-back. */
   }
 
   .nav-pill:hover {
@@ -483,6 +518,10 @@
 }
 
 .site-footer__links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px; /* WCAG 2.5.5 minimum tap target — text size/position
+   * unchanged, this only grows the invisible hit area. */
   color: var(--text-label);
   text-decoration: none;
 }
@@ -504,6 +543,12 @@
 
 .project-row:hover {
   background: var(--bg-inverse);
+}
+
+/* Non-clickable rows (no href yet — case study not published) never show
+ * the interactive hover treatment; nothing happens on click either way. */
+.project-row--upcoming:hover {
+  background: none;
 }
 
 .project-row__body {
@@ -531,10 +576,10 @@
 }
 
 .project-row__image-inner--siteoverview {
-  /* NEW — explicit aspect-ratio so the row doesn't flash/reflow before the
+  /* Explicit aspect-ratio so the row doesn't flash/reflow before the
    * video's own intrinsic size is known, matching ds_siteoverview.mp4's
-   * real 1600x1000 encode. */
-  aspect-ratio: 1600 / 1000;
+   * real 1600x986 encode. */
+  aspect-ratio: 1600 / 986;
 }
 
 .project-row__header {
@@ -551,7 +596,8 @@
 }
 
 .project-row__index {
-  color: var(--accent-primary);
+  color: var(--accent-primary-dark); /* accent-primary fails 4.5:1 as text on bg-page —
+   * accent-primary-dark clears it at 6.6:1. */
 }
 
 .project-row__title {

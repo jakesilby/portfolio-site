@@ -55,6 +55,16 @@
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // Hero video isn't wrapped in [data-clip-video] — it autoplays natively via
+  // the HTML attribute. Under reduced motion, drop that attribute and stay on
+  // the poster frame instead, per CLAUDE.md's stated fallback.
+  if (reduceMotion) {
+    document.querySelectorAll('video[autoplay]').forEach((video) => {
+      video.removeAttribute('autoplay');
+      video.pause();
+    });
+  }
+
   document.querySelectorAll('[data-clip-video]').forEach((wrap) => {
     const video = wrap.querySelector('video');
     if (!video) return;
@@ -125,6 +135,10 @@
         video.addEventListener('play', () => requestAnimationFrame(updateCamera));
       }
     }
+
+    // Scroll-triggered play/pause is motion, same as the hero's autoplay —
+    // stay on the poster frame under reduced motion instead of observing.
+    if (reduceMotion) return;
 
     const observer = new IntersectionObserver(
       (entries) => {

@@ -4,7 +4,7 @@ const projectRows = [
     type: 'Design Systems',
     title: 'OnePulse Connect Design System',
     description: "I built OnePulse Connect's token and component system solo — from scattered, undocumented Figma files to the shared source of truth design and engineering now build from.",
-    href: '#',
+    href: 'onepulse-connect.html',
     video: {
       poster: 'videos/ds_siteoverview_poster.jpg',
       sources: [
@@ -16,39 +16,44 @@ const projectRows = [
   },
   {
     year: '2026',
-    type: 'Project Type',
+    type: 'Coming Soon',
     title: 'Case Study Title',
     description: 'Description',
-    href: '#',
+    href: null,
   },
   {
     year: '2026',
-    type: 'Project Type',
+    type: 'Coming Soon',
     title: 'Case Study Title',
     description: 'Description',
-    href: '#',
+    href: null,
   },
   {
     year: '2026',
-    type: 'Project Type',
+    type: 'Coming Soon',
     title: 'Case Study Title',
     description: 'Description',
-    href: '#',
+    href: null,
   },
 ];
+
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const projectRowsHtml = projectRows
   .map((row, i) => {
     const index = String(i + 1).padStart(2, '0');
     const imageInner = row.video
-      ? `<video class="project-row__image-inner project-row__image-inner--siteoverview" poster="${row.video.poster}" autoplay muted loop playsinline aria-label="${row.imageAlt}">${row.video.sources
+      ? `<video class="project-row__image-inner project-row__image-inner--siteoverview" poster="${row.video.poster}"${reduceMotion ? '' : ' autoplay'} muted loop playsinline aria-label="${row.imageAlt}">${row.video.sources
           .map((s) => `<source src="${s.src}" type="${s.type}">`)
           .join('')}</video>`
       : row.image
       ? `<img class="project-row__image-inner" src="${row.image}" alt="${row.imageAlt}" loading="lazy">`
       : `<div class="project-row__image-inner"></div>`;
+    const tag = row.href ? 'a' : 'div';
+    const hrefAttr = row.href ? ` href="${row.href}"` : '';
+    const modifierClass = row.href ? '' : ' project-row--upcoming';
     return `
-<a class="project-row" href="${row.href}">
+<${tag} class="project-row${modifierClass}"${hrefAttr}>
   <div class="project-row__header">
     <div class="project-row__title-group">
       <span class="project-row__index type-label-secondary">${index}</span>
@@ -65,7 +70,7 @@ const projectRowsHtml = projectRows
     </div>
     <p class="project-row__description type-description">${row.description}</p>
   </div>
-</a>`;
+</${tag}>`;
   })
   .join('');
 
@@ -74,8 +79,6 @@ const projectRowScript = document.currentScript;
 projectRowScript.insertAdjacentHTML('afterend', `<div class="project-row-list">${projectRowsHtml}</div>`);
 
 (function observeProjectRows() {
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
   if (reduceMotion || !('IntersectionObserver' in window)) return;
 
   const rows = projectRowScript.nextElementSibling.querySelectorAll('.project-row');

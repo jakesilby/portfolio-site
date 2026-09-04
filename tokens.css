@@ -188,6 +188,7 @@
 
   /* --- Radius primitives --- */
   --radius-full: 99px; /* pill/fully-rounded — safely larger than half the height of anything it's applied to */
+  --radius-sm: var(--space-4); /* NEW — Problem Diagram resolved-side image frame corners, confirmed against Figma */
   --radius-md: var(--space-8); /* case-study row image corners, confirmed against Figma */
   --radius-lg: var(--space-16); /* NEW — homepage hero card + glow corners, confirmed against Figma node 378:160 (381:486/381:487) */
 
@@ -264,6 +265,7 @@
   --bg-page: var(--color-greenwhite-0);
   --bg-canvas: var(--color-greenwhite-1-5); /* corrected from greenwhite-0-5 (#f5f6f4) to greenwhite-1-5 (#f1f2ef) — confirmed against live Figma variables on node 44:2 ("The Problem" section fill), the token's first actual usage anywhere in the codebase */
   --bg-accent: var(--color-cosmos-4);
+  --bg-accent-tint: var(--color-cosmos-1); /* NEW — featured At a Glance stat tile fill, confirmed against Figma (#FBEEEE) */
   --bg-inverse: var(--color-greenwhite-5); /* confirmed against Figma node 239:186 — the light-tint hover redesign. Was previously cosmos-9 (dark, node 232:21) — my own local copy of this file was never updated when that fix was given to Claude Code directly, which is likely why it regressed. */
   --bg-placeholder: var(--color-greenwhite-4);
   --bg-placeholder-fill: var(--color-greenwhite-1); /* NEW — inner tone for the two-tone case-study image placeholder */
@@ -276,7 +278,10 @@
   --text-primary: var(--color-cosmos-9-5);
   --text-secondary: var(--color-elm-9);
   --text-inverse: var(--color-cosmos-9);
-  --text-muted: var(--color-sage-6); /* NOT migrated — still legacy sage */
+  --text-muted: var(--color-greenwhite-8); /* Migrated off legacy sage-6 (#b4beb5,
+   * 1.7:1 — failed WCAG AA). greenwhite-8 is the lightest step in the active
+   * 2026 palette that still clears 4.5:1 against both bg-page and bg-canvas
+   * (5.48:1 / 5.19:1). */
   --text-label: var(--color-elm-8);
   --text-hero-eyebrow: var(--color-cosmos-8-5); /* NEW — status unclear as of the latest hero revision, see chat note */
   --text-hero-heading: var(--color-cosmos-9-5); /* NEW */
@@ -323,6 +328,7 @@
   /* --- Shadows --- */
   --shadow-card: 0 2px 4px rgba(0, 0, 0, 0.1), 0 15px 9px rgba(0, 0, 0, 0.05), 0 41px 11px rgba(0, 0, 0, 0.02); /* 3-layer approximation of Figma's 5-stacked-shadow card spec — reads the same visually. Applied via CSS instead of baked into image assets so it stays themeable and doesn't bleed into the source PNG/WebP crop. */
   --shadow-thumbnail: 0 1px 2px rgba(0, 0, 0, 0.1), 0 8px 5px rgba(0, 0, 0, 0.05), 0 14px 5px rgba(0, 0, 0, 0.02); /* NEW — same 3-layer approximation approach as --shadow-card, scaled down for smaller inline thumbnails (e.g. the Problem Diagram's ds_colors image), confirmed against a distinct, tighter 5-layer spec on node 45:2 */
+  --shadow-resolved: 0 4px 16px rgba(0, 0, 0, 0.12); /* NEW — single-layer spec, meaningfully simpler than the 3-layer --shadow-card/--shadow-thumbnail approximations. Problem Diagram's resolved/"Token System" side only, confirmed against Figma. */
 }
 
 

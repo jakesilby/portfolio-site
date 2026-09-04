@@ -25,7 +25,8 @@
     }
 
     .case-title-block__eyebrow {
-      color: var(--accent-primary);
+      color: var(--accent-primary-dark); /* accent-primary fails 4.5:1 as text on
+       * bg-page (3.72:1) — accent-primary-dark clears it at 6.6:1. */
     }
 
     .case-title-block__title {
@@ -162,19 +163,19 @@
     <div class="stat-grid">
       <div class="stat-tile">
         <p class="stat-tile__value type-case-title">SOLO</p>
-        <p class="stat-tile__label type-meta">ARCHITECTURE, TOKENS &amp; COMPONENTS, NO DEDICATED ENGINEERING TEAM</p>
+        <p class="stat-tile__label type-meta">Architecture, tokens &amp; components, no dedicated engineering team</p>
       </div>
       <div class="stat-tile">
         <p class="stat-tile__value type-case-title">25 / 16 / 3</p>
-        <p class="stat-tile__label type-meta">ATOMS / PATTERNS / GLOBALS IN THE CODED LIBRARY</p>
+        <p class="stat-tile__label type-meta">Atoms / patterns / globals in the coded library</p>
       </div>
       <div class="stat-tile">
         <p class="stat-tile__value type-case-title">2–3 + ENG</p>
-        <p class="stat-tile__label type-meta">DESIGNERS ACTIVELY USING THE SYSTEM, PLUS ENGINEERING</p>
+        <p class="stat-tile__label type-meta">Designers actively using the system, plus engineering</p>
       </div>
-      <div class="stat-tile">
+      <div class="stat-tile stat-tile--featured">
         <p class="stat-tile__value type-case-title">1</p>
-        <p class="stat-tile__label type-meta">PRODUCTION COLOR-DRIFT BUG FOUND, FIXED, AND SHIPPED</p>
+        <p class="stat-tile__label type-meta">Production color-drift bug found, fixed, and shipped</p>
       </div>
     </div>
   </section>
@@ -196,14 +197,14 @@
             <div class="problem-diagram__card type-label-secondary">FILE C</div>
           </div>
         </div>
-        <p class="problem-diagram__caption problem-diagram__caption--label type-label-secondary">SCATTERED ACROSS FIGMA FILES, NO SHARED NAMING</p>
+        <p class="problem-diagram__caption problem-diagram__caption--label type-label-secondary">Scattered across Figma files, no shared naming</p>
       </div>
       <span class="problem-diagram__arrow">→</span>
       <div class="problem-diagram__group">
         <div class="problem-diagram__image-frame">
           <img class="problem-diagram__image" src="images/ds_colors.webp" alt="OnePulse Connect design system Colors foundation page, showing the full primitive color palette rows.">
         </div>
-        <p class="problem-diagram__caption problem-diagram__caption--primary type-label-secondary">ONE SHARED TOKEN &amp; COMPONENT SYSTEM</p>
+        <p class="problem-diagram__caption problem-diagram__caption--primary type-label-secondary">One shared token &amp; component system</p>
       </div>
     </div>
     <p class="case-section__body type-body"><strong>I set out to fix that at the source:</strong> a token and component system other designers could work from directly in Figma, with clear rules for states, variants, and usage.</p>
