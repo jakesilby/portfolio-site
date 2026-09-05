@@ -11,7 +11,7 @@ navScript.insertAdjacentHTML('afterend', `
   </a>
   <nav class="site-header__nav" aria-label="Primary">
     <a class="nav-pill type-nav-label" data-nav="work" href="/">Work</a>
-    <a class="nav-pill type-nav-label" data-nav="about" href="#">About</a>
+    <div class="nav-pill nav-pill--upcoming type-nav-label" data-nav="about">About</div>
   </nav>
 </header>
 `);

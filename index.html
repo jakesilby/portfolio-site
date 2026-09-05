@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jake Silby — Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@0,400;1,400&family=Spline+Sans+Mono:wght@400;500&family=Barlow:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&family=Spline+Sans+Mono:wght@400;500&family=Barlow:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="tokens.css">
   <link rel="stylesheet" href="components/components.css">
   <style>
@@ -15,18 +15,82 @@
       color: var(--text-primary);
       font-family: var(--font-family-sans);
     }
-    .hero-panel {
+    .hero-section {
+      padding: var(--hero-section-padding-y) var(--padding-section-x);
+    }
+    .hero-card {
+      position: relative;
+      width: 490px;
+      max-width: 100%;
+      height: 209px;
+    }
+    @property --gradient-angle {
+      syntax: '<angle>';
+      initial-value: 109.04deg;
+      inherits: false;
+    }
+
+    .hero-card__glow {
+      position: absolute;
+      top: 0;
+      left: var(--hero-card-glow-offset-left);
+      width: 483px;
+      height: 209px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(
+        var(--gradient-angle),
+        color-mix(in srgb, var(--bg-accent) 60%, transparent) 0%,
+        color-mix(in srgb, var(--color-greenwhite-6) 30%, transparent) 48.83%,
+        color-mix(in srgb, var(--bg-hero) 60%, transparent) 99.516%
+      );
+      filter: blur(13.45px);
+      opacity: 0.7;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-card__glow {
+        animation: hero-glow-rotate 48s linear infinite;
+      }
+    }
+
+    @keyframes hero-glow-rotate {
+      from { --gradient-angle: 109.04deg; }
+      to { --gradient-angle: 469.04deg; }
+    }
+    .hero-card__content {
+      position: absolute;
+      top: var(--hero-card-offset-top);
+      left: var(--hero-card-offset-left);
       display: flex;
       flex-direction: column;
       gap: var(--gap-hero-text);
-      background: var(--bg-hero);
-      padding: var(--padding-hero-y) var(--padding-section-x);
+      padding: var(--space-48);
+      border-radius: var(--radius-lg);
+      background: var(--bg-page);
+      white-space: nowrap;
     }
-    .hero-panel__heading {
+    .hero-card__heading {
       color: var(--text-hero-heading);
     }
-    .hero-panel__subhead {
+    .hero-card__subhead {
       color: var(--text-hero-subhead);
+    }
+
+    @media (max-width: 599px) {
+      .hero-card {
+        width: auto;
+        height: auto;
+      }
+      .hero-card__glow {
+        inset: calc(-1 * var(--hero-card-offset-top));
+        width: auto;
+        height: auto;
+      }
+      .hero-card__content {
+        position: static;
+        white-space: normal;
+        padding: var(--space-24);
+      }
     }
 
     .section-label {
@@ -39,12 +103,17 @@
 <body data-page="work">
   <script src="components/nav.js"></script>
 
-  <section class="hero-panel">
-    <p class="hero-panel__heading type-hero-heading">Hi, I’m Jake</p>
-    <p class="hero-panel__subhead type-hero-subhead">I am a product designer based in Brooklyn, NY.</p>
+  <section class="hero-section">
+    <div class="hero-card">
+      <div class="hero-card__glow" aria-hidden="true"></div>
+      <div class="hero-card__content">
+        <h1 class="hero-card__heading type-hero-heading">Hi, I’m Jake</h1>
+        <p class="hero-card__subhead type-hero-subhead">I am a product designer based in Brooklyn, NY.</p>
+      </div>
+    </div>
   </section>
 
-  <p class="section-label type-section-label">Selected Work ↓</p>
+  <h2 class="section-label type-section-label">Selected Work ↓</h2>
 
   <script src="components/project-row.js"></script>
 

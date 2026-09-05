@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "kicker-above-heading",
+        "value": "*",
+        "files": [
+          "onepulse-connect.html"
+        ],
+        "createdAt": "2026-09-04T19:56:16.618Z",
+        "reason": "User confirmed: intentional editorial convention, consistent with the already-accepted numbered section labels"
+      }
+    ]
+  }
+}

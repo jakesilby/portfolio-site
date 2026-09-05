@@ -1,7 +1,391 @@
-/* Shared chrome: site-header, site-footer, project-row.
+/* Shared chrome: site-header, site-footer, project-row, case-header.
  * Loaded on every page that uses these components — never modify a copy
  * per page, edit here.
  */
+
+/* --- Case header (case study pages — back-link only, no wordmark/nav) --- */
+
+.case-header {
+  display: flex;
+  align-items: center;
+  padding: var(--space-24) var(--padding-section-x);
+  background: var(--bg-page);
+}
+
+.case-header__back {
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+
+/* --- Case study numbered section (01 The Problem, 02 Why This Matters, ...) —
+ * repeats identically across every numbered section on a case study page,
+ * confirmed against Figma node 44:2. */
+
+.case-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-section);
+  padding: var(--padding-section-x);
+  background: var(--bg-page);
+}
+
+.case-section--alt {
+  background: var(--bg-canvas);
+}
+
+.case-section__index {
+  color: var(--accent-primary-dark); /* accent-primary fails 4.5:1 as text against both
+   * bg-page and bg-canvas (3.72:1 / 3.52:1) — accent-primary-dark clears both at 6.6:1
+   * and 6.25:1. Reused, not invented — same token already used for the Token
+   * Architecture arrow icon. */
+}
+
+.case-section__heading {
+  color: var(--text-primary);
+}
+
+.case-section__body {
+  color: var(--text-primary);
+  max-width: 640px; /* was 760px — rendered ~95 chars/line at this type
+   * scale, well past the ~80ch readability guideline; 640px lands at
+   * ~80 chars/line. */
+}
+
+/* --- Case study bulleted rules list (e.g. Reasoning & Governance's
+ * "standing rules" list) — a real <ul>, not literal bullet characters in
+ * <p> tags like Figma's own authoring, for semantics. --- */
+
+.case-rules-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-section);
+  width: 736px;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.case-rules-list__item {
+  position: relative;
+  padding-left: var(--gap-stack);
+  color: var(--text-primary);
+}
+
+.case-rules-list__item::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+}
+
+/* --- Case study inline visual (bg-placeholder wrapper, no radius on the
+ * wrapper itself; inner image gets radius + object-fit, no shadow) — reused
+ * across every real-screenshot block on a case study page. Each usage sets
+ * its own aspect-ratio via a modifier, since that varies per image. --- */
+
+.case-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 760px;
+  max-width: 100%;
+  padding: var(--space-24);
+  background: var(--bg-placeholder);
+}
+
+.case-visual__image {
+  display: block;
+  width: 100%;
+  max-width: 712px;
+  height: auto;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+}
+
+/* --- Case study vertical image stack (a group of .case-visual/
+ * .case-dashed-placeholder blocks stacked with a consistent 20px gap —
+ * Data Table Screenshots, Production Screenshots) --- */
+
+.case-image-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-section);
+  width: 760px;
+  max-width: 100%;
+}
+
+/* --- Stat Grid (case study "At a Glance") --- */
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--gap-card);
+  width: 100%;
+}
+
+.stat-tile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-inline);
+  padding: var(--gap-inline);
+  background: var(--bg-surface);
+}
+
+.stat-tile__value {
+  color: var(--text-primary);
+}
+
+/* --- Featured stat tile: the color-drift-bug tile only, confirmed against
+ * Figma — exclusive to this one tile, not a general stat-tile state. --- */
+
+.stat-tile--featured {
+  background: var(--bg-accent-tint);
+  border: 1px solid var(--accent-primary);
+  border-radius: var(--radius-md);
+}
+
+.stat-tile--featured .stat-tile__value {
+  color: var(--accent-primary-dark); /* accent-primary fails 4.5:1 on bg-accent-tint
+   * (3.50:1) — accent-primary-dark clears it at 6.21:1. */
+}
+
+.stat-tile__label {
+  color: var(--text-label);
+  text-transform: none; /* overrides .type-meta's uppercase — these are full
+   * sentences (up to 64 chars), not short labels; all-caps hurts readability
+   * at that length. */
+  letter-spacing: var(--letter-spacing-none); /* wide tracking only reads
+   * correctly on all-caps text — leaving it in place after removing
+   * uppercase left oddly wide-spaced sentence case. */
+}
+
+/* --- Problem Diagram (scattered files -> shared token system illustration,
+ * case study "The Problem" section only — bespoke, not a reusable pattern) --- */
+
+.problem-diagram {
+  display: flex;
+  align-items: center;
+  gap: var(--space-32);
+  padding: var(--gap-stack);
+  background: var(--bg-surface);
+}
+
+.problem-diagram__group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  gap: var(--gap-stack);
+  padding: var(--gap-stack);
+}
+
+.problem-diagram__thumbs {
+  position: relative;
+  width: 270px;
+  height: 220px;
+}
+
+.problem-diagram__thumb-wrap {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.problem-diagram__thumb-wrap--a {
+  left: 0;
+  top: 61px;
+  width: 160px;
+  height: 108px;
+  transform: rotate(7deg);
+}
+
+.problem-diagram__thumb-wrap--b {
+  left: 112px;
+  top: 0;
+  width: 157px;
+  height: 103px;
+  transform: rotate(-5deg);
+}
+
+.problem-diagram__thumb-wrap--c {
+  left: 67px;
+  top: 119px;
+  width: 156px;
+  height: 100px;
+  transform: rotate(4deg);
+}
+
+.problem-diagram__card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 90px;
+  padding: var(--space-32) var(--gap-stack);
+  background: var(--bg-canvas);
+  border: 1px solid var(--border-muted);
+  border-radius: var(--space-4);
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.problem-diagram__caption {
+  width: 220px;
+  text-align: center;
+  text-transform: none; /* overrides .type-label-secondary's uppercase —
+   * these run up to 46 chars, long enough that all-caps hurts readability. */
+  letter-spacing: var(--letter-spacing-none); /* same reasoning — wide
+   * tracking belongs to all-caps text, not the sentence case above. */
+}
+
+.problem-diagram__caption--primary {
+  color: var(--text-primary);
+}
+
+.problem-diagram__caption--label {
+  color: var(--text-label);
+}
+
+.problem-diagram__arrow {
+  flex-shrink: 0;
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-extrabold);
+  font-size: var(--font-size-32);
+  color: var(--accent-primary);
+}
+
+.problem-diagram__image-frame {
+  position: relative;
+  width: 280px;
+  height: 220px;
+}
+
+.problem-diagram__image {
+  position: absolute;
+  left: 0;
+  top: 22px;
+  width: 280px;
+  height: 175px;
+  object-fit: cover;
+  border: 1px solid var(--accent-primary);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-resolved);
+}
+
+/* --- Token Chain (case study "Token Architecture" live embed) — three
+ * connected cards showing a primitive/alias/mapped-token chain resolving to
+ * the same color; hovering any card highlights all three via :has(), no JS
+ * interaction needed. Confirmed against Figma node 353:108. --- */
+
+.token-chain-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 760px;
+  max-width: 100%;
+  padding: var(--space-24);
+  background: var(--bg-placeholder);
+}
+
+.token-chain {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1px var(--gap-card);
+  width: 100%;
+}
+
+.token-chain__card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1 0 0;
+  min-width: 0;
+  min-height: 110px;
+  gap: var(--gap-stack);
+  padding: var(--space-16) var(--space-8);
+  background: var(--bg-page);
+  border: 1px solid var(--border-divider);
+  border-radius: var(--radius-md);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .token-chain__card {
+    transition: border-color 200ms ease-out;
+  }
+}
+
+.token-chain:has(.token-chain__card:hover) .token-chain__card {
+  border-color: var(--border-highlight);
+}
+
+.token-chain__swatch {
+  display: block;
+  width: var(--space-24);
+  height: var(--space-24);
+  background: var(--color-pulse-teal-700);
+  border-radius: var(--space-4);
+}
+
+.token-chain__text {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  min-width: 0;
+  gap: var(--gap-inline);
+}
+
+.token-chain__label,
+.token-chain__name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.token-chain__label {
+  color: var(--color-teal-label);
+}
+
+.token-chain__name {
+  color: var(--text-primary);
+}
+
+.token-chain__arrow {
+  display: flex;
+  flex-shrink: 0;
+  width: 14px;
+  height: 14.7279px;
+  color: var(--accent-primary-dark);
+}
+
+.token-chain__arrow svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.token-chain__caption {
+  width: 760px;
+  max-width: 100%;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 600px) {
+  .token-chain {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+  }
+
+  .token-chain__arrow {
+    align-self: center;
+    transform: rotate(90deg);
+  }
+}
 
 /* --- Site header --- */
 
@@ -52,24 +436,42 @@
 }
 
 .nav-pill {
-  display: inline-block;
-  padding: var(--gap-inline) var(--gap-stack);
-  border: 1px solid var(--border-accent);
-  border-radius: var(--radius-full);
+  /* Reworked — border-radius back to 0 (square, reverses the earlier
+   * rounded-pill decision), padding uniform 8px (was 8px/16px), border
+   * moved off the shared base and onto the active [data-nav='work'] state
+   * only, confirmed against Figma node 378:160. */
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px; /* WCAG 2.5.5 minimum tap target — visible padding stays
+   * at the Figma-confirmed 8px; this only grows the invisible hit area. */
+  padding: var(--gap-inline);
+  border: none;
+  border-radius: 0;
   color: var(--text-primary);
   text-decoration: none;
   background: transparent;
 }
 
 .nav-pill[data-nav='work'] {
-  background: var(--bg-accent);
-  border-color: var(--bg-accent);
-  color: var(--text-inverse);
+  /* Active-tab treatment: bottom border only, 2px, cosmos-6 — reuses
+   * --border-highlight (defined for the Token Architecture hover border,
+   * same color). No fill, no inverse text — both removed per redesign. */
+  border-bottom: 2px solid var(--border-highlight);
+}
+
+/* Non-clickable pill (no page there yet) never shows the interactive
+ * hover/active treatment — same non-interactive pattern as
+ * .project-row--upcoming. */
+.nav-pill--upcoming:hover,
+.nav-pill--upcoming:active {
+  transform: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .nav-pill {
-    transition: transform 350ms cubic-bezier(0.34, 1.15, 0.64, 1);
+    transition: transform 350ms cubic-bezier(0.165, 0.84, 0.44, 1); /* was an
+     * overshoot/bounce curve (0.34, 1.15, 0.64, 1) — swapped for ease-out-quart,
+     * a smooth deceleration instead of a springy snap-back. */
   }
 
   .nav-pill:hover {
@@ -79,12 +481,6 @@
   .nav-pill:active {
     transform: scale(0.97);
     transition-duration: 120ms;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .nav-pill:hover {
-    border-color: var(--accent-primary);
   }
 }
 
@@ -101,6 +497,7 @@
 
 .site-footer__copy {
   color: var(--text-label);
+  text-transform: none; /* .type-meta normally uppercases; the copyright line stays mixed-case, confirmed against Figma node 48:15 */
 }
 
 .site-footer__links {
@@ -109,6 +506,10 @@
 }
 
 .site-footer__links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px; /* WCAG 2.5.5 minimum tap target — text size/position
+   * unchanged, this only grows the invisible hit area. */
   color: var(--text-label);
   text-decoration: none;
 }
@@ -130,6 +531,12 @@
 
 .project-row:hover {
   background: var(--bg-inverse);
+}
+
+/* Non-clickable rows (no href yet — case study not published) never show
+ * the interactive hover treatment; nothing happens on click either way. */
+.project-row--upcoming:hover {
+  background: none;
 }
 
 .project-row__body {
@@ -156,6 +563,13 @@
   box-shadow: var(--shadow-card);
 }
 
+.project-row__image-inner--siteoverview {
+  /* Explicit aspect-ratio so the row doesn't flash/reflow before the
+   * video's own intrinsic size is known, matching ds_siteoverview.mp4's
+   * real 1600x986 encode. */
+  aspect-ratio: 1600 / 986;
+}
+
 .project-row__header {
   display: flex;
   align-items: center;
@@ -170,13 +584,15 @@
 }
 
 .project-row__index {
-  color: var(--accent-primary);
+  color: var(--accent-primary-dark); /* accent-primary fails 4.5:1 as text on bg-page —
+   * accent-primary-dark clears it at 6.6:1. */
 }
 
 .project-row__title {
   color: var(--text-primary);
   margin: 0;
   font-size: var(--font-size-24);
+  letter-spacing: var(--letter-spacing-tight-xs2);
 }
 
 .project-row__meta {
@@ -269,5 +685,122 @@
 
   .project-row__meta {
     align-items: flex-start;
+  }
+
+  .stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .problem-diagram {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+}
+
+/* --- Lightbox (shared — click any real case-study image for a larger
+ * version). One instance injected per page by lightbox.js; any <img> with
+ * a data-lightbox-src attribute is a trigger. --- */
+
+[data-lightbox-src] {
+  cursor: zoom-in;
+}
+
+[data-lightbox-src]:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+body.lightbox-open {
+  overflow: hidden;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-48);
+  visibility: hidden;
+  opacity: 0;
+}
+
+.lightbox.is-open {
+  visibility: visible;
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .lightbox {
+    transition: opacity 200ms ease-out, visibility 0s linear 200ms;
+  }
+
+  .lightbox.is-open {
+    transition: opacity 200ms ease-out, visibility 0s linear 0s;
+  }
+}
+
+.lightbox__backdrop {
+  position: absolute;
+  inset: 0;
+  background: var(--bg-backdrop);
+}
+
+.lightbox__content {
+  position: relative;
+  display: flex;
+  max-width: 100%;
+  max-height: 100%;
+  transform: scale(0.96);
+}
+
+.lightbox.is-open .lightbox__content {
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .lightbox__content {
+    transition: transform 200ms ease-out;
+  }
+}
+
+.lightbox__image {
+  display: block;
+  max-width: 100%;
+  max-height: calc(100vh - var(--space-96));
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+}
+
+.lightbox__close {
+  position: fixed;
+  top: var(--space-24);
+  right: var(--space-24);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--space-48);
+  height: var(--space-48);
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-32);
+  line-height: 1;
+  color: var(--color-white);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+}
+
+.lightbox__close:hover,
+.lightbox__close:focus-visible {
+  background: color-mix(in srgb, var(--color-white) 15%, transparent);
+}
+
+@media (max-width: 600px) {
+  .lightbox {
+    padding: var(--space-24);
   }
 }
