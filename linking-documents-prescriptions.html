@@ -81,27 +81,60 @@
        * bottom gap, so matching Figma's own uniform 48px here would double it. */
     }
 
+    /* min-height, not aspect-ratio — these boxes hold wrapping label text,
+     * not fixed-ratio media. aspect-ratio was tried first and broke on
+     * mobile: at narrow widths the box got too short for its own label,
+     * so the text overflowed past the dashed border. min-height matches
+     * Figma's number at full width (where it was sized to exactly fit
+     * the text) and lets the box grow taller instead of clipping when the
+     * width shrinks. Same pattern as OnePulse's original
+     * .case-dashed-placeholder--sidebar-clip. */
+
     .case-dashed-placeholder--hero {
-      /* Sized to Figma's Hero Visual container (956 x 440) rather than
-       * OnePulse's hero frame proportions — this placeholder has no real
-       * asset yet to size around. */
+      /* Figma's Hero Visual container: 956 x 440. */
       width: 956px;
       max-width: 100%;
-      aspect-ratio: 956 / 440;
+      min-height: 440px;
     }
 
     .case-dashed-placeholder--before-after {
-      /* Sized to Figma's Problem-section Visual Placeholder container
-       * (760 x 240) — same reasoning as the hero modifier: no real asset
-       * yet to size around. */
+      /* Figma's Problem-section Visual Placeholder: 760 x 240. */
       width: 760px;
       max-width: 100%;
-      aspect-ratio: 760 / 240;
+      min-height: 240px;
+    }
+
+    .case-dashed-placeholder--upload-dialog {
+      /* Component Documentation's first placeholder — 760 x 220 in Figma,
+       * distinct from the other two placeholders in this section. */
+      width: 760px;
+      max-width: 100%;
+      min-height: 220px;
+    }
+
+    .case-dashed-placeholder--two-zone-clip {
+      /* 760 x 260 in Figma — flagged there as "the single most important
+       * visual in the case study," but that's a priority note for whoever
+       * shoots it later, not a styling difference; still the same dashed
+       * placeholder pattern until the real clip exists. */
+      width: 760px;
+      max-width: 100%;
+      min-height: 260px;
+    }
+
+    .case-dashed-placeholder--linked-elsewhere {
+      /* 760 x 180 in Figma — the shortest of the three. */
+      width: 760px;
+      max-width: 100%;
+      min-height: 180px;
     }
 
     @media (max-width: 720px) {
       .case-dashed-placeholder--hero,
-      .case-dashed-placeholder--before-after {
+      .case-dashed-placeholder--before-after,
+      .case-dashed-placeholder--upload-dialog,
+      .case-dashed-placeholder--two-zone-clip,
+      .case-dashed-placeholder--linked-elsewhere {
         /* Same fix as .case-visual/OnePulse's hero placeholder — 24px
          * horizontal padding shrinks the box disproportionately at mobile
          * widths, and it's the first thing a mobile visitor sees. */
@@ -146,6 +179,26 @@
     <h2 class="case-section__heading type-section-heading">Why This Matters</h2>
     <p class="case-section__body type-body">Jillian, who works documents from the patient profile rather than an active workflow, described hunting for an approval letter after a medication had already been dispensed, with no reliable way to find it by medication name. Staff were already renaming files "DO NOT USE" as a workaround, since there was no way to deactivate a document without deleting it.</p>
     <p class="case-section__body type-body"><strong>There was also a sharper, safety-adjacent problem underneath.</strong> Once a document could be linked to multiple medications, "Print Prescription" needed to resolve to exactly one document, even with several Rx Prescription-type documents on file. Left ambiguous, the system either can't act or a staff member has to guess, in a clinical dispensing context. That's not something this tool could leave loose.</p>
+  </section>
+
+  <section class="case-section">
+    <p class="case-section__index type-meta">03</p>
+    <h2 class="case-section__heading type-section-heading">Component Documentation: Linked Documents</h2>
+    <p class="case-section__body type-body"><strong>Checkboxes in a flat list were the first version, and they didn't work.</strong> There was no visible sign a document was tied to a medication, and real usability feedback confirmed it: the linking action wasn't explicit enough for people working under time pressure.</p>
+    <p class="case-section__body type-body"><strong>It had to work in both directions.</strong> From a prescription, a user opens Linked Documents and connects existing patient documents to it. From the documents side, uploading a new document lets a user tie it to one or more medications or prescriptions at upload time, in an optional Linked Medications &amp; Prescriptions field. If nothing's selected, the document still uploads, it just lands on the patient's profile only.</p>
+    <div class="case-dashed-placeholder case-dashed-placeholder--upload-dialog">
+      <p class="case-dashed-placeholder__label type-meta">HIGH PRIORITY, STATIC — UPLOAD FILE DIALOG, CROPPED TO THE LINKED MEDICATIONS &amp; PRESCRIPTIONS FIELD + "OPTIONAL" HELPER TEXT</p>
+    </div>
+    <p class="case-section__body type-body"><strong>A two-zone layout fixed the visibility problem.</strong> The dialog splits into Linked to this Prescription (populated with whatever's already connected, or an explicit empty state) and All Documents (the full list, with a Link action per row). Clicking Link visibly moves a document from one zone into the other.</p>
+    <div class="case-dashed-placeholder case-dashed-placeholder--two-zone-clip">
+      <p class="case-dashed-placeholder__label type-meta">HIGH PRIORITY, CLIP — CLICK LINK ON A ROW IN ALL DOCUMENTS AND WATCH IT MOVE INTO LINKED TO THIS PRESCRIPTION, STARTING FROM THE EMPTY STATE. THE SINGLE MOST IMPORTANT VISUAL IN THE CASE STUDY</p>
+    </div>
+    <p class="case-section__body type-body"><strong>Built entirely from existing components, on purpose.</strong> Table Row, Button, and Alert all came from the system as-is, no new components shipped for this. Every flow like this is a chance to either extend the system's surface area or confirm what's already there is enough. Later, eRx records folded into the same model as their own document type, so a prescription received electronically and one that arrived as a fax could be linked, replaced, and referenced identically.</p>
+    <p class="case-section__body type-body"><strong>The system also needed a way to show a document was already linked elsewhere.</strong> A patient's file could easily hold a document, an authorization letter, for instance, that applied to more than one medication. What shipped is a muted "Also Atorvastatin 20 mg" line under the filename, visible only when that link exists.</p>
+    <div class="case-dashed-placeholder case-dashed-placeholder--linked-elsewhere">
+      <p class="case-dashed-placeholder__label type-meta">MEDIUM PRIORITY, STATIC — STILL FRAME FROM THE TWO-ZONE CLIP ABOVE, ZOOMED ON THE "ALSO ATORVASTATIN 20 MG" LINE</p>
+    </div>
+    <p class="case-section__body type-body"><strong>That idea came straight out of the original working session.</strong> I proposed it live in that first meeting, and the team responded to it immediately. No existing design system pattern covered secondary metadata under a primary label that isn't a filename, so I flagged that gap rather than force an existing pattern to do something it wasn't built for.</p>
   </section>
 
   <script src="components/footer.js"></script>
