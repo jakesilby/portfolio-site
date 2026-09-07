@@ -137,8 +137,9 @@
     }
 
     .case-dashed-placeholder--removal-flowchart,
-    .case-dashed-placeholder--star-toggle-clip {
-      /* Both 760 x 200 in Figma — grouped since the value's identical,
+    .case-dashed-placeholder--star-toggle-clip,
+    .case-dashed-placeholder--prototype-clip {
+      /* All three 760 x 200 in Figma — grouped since the value's identical,
        * same as OnePulse groups same-ratio image modifiers. */
       width: 760px;
       max-width: 100%;
@@ -153,7 +154,8 @@
       .case-dashed-placeholder--linked-elsewhere,
       .case-dashed-placeholder--alert-clip,
       .case-dashed-placeholder--removal-flowchart,
-      .case-dashed-placeholder--star-toggle-clip {
+      .case-dashed-placeholder--star-toggle-clip,
+      .case-dashed-placeholder--prototype-clip {
         /* Same fix as .case-visual/OnePulse's hero placeholder — 24px
          * horizontal padding shrinks the box disproportionately at mobile
          * widths, and it's the first thing a mobile visitor sees. */
@@ -236,6 +238,16 @@
       <p class="case-dashed-placeholder__label type-meta">MEDIUM PRIORITY, CLIP — CLICKING THE STAR TOGGLE ON A DIFFERENT DOCUMENT AND WATCHING THE LEFT-STROKE HIGHLIGHT AND "REFERENCE RX" TAG MOVE TO THAT ROW</p>
     </div>
     <p class="case-section__body type-body">"Associated Documents" and "+ Associate" tested as unclear with real users, so I proposed "Linked Documents" and "Link," which matched the two-zone interaction more directly. "Primary Rx" got the same scrutiny: flagged early as a placeholder since "primary" implied a ranking, when the real function was identifying which document prints. That eventually settled on "Reference Rx." And when my first version dimmed already-linked documents in the All Documents list, the team's simpler read, just remove the row once it's linked, was the right call, so I changed it.</p>
+  </section>
+
+  <section class="case-section">
+    <p class="case-section__index type-meta">05</p>
+    <h2 class="case-section__heading type-section-heading">The Design-to-Code Bridge</h2>
+    <p class="case-section__body type-body"><strong>I built and iterated this as a working HTML/CSS/JS prototype, directed through Claude Code rather than hand-coded.</strong> I wrote the specs, reviewed every change against the design, and made the calls on naming, edge cases, and terminology. Claude Code wrote the markup and script changes to match.</p>
+    <p class="case-section__body type-body"><strong>Every prompt stayed scoped on purpose.</strong> Each one named exactly what should change, down to specific class names and IDs, and closed with an explicit instruction not to touch anything else, a guardrail against an AI-assisted change quietly drifting outside its scope, and a change log where every prompt maps to one reviewable diff. The Associated-to-Linked rename is the clearest example: it touched visible labels, CSS classes, JS function names, and data properties, and required spelling out exactly which needed to change and which structural IDs had to stay put.</p>
+    <div class="case-dashed-placeholder case-dashed-placeholder--prototype-clip">
+      <p class="case-dashed-placeholder__label type-meta">MEDIUM PRIORITY, CLIP, PENDING PROTOTYPE UPDATE — THE TWO-ZONE LINKING FLOW RUNNING LIVE IN-BROWSER, ONCE RESTYLED. NOT WORTH PULLING FROM THE CURRENT PRE-UPDATE VERSION</p>
+    </div>
   </section>
 
   <script src="components/footer.js"></script>
