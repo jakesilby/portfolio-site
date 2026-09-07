@@ -170,8 +170,8 @@
   <section class="case-title-block">
     <p class="case-title-block__eyebrow type-label-secondary">CASE STUDY</p>
     <h1 class="case-title-block__title type-page-title">Linking Documents &amp; Prescriptions</h1>
-    <p class="case-title-block__context type-meta">Lives inside OnePulse Connect's Global Inline Drawer, the panel that surfaces a patient's documents and prescriptions inline during dispensing. The drawer itself is background context here.</p>
     <p class="case-title-block__description type-tagline">Linked Documents connects prescriptions and medications to the documents that support them, so staff can attach an incoming document to an existing patient record instead of restarting intake, and the system can resolve exactly which document prints when more than one could. I designed the interaction model and its guardrails.</p>
+    <p class="case-title-block__context type-meta">(Lives inside OnePulse Connect's Global Inline Drawer, the panel that surfaces a patient's documents and prescriptions inline during dispensing. The drawer itself is background context here.)</p>
     <div class="case-title-block__meta type-meta">
       <span>ROLE: PRODUCT DESIGN (SOLO)</span>
       <span>TIMEFRAME: 2026 (IN PROGRESS AT DEPARTURE)</span>
@@ -205,7 +205,7 @@
   <section class="case-section">
     <p class="case-section__index type-meta">03</p>
     <h2 class="case-section__heading type-section-heading">Component Documentation: Linked Documents</h2>
-    <p class="case-section__body type-body"><strong>Checkboxes in a flat list were the first version, and they didn't work.</strong> There was no visible sign a document was tied to a medication, and real usability feedback confirmed it: the linking action wasn't explicit enough for people working under time pressure.</p>
+    <p class="case-section__body type-body"><strong>Checkboxes in a flat list were the first version, and they didn't work.</strong> Testing with three potential users confirmed it: the linking action wasn't explicit enough for people working under time pressure.</p>
     <p class="case-section__body type-body"><strong>It had to work in both directions.</strong> From a prescription, a user opens Linked Documents and connects existing patient documents to it. From the documents side, uploading a new document lets a user tie it to one or more medications or prescriptions at upload time, in an optional Linked Medications &amp; Prescriptions field. If nothing's selected, the document still uploads, it just lands on the patient's profile only.</p>
     <div class="case-dashed-placeholder case-dashed-placeholder--upload-dialog">
       <p class="case-dashed-placeholder__label type-meta">COMING SOON — THE UPLOAD DIALOG, CROPPED TO THE LINKED MEDICATIONS &amp; PRESCRIPTIONS FIELD AND ITS HELPER TEXT</p>
@@ -229,7 +229,7 @@
     <div class="case-dashed-placeholder case-dashed-placeholder--alert-clip">
       <p class="case-dashed-placeholder__label type-meta">COMING SOON — LINKING A SECOND RX-TYPE DOCUMENT WHILE ONE IS ALREADY THE REFERENCE, SHOWING THE LINKED PRESCRIPTIONS FOUND ALERT</p>
     </div>
-    <p class="case-section__body type-body"><strong>When that logic went through review with Anardo (architecture) and Maribel (clinical), it held up without changes. Maribel's standard was direct: patient records are never deleted, and a prescription should never be left without a source document attached. The only legitimate reason to fully unlink is a patient-mismatch error, handled at the patient-record level, not in this dialog. Anardo confirmed the removal lock and the reason-capture requirement I'd already built matched that standard exactly. Neither Maribel nor Anardo asked for a single change.</strong></p>
+    <p class="case-section__body type-body"><strong>When that logic went through review with Anardo (Product Manager) and Maribel (Director of Clinical Pharmacy Innovation), it held up without changes. Maribel's standard was direct: patient records are never deleted, and a prescription should never be left without a source document attached. The only legitimate reason to fully unlink is a patient-mismatch error, handled at the patient-record level, not in this dialog. Anardo confirmed the removal lock and the reason-capture requirement I'd already built matched that standard exactly. Neither Maribel nor Anardo asked for a single change.</strong></p>
     <div class="case-dashed-placeholder case-dashed-placeholder--removal-flowchart">
       <p class="case-dashed-placeholder__label type-meta">COMING SOON — A SIMPLIFIED DIAGRAM OF THE REMOVAL GUARDRAIL: SAVE, LOCK, CHECK IF IT'S THE REFERENCE, THEN BLOCK OR REQUIRE A REPLACEMENT</p>
     </div>
@@ -237,7 +237,7 @@
     <div class="case-dashed-placeholder case-dashed-placeholder--star-toggle-clip">
       <p class="case-dashed-placeholder__label type-meta">COMING SOON — CLICKING THE STAR TOGGLE ON A DIFFERENT DOCUMENT AND WATCHING THE HIGHLIGHT AND REFERENCE RX TAG MOVE TO THAT ROW</p>
     </div>
-    <p class="case-section__body type-body">"Associated Documents" and "+ Associate" tested as unclear with real users, so I proposed "Linked Documents" and "Link," which matched the two-zone interaction more directly. "Primary Rx" got the same scrutiny: flagged early as a placeholder since "primary" implied a ranking, when the real function was identifying which document prints. That eventually settled on "Reference Rx." And when my first version dimmed already-linked documents in the All Documents list, the team's simpler read, just remove the row once it's linked, was the right call, so I changed it.</p>
+    <p class="case-section__body type-body">"Associated Documents" and "+ Associate" tested as unclear across those same sessions, so I proposed "Linked Documents" and "Link," which matched the two-zone interaction more directly. "Primary Rx" got the same scrutiny: flagged early as a placeholder since "primary" implied a ranking, when the real function was identifying which document prints. That eventually settled on "Reference Rx." And when my first version dimmed already-linked documents in the All Documents list, the team's simpler read, just remove the row once it's linked, was the right call, so I changed it.</p>
   </section>
 
   <section class="case-section">
