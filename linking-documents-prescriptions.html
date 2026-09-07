@@ -90,8 +90,18 @@
       aspect-ratio: 956 / 440;
     }
 
+    .case-dashed-placeholder--before-after {
+      /* Sized to Figma's Problem-section Visual Placeholder container
+       * (760 x 240) — same reasoning as the hero modifier: no real asset
+       * yet to size around. */
+      width: 760px;
+      max-width: 100%;
+      aspect-ratio: 760 / 240;
+    }
+
     @media (max-width: 720px) {
-      .case-dashed-placeholder--hero {
+      .case-dashed-placeholder--hero,
+      .case-dashed-placeholder--before-after {
         /* Same fix as .case-visual/OnePulse's hero placeholder — 24px
          * horizontal padding shrinks the box disproportionately at mobile
          * widths, and it's the first thing a mobile visitor sees. */
@@ -119,6 +129,23 @@
     <div class="case-dashed-placeholder case-dashed-placeholder--hero">
       <p class="case-dashed-placeholder__label type-meta">HERO — STILL FRAME FROM THE REFERENCE-ROW TOGGLE CLIP BELOW; NO SEPARATE HERO SHOOT NEEDED</p>
     </div>
+  </section>
+
+  <section class="case-section">
+    <p class="case-section__index type-meta">01</p>
+    <h2 class="case-section__heading type-section-heading">Problem</h2>
+    <p class="case-section__body type-body"><strong>Two separate views had no way to talk to each other.</strong> During OnePulse Connect's dispensing workflow, staff work across a documents tab (authorization letters, EOBs, signed prescriptions, consent forms tied to a patient) and a prescription tab (prescription info and the patient's medication list, different objects with different data behind them), both inside the Global Inline Drawer. Nothing connected the two.</p>
+    <div class="case-dashed-placeholder case-dashed-placeholder--before-after">
+      <p class="case-dashed-placeholder__label type-meta">BEFORE/AFTER, STATIC — DOCUMENT CARD &amp; PRESCRIPTION/MEDICATION CARD, EACH WITH ITS "LINKED" SECTION REMOVED (BUILD FROM REAL CARD COMPONENTS)</p>
+    </div>
+    <p class="case-section__body type-body"><strong>The cost showed up as real, specific workflow problems.</strong> When a doctor sent an ERX for a patient already set up in workflow, staff had no way to attach it to the existing record, they had to restart intake from scratch. A single document, an authorization letter covering two dosage variants of the same drug, for example, sometimes needed to apply to more than one medication, and the system had no way to express that. We scoped the fix properly in a working session with the team on June 5, 2026.</p>
+  </section>
+
+  <section class="case-section case-section--alt">
+    <p class="case-section__index type-meta">02</p>
+    <h2 class="case-section__heading type-section-heading">Why This Matters</h2>
+    <p class="case-section__body type-body">Jillian, who works documents from the patient profile rather than an active workflow, described hunting for an approval letter after a medication had already been dispensed, with no reliable way to find it by medication name. Staff were already renaming files "DO NOT USE" as a workaround, since there was no way to deactivate a document without deleting it.</p>
+    <p class="case-section__body type-body"><strong>There was also a sharper, safety-adjacent problem underneath.</strong> Once a document could be linked to multiple medications, "Print Prescription" needed to resolve to exactly one document, even with several Rx Prescription-type documents on file. Left ambiguous, the system either can't act or a staff member has to guess, in a clinical dispensing context. That's not something this tool could leave loose.</p>
   </section>
 
   <script src="components/footer.js"></script>
