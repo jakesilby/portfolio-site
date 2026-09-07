@@ -129,12 +129,31 @@
       min-height: 180px;
     }
 
+    .case-dashed-placeholder--alert-clip {
+      /* Reasoning & Governance's first placeholder — 760 x 220 in Figma. */
+      width: 760px;
+      max-width: 100%;
+      min-height: 220px;
+    }
+
+    .case-dashed-placeholder--removal-flowchart,
+    .case-dashed-placeholder--star-toggle-clip {
+      /* Both 760 x 200 in Figma — grouped since the value's identical,
+       * same as OnePulse groups same-ratio image modifiers. */
+      width: 760px;
+      max-width: 100%;
+      min-height: 200px;
+    }
+
     @media (max-width: 720px) {
       .case-dashed-placeholder--hero,
       .case-dashed-placeholder--before-after,
       .case-dashed-placeholder--upload-dialog,
       .case-dashed-placeholder--two-zone-clip,
-      .case-dashed-placeholder--linked-elsewhere {
+      .case-dashed-placeholder--linked-elsewhere,
+      .case-dashed-placeholder--alert-clip,
+      .case-dashed-placeholder--removal-flowchart,
+      .case-dashed-placeholder--star-toggle-clip {
         /* Same fix as .case-visual/OnePulse's hero placeholder — 24px
          * horizontal padding shrinks the box disproportionately at mobile
          * widths, and it's the first thing a mobile visitor sees. */
@@ -199,6 +218,24 @@
       <p class="case-dashed-placeholder__label type-meta">MEDIUM PRIORITY, STATIC — STILL FRAME FROM THE TWO-ZONE CLIP ABOVE, ZOOMED ON THE "ALSO ATORVASTATIN 20 MG" LINE</p>
     </div>
     <p class="case-section__body type-body"><strong>That idea came straight out of the original working session.</strong> I proposed it live in that first meeting, and the team responded to it immediately. No existing design system pattern covered secondary metadata under a primary label that isn't a filename, so I flagged that gap rather than force an existing pattern to do something it wasn't built for.</p>
+  </section>
+
+  <section class="case-section case-section--alt">
+    <p class="case-section__index type-meta">04</p>
+    <h2 class="case-section__heading type-section-heading">Reasoning &amp; Governance</h2>
+    <p class="case-section__body type-body"><strong>The hardest problem in this feature was a guardrail: never let a prescription end up without a document backing it.</strong> Once "Print Prescription" depended on exactly one reference document, removing that document carelessly could leave a prescription with nothing behind it, a real risk in a system that dispenses medication. I designed the rule before it went through any formal review. Links stay freely editable before anything is saved, since nothing is committed yet. Once saved, the reference document can't be removed outright, a replacement has to be designated first. Linking a new Rx-type document while one is already the reference surfaces a "Linked Prescriptions Found" alert, asking whether to replace it, add the new one alongside it, or cancel, and replacing the reference always requires capturing a reason first: new Rx, updated Rx, a strength change.</p>
+    <div class="case-dashed-placeholder case-dashed-placeholder--alert-clip">
+      <p class="case-dashed-placeholder__label type-meta">HIGH PRIORITY, CLIP — LINKING A SECOND RX-TYPE DOCUMENT WHILE ONE IS ALREADY THE REFERENCE, SHOWING THE "LINKED PRESCRIPTIONS FOUND" ALERT APPEAR</p>
+    </div>
+    <p class="case-section__body type-body"><strong>When that logic went through review with Anardo (architecture) and Maribel (clinical), it held up without changes. Maribel's standard was direct: patient records are never deleted, and a prescription should never be left without a source document attached. The only legitimate reason to fully unlink is a patient-mismatch error, handled at the patient-record level, not in this dialog. Anardo confirmed the removal lock and the reason-capture requirement I'd already built matched that standard exactly. Neither Maribel nor Anardo asked for a single change.</strong></p>
+    <div class="case-dashed-placeholder case-dashed-placeholder--removal-flowchart">
+      <p class="case-dashed-placeholder__label type-meta">MEDIUM PRIORITY, STATIC — SIMPLIFIED 4-5 STEP REDRAW OF THE REMOVAL GUARDRAIL (SAVE → LOCK → IS IT THE REFERENCE? → BLOCK OR REQUIRE REPLACEMENT), NOT THE DENSE FULL FLOWCHART</p>
+    </div>
+    <p class="case-section__body type-body"><strong>An AI assistant helped lay out candidate patterns for the reference-designation problem, weighed against what the design system already had.</strong> I chose a persistent row treatment and pushed it further: a left-stroke highlight, a "Reference Rx" tag, and a filled star that doubles as the toggle, kept always visible so it can't get missed in a fast-moving workflow.</p>
+    <div class="case-dashed-placeholder case-dashed-placeholder--star-toggle-clip">
+      <p class="case-dashed-placeholder__label type-meta">MEDIUM PRIORITY, CLIP — CLICKING THE STAR TOGGLE ON A DIFFERENT DOCUMENT AND WATCHING THE LEFT-STROKE HIGHLIGHT AND "REFERENCE RX" TAG MOVE TO THAT ROW</p>
+    </div>
+    <p class="case-section__body type-body">"Associated Documents" and "+ Associate" tested as unclear with real users, so I proposed "Linked Documents" and "Link," which matched the two-zone interaction more directly. "Primary Rx" got the same scrutiny: flagged early as a placeholder since "primary" implied a ranking, when the real function was identifying which document prints. That eventually settled on "Reference Rx." And when my first version dimmed already-linked documents in the All Documents list, the team's simpler read, just remove the row once it's linked, was the right call, so I changed it.</p>
   </section>
 
   <script src="components/footer.js"></script>
