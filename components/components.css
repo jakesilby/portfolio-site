@@ -103,6 +103,27 @@
   border-radius: var(--radius-md);
 }
 
+/* --- Case study dashed placeholder (flagged visual gap not built yet —
+ * a genuinely missing asset, not a stand-in for something already shot).
+ * Re-added for Linking Documents & Prescriptions' Hero Visual; was removed
+ * as dead code once OnePulse Connect's own gaps (sidebar clip, hero) got
+ * real footage. Each usage sets its own size via a modifier. --- */
+
+.case-dashed-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-24);
+  background: transparent;
+  border: 2px dashed var(--border-muted);
+  border-radius: var(--radius-md);
+}
+
+.case-dashed-placeholder__label {
+  color: var(--text-primary);
+  text-align: center;
+}
+
 /* --- Case study vertical image stack (a group of .case-visual/
  * .case-dashed-placeholder blocks stacked with a consistent 20px gap —
  * Data Table Screenshots, Production Screenshots) --- */

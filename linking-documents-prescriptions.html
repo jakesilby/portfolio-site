@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Linking Documents & Prescriptions — Jake Silby</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&family=Spline+Sans+Mono:wght@400;500&family=Barlow:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components/components.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      background: var(--bg-page);
+      color: var(--text-primary);
+      font-family: var(--font-family-sans);
+    }
+
+    .case-title-block {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-stack);
+      background: var(--bg-page);
+      padding: var(--space-24) var(--padding-section-x) var(--padding-section-x);
+    }
+
+    .case-title-block__eyebrow {
+      color: var(--accent-primary-dark); /* accent-primary fails 4.5:1 as text on
+       * bg-page (3.72:1) — accent-primary-dark clears it at 6.6:1. Same fix as
+       * OnePulse Connect's title block. */
+    }
+
+    .case-title-block__title {
+      color: var(--text-primary);
+      max-width: 956px;
+      font-size: var(--font-size-40);
+    }
+
+    /* Scope note between title and description — Figma node 106:8 has no
+     * equivalent in OnePulse's Title Block, so there's no established class
+     * to reuse directly. Built on .type-meta (the codebase's mono/uppercase/
+     * secondary convention) with the same text-transform/letter-spacing
+     * override already established on .stat-tile__label for a full sentence
+     * at this scale, rather than inventing a new type step to match Figma's
+     * one-off 12px/0.4px numbers (which don't match any current token anyway
+     * — see below). FLAG: confirm this mapping, or tell me the intended
+     * class if one exists that I'm missing. */
+    .case-title-block__context {
+      color: var(--text-label); /* Figma's #4a594c doesn't match any current
+       * text token (closest role-equivalent, the meta row, already resolves
+       * to text-label despite Figma showing the same stale color there too). */
+      max-width: 760px;
+      text-transform: none;
+      letter-spacing: var(--letter-spacing-none);
+    }
+
+    .case-title-block__description {
+      color: var(--text-secondary);
+      max-width: 760px;
+    }
+
+    .case-title-block__meta {
+      display: flex;
+      flex-wrap: wrap;
+      width: fit-content; /* same hug-content-width fix as OnePulse — .case-title-block
+       * is a column flex container, whose default align-items: stretch was forcing
+       * this to full row width. */
+      max-width: 100%;
+      gap: var(--gap-card);
+      padding: var(--space-4) var(--space-8);
+      background: var(--bg-surface);
+      color: var(--text-label);
+    }
+
+    .case-hero {
+      display: flex;
+      justify-content: center;
+      background: var(--bg-page);
+      padding: 0 var(--padding-section-x) var(--padding-section-x); /* no top
+       * padding — case-title-block already ends with a padding-section-x
+       * bottom gap, so matching Figma's own uniform 48px here would double it. */
+    }
+
+    .case-dashed-placeholder--hero {
+      /* Sized to Figma's Hero Visual container (956 x 440) rather than
+       * OnePulse's hero frame proportions — this placeholder has no real
+       * asset yet to size around. */
+      width: 956px;
+      max-width: 100%;
+      aspect-ratio: 956 / 440;
+    }
+
+    @media (max-width: 720px) {
+      .case-dashed-placeholder--hero {
+        /* Same fix as .case-visual/OnePulse's hero placeholder — 24px
+         * horizontal padding shrinks the box disproportionately at mobile
+         * widths, and it's the first thing a mobile visitor sees. */
+        padding: var(--space-24) var(--space-12);
+      }
+    }
+  </style>
+</head>
+<body data-page="case-study">
+  <script src="components/case-header.js"></script>
+
+  <section class="case-title-block">
+    <p class="case-title-block__eyebrow type-label-secondary">CASE STUDY</p>
+    <h1 class="case-title-block__title type-page-title">Linking Documents &amp; Prescriptions</h1>
+    <p class="case-title-block__context type-meta">Lives inside OnePulse Connect's Global Inline Drawer, the panel that surfaces a patient's documents and prescriptions inline during dispensing. The drawer itself is background context here.</p>
+    <p class="case-title-block__description type-tagline">Linked Documents connects prescriptions and medications to the documents that support them, so staff can attach an incoming document to an existing patient record instead of restarting intake, and the system can resolve exactly which document prints when more than one could. I designed the interaction model and its guardrails.</p>
+    <div class="case-title-block__meta type-meta">
+      <span>ROLE: PRODUCT DESIGN (SOLO)</span>
+      <span>TIMEFRAME: 2026 (IN PROGRESS AT DEPARTURE)</span>
+      <span>STACK: FIGMA → CLAUDE CODE</span>
+    </div>
+  </section>
+
+  <section class="case-hero">
+    <div class="case-dashed-placeholder case-dashed-placeholder--hero">
+      <p class="case-dashed-placeholder__label type-meta">HERO — STILL FRAME FROM THE REFERENCE-ROW TOGGLE CLIP BELOW; NO SEPARATE HERO SHOOT NEEDED</p>
+    </div>
+  </section>
+
+  <script src="components/footer.js"></script>
+</body>
+</html>
