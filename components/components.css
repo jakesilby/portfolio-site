@@ -591,6 +591,14 @@
   aspect-ratio: 1600 / 986;
 }
 
+.project-row__image-inner--linkdocflow {
+  /* Same reasoning as --siteoverview, matching link-document-flow-short.mp4's
+   * real 1440x900 encode. project-row.js derives this class name from each
+   * row's own video.aspectClass rather than hardcoding one modifier for
+   * every video row. */
+  aspect-ratio: 1440 / 900;
+}
+
 .project-row__header {
   display: flex;
   align-items: center;

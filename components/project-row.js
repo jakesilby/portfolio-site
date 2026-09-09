@@ -11,29 +11,25 @@ const projectRows = [
         { src: 'videos/ds_siteoverview.webm', type: 'video/webm' },
         { src: 'videos/ds_siteoverview.mp4', type: 'video/mp4' },
       ],
+      aspectClass: 'siteoverview',
     },
     imageAlt: "OnePulse Connect component library: clicking through the sidebar to load Alert, Data Table, Dialog, and Chip in the documentation viewer.",
   },
   {
     year: '2026',
-    type: 'Coming Soon',
-    title: 'Case Study Title',
-    description: 'Description',
-    href: null,
-  },
-  {
-    year: '2026',
-    type: 'Coming Soon',
-    title: 'Case Study Title',
-    description: 'Description',
-    href: null,
-  },
-  {
-    year: '2026',
-    type: 'Coming Soon',
-    title: 'Case Study Title',
-    description: 'Description',
-    href: null,
+    type: 'Product Design',
+    title: 'Linking Documents & Prescriptions',
+    description: "I designed the interaction that connects prescriptions and documents — from two separate views staff reconciled by hand to one linking action that resolves which document prints.",
+    href: 'linking-documents-prescriptions.html',
+    video: {
+      poster: 'videos/link-document-flow-short_poster.jpg',
+      sources: [
+        { src: 'videos/link-document-flow-short.webm', type: 'video/webm' },
+        { src: 'videos/link-document-flow-short.mp4', type: 'video/mp4' },
+      ],
+      aspectClass: 'linkdocflow',
+    },
+    imageAlt: "Clicking Link on a prescription row in All Documents, watching it move into Linked to this Prescription, then unlinking it again to return to the empty state.",
   },
 ];
 
@@ -43,7 +39,7 @@ const projectRowsHtml = projectRows
   .map((row, i) => {
     const index = String(i + 1).padStart(2, '0');
     const imageInner = row.video
-      ? `<video class="project-row__image-inner project-row__image-inner--siteoverview" poster="${row.video.poster}"${reduceMotion ? '' : ' autoplay'} muted loop playsinline aria-label="${row.imageAlt}">${row.video.sources
+      ? `<video class="project-row__image-inner project-row__image-inner--${row.video.aspectClass}" poster="${row.video.poster}"${reduceMotion ? '' : ' autoplay'} muted loop playsinline aria-label="${row.imageAlt}">${row.video.sources
           .map((s) => `<source src="${s.src}" type="${s.type}">`)
           .join('')}</video>`
       : row.image
