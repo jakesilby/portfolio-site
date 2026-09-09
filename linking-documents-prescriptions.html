@@ -81,86 +81,139 @@
        * bottom gap, so matching Figma's own uniform 48px here would double it. */
     }
 
-    /* min-height, not aspect-ratio — these boxes hold wrapping label text,
-     * not fixed-ratio media. aspect-ratio was tried first and broke on
-     * mobile: at narrow widths the box got too short for its own label,
-     * so the text overflowed past the dashed border. min-height matches
-     * Figma's number at full width (where it was sized to exactly fit
-     * the text) and lets the box grow taller instead of clipping when the
-     * width shrinks. Same pattern as OnePulse's original
-     * .case-dashed-placeholder--sidebar-clip. */
+    /* Hero — autoplaying looping video, same card-wrapper pattern as
+     * OnePulse's .case-hero__placeholder/.case-hero__frame (a padded
+     * card around a fixed-width video with its own real aspect-ratio,
+     * rather than Figma's arbitrary 956x440 placeholder box), and the
+     * same native-autoplay treatment as OnePulse's own hero clip:
+     * `autoplay muted loop playsinline`, not the scroll-triggered
+     * data-clip-video pattern the section clips below use. This was a
+     * deliberate reversal of the original still-frame hero plan — see
+     * the delivery report for the round this changed in.
+     *
+     * hero-linking-flow.mp4/.webm are a dedicated ~9.65s trim of
+     * link-document-full.mp4 (t=7.85s-17.5s of that source), cut
+     * specifically for this placement after a hiring-manager critique
+     * flagged the original full-length loop opening on ~6s of unrelated
+     * Prescription Info tab content before reaching the actual Linked
+     * Documents interaction. This trim opens already inside Linked
+     * Documents, on the row that just moved into "Linked to this
+     * Prescription" (matching the same "just clicked Link" beat as the
+     * flagship two-zone clip in section 03), and ends once the save
+     * confirmation and linked-file details are visible on the base
+     * record — cut before the tangential View Document PDF preview.
+     *
+     * This does NOT loop seamlessly and by design can't from this
+     * source: the trim starts inside an open Edit Prescription dialog
+     * and ends back on the closed base record, two different screens
+     * with no matching frame to loop against. A true seamless loop
+     * isn't available in this single continuous take (it doesn't
+     * reverse or return to its own start state anywhere). Accepted as
+     * a hard cut rather than trimmed down to a static non-loop, since
+     * the content on both sides of the cut is worth keeping. Native
+     * 2880x1800 (16:10, same as link-document-full.mp4 and the section
+     * clips below), so .case-hero__frame uses that ratio directly
+     * instead of cropping to fit an unrelated number. */
 
-    .case-dashed-placeholder--hero {
-      /* Figma's Hero Visual container: 956 x 440. */
-      width: 956px;
-      max-width: 100%;
-      min-height: 440px;
-    }
-
-    .case-dashed-placeholder--before-after {
-      /* Figma's Problem-section Visual Placeholder: 760 x 240. */
-      width: 760px;
-      max-width: 100%;
-      min-height: 240px;
-    }
-
-    .case-dashed-placeholder--upload-dialog {
-      /* Component Documentation's first placeholder — 760 x 220 in Figma,
-       * distinct from the other two placeholders in this section. */
-      width: 760px;
-      max-width: 100%;
-      min-height: 220px;
-    }
-
-    .case-dashed-placeholder--two-zone-clip {
-      /* 760 x 260 in Figma — flagged there as "the single most important
-       * visual in the case study," but that's a priority note for whoever
-       * shoots it later, not a styling difference; still the same dashed
-       * placeholder pattern until the real clip exists. */
-      width: 760px;
-      max-width: 100%;
-      min-height: 260px;
-    }
-
-    .case-dashed-placeholder--linked-elsewhere {
-      /* 760 x 180 in Figma — the shortest of the three. */
-      width: 760px;
-      max-width: 100%;
-      min-height: 180px;
-    }
-
-    .case-dashed-placeholder--alert-clip {
-      /* Reasoning & Governance's first placeholder — 760 x 220 in Figma. */
-      width: 760px;
-      max-width: 100%;
-      min-height: 220px;
-    }
-
-    .case-dashed-placeholder--removal-flowchart,
-    .case-dashed-placeholder--star-toggle-clip,
-    .case-dashed-placeholder--prototype-clip {
-      /* All three 760 x 200 in Figma — grouped since the value's identical,
-       * same as OnePulse groups same-ratio image modifiers. */
-      width: 760px;
-      max-width: 100%;
-      min-height: 200px;
+    .case-hero__placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      background: var(--bg-placeholder);
+      border-radius: var(--radius-md);
+      padding: var(--space-48) var(--space-24);
     }
 
     @media (max-width: 720px) {
-      .case-dashed-placeholder--hero,
-      .case-dashed-placeholder--before-after,
-      .case-dashed-placeholder--upload-dialog,
-      .case-dashed-placeholder--two-zone-clip,
-      .case-dashed-placeholder--linked-elsewhere,
-      .case-dashed-placeholder--alert-clip,
-      .case-dashed-placeholder--removal-flowchart,
-      .case-dashed-placeholder--star-toggle-clip,
-      .case-dashed-placeholder--prototype-clip {
+      .case-hero__placeholder {
         /* Same fix as .case-visual/OnePulse's hero placeholder — 24px
          * horizontal padding shrinks the box disproportionately at mobile
          * widths, and it's the first thing a mobile visitor sees. */
-        padding: var(--space-24) var(--space-12);
+        padding: var(--space-48) var(--space-12);
       }
+    }
+
+    .case-hero__frame {
+      display: block;
+      width: 956px;
+      max-width: 100%;
+      aspect-ratio: 1440 / 900;
+      background: var(--bg-page);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-card);
+      object-fit: cover;
+    }
+
+    .removal-guardrail-image {
+      /* Real diagram, built in Figma to match the site's own visual
+       * language — no border/shadow/background frame needed on top of
+       * it, unlike .case-visual's card treatment for screenshots. Sized
+       * to the same 760px content width the placeholder it replaces
+       * used. */
+      display: block;
+      width: 100%;
+      max-width: 760px;
+    }
+
+    /* --- Real screenshots replacing former placeholders — .case-visual
+     * is shared (components.css), each image just needs its own real
+     * aspect-ratio, same convention as OnePulse's ds_* images. --- */
+
+    .case-visual__image--before-after-cards {
+      aspect-ratio: 1968 / 2192; /* portrait — the real capture stacks the
+       * prescription-card and document-card before/after pairs vertically,
+       * nothing like the wide-short box Figma originally sketched here. */
+    }
+
+    .case-visual__image--linked-medications-field {
+      aspect-ratio: 1600 / 256;
+    }
+
+    .case-visual__image--also-linked-line {
+      aspect-ratio: 1564 / 195;
+    }
+
+    /* .case-visual's shared --bg-placeholder card fill (components.css)
+     * is meant for a placeholder-style box behind screenshots that need
+     * one. All three of these images are captures that already carry
+     * their own light background (two fully transparent, one flat white)
+     * — stacking --bg-placeholder's darker greenwhite tone behind them
+     * just adds a visible colored border with no content reason for it.
+     * Page-local override, not a components.css change, since .case-visual
+     * is shared with OnePulse and its other instances here (the video
+     * clips) still want the card frame. */
+
+    .case-visual--transparent {
+      background: transparent;
+    }
+
+    /* --- Real clips replacing former placeholders — reusing OnePulse's
+     * .case-clip-video pattern verbatim (page-local there too). All four
+     * captures share one native ratio (2880x1800 source, scaled to
+     * 1440x900), so one aspect-ratio covers all of them — no per-clip
+     * modifier needed this time. Plain full-frame playback, no pan/zoom:
+     * the source is already close to square, nothing meaningful sits
+     * outside the modal to crop away, and this project already tried
+     * keyframed pan/zoom as a default once and walked it back in favor
+     * of plain playback. */
+
+    .case-clip-video {
+      position: relative;
+      width: 100%;
+      max-width: 712px;
+      aspect-ratio: 1440 / 900;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      background: var(--bg-placeholder-fill);
+    }
+
+    .case-clip-video__media {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform-origin: center;
     }
   </style>
 </head>
@@ -180,8 +233,11 @@
   </section>
 
   <section class="case-hero">
-    <div class="case-dashed-placeholder case-dashed-placeholder--hero">
-      <p class="case-dashed-placeholder__label type-meta">COMING SOON — A STILL FRAME FROM THE REFERENCE-ROW TOGGLE INTERACTION BELOW</p>
+    <div class="case-hero__placeholder">
+      <video class="case-hero__frame" poster="videos/hero-linking-flow_poster.jpg" autoplay muted loop playsinline aria-label="A document row that just moved into Linked to this Prescription, being set as the Reference Rx, saved, and confirmed on the prescription record with the linked file visible.">
+        <source src="videos/hero-linking-flow.webm" type="video/webm">
+        <source src="videos/hero-linking-flow.mp4" type="video/mp4">
+      </video>
     </div>
   </section>
 
@@ -189,8 +245,8 @@
     <p class="case-section__index type-meta">01</p>
     <h2 class="case-section__heading type-section-heading">Problem</h2>
     <p class="case-section__body type-body"><strong>Staff had no way to connect a document to a prescription across two separate views.</strong> During OnePulse Connect's dispensing workflow, staff work across a documents tab (authorization letters, EOBs, signed prescriptions, consent forms tied to a patient) and a prescription tab (prescription info and the patient's medication list, different objects with different data behind them), both inside the Global Inline Drawer. Staff had to reconcile the two by hand.</p>
-    <div class="case-dashed-placeholder case-dashed-placeholder--before-after">
-      <p class="case-dashed-placeholder__label type-meta">COMING SOON — BEFORE/AFTER VIEWS OF THE DOCUMENT CARD AND PRESCRIPTION CARD, EACH MISSING ITS LINKED SECTION</p>
+    <div class="case-visual case-visual--transparent">
+      <img class="case-visual__image case-visual__image--before-after-cards" src="images/document-prescription-cards-before-after.webp" alt="Before and after: an original prescription card and document card, and their updated versions after gaining a new Linked Documents section on the prescription card (with a Reference Rx tag) and a Linked Medications section on the document card." loading="lazy">
     </div>
     <p class="case-section__body type-body"><strong>A doctor sending an ERX for a patient already set up in workflow left staff no way to attach it to the existing record, they had to restart intake from scratch.</strong> A single document, an authorization letter covering two dosage variants of the same drug, for example, sometimes needed to apply to more than one medication, and the system had no way to express that. We scoped the fix in a working session with the team on June 5, 2026.</p>
   </section>
@@ -207,17 +263,22 @@
     <h2 class="case-section__heading type-section-heading">Component Documentation: Linked Documents</h2>
     <p class="case-section__body type-body"><strong>Checkboxes in a flat list were the first version, and they didn't work.</strong> Three potential users struggled with it in testing: the linking action wasn't explicit enough for people working under time pressure.</p>
     <p class="case-section__body type-body"><strong>It had to work in both directions.</strong> From a prescription, a user opens Linked Documents and connects existing patient documents to it. From the documents side, uploading a new document lets a user tie it to one or more medications or prescriptions at upload time, in an optional Linked Medications &amp; Prescriptions field. If nothing's selected, the document still uploads, it lands on the patient's profile only.</p>
-    <div class="case-dashed-placeholder case-dashed-placeholder--upload-dialog">
-      <p class="case-dashed-placeholder__label type-meta">COMING SOON — THE UPLOAD DIALOG, CROPPED TO THE LINKED MEDICATIONS &amp; PRESCRIPTIONS FIELD AND ITS HELPER TEXT</p>
+    <div class="case-visual case-visual--transparent">
+      <img class="case-visual__image case-visual__image--linked-medications-field" src="images/linked-medications-field.webp" alt="The Linked Medications & Prescriptions field in the upload dialog, showing two selected chips (Keytruda 100 mg/4 mL Vial and Humira Pen 40 mg/0.8 mL) and helper text: Optional — if no medication is selected, the document will be added to the patient profile only." loading="lazy">
     </div>
     <p class="case-section__body type-body"><strong>I fixed the visibility problem with a two-zone layout.</strong> The dialog splits into Linked to this Prescription (populated with whatever's already connected, or an explicit empty state) and All Documents (the full list, with a Link action per row). Clicking Link moves a document from one zone into the other.</p>
-    <div class="case-dashed-placeholder case-dashed-placeholder--two-zone-clip">
-      <p class="case-dashed-placeholder__label type-meta">COMING SOON — CLICKING LINK ON A ROW IN ALL DOCUMENTS AND WATCHING IT MOVE INTO LINKED TO THIS PRESCRIPTION</p>
+    <div class="case-visual">
+      <div class="case-clip-video" data-clip-video>
+        <video class="case-clip-video__media" poster="videos/link-document-flow-short_poster.jpg" muted loop playsinline aria-label="Clicking Link on a prescription row in All Documents, watching it move into Linked to this Prescription, then unlinking it again to return to the empty state.">
+          <source src="videos/link-document-flow-short.webm" type="video/webm">
+          <source src="videos/link-document-flow-short.mp4" type="video/mp4">
+        </video>
+      </div>
     </div>
     <p class="case-section__body type-body"><strong>I built this from existing components, on purpose.</strong> Table Row, Button, and Alert all came from the system as-is, no new components shipped for this. This kind of flow is a chance to either extend the system's surface area or confirm what's already there is enough. Later, I folded eRx records into the same model as their own document type, so I could link and replace a prescription received electronically the same way as one that arrived as a fax.</p>
     <p class="case-section__body type-body"><strong>The system also needed a way to show when staff had already linked a document elsewhere.</strong> A patient's file could hold a document, an authorization letter, for instance, that applied to more than one medication. The shipped fix: a muted "Also Atorvastatin 20 mg" line under the filename, visible only when that link exists.</p>
-    <div class="case-dashed-placeholder case-dashed-placeholder--linked-elsewhere">
-      <p class="case-dashed-placeholder__label type-meta">COMING SOON — A CLOSE-UP ON THE "ALSO ATORVASTATIN 20 MG" LINE SHOWN UNDER A LINKED DOCUMENT'S FILENAME</p>
+    <div class="case-visual case-visual--transparent">
+      <img class="case-visual__image case-visual__image--also-linked-line" src="images/also-linked-medication-line.webp" alt="A Data Sharing Consent document row showing a muted 'Also: Atorvastatin 20 mg, Keytruda... +1 more' line under the filename, with a tooltip revealing the additional linked medication, Adalimumab 40 mg." loading="lazy">
     </div>
     <p class="case-section__body type-body"><strong>That idea came straight out of the original working session.</strong> I proposed it live in that first meeting, and the team responded to it. No existing design system pattern covered secondary metadata under a primary label that isn't a filename, so I flagged that gap rather than force an existing pattern to do something it wasn't built for.</p>
   </section>
@@ -226,16 +287,24 @@
     <p class="case-section__index type-meta">04</p>
     <h2 class="case-section__heading type-section-heading">Reasoning &amp; Governance</h2>
     <p class="case-section__body type-body"><strong>The hardest problem in this feature was a guardrail: never let a prescription end up without a document backing it.</strong> Once "Print Prescription" depended on exactly one reference document, removing that document could leave a prescription with nothing behind it, a real risk in a system that dispenses medication. I designed the rule before it went through any formal review. Links stay editable before you save anything, since nothing is committed yet. Once you save, you can't remove the reference document outright, you have to designate a replacement first. Linking a new Rx-type document while one is already the reference surfaces a "Linked Prescriptions Found" alert, asking whether to replace it, add the new one alongside it, or cancel, and replacing the reference always requires capturing a reason first: new Rx, updated Rx, a strength change.</p>
-    <div class="case-dashed-placeholder case-dashed-placeholder--alert-clip">
-      <p class="case-dashed-placeholder__label type-meta">COMING SOON — LINKING A SECOND RX-TYPE DOCUMENT WHILE ONE IS ALREADY THE REFERENCE, SHOWING THE LINKED PRESCRIPTIONS FOUND ALERT</p>
+    <div class="case-visual">
+      <div class="case-clip-video" data-clip-video>
+        <video class="case-clip-video__media" poster="videos/linked-prescriptions-alert_poster.jpg" muted loop playsinline aria-label="Linking a second Rx-type document while one is already the reference, triggering a Linked Prescriptions Found alert with options to cancel, add as an additional document, or update the existing one.">
+          <source src="videos/linked-prescriptions-alert.webm" type="video/webm">
+          <source src="videos/linked-prescriptions-alert.mp4" type="video/mp4">
+        </video>
+      </div>
     </div>
     <p class="case-section__body type-body"><strong>Anardo (Product Manager) and Maribel (Director of Clinical Pharmacy Innovation) reviewed that logic, and it held up without changes. Maribel's standard was direct: staff never delete patient records, and every prescription keeps a source document attached. The only legitimate reason to fully unlink is a patient-mismatch error, and staff handle that at the patient-record level, not in this dialog. Anardo confirmed the removal lock and the reason-capture requirement I'd already built matched that standard. Neither Maribel nor Anardo asked for a single change.</strong></p>
-    <div class="case-dashed-placeholder case-dashed-placeholder--removal-flowchart">
-      <p class="case-dashed-placeholder__label type-meta">COMING SOON — A SIMPLIFIED DIAGRAM OF THE REMOVAL GUARDRAIL: SAVE, LOCK, CHECK IF IT'S THE REFERENCE, THEN BLOCK OR REQUIRE A REPLACEMENT</p>
-    </div>
+    <img class="removal-guardrail-image" src="images/removal-guardrail-diagram.webp" alt="Flowchart: saving changes activates removal locks; if the document is the reference, removal is blocked until a replacement is designated; otherwise it can be removed freely." loading="lazy">
     <p class="case-section__body type-body"><strong>An AI assistant helped lay out candidate patterns for the reference-designation problem, weighed against what the design system already had.</strong> I chose a persistent row treatment and pushed it further: a left-stroke highlight and a "Reference Rx" tag on a filled star that doubles as the toggle, kept always visible so staff don't miss it in a fast-moving workflow.</p>
-    <div class="case-dashed-placeholder case-dashed-placeholder--star-toggle-clip">
-      <p class="case-dashed-placeholder__label type-meta">COMING SOON — CLICKING THE STAR TOGGLE ON A DIFFERENT DOCUMENT AND WATCHING THE HIGHLIGHT AND REFERENCE RX TAG MOVE TO THAT ROW</p>
+    <div class="case-visual">
+      <div class="case-clip-video" data-clip-video>
+        <video class="case-clip-video__media" poster="videos/reference-toggle_poster.jpg" muted loop playsinline aria-label="Clicking the star toggle on a second linked document, moving the left-stroke highlight and Reference Rx tag from the first row to that row.">
+          <source src="videos/reference-toggle.webm" type="video/webm">
+          <source src="videos/reference-toggle.mp4" type="video/mp4">
+        </video>
+      </div>
     </div>
     <p class="case-section__body type-body">"Associated Documents" and "+ Associate" tested as unclear across those same sessions, so I proposed "Linked Documents" and "Link," which matched the two-zone interaction more directly. "Primary Rx" got the same scrutiny: I flagged it early as a placeholder since "primary" implied a ranking, when the real function was identifying which document prints. I eventually settled on "Reference Rx." And when I dimmed already-linked documents in the All Documents list in my first version, the team's simpler read, remove the row once it's linked, was the right call, so I changed it.</p>
   </section>
@@ -245,8 +314,13 @@
     <h2 class="case-section__heading type-section-heading">The Design-to-Code Bridge</h2>
     <p class="case-section__body type-body"><strong>I built and iterated this as a working HTML/CSS/JS prototype, directed through Claude Code rather than hand-coded.</strong> I wrote the specs, reviewed every change against the design, and made the calls on naming and edge cases. Claude Code wrote the markup and script changes to match.</p>
     <p class="case-section__body type-body"><strong>Every prompt stayed scoped on purpose.</strong> Each one named what should change, down to specific class names and IDs, and closed with an explicit instruction not to touch anything else, a guardrail against letting an AI-assisted change drift outside its scope unnoticed, and a change log where every prompt maps to one reviewable diff. The Associated-to-Linked rename is the clearest example: it touched visible labels, CSS classes, JS function names, and data properties, and required spelling out which needed to change and which structural IDs had to stay put.</p>
-    <div class="case-dashed-placeholder case-dashed-placeholder--prototype-clip">
-      <p class="case-dashed-placeholder__label type-meta">COMING SOON — THE TWO-ZONE LINKING FLOW RUNNING LIVE IN-BROWSER</p>
+    <div class="case-visual">
+      <div class="case-clip-video" data-clip-video>
+        <video class="case-clip-video__media" poster="videos/link-document-full_poster.jpg" muted loop playsinline aria-label="The full Linked Documents flow running live in-browser: opening a prescription's Edit dialog, linking a document from All Documents, setting it as the Reference Rx, saving, and viewing the linked file.">
+          <source src="videos/link-document-full.webm" type="video/webm">
+          <source src="videos/link-document-full.mp4" type="video/mp4">
+        </video>
+      </div>
     </div>
   </section>
 
@@ -265,8 +339,10 @@
       <li class="case-rules-list__item type-body">An active/inactive status for documents, so staff have a real way to retire one instead of the "DO NOT USE" workaround.</li>
       <li class="case-rules-list__item type-body">Distinguishing a medication from a prescription in the interface itself, matching the distinction the data model already makes.</li>
     </ul>
+    <p class="case-section__body type-body">I'd have kept iterating on all three with the same team that caught the guardrail edge cases early.</p>
   </section>
 
+  <script src="components/clip-video.js"></script>
   <script src="components/footer.js"></script>
 </body>
 </html>
