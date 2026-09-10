@@ -31,6 +31,19 @@ const projectRows = [
     },
     imageAlt: "Clicking Link on a prescription row in All Documents, watching it move into Linked to this Prescription, then unlinking it again to return to the empty state.",
   },
+  {
+    year: '2026',
+    type: 'Product Design',
+    title: 'Pre-Infusion Assessment Flow',
+    description: "I designed the framework OnePulse Connect uses to select, complete, and review assessments at scale, then pressure-tested it against pre-infusion, the most demanding case in the catalog: the most branching logic and the only assessment type carrying hard safety stops.",
+    href: 'pre-infusion-assessment-flow.html',
+    // No hero footage exists yet (case study is still at placeholder stage —
+    // see the dashed-placeholder hero on the case study page itself), so
+    // this row falls through to project-row.js's existing no-media path
+    // (an empty .project-row__image-inner) rather than a video/image entry.
+    // Swap in `video` (matching the other two rows' shape) once a still or
+    // clip is shot.
+  },
 ];
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

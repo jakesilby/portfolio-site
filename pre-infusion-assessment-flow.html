@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pre-Infusion Assessment Flow — Jake Silby</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&family=Spline+Sans+Mono:wght@400;500&family=Barlow:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components/components.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      background: var(--bg-page);
+      color: var(--text-primary);
+      font-family: var(--font-family-sans);
+    }
+
+    .case-title-block {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-stack);
+      background: var(--bg-page);
+      padding: var(--space-24) var(--padding-section-x) var(--padding-section-x);
+    }
+
+    .case-title-block__eyebrow {
+      color: var(--accent-primary-dark); /* accent-primary fails 4.5:1 as text on
+       * bg-page (3.72:1) — accent-primary-dark clears it at 6.6:1. Same fix as
+       * OnePulse Connect's and Linking Documents' title blocks. */
+    }
+
+    .case-title-block__title {
+      color: var(--text-primary);
+      max-width: 956px;
+      font-size: var(--font-size-40);
+    }
+
+    .case-title-block__description {
+      color: var(--text-secondary);
+      max-width: 760px;
+    }
+
+    .case-title-block__meta {
+      display: flex;
+      flex-wrap: wrap;
+      width: fit-content; /* same hug-content-width fix as the other two case
+       * studies — .case-title-block is a column flex container, whose default
+       * align-items: stretch was forcing this to full row width. */
+      max-width: 100%;
+      gap: var(--gap-card);
+      padding: var(--space-4) var(--space-8);
+      background: var(--bg-surface);
+      color: var(--text-label);
+    }
+
+    .case-hero {
+      display: flex;
+      justify-content: center;
+      background: var(--bg-page);
+      padding: 0 var(--padding-section-x) var(--padding-section-x);
+    }
+
+    /* --- No real footage or Figma frames exist yet for this case study (it's
+     * still at content-draft stage) — every visual on this page uses the
+     * shared .case-dashed-placeholder pattern (components.css), same as
+     * Linking Documents & Prescriptions did before its assets landed. Sized
+     * generically (one box for the hero, one shared size for in-body
+     * visuals) since there's no Figma spec yet to pull real dimensions from;
+     * revisit sizing once real screenshots/clips replace these. min-height,
+     * not aspect-ratio, so wrapping label text never overflows the dashed
+     * border at narrow widths — same reasoning as Linking Documents'
+     * pre-asset placeholders. --- */
+
+    .case-dashed-placeholder--hero {
+      width: 956px;
+      max-width: 100%;
+      min-height: 440px;
+    }
+
+    .case-dashed-placeholder--visual {
+      width: 760px;
+      max-width: 100%;
+      min-height: 320px;
+    }
+
+    @media (max-width: 720px) {
+      .case-dashed-placeholder--hero,
+      .case-dashed-placeholder--visual {
+        /* Same fix as the other two case studies' hero/visual boxes — 24px
+         * horizontal padding shrinks the box disproportionately at mobile
+         * widths. */
+        padding: var(--space-24) var(--space-12);
+      }
+    }
+  </style>
+</head>
+<body data-page="case-study">
+  <script src="components/case-header.js"></script>
+
+  <!-- Working title flagged in the source content file as possibly changing
+       before this goes live (draft alternative: "Scaling the Assessment
+       System") — kept as written here pending a decision; see
+       content/case-studies/pre-infusion-assessment-flow.md for the full note. -->
+  <section class="case-title-block">
+    <p class="case-title-block__eyebrow type-label-secondary">CASE STUDY</p>
+    <h1 class="case-title-block__title type-page-title">Pre-Infusion Assessment Flow</h1>
+    <p class="case-title-block__description type-tagline">Designed the framework OnePulse Connect uses to select, complete, and review clinical and module-level assessments at scale, then used pre-infusion assessments, the most demanding case in the catalog, to pressure-test it against real branching logic and hard safety stops.</p>
+    <!-- ROLE / TIMEFRAME / STACK not supplied in the source content — needs
+         confirmation before this ships. Bracketed placeholders follow the
+         same [NEEDS VERIFICATION]-style flagging already used elsewhere in
+         this codebase (see OnePulse Connect's Component Documentation
+         section) rather than guessing at unconfirmed facts. -->
+    <div class="case-title-block__meta type-meta">
+      <span>ROLE: [NEEDS INPUT]</span>
+      <span>TIMEFRAME: [NEEDS INPUT]</span>
+      <span>STACK: [NEEDS INPUT]</span>
+    </div>
+  </section>
+
+  <section class="case-hero">
+    <div class="case-dashed-placeholder case-dashed-placeholder--hero">
+      <p class="case-dashed-placeholder__label type-meta">COMING SOON — HERO VISUAL (STILL FRAME, HIGH PRIORITY). NO SHOT IS SPECIFIED AS THE HERO IN THE DRAFT; SUGGEST PULLING A STILL FROM THE FULL ASSESSMENT DIALOG / SECTION-LIST SHOT IN "PRE-INFUSION AS THE WORKED EXAMPLE" BELOW, PER CLAUDE.MD'S DEFAULT (HERO = STATIC STILL, NOT AUTOPLAY)</p>
+    </div>
+  </section>
+
+  <section class="case-section case-section--alt">
+    <p class="case-section__index type-meta">01</p>
+    <h2 class="case-section__heading type-section-heading">The Problem</h2>
+    <p class="case-section__body type-body"><strong>The assessment system in OnePulse started with a single, straightforward case:</strong> a nurse fills out a pre-infusion form for one therapy. As real data came in, from a clinical branching-logic spreadsheet covering therapy groups like Neuro/Rheum, MS, CIDP/MMN, and CVID, it became clear that assessments weren't one thing. Each one carried several independent dimensions: which therapy and phase it applied to, who completed it (staff on-site or a patient completing it remotely), where it fell in the infusion timeline, and its own internal branching logic between questions.</p>
+    <!-- Intended alt text (once a real capture replaces this box): "The original flat-list assessment picker alongside a mockup of the full 20-40 item catalog, showing the same list layout at scale." -->
+    <div class="case-dashed-placeholder case-dashed-placeholder--visual">
+      <p class="case-dashed-placeholder__label type-meta">COMING SOON — STATIC, HIGH PRIORITY. THE ORIGINAL FLAT-LIST ASSESSMENT PICKER NEXT TO A MOCKUP OR REAL DATA VIEW SHOWING THE FULL 20-40 ITEM CATALOG LAID OUT THE SAME WAY. MAKES THE SCALE PROBLEM VISIBLE RATHER THAN ASSERTED.</p>
+    </div>
+    <p class="case-section__body type-body"><strong>A flat list of assessment cards was fine for a handful of items.</strong> But even a single therapy group could have four or more assessments across multiple phases, and with multiple therapy groups in the system, the real number was closer to 20 to 40 assessment types. The selection pattern needed to hold up at that scale.</p>
+  </section>
+
+  <section class="case-section">
+    <p class="case-section__index type-meta">02</p>
+    <h2 class="case-section__heading type-section-heading">Why This Matters</h2>
+    <p class="case-section__body type-body">Pre-infusion assessments gate whether a patient can proceed to treatment. Certain answers, a positive pregnancy test, a patient refusing consent, need to stop the workflow immediately rather than let a clinician click through to the next question. That's the clinical stakes layer.</p>
+    <p class="case-section__body type-body">The scale problem compounds it. If the pattern for finding and completing an assessment doesn't generalize, every new therapy program OnePulse adds either gets bolted onto a selection pattern that wasn't built for it, or requires the design to be redone from scratch. Getting the underlying framework right once, instead of per therapy group, is what makes the system able to grow without each addition becoming its own design project.</p>
+  </section>
+
+  <section class="case-section case-section--alt">
+    <p class="case-section__index type-meta">03</p>
+    <h2 class="case-section__heading type-section-heading">The Framework</h2>
+    <p class="case-section__body type-body"><strong>Two decisions came out of this.</strong> The first was how assessments get selected at scale. Three approaches were on the table: a grouped list with collapsible category headers, a two-step drill-down (choose audience first, then choose the specific assessment within that group), and a search-first pattern with filter chips. The grouped list was the most familiar but still turned into a long scroll once several categories were expanded. Search-first scaled the best long-term but added complexity that wasn't justified yet. The two-step drill-down won: staff and patient as the first choice, then the specific assessment grouped by therapy group within that. Making the completing-audience the first-level choice matched a real distinction in the data, since staff and patient assessments are fundamentally different outcomes, not different filters on the same list. Adding a new therapy group means adding one entry to a catalog structure. Adding a new assessment means adding one item to that group's list. Nothing about the layout breaks as the catalog grows.</p>
+    <!-- Intended alt text: "Three wireframes comparing a grouped list, a two-step drill-down, and a search-first pattern for selecting an assessment, with the two-step drill-down marked as the chosen approach." -->
+    <div class="case-dashed-placeholder case-dashed-placeholder--visual">
+      <p class="case-dashed-placeholder__label type-meta">COMING SOON — STATIC, HIGH PRIORITY. SIDE-BY-SIDE OF THE THREE CONSIDERED PATTERNS (GROUPED LIST / DRILL-DOWN / SEARCH-FIRST) AS SIMPLE WIREFRAMES, WITH THE CHOSEN ONE CALLED OUT.</p>
+    </div>
+    <p class="case-section__body type-body"><strong>The second decision was how assessments render once selected.</strong> Some assessments are lightweight and scoped to whatever module a user is already working in (a status dropdown with a conditional reason field, for example). Others are the full clinical assessment, like pre-infusion, with sections, branching logic, and a progress indicator. Rather than deciding the rendering mode based on how many questions an assessment has, the split is config-driven: an assessment's type (module or clinical) determines whether it renders inline or as a full-page flow. That keeps the rendering logic simple and predictable instead of something re-evaluated case by case.</p>
+    <!-- Intended alt text: "Diagram showing an assessment config's type flag branching into either an inline module render or a full-page clinical render, with two real examples of each." -->
+    <div class="case-dashed-placeholder case-dashed-placeholder--visual">
+      <p class="case-dashed-placeholder__label type-meta">COMING SOON — STATIC, MEDIUM PRIORITY. SIMPLE DIAGRAM: ASSESSMENT CONFIG → TYPE FLAG → INLINE MODULE RENDER OR FULL-PAGE CLINICAL RENDER. TWO REAL EXAMPLES OF EACH, SIDE BY SIDE.</p>
+    </div>
+  </section>
+
+  <section class="case-section">
+    <p class="case-section__index type-meta">04</p>
+    <h2 class="case-section__heading type-section-heading">Pre-Infusion as the Worked Example</h2>
+    <p class="case-section__body type-body"><strong>Pre-infusion was the right assessment to validate the framework against, not because it was the first one available, but because it was the most demanding case in the catalog:</strong> the most sections, the most branching logic, and the only assessment type carrying hard safety stops. If the framework held up here, including for a therapy group like Keytruda where the branching logic is especially dense, it would hold up for the rest of the catalog.</p>
+    <p class="case-section__body type-body">The clinical branching-logic data used to pressure-test the framework was the pre-infusion assessment: 35 questions (43 total, with 8 scoped to diagnosis-specific branches) organized into sections in a fixed order: Medication Verification, Vitals, Treatment History, Adherence, Critical Safety Screening, Infection Screening, Adverse Event, Pre-medications, Vascular Access, Diagnosis-Specific, Proceed Decision, Education and Consent, and Notes.</p>
+    <!-- Intended alt text: "Full pre-infusion assessment dialog showing the section list and progress indicator down the side, covering all thirteen sections from Medication Verification through Notes." -->
+    <div class="case-dashed-placeholder case-dashed-placeholder--visual">
+      <p class="case-dashed-placeholder__label type-meta">COMING SOON — STATIC, HIGH PRIORITY. FULL ASSESSMENT DIALOG SHOWING THE SECTION LIST/PROGRESS INDICATOR DOWN THE SIDE, SO A READER CAN SEE THE SCOPE OF A "FULL CLINICAL ASSESSMENT" AT A GLANCE.</p>
+    </div>
+    <p class="case-section__body type-body"><strong>The form isn't static.</strong> Certain answers reveal follow-up questions inline, directly below the triggering question, without a page reload or navigation away from where the clinician is working. The form grows and contracts as it's filled out.</p>
+    <!-- Intended alt text: "Selecting Yes on the infection screening question, causing fever, cough, and urinary status sub-questions to expand inline directly below it." -->
+    <div class="case-dashed-placeholder case-dashed-placeholder--visual">
+      <p class="case-dashed-placeholder__label type-meta">COMING SOON — CLIP, HIGH PRIORITY (3–5S, MUTED, LOOPED, POSTER FALLBACK FOR REDUCED MOTION). SELECT "YES" ON THE INFECTION SCREENING QUESTION AND WATCH THE FEVER/COUGH/URINARY SUB-QUESTIONS EXPAND INLINE. A BEHAVIOR CLAIM A SCREENSHOT CAN'T PROVE.</p>
+    </div>
+    <p class="case-section__body type-body"><strong>Certain answers also carry more weight than others.</strong> A positive pregnancy test or a patient refusing consent needs to stop the workflow immediately rather than let the clinician continue to the next section. Those hard stops surface as alerts placed directly next to the question that triggered them, not just as a banner at the top of the form, so the warning is visible at the exact point of decision.</p>
+    <!-- Intended alt text: "A hard-stop alert for a positive pregnancy test result, shown inline directly beneath its triggering field using the design system's error-variant alert component." -->
+    <div class="case-dashed-placeholder case-dashed-placeholder--visual">
+      <p class="case-dashed-placeholder__label type-meta">COMING SOON — STATIC, HIGH PRIORITY. A HARD-STOP ALERT (E.G. POSITIVE PREGNANCY TEST) SHOWN INLINE NEXT TO ITS TRIGGERING FIELD, USING THE REAL DESIGN SYSTEM ALERT COMPONENT (ERROR VARIANT).</p>
+    </div>
+    <p class="case-section__body type-body"><strong>Layout went through a real revision here too.</strong> Fields were originally laid out two or three to a row in places like Vitals (blood pressure and heart rate side by side, for example). That changed to one field per line across the entire form, including Vitals, because a clinician moving through a long form under time pressure benefits more from a predictable, scannable vertical rhythm than from saving vertical space.</p>
+    <!-- Intended alt text: "Before and after of the Vitals section: fields laid out two to three per row versus the single-column revision." -->
+    <div class="case-dashed-placeholder case-dashed-placeholder--visual">
+      <p class="case-dashed-placeholder__label type-meta">COMING SOON — STATIC, MEDIUM PRIORITY. BEFORE/AFTER OF THE VITALS SECTION: MULTI-COLUMN LAYOUT VS. THE SINGLE-COLUMN REVISION.</p>
+    </div>
+  </section>
+
+  <section class="case-section case-section--alt">
+    <p class="case-section__index type-meta">05</p>
+    <h2 class="case-section__heading type-section-heading">Reasoning Under Iteration</h2>
+    <p class="case-section__body type-body"><strong>The completed-assessment view mode started as a two-step chooser:</strong> click a completed assessment, then decide whether to view it standalone or alongside an active assessment. Testing showed that extra step wasn't earning its place for the standalone case, so it was removed for that path. Clicking a completed item now opens directly into a read-only view. The alongside option still exists, but only as an action available from inside an active assessment dialog, since that's the only context where it's actually relevant.</p>
+    <p class="case-section__body type-body"><strong>The submission confirmation pattern changed after review too.</strong> The original design stacked a confirmation dialog on top of the assessment dialog once submitted, which read as cluttered. That was replaced with an inline transform: the dialog's form content is replaced in place by a success state, summary card, and a single "Done" button, on the same surface, with no stacking.</p>
+    <!-- Intended alt text: "Submitting an assessment and watching the dialog's form content transform in place into a success state with a summary card and Done button, no second dialog on top." -->
+    <div class="case-dashed-placeholder case-dashed-placeholder--visual">
+      <p class="case-dashed-placeholder__label type-meta">COMING SOON — CLIP, MEDIUM PRIORITY (3–5S, MUTED, LOOPED, POSTER FALLBACK FOR REDUCED MOTION). SUBMIT AN ASSESSMENT AND WATCH THE DIALOG TRANSFORM IN PLACE TO THE SUCCESS STATE, NO SECOND DIALOG APPEARING ON TOP.</p>
+    </div>
+  </section>
+
+  <section class="case-section">
+    <p class="case-section__index type-meta">06</p>
+    <h2 class="case-section__heading type-section-heading">Catching a Validation Gap in Testing</h2>
+    <p class="case-section__body type-body"><strong>The clearest example of iterating through a real gap, rather than getting a decision right on the first pass, came from required-field validation.</strong></p>
+    <p class="case-section__body type-body">The first version of the prototype let a user submit an assessment with required fields empty. The obvious fix was to disable Submit until required fields were filled. But the first pass at that logic was too strict: it scanned every input on the form, not just the fields that were actually required, so the button stayed disabled even once the real requirements were met.</p>
+    <p class="case-section__body type-body">Narrowing the validator to an explicit list of required-field IDs fixed that. Testing again surfaced a second, more specific gap: the infection screening question has its own branching sub-questions. If a user answers "yes" there, three follow-up fields (fever, cough, urinary status) become required. But the validator had no way of knowing a branch had opened, so it still let submission through even when those follow-up fields were empty.</p>
+    <p class="case-section__body type-body">The fix made the required-field set conditional on that branch: answering "yes" to infection screening adds the three follow-up fields to the required set, and switching back to "no" removes that requirement again. It took two rounds of testing to find both gaps, and each needed a different kind of fix: one about scope (which fields to watch), one about state (what "required" means once a branch is open).</p>
+    <!-- Intended alt text: "Attempting to submit with infection screening set to Yes and its sub-questions empty: Submit stays disabled and the empty fields highlight, then filling them enables Submit." -->
+    <div class="case-dashed-placeholder case-dashed-placeholder--visual">
+      <p class="case-dashed-placeholder__label type-meta">COMING SOON — CLIP, HIGH PRIORITY (3–5S, MUTED, LOOPED, POSTER FALLBACK FOR REDUCED MOTION). SHOOT THIS ONE FIRST. ATTEMPT TO SUBMIT WITH INFECTION SCREENING SET TO "YES" AND SUB-QUESTIONS EMPTY, SHOWING SUBMIT STAYS DISABLED/FIELDS HIGHLIGHT, THEN FILL THEM AND SUBMIT ACTIVATES. THE SINGLE MOST IMPORTANT VISUAL IN THIS SECTION — PROVES THE SPECIFIC GAP AND ITS FIX.</p>
+    </div>
+  </section>
+
+  <section class="case-section case-section--alt">
+    <p class="case-section__index type-meta">07</p>
+    <h2 class="case-section__heading type-section-heading">Status</h2>
+    <p class="case-section__body type-body">This work was fully designed and spec'd, including the branching logic, hard stops, alert placement, and the audience-first selection framework, but it wasn't built into OnePulse's production codebase before I left the company. The prototype is what makes the design tangible: an interactive artifact that demonstrates the framework working end to end, from selecting an assessment through submission, built with AI-assisted coding tools that I directed.</p>
+    <p class="case-section__body type-body">The framework covers both clinical assessments (pre-infusion and similar, full-page, branching, section-based) and lighter module-level assessments (inline, scoped to whatever module a user is working in) under the same config-driven rendering split. The inline drawer also includes a reference view showing all assessments run across modules for a given patient, so staff can look back at what's been completed without leaving their current context. What I didn't design is the patient-facing side of assessment completion itself, the experience a patient has when filling one out remotely. That was outside my scope on this project.</p>
+    <p class="case-section__body type-body">What's still open if this were to ship: wiring the framework to real assessment data instead of the CSV-derived example set, and extending past the therapy groups used to validate the pattern during design. The two-step selection pattern, the config-driven rendering split, and the conditional validation logic described above are the reusable parts, exactly the kind of edge case that surfaces when a framework gets tested against real branching data rather than a single flat form.</p>
+  </section>
+
+  <script src="components/footer.js"></script>
+</body>
+</html>
