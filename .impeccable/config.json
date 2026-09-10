@@ -29,6 +29,15 @@
         ],
         "createdAt": "2026-09-07T15:02:34.160Z",
         "reason": "Three instances triaged: (1) 189-char context line is a false positive -- .case-title-block__context overrides .type-meta's uppercase to text-transform:none, confirmed sentence-case in rendered screenshot; (2) 42-char TIMEFRAME meta item and (3) 90-char hero-placeholder label both match pre-existing .type-meta/.case-dashed-placeholder__label conventions already shipped identically in onepulse-connect.html"
+      },
+      {
+        "rule": "kicker-above-heading",
+        "value": "*",
+        "files": [
+          "pre-infusion-assessment-flow.html"
+        ],
+        "createdAt": "2026-09-10T15:43:48.228Z",
+        "reason": "existing sitewide pattern: identical CASE STUDY eyebrow + H1 structure already shipped on onepulse-connect.html and linking-documents-prescriptions.html, Figma-confirmed (see .case-title-block__eyebrow contrast-ratio comment) — this site's established case-study template, not a generated kicker"
       }
     ]
   }
