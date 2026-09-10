@@ -22,7 +22,10 @@
       position: relative;
       width: 490px;
       max-width: 100%;
-      height: 209px;
+      height: 268px; /* was 209px, fixed to fit "Hi, I'm Jake" + one short
+       * sentence with white-space: nowrap. The new subhead is a full
+       * positioning statement and needs to wrap — height re-measured
+       * against the actual rendered content below, not guessed. */
     }
     @property --gradient-angle {
       syntax: '<angle>';
@@ -35,7 +38,7 @@
       top: 0;
       left: var(--hero-card-glow-offset-left);
       width: 483px;
-      height: 209px;
+      height: 268px;
       border-radius: var(--radius-lg);
       background: linear-gradient(
         var(--gradient-angle),
@@ -67,7 +70,6 @@
       padding: var(--space-48);
       border-radius: var(--radius-lg);
       background: var(--bg-page);
-      white-space: nowrap;
     }
     .hero-card__heading {
       color: var(--text-hero-heading);
@@ -107,8 +109,8 @@
     <div class="hero-card">
       <div class="hero-card__glow" aria-hidden="true"></div>
       <div class="hero-card__content">
-        <h1 class="hero-card__heading type-hero-heading">Hi, I’m Jake</h1>
-        <p class="hero-card__subhead type-hero-subhead">I am a product designer based in Brooklyn, NY.</p>
+        <h1 class="hero-card__heading type-hero-heading">Hey, I’m Jake</h1>
+        <p class="hero-card__subhead type-hero-subhead">I'm a product designer with a particular depth in design systems: creating the structure that turns scattered decisions into shared, working code.</p>
       </div>
     </div>
   </section>

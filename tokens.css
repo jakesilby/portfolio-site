@@ -408,7 +408,13 @@
   font-family: var(--font-family-serif);
   font-weight: var(--font-weight-regular);
   font-size: var(--font-size-20);
-  line-height: var(--line-height-24);
+  line-height: var(--line-height-32); /* was line-height-24 (1.2x) — fine
+   * for the single nowrap line this role held until the 2026 hero rewrite;
+   * now genuinely multi-line, and 1.2x read as tight-leading (Impeccable
+   * flagged it). 32px/20px = 1.6x, matching frontend-design's guidance to
+   * give serif text slightly more leading than the sans-serif body's 1.5x
+   * (--line-height-24 on .type-body, 16px). Reused an existing token
+   * rather than adding a new one. */
   letter-spacing: var(--letter-spacing-none);
 }
 
@@ -483,7 +489,11 @@
   font-style: italic;
   font-weight: var(--font-weight-regular);
   font-size: var(--font-size-20);
-  line-height: var(--line-height-24);
+  line-height: var(--line-height-32); /* was line-height-24 (1.2x) — same
+   * tight-leading bug as .type-hero-subhead, same fix: 32px/20px = 1.6x.
+   * Unlike the hero card, .project-row__description has no fixed-height
+   * container (flex, align-items: start) — confirmed no re-measurement
+   * needed here. */
   letter-spacing: var(--letter-spacing-none);
 }
 
