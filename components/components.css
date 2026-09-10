@@ -122,6 +122,12 @@
 .case-dashed-placeholder__label {
   color: var(--text-primary);
   text-align: center;
+  text-transform: none; /* overrides .type-meta's uppercase — these labels
+   * run to full sentences describing what's missing, not short tags;
+   * all-caps hurts readability at that length. Same fix as
+   * .stat-tile__label and .site-footer__copy. */
+  letter-spacing: var(--letter-spacing-none); /* wide tracking only reads
+   * correctly on all-caps text — same pairing as .stat-tile__label. */
 }
 
 /* --- Case study vertical image stack (a group of .case-visual/
