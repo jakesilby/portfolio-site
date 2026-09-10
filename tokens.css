@@ -357,16 +357,24 @@
   font-size: var(--font-size-11);
   line-height: var(--line-height-16);
   letter-spacing: var(--letter-spacing-wide-lg);
-  text-transform: uppercase;
+  text-transform: none; /* was uppercase — all-caps mono labels flagged as
+   * an unexamined-default tell (frontend-design audit). Scoped exclusively
+   * to mono-font elements sitewide, confirmed before removing — see the
+   * audit round this was fixed in for the full instance-by-instance check.
+   * Live text here ("Work") is already Title Case in source, so this is
+   * a real visible change, not just removing a no-op. */
 }
 
 .type-eyebrow {
+  /* Unused anywhere in the current HTML — confirmed via grep across all
+   * pages/components. Fixed for consistency with the other mono classes
+   * rather than left uppercase, in case this gets picked up later. */
   font-family: var(--font-family-mono);
   font-weight: var(--font-weight-regular);
   font-size: var(--font-size-16);
   line-height: var(--line-height-20);
   letter-spacing: var(--letter-spacing-wide-md);
-  text-transform: uppercase;
+  text-transform: none;
 }
 .type-eyebrow strong,
 .type-eyebrow .emphasis {
@@ -374,13 +382,15 @@
 }
 
 .type-hero-eyebrow {
-  /* NEW — 2026 homepage hero. Same family as .type-eyebrow, larger and wider-tracked. */
+  /* NEW — 2026 homepage hero. Same family as .type-eyebrow, larger and
+   * wider-tracked. Also unused anywhere in the current HTML — same
+   * for-consistency fix as .type-eyebrow above. */
   font-family: var(--font-family-mono);
   font-weight: var(--font-weight-regular);
   font-size: var(--font-size-18);
   line-height: var(--line-height-20);
   letter-spacing: var(--letter-spacing-wide-xl);
-  text-transform: uppercase;
+  text-transform: none;
 }
 .type-hero-eyebrow strong,
 .type-hero-eyebrow .emphasis {
@@ -450,7 +460,15 @@
   font-size: var(--font-size-13);
   line-height: var(--line-height-20);
   letter-spacing: var(--letter-spacing-wide-md);
-  text-transform: uppercase;
+  text-transform: none; /* was uppercase — see .type-nav-label above for
+   * the audit this was fixed in. Most live text using this class is
+   * already hardcoded caps in the HTML itself (section index numbers
+   * aside, which have no case) — this CSS change alone won't visibly
+   * affect those instances; only genuinely mixed-case content (like
+   * the copyright line) changes appearance. .case-title-block__context
+   * and .stat-tile__label both already set text-transform: none
+   * downstream to counter this rule — now redundant, left in place,
+   * not cleaned up as part of this fix. */
 }
 
 .type-case-title {
@@ -467,7 +485,13 @@
   font-size: var(--font-size-11);
   line-height: var(--line-height-16);
   letter-spacing: var(--letter-spacing-wide-sm);
-  text-transform: uppercase;
+  text-transform: none; /* was uppercase — see .type-nav-label above for
+   * the audit this was fixed in. Most live text using this class is
+   * already hardcoded caps in the HTML (CASE STUDY, FILE A/B/C, WORK) —
+   * this alone won't visibly change those; badge/project-row__index
+   * text (Title Case/numbers in source) is the visible change here.
+   * .problem-diagram__caption already sets text-transform: none
+   * downstream to counter this rule — now redundant, left in place. */
 }
 
 .type-token-name {
@@ -481,7 +505,10 @@
   font-size: var(--font-size-12);
   line-height: normal;
   letter-spacing: var(--letter-spacing-wide-sm);
-  text-transform: uppercase;
+  text-transform: none; /* was uppercase — see .type-nav-label above for
+   * the audit this was fixed in. All live text here ("Primitive",
+   * "Pulse-teal.700", etc.) is Title/mixed case in source, so this is a
+   * real visible change on every instance, not a no-op. */
 }
 
 .type-description {

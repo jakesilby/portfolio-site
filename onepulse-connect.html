@@ -47,6 +47,9 @@
       padding: var(--space-4) var(--space-8);
       background: var(--bg-surface);
       color: var(--text-label);
+      letter-spacing: var(--letter-spacing-none); /* overrides .type-meta's
+       * wide tracking — this line runs long (ROLE/TIMEFRAME/STACK combined),
+       * same reasoning as .case-title-block__context and .stat-tile__label. */
     }
 
     .case-hero {
