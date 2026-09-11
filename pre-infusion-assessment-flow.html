@@ -61,37 +61,93 @@
       padding: 0 var(--padding-section-x) var(--padding-section-x);
     }
 
-    /* --- No real footage or Figma frames exist yet for this case study (it's
-     * still at content-draft stage) — every visual on this page uses the
-     * shared .case-dashed-placeholder pattern (components.css), same as
-     * Linking Documents & Prescriptions did before its assets landed. Sized
-     * generically (one box for the hero, one shared size for in-body
-     * visuals) since there's no Figma spec yet to pull real dimensions from;
-     * revisit sizing once real screenshots/clips replace these. min-height,
-     * not aspect-ratio, so wrapping label text never overflows the dashed
-     * border at narrow widths — same reasoning as Linking Documents'
-     * pre-asset placeholders. --- */
+    /* --- Hero — real still frame now that assets have landed. Reuses the
+     * same shot as the Worked Example section's full-page screenshot below
+     * (per CLAUDE.md's static-hero default — no clip was cut specifically
+     * for hero placement, so this pulls a still rather than inventing an
+     * autoplay exception). Same card-wrapper pattern as the other two case
+     * studies' .case-hero__placeholder/.case-hero__frame, swapped from
+     * video to img. --- */
 
-    .case-dashed-placeholder--hero {
-      width: 956px;
-      max-width: 100%;
-      min-height: 440px;
-    }
-
-    .case-dashed-placeholder--visual {
-      width: 760px;
-      max-width: 100%;
-      min-height: 320px;
+    .case-hero__placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      background: var(--bg-placeholder);
+      border-radius: var(--radius-md);
+      padding: var(--space-48) var(--space-24);
     }
 
     @media (max-width: 720px) {
-      .case-dashed-placeholder--hero,
-      .case-dashed-placeholder--visual {
-        /* Same fix as the other two case studies' hero/visual boxes — 24px
-         * horizontal padding shrinks the box disproportionately at mobile
-         * widths. */
-        padding: var(--space-24) var(--space-12);
+      .case-hero__placeholder {
+        padding: var(--space-48) var(--space-12);
       }
+    }
+
+    .case-hero__frame {
+      display: block;
+      width: 956px;
+      max-width: 100%;
+      aspect-ratio: 2904 / 2160;
+      background: var(--bg-page);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-card);
+      object-fit: cover;
+    }
+
+    /* --- Real screenshots — each sets its own aspect-ratio from the real
+     * capture, same convention as OnePulse's/Linking Documents' ds_ and
+     * document- prefixed images. --- */
+
+    .case-visual__image--selectassessment {
+      aspect-ratio: 3576 / 2892;
+    }
+
+    .case-visual__image--assessmentpage {
+      aspect-ratio: 2904 / 2160;
+    }
+
+    .case-visual__image--hardstopalert {
+      aspect-ratio: 2880 / 1800;
+    }
+
+    .case-visual__image--vitalsbanda {
+      aspect-ratio: 1800 / 1360;
+    }
+
+    /* --- Framework diagram — a real diagram already matching the site's
+     * visual language (flat color, white background), same treatment as
+     * Linking Documents' removal-guardrail-diagram: no .case-visual card
+     * frame on top of it. --- */
+
+    .framework-diagram-image {
+      display: block;
+      width: 100%;
+      max-width: 760px;
+      aspect-ratio: 1938 / 304;
+    }
+
+    /* --- Real clips — same .case-clip-video pattern as OnePulse/Linking
+     * Documents (page-local there too). All three captures share one
+     * native ratio (2880x1800), so the base class carries it directly
+     * rather than a per-clip modifier. --- */
+
+    .case-clip-video {
+      position: relative;
+      width: 100%;
+      max-width: 712px;
+      aspect-ratio: 2880 / 1800;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      background: var(--bg-placeholder-fill);
+    }
+
+    .case-clip-video__media {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
   </style>
 </head>
@@ -114,8 +170,8 @@
   </section>
 
   <section class="case-hero">
-    <div class="case-dashed-placeholder case-dashed-placeholder--hero">
-      <p class="case-dashed-placeholder__label type-meta">Coming soon — hero visual (still frame, high priority). No shot is specified as the hero in the draft; suggest pulling a still from the full assessment dialog / section-list shot in "Pre-Infusion as the Worked Example" below, per CLAUDE.md's default (hero = static still, not autoplay).</p>
+    <div class="case-hero__placeholder">
+      <img class="case-hero__frame" src="images/as_assessmentpage.png" alt="The full pre-infusion assessment page: section-nav list on the left, the Medication Verification form in the center, and the Global Inline Drawer showing completed assessments as a card list on the right.">
     </div>
   </section>
 
@@ -123,9 +179,8 @@
     <p class="case-section__index type-meta">01</p>
     <h2 class="case-section__heading type-section-heading">The Problem</h2>
     <p class="case-section__body type-body"><strong>The assessment system in OnePulse started with a single, straightforward case:</strong> a nurse fills out a pre-infusion form for one therapy. As real data came in, from a clinical branching-logic spreadsheet covering therapy groups like Neuro/Rheum, MS, CIDP/MMN, and CVID, it became clear that assessments weren't one thing. Each one carried several independent dimensions: which therapy and phase it applied to, who completed it (staff on-site or a patient completing it remotely), where it fell in the infusion timeline, and its own internal branching logic between questions.</p>
-    <!-- Intended alt text (once a real capture replaces this box): "The original flat-list assessment picker alongside a mockup of the full 20-40 item catalog, showing the same list layout at scale." -->
-    <div class="case-dashed-placeholder case-dashed-placeholder--visual">
-      <p class="case-dashed-placeholder__label type-meta">Coming soon — static, high priority. The original flat-list assessment picker next to a mockup or real data view showing the full 20-40 item catalog laid out the same way. Makes the scale problem visible rather than asserted.</p>
+    <div class="case-visual case-visual--transparent">
+      <img class="case-visual__image case-visual__image--selectassessment" src="images/AS_selectassessment_banda.png" alt="The original flat, ungrouped Select Assessment picker (about 30 items) next to the redesigned picker, grouped by therapy category with a search field." loading="lazy">
     </div>
     <p class="case-section__body type-body"><strong>A flat list of assessment cards was fine for a handful of items.</strong> But even a single therapy group could have four or more assessments across multiple phases, and with multiple therapy groups in the system, the real number was closer to 20 to 40 assessment types. The selection pattern needed to hold up at that scale.</p>
   </section>
@@ -142,10 +197,7 @@
     <h2 class="case-section__heading type-section-heading">The Framework</h2>
     <p class="case-section__body type-body"><strong>Two decisions came out of this.</strong> The first was how assessments get selected at scale. Two approaches were considered: a grouped list with collapsible category headers, and a search-first pattern with filter chips. The grouped list was the most familiar but still turned into a long scroll once several categories were expanded. Search-first scaled the best long-term but added complexity that wasn't justified on its own. What stuck was a hybrid of the two: a single searchable list, grouped by therapy category. Adding a new therapy group means adding one entry to that grouped structure. Adding a new assessment means adding one item to that group's list. Nothing about the layout breaks as the catalog grows.</p>
     <p class="case-section__body type-body"><strong>The second decision was where a user encounters an assessment at all, and how it renders once they do.</strong> Module assessments live in the GID's Processing tab, appearing inline as part of whatever a user is already doing there (a status dropdown with a conditional reason field, for example). Clinical assessments, like pre-infusion, live behind a separate Assessments tab and open as a full page, with sections, branching logic, and hard stops. These aren't two outcomes of a shared decision a user makes in the moment, they're two separate paths, and an assessment's config determines which one it belongs to before a user ever sees it. That keeps each path simple and predictable instead of one shared path having to account for both cases. Both decisions solve how staff navigate to an assessment once they're looking for one; whether they should have to browse at all is a separate question, one that comes back later in this case study.</p>
-    <!-- Intended alt text: "Two separate paths diagram: GID Processing tab leading to an inline module assessment, and separately, GID Assessments tab leading to a full-page clinical assessment, with an assessment's config determining which path it belongs to ahead of time." -->
-    <div class="case-dashed-placeholder case-dashed-placeholder--visual">
-      <p class="case-dashed-placeholder__label type-meta">Coming soon — static, medium priority. Two separate paths, not a shared branch: GID Processing tab → module assessment → renders inline (e.g. status dropdown), and separately, GID Assessments tab → Select Assessment picker → clinical assessment → renders full-page (e.g. pre-infusion assessment). An assessment's config sets which path it belongs to ahead of time; this isn't a decision a user or the system makes live.</p>
-    </div>
+    <img class="framework-diagram-image" src="images/as_configdialog.png" alt="Diagram: an assessment's config sets its path ahead of time. GID Processing tab leads to an inline module-assessment render; separately, GID Assessments tab leads through the Select Assessment picker to a full-page clinical-assessment render." loading="lazy">
   </section>
 
   <section class="case-section">
@@ -154,24 +206,24 @@
     <p class="case-section__body type-body"><strong>Pre-infusion was the right assessment to validate the framework against, not because it was the first one available, but because it was the most demanding case in the catalog:</strong> the most sections, the most branching logic, and the only assessment type carrying hard safety stops. If the framework held up here, including for a therapy group like Keytruda where the branching logic is especially dense, it would hold up for the rest of the catalog.</p>
     <p class="case-section__body type-body">The clinical branching-logic data used to pressure-test the framework was the pre-infusion assessment: 35 questions (43 total, with 8 scoped to diagnosis-specific branches) organized into sections in a fixed order: Medication Verification, Vitals, Treatment History, Adherence, Critical Safety Screening, Infection Screening, Adverse Event, Pre-medications, Vascular Access, Diagnosis-Specific, Proceed Decision, Education and Consent, and Notes. As a clinical assessment, it opens as a dedicated full page rather than a dialog, reserving the dialog pattern for the picker that selects it.</p>
     <p class="case-section__body type-body">The page splits into three regions: a vertical section-nav list on the left (Medication Verification, Vitals, Treatment History, and so on, with the active section highlighted), the form itself in the center, and the Global Inline Drawer on the right, the same collapsible component used elsewhere in the product, reused here to show completed assessments as a card list so a clinician can reference prior responses without losing their place. An early version tried a progress stepper in place of the plain section-nav list; that was cut because it implied a fixed, linear sequence of steps that the branching logic doesn't actually have.</p>
-    <!-- Intended alt text: "Full pre-infusion assessment page showing the section-nav list on the left, the form in the center, and the Global Inline Drawer showing completed assessments as a card list on the right." -->
-    <div class="case-dashed-placeholder case-dashed-placeholder--visual">
-      <p class="case-dashed-placeholder__label type-meta">Coming soon — static, high priority. The full assessment page: section nav on the left, form in the center, Global Inline Drawer (completed assessments) on the right, so a reader can see the scope of a "full clinical assessment" at a glance.</p>
+    <div class="case-visual">
+      <img class="case-visual__image case-visual__image--assessmentpage" src="images/as_assessmentpage.png" alt="Full pre-infusion assessment page showing the section-nav list on the left, the form in the center, and the Global Inline Drawer showing completed assessments as a card list on the right." loading="lazy">
     </div>
     <p class="case-section__body type-body"><strong>The form isn't static.</strong> Certain answers reveal follow-up questions inline, directly below the triggering question, without a page reload or navigation away from where the clinician is working. The form grows and contracts as it's filled out.</p>
-    <!-- Intended alt text: "Selecting Yes on the infection screening question, causing fever, cough, and urinary status sub-questions to expand inline directly below it." -->
-    <div class="case-dashed-placeholder case-dashed-placeholder--visual">
-      <p class="case-dashed-placeholder__label type-meta">Coming soon — clip, high priority (3–5s, muted, looped, poster fallback for reduced motion). Select "Yes" on the infection screening question and watch the fever/cough/urinary sub-questions expand inline. A behavior claim a screenshot can't prove.</p>
+    <div class="case-visual">
+      <div class="case-clip-video" data-clip-video>
+        <video class="case-clip-video__media" poster="videos/as_infectionscreening_poster.jpg" muted loop playsinline aria-label="Selecting Yes on the infection screening question, causing fever, cough, and urinary status sub-questions to expand inline directly below it.">
+          <source src="videos/as_infectionscreening.mp4" type="video/mp4">
+        </video>
+      </div>
     </div>
     <p class="case-section__body type-body"><strong>Certain answers also carry more weight than others.</strong> A positive pregnancy test or a patient refusing consent needs to stop the workflow immediately rather than let the clinician continue to the next section. Those hard stops surface as alerts placed directly next to the question that triggered them, not just as a banner at the top of the form, so the warning is visible at the exact point of decision.</p>
-    <!-- Intended alt text: "A hard-stop alert for a positive pregnancy test result, shown inline directly beneath its triggering field using the design system's error-variant alert component." -->
-    <div class="case-dashed-placeholder case-dashed-placeholder--visual">
-      <p class="case-dashed-placeholder__label type-meta">Coming soon — static, high priority. A hard-stop alert (e.g. positive pregnancy test) shown inline next to its triggering field, using the real design system alert component (error variant).</p>
+    <div class="case-visual">
+      <img class="case-visual__image case-visual__image--hardstopalert" src="images/as_hardstopalert.png" alt="A hard-stop alert for a positive pregnancy test result, shown inline directly beneath its triggering field using the design system's error-variant alert component." loading="lazy">
     </div>
     <p class="case-section__body type-body"><strong>Layout went through a real revision here too.</strong> Fields were originally laid out two or three to a row in places like Vitals (blood pressure and heart rate side by side, for example). That changed to one field per line across the entire form, including Vitals, because a clinician moving through a long form under time pressure benefits more from a predictable, scannable vertical rhythm than from saving vertical space.</p>
-    <!-- Intended alt text: "Before and after of the Vitals section: fields laid out two to three per row versus the single-column revision." -->
-    <div class="case-dashed-placeholder case-dashed-placeholder--visual">
-      <p class="case-dashed-placeholder__label type-meta">Coming soon — static, medium priority. Before/after of the Vitals section: multi-column layout vs. the single-column revision.</p>
+    <div class="case-visual case-visual--transparent">
+      <img class="case-visual__image case-visual__image--vitalsbanda" src="images/as_vitalsbanda.png" alt="Before and after of the Vitals section: fields laid out two to three per row versus the single-column revision." loading="lazy">
     </div>
   </section>
 
@@ -181,9 +233,12 @@
     <p class="case-section__body type-body"><strong>Yes/No questions started as dropdowns and were changed to radio buttons.</strong> A dropdown needs two interactions to answer a question with only two possible values, and it hides both options until opened, adding friction on a form with dozens of these. Since most of the Yes/No questions trigger branching sub-questions, keeping both options visible also makes the cause-and-effect of a branch opening easier to follow than a closed dropdown does. The first pass at this also added a horizontal layout for short option sets, a rule invented on the spot rather than pulled from the design system. Once checked against the actual system, the guidance was to keep this pattern vertical regardless of option count, so that's what shipped.</p>
     <p class="case-section__body type-body"><strong>The completed-assessment view mode started as a two-step chooser:</strong> click a completed assessment, then decide whether to view it standalone or alongside an active assessment. Testing showed that extra step wasn't earning its place for the standalone case, so it was removed for that path. Clicking a completed item now opens directly into a read-only view. The alongside option still exists, but only as an action available from inside an active assessment dialog, since that's the only context where it's actually relevant.</p>
     <p class="case-section__body type-body"><strong>The submission confirmation pattern changed after review too.</strong> The original design stacked a confirmation dialog on top of the assessment dialog once submitted, which read as cluttered. That was replaced with an inline transform: the dialog's form content is replaced in place by a success state, summary card, and a single "Done" button, on the same surface, with no stacking.</p>
-    <!-- Intended alt text: "Submitting an assessment and watching the dialog's form content transform in place into a success state with a summary card and Done button, no second dialog on top." -->
-    <div class="case-dashed-placeholder case-dashed-placeholder--visual">
-      <p class="case-dashed-placeholder__label type-meta">Coming soon — clip, medium priority (3–5s, muted, looped, poster fallback for reduced motion). Submit an assessment and watch the dialog transform in place to the success state, no second dialog appearing on top.</p>
+    <div class="case-visual">
+      <div class="case-clip-video" data-clip-video>
+        <video class="case-clip-video__media" poster="videos/as_submitassessment_poster.jpg" muted loop playsinline aria-label="Submitting an assessment and watching the dialog's form content transform in place into a success state with a summary card and Done button, no second dialog on top.">
+          <source src="videos/as_submitassessment.mp4" type="video/mp4">
+        </video>
+      </div>
     </div>
   </section>
 
@@ -194,9 +249,12 @@
     <p class="case-section__body type-body">The first version of the prototype let a user submit an assessment with required fields empty. The obvious fix was to disable Submit until required fields were filled. But the first pass at that logic was too strict: it scanned every input on the form, not just the fields that were actually required, so the button stayed disabled even once the real requirements were met.</p>
     <p class="case-section__body type-body">Narrowing the validator to an explicit list of required-field IDs fixed that. Testing again surfaced a second, more specific gap: the infection screening question has its own branching sub-questions. If a user answers "yes" there, three follow-up fields (fever, cough, urinary status) become required. But the validator had no way of knowing a branch had opened, so it still let submission through even when those follow-up fields were empty.</p>
     <p class="case-section__body type-body">The fix made the required-field set conditional on that branch: answering "yes" to infection screening adds the three follow-up fields to the required set, and switching back to "no" removes that requirement again. It took two rounds of testing to find both gaps, and each needed a different kind of fix: one about scope (which fields to watch), one about state (what "required" means once a branch is open).</p>
-    <!-- Intended alt text: "Attempting to submit with infection screening set to Yes and its sub-questions empty: Submit stays disabled and the empty fields highlight, then filling them enables Submit." -->
-    <div class="case-dashed-placeholder case-dashed-placeholder--visual">
-      <p class="case-dashed-placeholder__label type-meta">Coming soon — clip, high priority (3–5s, muted, looped, poster fallback for reduced motion). Shoot this one first. Attempt to submit with infection screening set to "Yes" and sub-questions empty, showing Submit stays disabled/fields highlight, then fill them and Submit activates. The single most important visual in this section — proves the specific gap and its fix.</p>
+    <div class="case-visual">
+      <div class="case-clip-video" data-clip-video>
+        <video class="case-clip-video__media" poster="videos/as_validationgap_poster.jpg" muted loop playsinline aria-label="Attempting to submit with infection screening set to Yes and its sub-questions empty: Submit stays disabled and the empty fields highlight, then filling them enables Submit.">
+          <source src="videos/as_validationgap.mp4" type="video/mp4">
+        </video>
+      </div>
     </div>
   </section>
 
@@ -209,6 +267,7 @@
     <p class="case-section__body type-body">One idea surfaced during testing but wasn't pursued: since assessment selection happens from within a specific patient's active medication or order, the system already has enough context to filter the picker to just the relevant therapy group automatically, rather than requiring staff to manually navigate the full catalog every time. The gap became visible when testing the prototype with a non-infusion medication (Humira, a self-administered biologic) against infusion-specific assessment options that didn't apply to it at all. The grouped, searchable list still matters for cases where staff are browsing more broadly, Ad Hoc assessments, or working across therapies, but context-aware filtering could reduce how often that manual browsing is needed in the first place.</p>
   </section>
 
+  <script src="components/clip-video.js"></script>
   <script src="components/footer.js"></script>
 </body>
 </html>
