@@ -128,25 +128,6 @@
       aspect-ratio: 1938 / 304;
     }
 
-    /* --- One new visual note added after the fact, with no real asset shot
-     * yet — back to the shared .case-dashed-placeholder pattern
-     * (components.css) for just this one box, same convention as every
-     * other not-yet-shot visual on this site. min-height, not
-     * aspect-ratio, so the wrapping label text never overflows the dashed
-     * border at narrow widths. --- */
-
-    .case-dashed-placeholder--visual {
-      width: 760px;
-      max-width: 100%;
-      min-height: 320px;
-    }
-
-    @media (max-width: 720px) {
-      .case-dashed-placeholder--visual {
-        padding: var(--space-24) var(--space-12);
-      }
-    }
-
     /* --- Real clips — same .case-clip-video pattern as OnePulse/Linking
      * Documents (page-local there too). All three captures share one
      * native ratio (2880x1800), so the base class carries it directly
@@ -198,9 +179,6 @@
     <p class="case-section__index type-meta">01</p>
     <h2 class="case-section__heading type-section-heading">The Problem</h2>
     <p class="case-section__body type-body"><strong>The assessment system in OnePulse started with a single, straightforward case:</strong> a nurse fills out a pre-infusion form for one therapy. As real data came in, from a clinical branching-logic spreadsheet covering therapy groups like Neuro/Rheum, MS, CIDP/MMN, and CVID, it became clear that assessments weren't one thing. Each one carried several independent dimensions: which therapy and phase it applied to, who completed it (staff on-site or a patient completing it remotely), where it fell in the infusion timeline, and its own internal branching logic between questions.</p>
-    <div class="case-dashed-placeholder case-dashed-placeholder--visual">
-      <p class="case-dashed-placeholder__label type-meta">Coming soon — static, high priority. The original flat-list assessment picker, a small handful of items, clean and usable at this size. What happens once the catalog grows past this point is shown later, in the Framework section.</p>
-    </div>
     <p class="case-section__body type-body"><strong>A flat list of assessment cards was fine for a handful of items.</strong> But even a single therapy group could have four or more assessments across multiple phases, and with multiple therapy groups in the system, the real number was closer to 20 to 40 assessment types. The selection pattern needed to hold up at that scale.</p>
   </section>
 

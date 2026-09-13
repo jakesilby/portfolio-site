@@ -14,8 +14,6 @@ Designed a framework for OnePulse Connect to select, complete, and review 20 to 
 
 **A flat list of assessment cards was fine for a handful of items.** But even a single therapy group could have four or more assessments across multiple phases, and with multiple therapy groups in the system, the real number was closer to 20 to 40 assessment types. The selection pattern needed to hold up at that scale.
 
-> **[VISUAL — high priority, STATIC]** The original flat-list assessment picker, a small handful of items, clean and usable at this size. What happens once the catalog grows past this point is shown later, in the Framework section.
-
 ---
 
 ## Why This Matters
