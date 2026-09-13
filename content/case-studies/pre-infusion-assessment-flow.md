@@ -14,7 +14,7 @@ Designed a framework for OnePulse Connect to select, complete, and review 20 to 
 
 **A flat list of assessment cards was fine for a handful of items.** But even a single therapy group could have four or more assessments across multiple phases, and with multiple therapy groups in the system, the real number was closer to 20 to 40 assessment types. The selection pattern needed to hold up at that scale.
 
-> **[VISUAL — high priority, STATIC]** The original flat-list assessment picker, however many items it had at the time, next to a mockup or real data view showing the full 20-40 item catalog laid out the same way. Makes the scale problem visible rather than asserted.
+> **[VISUAL — high priority, STATIC]** The original flat-list assessment picker, a small handful of items, clean and usable at this size. What happens once the catalog grows past this point is shown later, in the Framework section.
 
 ---
 
@@ -30,7 +30,7 @@ The scale problem compounds it. If the pattern for finding and completing an ass
 
 **Two decisions came out of this.** The first was how assessments get selected at scale. Two approaches were considered: a grouped list with collapsible category headers, and a search-first pattern with filter chips. The grouped list was the most familiar but still turned into a long scroll once several categories were expanded. Search-first scaled the best long-term but added complexity that wasn't justified on its own. What stuck was a hybrid of the two: a single searchable list, grouped by therapy category. Adding a new therapy group means adding one entry to that grouped structure. Adding a new assessment means adding one item to that group's list. Nothing about the layout breaks as the catalog grows.
 
-> **[VISUAL — high priority, STATIC]** The searchable, grouped list at full catalog scale (8 therapy groups, 23 assessments), showing the hybrid pattern holding up under real volume rather than the handful of items a first mockup would show.
+> **[VISUAL — high priority, STATIC]** Side by side, both at full catalog scale: the same flat-list pattern from the Problem section crowded to 30 ungrouped items, next to the searchable, grouped list at 23 items across 8 therapy groups. One paired image proving both the breakdown and the fix.
 
 **The second decision was where a user encounters an assessment at all, and how it renders once they do.** Module assessments live in the GID's Processing tab, appearing inline as part of whatever a user is already doing there (a status dropdown with a conditional reason field, for example). Clinical assessments, like pre-infusion, live behind a separate Assessments tab and open as a full page, with sections, branching logic, and hard stops. These aren't two outcomes of a shared decision a user makes in the moment, they're two separate paths, and an assessment's config determines which one it belongs to before a user ever sees it. That keeps each path simple and predictable instead of one shared path having to account for both cases. Both decisions solve how staff navigate to an assessment once they're looking for one; whether they should have to browse at all is a separate question, one that comes back later in this case study.
 
