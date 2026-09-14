@@ -183,6 +183,18 @@
   --color-pulse-teal-700: #0c6265;
   --color-teal-label: #006566; /* NEW — Token Architecture live-embed card label text (PRIMITIVE/SEMANTIC ALIAS/MAPPED TOKEN), confirmed against Figma node 353:108. Unbound literal in Figma (not aliased to any variable there), same as --color-pulse-teal-700 above. */
 
+  /* --- Illustrative alias/mapped steps for the same live embed — chained via
+   * var() to --color-pulse-teal-700 above rather than repeating its hex, so
+   * the three Token Architecture cards reference three distinct custom
+   * properties instead of one value copy-pasted three times. Same
+   * illustrative status as --color-pulse-teal-700: this is OnePulse
+   * Connect's palette being demonstrated, not a portfolio design token, so
+   * neither is used anywhere else on the site.
+   * primary.main (#14A3A8) confirmed distinct via Figma variable lookup —
+   * the chain intentionally resolves through primary.dark instead. */
+  --pulse-primary-dark: var(--color-pulse-teal-700);
+  --pulse-accent-primary-fg-fill: var(--pulse-primary-dark);
+
   /* --- Layout primitives --- */
   --layout-max-width: 1200px;
 

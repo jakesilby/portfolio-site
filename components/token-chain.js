@@ -11,7 +11,7 @@ tokenChainScript.insertAdjacentHTML('afterend', `
 <div class="token-chain-wrap">
   <div class="token-chain">
     <div class="token-chain__card">
-      <span class="token-chain__swatch"></span>
+      <span class="token-chain__swatch token-chain__swatch--primitive"></span>
       <div class="token-chain__text">
         <p class="token-chain__label type-token-name">Primitive</p>
         <p class="token-chain__name type-token-name">Pulse-teal.700</p>
@@ -19,7 +19,7 @@ tokenChainScript.insertAdjacentHTML('afterend', `
     </div>
     ${tokenChainArrow}
     <div class="token-chain__card">
-      <span class="token-chain__swatch"></span>
+      <span class="token-chain__swatch token-chain__swatch--alias"></span>
       <div class="token-chain__text">
         <p class="token-chain__label type-token-name">Semantic Alias</p>
         <p class="token-chain__name type-token-name">Primary.Dark</p>
@@ -27,7 +27,7 @@ tokenChainScript.insertAdjacentHTML('afterend', `
     </div>
     ${tokenChainArrow}
     <div class="token-chain__card">
-      <span class="token-chain__swatch"></span>
+      <span class="token-chain__swatch token-chain__swatch--mapped"></span>
       <div class="token-chain__text">
         <p class="token-chain__label type-token-name">Mapped Token</p>
         <p class="token-chain__name type-token-name">Accent.Primary.fg.fill</p>

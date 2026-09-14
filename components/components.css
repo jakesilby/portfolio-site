@@ -372,8 +372,23 @@
   display: block;
   width: var(--space-24);
   height: var(--space-24);
-  background: var(--color-pulse-teal-700);
   border-radius: var(--space-4);
+}
+
+/* Each card's swatch resolves through its own step of the chain rather than
+ * all three sharing one variable — primitive, alias, and mapped token are
+ * genuinely distinct custom properties here, even though (per tokens.css)
+ * they resolve to the same value by design. */
+.token-chain__swatch--primitive {
+  background: var(--color-pulse-teal-700);
+}
+
+.token-chain__swatch--alias {
+  background: var(--pulse-primary-dark);
+}
+
+.token-chain__swatch--mapped {
+  background: var(--pulse-accent-primary-fg-fill);
 }
 
 .token-chain__text {
