@@ -312,7 +312,8 @@
   --border-default: var(--color-elm-9-5);
   --border-accent: var(--color-cosmos-9); /* NEW — nav pill button outline */
   --border-interactive: var(--color-smaltblue-7); /* NEW — smaltblue's first assigned role */
-  --border-highlight: var(--color-cosmos-6); /* NEW — Token Architecture live-embed card hover border. Stated by the user as #FC7973/cosmos-6; not confirmed via Figma (hover states aren't captured in a static node export), but cosmos-6 is a real existing primitive. */
+  --border-highlight: var(--color-cosmos-6); /* NEW — nav pill active-tab underline. Stated by the user as #FC7973/cosmos-6; not confirmed via Figma, but cosmos-6 is a real existing primitive. */
+  --border-highlight-teal: var(--color-pulse-teal-700); /* NEW — Token Architecture card hover border. Reuses the exact swatch color the widget already demonstrates (pulse-teal.700), kept separate from --border-highlight so this hover treatment doesn't move if the nav pill's underline color ever changes. */
 
   /* --- Spacing: gaps --- */
   --gap-tight: var(--space-4);

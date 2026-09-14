@@ -354,7 +354,7 @@
 }
 
 .token-chain:has(.token-chain__card:hover) .token-chain__card {
-  border-color: var(--border-highlight);
+  border-color: var(--border-highlight-teal);
 }
 
 .token-chain__swatch {
