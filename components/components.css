@@ -274,11 +274,19 @@
 }
 
 .problem-diagram__arrow {
+  /* Matches .token-chain__arrow exactly — same SVG asset, size, and color,
+   * for visual consistency between the two arrow usages on this page. */
+  display: flex;
   flex-shrink: 0;
-  font-family: var(--font-family-sans);
-  font-weight: var(--font-weight-extrabold);
-  font-size: var(--font-size-32);
-  color: var(--accent-primary);
+  width: 14px;
+  height: 14.7279px;
+  color: var(--accent-primary-dark);
+}
+
+.problem-diagram__arrow svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .problem-diagram__image-frame {
