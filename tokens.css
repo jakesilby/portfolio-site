@@ -203,7 +203,19 @@
   --space-36: 36px;
   --space-48: 48px;
   --space-56: 56px;
-  --space-64: 64px; /* NEW — About page's card/bio column gap, confirmed against latest Figma revision of node 496:156. General rhythm-scale primitive (fits between the existing 56/96 rungs), not a component-scoped one-off — flagging since it's a new addition, per the last two rounds' pattern, even though it needed no judgment call (a clean round number already implied by the surrounding scale). */
+  --space-64: 64px; /* superseded — was the About page's card/bio column gap
+   * for one revision of node 496:156; the next revision moved that gap to
+   * 80px (see --space-80 below). Kept, same as --space-128/--font-size-64,
+   * in case a future section lands on this rung again. */
+  --space-80: 80px; /* NEW — About page's card/bio column gap, now 80px per
+   * the latest revision of node 496:156/517:67 (was 64px, see --space-64
+   * above). 80px already exists as a literal value on --hero-section-padding-y
+   * below, but that token is named and scoped for the homepage hero
+   * section's padding role, not a general gap value; reusing it here would
+   * be the same kind of name/role mismatch flagged for --border-muted in
+   * the first About audit, so this gets its own general-scale primitive
+   * instead, consistent with how --space-64 was added last round rather
+   * than reused from elsewhere. */
   --space-96: 96px;
   --space-128: 128px; /* superseded — kept in case another section needs it */
   --space-160: 160px;
