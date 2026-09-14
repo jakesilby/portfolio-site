@@ -61,13 +61,15 @@
       padding: 0 var(--padding-section-x) var(--padding-section-x);
     }
 
-    /* --- Hero — real still frame now that assets have landed. Reuses the
-     * same shot as the Worked Example section's full-page screenshot below
-     * (per CLAUDE.md's static-hero default — no clip was cut specifically
-     * for hero placement, so this pulls a still rather than inventing an
-     * autoplay exception). Same card-wrapper pattern as the other two case
-     * studies' .case-hero__placeholder/.case-hero__frame, swapped from
-     * video to img. --- */
+    /* --- Hero — autoplaying looping video, same treatment as OnePulse
+     * Connect's and Linking Documents' hero clips: native `autoplay muted
+     * loop playsinline` on the video element itself, not the scroll-
+     * triggered data-clip-video pattern the section clips below use. A
+     * deliberate per-case-study exception to the static-hero default
+     * (CLAUDE.md), reusing the infection-screening branching-reveal clip
+     * since it already makes a genuine behavior claim a still can't.
+     * Same card-wrapper pattern as the other two case studies'
+     * .case-hero__placeholder/.case-hero__frame. --- */
 
     .case-hero__placeholder {
       display: flex;
@@ -89,7 +91,7 @@
       display: block;
       width: 956px;
       max-width: 100%;
-      aspect-ratio: 2904 / 2160;
+      aspect-ratio: 2880 / 1800;
       background: var(--bg-page);
       border-radius: var(--radius-md);
       box-shadow: var(--shadow-card);
@@ -114,6 +116,14 @@
 
     .case-visual__image--vitalsbanda {
       aspect-ratio: 1800 / 1360;
+    }
+
+    /* --- A real frame grabbed from the infection-screening clip itself
+     * (mid-expansion, sub-questions visible) — used here now that the same
+     * clip lives in the hero, so this section doesn't repeat it verbatim. --- */
+
+    .case-visual__image--infectionscreening {
+      aspect-ratio: 2880 / 1800;
     }
 
     /* --- Framework diagram — a real diagram already matching the site's
@@ -171,7 +181,9 @@
 
   <section class="case-hero">
     <div class="case-hero__placeholder">
-      <img class="case-hero__frame" src="images/as_assessmentpage.png" alt="The full pre-infusion assessment page: section-nav list on the left, the Medication Verification form in the center, and an inline drawer showing completed assessments as a card list on the right.">
+      <video class="case-hero__frame" poster="videos/as_infectionscreening_poster.jpg" autoplay muted loop playsinline aria-label="Selecting Yes on the infection screening question, causing fever, cough, and urinary status sub-questions to expand inline directly below it.">
+        <source src="videos/as_infectionscreening.mp4" type="video/mp4">
+      </video>
     </div>
   </section>
 
@@ -211,11 +223,7 @@
     </div>
     <p class="case-section__body type-body"><strong>The form isn't static.</strong> Certain answers reveal follow-up questions inline, directly below the triggering question, without a page reload or navigation away from where the nurse is working. The form grows and contracts as it's filled out.</p>
     <div class="case-visual">
-      <div class="case-clip-video" data-clip-video>
-        <video class="case-clip-video__media" poster="videos/as_infectionscreening_poster.jpg" muted loop playsinline aria-label="Selecting Yes on the infection screening question, causing fever, cough, and urinary status sub-questions to expand inline directly below it.">
-          <source src="videos/as_infectionscreening.mp4" type="video/mp4">
-        </video>
-      </div>
+      <img class="case-visual__image case-visual__image--infectionscreening" src="images/as_infectionscreening_expanded.png" alt="Mid-interaction: Yes selected on the infection screening question, with the fever, cough, urinary, and skin sub-questions expanded inline directly below it, still unanswered." loading="lazy">
     </div>
     <p class="case-section__body type-body"><strong>Certain answers also carry more weight than others.</strong> A positive pregnancy test or a patient refusing consent needs to stop the workflow immediately rather than let the nurse continue to the next section. Those hard stops surface as alerts placed directly next to the question that triggered them, at the exact point of decision, rather than as a banner at the top of the form.</p>
     <div class="case-visual">

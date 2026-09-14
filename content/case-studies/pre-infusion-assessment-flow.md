@@ -48,7 +48,7 @@ The page splits into three regions: a vertical section-nav list on the left (Med
 
 **The form isn't static.** Certain answers reveal follow-up questions inline, directly below the triggering question, without a page reload or navigation away from where the nurse is working. The form grows and contracts as it's filled out.
 
-> **[VISUAL — high priority, CLIP]** 3-5 second clip: select "Yes" on the infection screening question and watch the fever/cough/urinary sub-questions expand inline. A behavior claim a screenshot can't prove.
+> **[VISUAL — high priority, STATIC]** A still frame from the same clip playing in the hero above: "Yes" selected on the infection screening question, with the fever, cough, urinary, and skin sub-questions expanded inline and still unanswered. The live version of this interaction already plays at the top of the page, so this section shows the resulting state rather than repeating the clip.
 
 **Certain answers also carry more weight than others.** A positive pregnancy test or a patient refusing consent needs to stop the workflow immediately rather than let the nurse continue to the next section. Those hard stops surface as alerts placed directly next to the question that triggered them, at the exact point of decision, rather than as a banner at the top of the form.
 
