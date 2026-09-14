@@ -181,20 +181,6 @@
       aspect-ratio: 1564 / 195;
     }
 
-    /* .case-visual's shared --bg-placeholder card fill (components.css)
-     * is meant for a placeholder-style box behind screenshots that need
-     * one. All three of these images are captures that already carry
-     * their own light background (two fully transparent, one flat white)
-     * — stacking --bg-placeholder's darker greenwhite tone behind them
-     * just adds a visible colored border with no content reason for it.
-     * Page-local override, not a components.css change, since .case-visual
-     * is shared with OnePulse and its other instances here (the video
-     * clips) still want the card frame. */
-
-    .case-visual--transparent {
-      background: transparent;
-    }
-
     /* --- Real clips replacing former placeholders — reusing OnePulse's
      * .case-clip-video pattern verbatim (page-local there too). All four
      * captures share one native ratio (2880x1800 source, scaled to

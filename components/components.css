@@ -103,6 +103,21 @@
   border-radius: var(--radius-md);
 }
 
+/* .case-visual's --bg-placeholder card fill is meant for a placeholder-
+ * style box behind screenshots that need one. Some captures already
+ * carry their own light background (fully transparent, or flat white/
+ * near-white) — stacking --bg-placeholder's darker greenwhite tone
+ * behind those just adds a visible colored border with no content
+ * reason for it. Opt-in per image, not a change to .case-visual's
+ * default, since most instances (full-app screenshots, video clips)
+ * still want the card frame. Used on both Linking Documents &
+ * Prescriptions and OnePulse Connect — shared here rather than
+ * duplicated per page. */
+
+.case-visual--transparent {
+  background: transparent;
+}
+
 /* --- Case study dashed placeholder (flagged visual gap not built yet —
  * a genuinely missing asset, not a stand-in for something already shot).
  * Re-added for Linking Documents & Prescriptions' Hero Visual; was removed
