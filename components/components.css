@@ -122,10 +122,10 @@
 .case-dashed-placeholder__label {
   color: var(--text-primary);
   text-align: center;
-  text-transform: none; /* overrides .type-meta's uppercase — these labels
-   * run to full sentences describing what's missing, not short tags;
-   * all-caps hurts readability at that length. Same fix as
-   * .stat-tile__label and .site-footer__copy. */
+  text-transform: none; /* .type-meta already sets none at the token level;
+   * this is now redundant but left explicit — these labels run to full
+   * sentences describing what's missing, not short tags, so all-caps would
+   * hurt readability here regardless of the base value. */
   letter-spacing: var(--letter-spacing-none); /* wide tracking only reads
    * correctly on all-caps text — same pairing as .stat-tile__label. */
 }
@@ -180,9 +180,10 @@
 
 .stat-tile__label {
   color: var(--text-label);
-  text-transform: none; /* overrides .type-meta's uppercase — these are full
-   * sentences (up to 64 chars), not short labels; all-caps hurts readability
-   * at that length. */
+  text-transform: none; /* .type-meta already sets none at the token level;
+   * this is now redundant but left explicit — these are full sentences (up
+   * to 64 chars), not short labels, so all-caps would hurt readability here
+   * regardless of the base value. */
   letter-spacing: var(--letter-spacing-none); /* wide tracking only reads
    * correctly on all-caps text — leaving it in place after removing
    * uppercase left oddly wide-spaced sentence case. */
@@ -262,8 +263,10 @@
 .problem-diagram__caption {
   width: 220px;
   text-align: center;
-  text-transform: none; /* overrides .type-label-secondary's uppercase —
-   * these run up to 46 chars, long enough that all-caps hurts readability. */
+  text-transform: none; /* .type-label-secondary already sets none at the
+   * token level; this is now redundant but left explicit — these run up to
+   * 46 chars, long enough that all-caps would hurt readability here
+   * regardless of the base value. */
   letter-spacing: var(--letter-spacing-none); /* same reasoning — wide
    * tracking belongs to all-caps text, not the sentence case above. */
 }
@@ -524,7 +527,9 @@
 
 .site-footer__copy {
   color: var(--text-label);
-  text-transform: none; /* .type-meta normally uppercases; the copyright line stays mixed-case, confirmed against Figma node 48:15 */
+  text-transform: none; /* .type-meta already sets none at the token level;
+   * this is now redundant but left explicit — confirmed against Figma node
+   * 48:15 that the copyright line is mixed-case, not all-caps. */
 }
 
 .site-footer__links {
