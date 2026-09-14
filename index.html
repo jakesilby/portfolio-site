@@ -97,7 +97,13 @@
         height: auto;
       }
       .hero-card__content {
-        position: static;
+        position: relative; /* was static — static painted below the
+         * still-absolutely-positioned .hero-card__glow sibling, so the
+         * blurred gradient rendered on top of this card's text instead of
+         * behind it. relative keeps the auto width/height sizing below
+         * while restoring correct stacking (this element comes after the
+         * glow in DOM order, so a positioned element here paints above it
+         * again, matching desktop). */
         width: auto; /* NEW — the base rule now fixes width/height at
          * 600×234 (node 507:24's desktop text-card size); without an
          * explicit reset here that fixed size leaked into mobile,
