@@ -73,6 +73,15 @@
       padding: var(--space-48) var(--space-24);
     }
 
+    @media (max-width: 720px) {
+      .case-hero__placeholder {
+        /* Same fix as .case-visual in components.css — 24px horizontal
+         * padding shrinks the hero video disproportionately at mobile
+         * widths, and it's the first thing a mobile visitor sees. */
+        padding: var(--space-48) var(--space-12);
+      }
+    }
+
     .case-hero__frame {
       display: block;
       width: 700px;

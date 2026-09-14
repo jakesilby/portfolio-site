@@ -754,6 +754,15 @@
     max-width: 100%;
     overflow-x: auto;
   }
+
+  .case-visual {
+    /* 24px fixed padding eats ~17% of a 279px mobile container width vs.
+     * ~3% of the 712px desktop one, shrinking Tab Group, Data Table, and
+     * Cell Type Variants down to an illegible size inside an
+     * oversized empty box. 12px keeps a visible inset without the
+     * disproportionate shrink. */
+    padding: var(--space-12);
+  }
 }
 
 /* --- Lightbox (shared — click any real case-study image for a larger
