@@ -535,6 +535,10 @@
   text-transform: none; /* .type-meta already sets none at the token level;
    * this is now redundant but left explicit — confirmed against Figma node
    * 48:15 that the copyright line is mixed-case, not all-caps. */
+  letter-spacing: var(--letter-spacing-none); /* was wide-md — missed when
+   * text-transform was fixed above; the copyright line was always mixed
+   * case, never all-caps, so wide tracking never read correctly here,
+   * same pairing as .stat-tile__label and the other mono labels. */
 }
 
 .site-footer__links {
