@@ -605,6 +605,13 @@
   aspect-ratio: 1440 / 900;
 }
 
+.project-row__image-inner--infectionscreening {
+  /* Same reasoning as --siteoverview/--linkdocflow, matching
+   * as_infectionscreening.mp4's real 2880x1800 encode (also the Pre-Infusion
+   * case study page's own hero clip). */
+  aspect-ratio: 2880 / 1800;
+}
+
 .project-row__header {
   display: flex;
   align-items: center;

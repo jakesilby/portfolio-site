@@ -31,11 +31,21 @@ const projectRows = [
     },
     imageAlt: "Clicking Link on a prescription row in All Documents, watching it move into Linked to this Prescription, then unlinking it again to return to the empty state.",
   },
-  // Pre-Infusion Assessment Flow is deliberately not listed here yet — no
-  // real still/clip exists for the row thumbnail, and ProjectRow has no
-  // supported placeholder state for a published-but-unshot row (see the
-  // case study page itself for the same reasoning). Add an entry matching
-  // the two rows above once a real image/video exists.
+  {
+    year: '2026',
+    type: 'Product Design',
+    title: 'Pre-Infusion Assessment Flow',
+    description: "I designed a framework for OnePulse Connect to select, complete, and review clinical assessments at scale — then stress-tested it against the hardest case in the catalog: a 43-question form with hard safety stops.",
+    href: 'pre-infusion-assessment-flow.html',
+    video: {
+      poster: 'videos/as_infectionscreening_poster.jpg',
+      sources: [
+        { src: 'videos/as_infectionscreening.mp4', type: 'video/mp4' },
+      ],
+      aspectClass: 'infectionscreening',
+    },
+    imageAlt: "Selecting Yes on the infection screening question, causing fever, cough, and urinary status sub-questions to expand inline directly below it.",
+  },
 ];
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
