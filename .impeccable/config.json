@@ -38,6 +38,15 @@
         ],
         "createdAt": "2026-09-10T15:43:48.228Z",
         "reason": "existing sitewide pattern: identical CASE STUDY eyebrow + H1 structure already shipped on onepulse-connect.html and linking-documents-prescriptions.html, Figma-confirmed (see .case-title-block__eyebrow contrast-ratio comment) — this site's established case-study template, not a generated kicker"
+      },
+      {
+        "rule": "flat-type-hierarchy",
+        "value": "*",
+        "files": [
+          "about.html"
+        ],
+        "createdAt": "2026-09-14T15:51:54.353Z",
+        "reason": "Claude: the 16px role in this measurement is about.html's sr-only h1 (visually-hidden, never rendered) — it isn't part of the page's visible type hierarchy. Visible roles are body 14px and h2 18px, a 1.286:1 step that clears the 1.25 target on its own."
       }
     ]
   }
