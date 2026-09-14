@@ -302,9 +302,8 @@
   width: 280px;
   height: 175px;
   object-fit: cover;
-  border: 1px solid var(--accent-primary);
   border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-resolved);
+  box-shadow: var(--shadow-resolved); /* the resolved/elevated cue now stands alone, no border */
 }
 
 /* --- Token Chain (case study "Token Architecture" live embed) — three
