@@ -334,8 +334,14 @@
    * belong to a single component's exact Figma geometry, not the general
    * spacing rhythm scale above. Per CLAUDE.md's third token tier. --- */
   --hero-section-padding-y: 80px; /* NEW — homepage hero section vertical padding, confirmed against Figma node 378:160 */
-  --hero-card-offset-top: 14px; /* NEW — hero card's absolute top offset within its wrapper, confirmed against Figma node 381:487 */
-  --hero-card-offset-left: 17px; /* NEW — hero card's absolute left offset within its wrapper, confirmed against Figma node 381:487 */
+  --hero-card-offset-top: 15px; /* was 14px — verified against Figma node
+   * 507:24 (fileKey Sv50ruZLmflO9t4vcN7wiH) on 2026-09-14. An earlier pass
+   * without live Figma access read the frame's combined "19px/15px" offset
+   * description as top/left in that order; live verification shows that
+   * assumption had the axes backwards — 15px is top, 19px is left (see
+   * --hero-card-offset-left below). */
+  --hero-card-offset-left: 19px; /* was 17px — verified against Figma node
+   * 507:24 on 2026-09-14; see --hero-card-offset-top above. */
   --hero-card-glow-offset-left: 3px; /* NEW — glow layer's absolute left offset within the wrapper (top offset is 0), confirmed against Figma node 381:486 */
   --about-card-offset-top: 14px; /* NEW — About page experience/education card's inset from its own glow layer, confirmed against Figma node 496:156 (496:275) */
   --about-card-offset-left: 17px; /* NEW — see --about-card-offset-top; same node, left axis */

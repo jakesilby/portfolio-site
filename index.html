@@ -20,12 +20,11 @@
     }
     .hero-card {
       position: relative;
-      width: 490px;
+      width: 634px; /* was 490px — corrected against Figma node 507:24
+       * ("Site Hero"), which fixes this at 634px. Previous value was
+       * hand-tuned to fit rendered copy rather than matched to the frame. */
       max-width: 100%;
-      height: 268px; /* was 209px, fixed to fit "Hi, I'm Jake" + one short
-       * sentence with white-space: nowrap. The new subhead is a full
-       * positioning statement and needs to wrap — height re-measured
-       * against the actual rendered content below, not guessed. */
+      height: 264px; /* was 268px — corrected against node 507:24. */
     }
     @property --gradient-angle {
       syntax: '<angle>';
@@ -37,16 +36,22 @@
       position: absolute;
       top: 0;
       left: var(--hero-card-glow-offset-left);
-      width: 483px;
-      height: 268px;
+      width: 631px; /* was 483px — corrected against Figma node 507:24. */
+      height: 263px; /* was 268px — corrected against node 507:24. */
       border-radius: var(--radius-lg);
       background: linear-gradient(
         var(--gradient-angle),
-        color-mix(in srgb, var(--bg-accent) 60%, transparent) 0%,
-        color-mix(in srgb, var(--color-greenwhite-6) 30%, transparent) 48.83%,
-        color-mix(in srgb, var(--bg-hero) 60%, transparent) 99.516%
-      );
-      filter: blur(13.45px);
+        var(--bg-accent) 0%,
+        var(--color-greenwhite-6) 49%,
+        var(--bg-hero) 100%
+      ); /* was per-stop color-mix() transparency at 60/30/60% and
+       * 0/48.83/99.516% — node 507:24 specifies solid stops at these three
+       * colors and percentages, with opacity 0.7 applied once to the whole
+       * layer (already set below), not baked into each stop. */
+      filter: blur(13.45px); /* verified against Figma node 507:24 on
+       * 2026-09-14 — 13.45px was correct all along; an earlier pass without
+       * live Figma access had changed this to 26.9px, which live
+       * verification shows was wrong. */
       opacity: 0.7;
     }
 
@@ -64,6 +69,9 @@
       position: absolute;
       top: var(--hero-card-offset-top);
       left: var(--hero-card-offset-left);
+      width: 600px; /* NEW — node 507:24 fixes the text card at 600×234;
+       * previously unset/intrinsic, sized by content. */
+      height: 234px;
       display: flex;
       flex-direction: column;
       gap: var(--gap-hero-text);
@@ -90,6 +98,12 @@
       }
       .hero-card__content {
         position: static;
+        width: auto; /* NEW — the base rule now fixes width/height at
+         * 600×234 (node 507:24's desktop text-card size); without an
+         * explicit reset here that fixed size leaked into mobile,
+         * overflowing the viewport and clipping the box short of its
+         * wrapped text. */
+        height: auto;
         white-space: normal;
         padding: var(--space-24);
       }
@@ -109,8 +123,8 @@
     <div class="hero-card">
       <div class="hero-card__glow" aria-hidden="true"></div>
       <div class="hero-card__content">
-        <h1 class="hero-card__heading type-hero-heading">Hey, I’m Jake</h1>
-        <p class="hero-card__subhead type-hero-subhead">I'm a product designer with a particular depth in design systems: creating the structure that turns scattered decisions into shared, working code.</p>
+        <h1 class="hero-card__heading type-hero-heading">Hi, I’m Jake</h1>
+        <p class="hero-card__subhead type-hero-subhead">I'm a product designer with a particular interest in design systems: creating the structure that turns scattered decisions into shared, working code.</p>
       </div>
     </div>
   </section>
