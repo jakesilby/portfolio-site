@@ -28,6 +28,10 @@
       color: var(--accent-primary-dark); /* accent-primary fails 4.5:1 as text on
        * bg-page (3.72:1) — accent-primary-dark clears it at 6.6:1. Same fix as
        * OnePulse Connect's title block. */
+      letter-spacing: var(--letter-spacing-none); /* was wide-sm — only read
+       * correctly while the text was hardcoded "CASE STUDY"; now that it's
+       * "Case study", wide tracking only reads correctly on all-caps text,
+       * same pairing already fixed on .stat-tile__label and others. */
     }
 
     .case-title-block__title {
