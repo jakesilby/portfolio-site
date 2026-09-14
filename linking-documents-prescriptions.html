@@ -41,14 +41,14 @@
     }
 
     /* Scope note between title and description — Figma node 106:8 has no
-     * equivalent in OnePulse's Title Block, so there's no established class
-     * to reuse directly. Built on .type-meta (the codebase's mono/uppercase/
-     * secondary convention) with the same text-transform/letter-spacing
-     * override already established on .stat-tile__label for a full sentence
-     * at this scale, rather than inventing a new type step to match Figma's
-     * one-off 12px/0.4px numbers (which don't match any current token anyway
-     * — see below). FLAG: confirm this mapping, or tell me the intended
-     * class if one exists that I'm missing. */
+     * equivalent in OnePulse's Title Block, confirmed via a cross-page
+     * structural audit: no existing class covers this role anywhere in
+     * the shared system. Built on .type-meta (the codebase's mono/
+     * uppercase/secondary convention) with the same text-transform/
+     * letter-spacing override already established on .stat-tile__label
+     * for a full sentence at this scale, rather than inventing a new
+     * type step to match Figma's one-off 12px/0.4px numbers (which
+     * don't match any current token anyway — see below). */
     .case-title-block__context {
       color: var(--text-label); /* Figma's #4a594c doesn't match any current
        * text token (closest role-equivalent, the meta row, already resolves
@@ -98,29 +98,22 @@
      * deliberate reversal of the original still-frame hero plan — see
      * the delivery report for the round this changed in.
      *
-     * hero-linking-flow.mp4/.webm are a dedicated ~9.65s trim of
-     * link-document-full.mp4 (t=7.85s-17.5s of that source), cut
-     * specifically for this placement after a hiring-manager critique
-     * flagged the original full-length loop opening on ~6s of unrelated
-     * Prescription Info tab content before reaching the actual Linked
-     * Documents interaction. This trim opens already inside Linked
-     * Documents, on the row that just moved into "Linked to this
-     * Prescription" (matching the same "just clicked Link" beat as the
-     * flagship two-zone clip in section 03), and ends once the save
-     * confirmation and linked-file details are visible on the base
-     * record — cut before the tangential View Document PDF preview.
-     *
-     * This does NOT loop seamlessly and by design can't from this
-     * source: the trim starts inside an open Edit Prescription dialog
-     * and ends back on the closed base record, two different screens
-     * with no matching frame to loop against. A true seamless loop
-     * isn't available in this single continuous take (it doesn't
-     * reverse or return to its own start state anywhere). Accepted as
-     * a hard cut rather than trimmed down to a static non-loop, since
-     * the content on both sides of the cut is worth keeping. Native
-     * 2880x1800 (16:10, same as link-document-full.mp4 and the section
-     * clips below), so .case-hero__frame uses that ratio directly
-     * instead of cropping to fit an unrelated number. */
+     * Sources are link-document-flow-short.mp4/.webm — the exact same
+     * files as the flagship two-zone clip in section 03, not a separate
+     * cut. An earlier round gave the Hero its own dedicated trim
+     * (hero-linking-flow.mp4), but that meant Hero and section 03 told
+     * the same story with two different custom edits for no real
+     * reason; reusing the one asset both places removes that
+     * duplication. It also loops seamlessly, unlike the earlier custom
+     * trim: this clip was cut as a link-then-unlink round trip, so it
+     * starts and ends on the same empty "No documents linked" state,
+     * with no hard cut. And it opens already inside the Linked
+     * Documents tab — confirmed via frame extraction at t=0 — not on
+     * unrelated Prescription Info content, which is the thing the
+     * hiring-manager critique flagged about the original full-length
+     * hero loop. Native 1440x900 (16:10, same as the other section
+     * clips), so .case-hero__frame uses that ratio directly instead of
+     * cropping to fit an unrelated number. */
 
     .case-hero__placeholder {
       display: flex;
@@ -227,9 +220,9 @@
 
   <section class="case-hero">
     <div class="case-hero__placeholder">
-      <video class="case-hero__frame" poster="videos/hero-linking-flow_poster.jpg" autoplay muted loop playsinline aria-label="A document row that just moved into Linked to this Prescription, being set as the Reference Rx, saved, and confirmed on the prescription record with the linked file visible.">
-        <source src="videos/hero-linking-flow.webm" type="video/webm">
-        <source src="videos/hero-linking-flow.mp4" type="video/mp4">
+      <video class="case-hero__frame" poster="videos/link-document-flow-short_poster.jpg" autoplay muted loop playsinline aria-label="Clicking Link on a prescription row in All Documents, watching it move into Linked to this Prescription, then unlinking it again to return to the empty state.">
+        <source src="videos/link-document-flow-short.webm" type="video/webm">
+        <source src="videos/link-document-flow-short.mp4" type="video/mp4">
       </video>
     </div>
   </section>
