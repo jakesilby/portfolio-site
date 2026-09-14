@@ -41,7 +41,7 @@
 
     @property --about-glow-angle {
       syntax: '<angle>';
-      initial-value: 94.81deg;
+      initial-value: 109.04deg;
       inherits: false;
     }
 
@@ -55,7 +55,7 @@
         var(--color-greenwhite-6) 49%,
         var(--bg-hero) 100%
       );
-      filter: blur(13.45px);
+      filter: blur(26.9px); /* matched to the homepage hero card's glow — was 13.45px (Figma's literal spec for this node) */
       opacity: 0.7;
     }
 
@@ -66,8 +66,8 @@
     }
 
     @keyframes about-glow-rotate {
-      from { --about-glow-angle: 94.81deg; }
-      to { --about-glow-angle: 454.81deg; }
+      from { --about-glow-angle: 109.04deg; }
+      to { --about-glow-angle: 469.04deg; }
     }
 
     .about-card__content {
