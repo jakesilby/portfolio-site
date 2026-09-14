@@ -1,4 +1,5 @@
 const navScript = document.currentScript;
+const currentPage = document.body.dataset.page;
 
 navScript.insertAdjacentHTML('afterend', `
 <header class="site-header">
@@ -11,10 +12,13 @@ navScript.insertAdjacentHTML('afterend', `
   </a>
   <nav class="site-header__nav" aria-label="Primary">
     <a class="nav-pill type-nav-label" data-nav="work" href="/">Work</a>
-    <div class="nav-pill nav-pill--upcoming type-nav-label" data-nav="about">About</div>
+    <a class="nav-pill type-nav-label" data-nav="about" href="/about.html">About</a>
   </nav>
 </header>
 `);
+
+const activePill = navScript.nextElementSibling.querySelector(`[data-nav="${currentPage}"]`);
+if (activePill) activePill.classList.add('is-active');
 
 (function cycleBrandText() {
   const greetings = [

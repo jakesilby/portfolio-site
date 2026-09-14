@@ -473,7 +473,7 @@
 .nav-pill {
   /* Reworked — border-radius back to 0 (square, reverses the earlier
    * rounded-pill decision), padding uniform 8px (was 8px/16px), border
-   * moved off the shared base and onto the active [data-nav='work'] state
+   * moved off the shared base and onto the active .is-active state
    * only, confirmed against Figma node 378:160. */
   display: inline-flex;
   align-items: center;
@@ -487,19 +487,14 @@
   background: transparent;
 }
 
-.nav-pill[data-nav='work'] {
+.nav-pill.is-active {
   /* Active-tab treatment: bottom border only, 2px, cosmos-6 — reuses
    * --border-highlight (defined for the Token Architecture hover border,
-   * same color). No fill, no inverse text — both removed per redesign. */
+   * same color). No fill, no inverse text — both removed per redesign.
+   * Which pill gets this class is decided at render time in nav.js from
+   * document.body.dataset.page, not hardcoded to a single data-nav value
+   * — every page nav.js renders is a real, active-able destination now. */
   border-bottom: 2px solid var(--border-highlight);
-}
-
-/* Non-clickable pill (no page there yet) never shows the interactive
- * hover/active treatment — same non-interactive pattern as
- * .project-row--upcoming. */
-.nav-pill--upcoming:hover,
-.nav-pill--upcoming:active {
-  transform: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
