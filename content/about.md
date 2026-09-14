@@ -6,6 +6,10 @@
 
 My background is in healthcare software, where I've spent most of my time building the underlying architecture — tokens, components, documentation — alongside the day-to-day product work. I'm interested in the discipline that comes from designing for real complexity, and in using AI-assisted workflows to close the gap between what gets designed and what actually ships.
 
+[LinkedIn](https://www.linkedin.com/in/jakesilby/)
+
+✉️ jake.r.silby[at]gmail.com
+
 ## Experience
 
 - **UX/UI Designer** / Elevate Health Technologies — 2025-2026

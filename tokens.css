@@ -300,6 +300,7 @@
   --text-hero-heading: var(--color-cosmos-9-5); /* NEW */
   --text-hero-subhead: var(--color-greenwhite-8); /* NEW — the hero's second line ("I am a product designer..."), confirmed against live Figma (196:383) */
   --text-tag: var(--color-greenwhite-8);
+  --text-link: var(--color-elm-5); /* NEW — About page's inline LinkedIn link, confirmed against Figma node 517:67 (#23657f). color-elm-5 already existed as a primitive but had no semantic role assigned yet. */
 
   /* --- Color: accent --- */
   --accent-primary: var(--color-cosmos-7);
