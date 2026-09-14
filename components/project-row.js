@@ -52,7 +52,6 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
 
 const projectRowsHtml = projectRows
   .map((row, i) => {
-    const index = String(i + 1).padStart(2, '0');
     const imageInner = row.video
       ? `<video class="project-row__image-inner project-row__image-inner--${row.video.aspectClass}" poster="${row.video.poster}"${reduceMotion ? '' : ' autoplay'} muted loop playsinline aria-label="${row.imageAlt}">${row.video.sources
           .map((s) => `<source src="${s.src}" type="${s.type}">`)
@@ -67,7 +66,6 @@ const projectRowsHtml = projectRows
 <${tag} class="project-row${modifierClass}"${hrefAttr}>
   <div class="project-row__header">
     <div class="project-row__title-group">
-      <span class="project-row__index type-label-secondary">${index}</span>
       <h3 class="project-row__title type-case-title">${row.title}</h3>
     </div>
     <div class="project-row__meta">

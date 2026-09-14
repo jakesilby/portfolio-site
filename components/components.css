@@ -678,7 +678,6 @@
  * fails to run. .is-visible is added once per row, on first intersection,
  * and never removed — the reveal fires exactly once. */
 @media (prefers-reduced-motion: no-preference) {
-  .project-row.js-stagger .project-row__index,
   .project-row.js-stagger .badge,
   .project-row.js-stagger .project-row__description {
     opacity: 0;
@@ -700,7 +699,6 @@
     transform: scale(0.98);
   }
 
-  .project-row.js-stagger.is-visible .project-row__index,
   .project-row.js-stagger.is-visible .badge,
   .project-row.js-stagger.is-visible .project-row__description {
     opacity: 1;
@@ -713,7 +711,6 @@
     filter: blur(0);
   }
 
-  .project-row.js-stagger.is-visible .project-row__index { transition-delay: 0ms; }
   .project-row.js-stagger.is-visible .project-row__title { transition-delay: 60ms; }
   .project-row.js-stagger.is-visible .badge { transition-delay: 120ms; }
   .project-row.js-stagger.is-visible .project-row__image { transition-delay: 180ms; }
