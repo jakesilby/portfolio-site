@@ -562,6 +562,64 @@
   font-weight: var(--font-weight-semibold);
 }
 
+/* --- About page additions (introduced while building the About page,
+ * confirmed against Figma node 496:156) --- */
+
+.type-about-heading {
+  /* "Experience:" / "Education:" card headings. */
+  font-family: var(--font-family-serif);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-18);
+  line-height: var(--line-height-24);
+  letter-spacing: var(--letter-spacing-none);
+}
+
+.type-about-entry {
+  /* Role/org line per experience & education entry. Role name is Medium
+   * weight, org name Regular — same in-line emphasis pattern as
+   * .type-eyebrow/.type-body (bold via a nested element, not a second
+   * class), here on <strong> for the role name. */
+  font-family: var(--font-family-serif);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-14);
+  line-height: var(--line-height-24);
+  letter-spacing: var(--letter-spacing-none);
+}
+.type-about-entry strong {
+  font-weight: var(--font-weight-medium);
+}
+
+.type-about-entry-years {
+  /* Mono year/range under each entry. No letter-spacing in the Figma
+   * export (unlike the wide-tracked mono labels elsewhere) — left at
+   * none rather than assumed. */
+  font-family: var(--font-family-mono);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-10);
+  line-height: var(--line-height-24);
+  letter-spacing: var(--letter-spacing-none);
+}
+
+.type-about-bio-lead {
+  /* Bio's opening sentence — semibold italic, per Figma. */
+  font-family: var(--font-family-serif);
+  font-style: italic;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-24);
+  line-height: normal; /* Figma leading-[normal], same deliberate "auto"
+   * choice as .type-tagline/.type-token-name — not forced onto the
+   * line-height scale. */
+  letter-spacing: var(--letter-spacing-none);
+}
+
+.type-about-bio-body {
+  font-family: var(--font-family-serif);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-24);
+  line-height: normal;
+  letter-spacing: var(--letter-spacing-none);
+}
+
 
 /* ============================================================
  * COMPONENT INTENT (not yet built) — documented here so it isn't

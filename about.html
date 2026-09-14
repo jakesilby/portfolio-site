@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Jake Silby</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,600&family=Spline+Sans+Mono:wght@400;500&family=Barlow:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components/components.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      background: var(--bg-page);
+      color: var(--text-primary);
+      font-family: var(--font-family-sans);
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    .about-section {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-48);
+      padding: var(--hero-section-padding-y) var(--padding-section-x);
+    }
+
+    .about-card {
+      position: relative;
+      width: 456px;
+      max-width: 100%;
+      flex-shrink: 0;
+    }
+
+    @property --about-glow-angle {
+      syntax: '<angle>';
+      initial-value: 94.81deg;
+      inherits: false;
+    }
+
+    .about-card__glow {
+      position: absolute;
+      inset: 0 var(--about-card-glow-offset-left);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(
+        var(--about-glow-angle),
+        var(--bg-accent) 0%,
+        var(--color-greenwhite-6) 49%,
+        var(--bg-hero) 100%
+      );
+      filter: blur(13.45px);
+      opacity: 0.7;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .about-card__glow {
+        animation: about-glow-rotate 48s linear infinite;
+      }
+    }
+
+    @keyframes about-glow-rotate {
+      from { --about-glow-angle: 94.81deg; }
+      to { --about-glow-angle: 454.81deg; }
+    }
+
+    .about-card__content {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-16);
+      margin: var(--about-card-offset-top) var(--about-card-offset-left);
+      padding: var(--space-48);
+      border-radius: var(--radius-lg);
+      background: var(--bg-page);
+    }
+
+    .about-card__heading {
+      color: var(--text-primary);
+    }
+
+    .about-entry {
+      color: var(--text-primary);
+    }
+
+    .about-entry__years {
+      display: block;
+      color: var(--text-hero-subhead);
+    }
+
+    .about-divider {
+      width: 100%;
+      border: none;
+      border-top: 1px dashed var(--border-divider);
+    }
+
+    .about-bio {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-16);
+      max-width: 379px;
+      color: var(--text-hero-subhead);
+    }
+
+    @media (max-width: 720px) {
+      .about-section {
+        flex-direction: column;
+        padding: var(--space-48) var(--padding-section-x);
+      }
+
+      .about-card__content {
+        padding: var(--space-24);
+      }
+
+      .about-bio {
+        max-width: none;
+      }
+    }
+  </style>
+</head>
+<body data-page="about">
+  <script src="components/nav.js"></script>
+
+  <h1 class="visually-hidden">About</h1>
+
+  <main class="about-section">
+    <div class="about-card">
+      <div class="about-card__glow" aria-hidden="true"></div>
+      <div class="about-card__content">
+        <h2 class="about-card__heading type-about-heading">Experience:</h2>
+
+        <p class="about-entry type-about-entry">
+          <strong>UX/UI Designer</strong> / Elevate Health Technologies
+          <span class="about-entry__years type-about-entry-years">2025-2026</span>
+        </p>
+        <p class="about-entry type-about-entry">
+          <strong>Product Designer</strong> / Elevance Health
+          <span class="about-entry__years type-about-entry-years">2023-2025</span>
+        </p>
+        <p class="about-entry type-about-entry">
+          <strong>UX/UI Designer</strong> / BioPlus Specialty Pharmacy
+          <span class="about-entry__years type-about-entry-years">2022-2023</span>
+        </p>
+        <p class="about-entry type-about-entry">
+          <strong>Freelance UX Designer</strong> / Aperture
+          <span class="about-entry__years type-about-entry-years">2022</span>
+        </p>
+        <p class="about-entry type-about-entry">
+          <strong>Freelance UX/UI Designer</strong> / Radish Health
+          <span class="about-entry__years type-about-entry-years">2022</span>
+        </p>
+
+        <hr class="about-divider">
+
+        <h2 class="about-card__heading type-about-heading">Education:</h2>
+
+        <p class="about-entry type-about-entry">
+          <strong>Design Systems Certificate</strong> / Memorisely
+          <span class="about-entry__years type-about-entry-years">2024</span>
+        </p>
+        <p class="about-entry type-about-entry">
+          <strong>UX Design Career Track Certificate</strong> / Springboard
+          <span class="about-entry__years type-about-entry-years">2021</span>
+        </p>
+        <p class="about-entry type-about-entry">
+          <strong>Masters of Fine Arts</strong> / School of the Art Institute of Chicago
+          <span class="about-entry__years type-about-entry-years">2019</span>
+        </p>
+        <p class="about-entry type-about-entry">
+          <strong>Bachelor of Design (1st Class Honors)</strong> / Massey University
+          <span class="about-entry__years type-about-entry-years">2015</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="about-bio">
+      <p class="type-about-bio-lead">Product designer in Brooklyn, focused on design systems and the handoff between design and code.</p>
+      <p class="type-about-bio-body">My background is in healthcare software, where I've spent most of my time building the underlying architecture — tokens, components, documentation — alongside the day-to-day product work. I'm interested in the discipline that comes from designing for real complexity, and in using AI-assisted workflows to close the gap between what gets designed and what actually ships.</p>
+    </div>
+  </main>
+
+  <script src="components/footer.js"></script>
+</body>
+</html>
