@@ -245,7 +245,6 @@
   </section>
 
   <section class="case-section">
-    <p class="case-section__index type-meta">01</p>
     <h2 class="case-section__heading type-section-heading">Problem</h2>
     <p class="case-section__body type-body"><strong>Staff had no way to connect a document to a prescription across two separate views.</strong> During OnePulse Connect's dispensing workflow, staff work across a documents tab (authorization letters, EOBs, signed prescriptions, consent forms tied to a patient) and a prescription tab (prescription info and the patient's medication list, different objects with different data behind them), both inside the Global Inline Drawer. Staff had to reconcile the two by hand.</p>
     <div class="case-visual case-visual--transparent">
@@ -255,14 +254,12 @@
   </section>
 
   <section class="case-section case-section--alt">
-    <p class="case-section__index type-meta">02</p>
     <h2 class="case-section__heading type-section-heading">Why This Matters</h2>
     <p class="case-section__body type-body">Jillian, who works documents from the patient profile rather than an active workflow, described hunting for an approval letter after staff had already dispensed the medication, with no reliable way to find it by medication name. Staff were already renaming files "DO NOT USE" as a workaround, since there was no way to deactivate a document without deleting it.</p>
     <p class="case-section__body type-body"><strong>Once staff could link a document to multiple medications, "Print Prescription" needed to resolve to exactly one document, even with several Rx Prescription-type documents on file.</strong> Leave it ambiguous, and the system either can't act or a staff member has to guess, in a clinical dispensing context. This tool couldn't leave that loose.</p>
   </section>
 
   <section class="case-section">
-    <p class="case-section__index type-meta">03</p>
     <h2 class="case-section__heading type-section-heading">Component Documentation: Linked Documents</h2>
     <p class="case-section__body type-body"><strong>Checkboxes in a flat list were the first version, and they didn't work.</strong> Three potential users struggled with it in testing: the linking action wasn't explicit enough for people working under time pressure.</p>
     <p class="case-section__body type-body"><strong>It had to work in both directions.</strong> From a prescription, a user opens Linked Documents and connects existing patient documents to it. From the documents side, uploading a new document lets a user tie it to one or more medications or prescriptions at upload time, in an optional Linked Medications &amp; Prescriptions field. If nothing's selected, the document still uploads, it lands on the patient's profile only.</p>
@@ -287,7 +284,6 @@
   </section>
 
   <section class="case-section case-section--alt">
-    <p class="case-section__index type-meta">04</p>
     <h2 class="case-section__heading type-section-heading">Reasoning &amp; Governance</h2>
     <p class="case-section__body type-body"><strong>The hardest problem in this feature was a guardrail: never let a prescription end up without a document backing it.</strong> Once "Print Prescription" depended on exactly one reference document, removing that document could leave a prescription with nothing behind it, a real risk in a system that dispenses medication. I designed the rule before it went through any formal review. Links stay editable before you save anything, since nothing is committed yet. Once you save, you can't remove the reference document outright, you have to designate a replacement first. Linking a new Rx-type document while one is already the reference surfaces a "Linked Prescriptions Found" alert, asking whether to replace it, add the new one alongside it, or cancel, and replacing the reference always requires capturing a reason first: new Rx, updated Rx, a strength change.</p>
     <div class="case-visual">
@@ -313,7 +309,6 @@
   </section>
 
   <section class="case-section">
-    <p class="case-section__index type-meta">05</p>
     <h2 class="case-section__heading type-section-heading">The Design-to-Code Bridge</h2>
     <p class="case-section__body type-body"><strong>I built and iterated this as a working HTML/CSS/JS prototype, directed through Claude Code rather than hand-coded.</strong> I wrote the specs, reviewed every change against the design, and made the calls on naming and edge cases. Claude Code wrote the markup and script changes to match.</p>
     <p class="case-section__body type-body"><strong>Every prompt stayed scoped on purpose.</strong> Each one named what should change, down to specific class names and IDs, and closed with an explicit instruction not to touch anything else, a guardrail against letting an AI-assisted change drift outside its scope unnoticed, and a change log where every prompt maps to one reviewable diff. The Associated-to-Linked rename is the clearest example: it touched visible labels, CSS classes, JS function names, and data properties, and required spelling out which needed to change and which structural IDs had to stay put.</p>
@@ -328,13 +323,11 @@
   </section>
 
   <section class="case-section case-section--alt">
-    <p class="case-section__index type-meta">06</p>
     <h2 class="case-section__heading type-section-heading">Adoption in Production</h2>
     <p class="case-section__body type-body"><strong>I was moving this into production, into the real OPC app, when I left the team.</strong> I don't have confirmation it reached a full release, and I'm not claiming that it did. I moved this past design and prototype into active implementation, on the strength of the decisions and spec discipline above, including a guardrail that Anardo and Maribel confirmed in review was already correct.</p>
   </section>
 
   <section class="case-section">
-    <p class="case-section__index type-meta">07</p>
     <h2 class="case-section__heading type-section-heading">What's Next</h2>
     <p class="case-section__body type-body"><strong>A few things were still open when I moved this into build:</strong></p>
     <ul class="case-rules-list">

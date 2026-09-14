@@ -179,7 +179,6 @@
   </section>
 
   <section class="case-section case-section--alt">
-    <p class="case-section__index type-meta">01</p>
     <h2 class="case-section__heading type-section-heading">The Problem</h2>
     <p class="case-section__body type-body"><strong>No shared source of truth existed.</strong> OnePulse Connect had a component library when I joined, spread across different Figma files with no consistent naming and no shared token source. There was no single place designers or engineers could go to see how a chip, a card, or a table was supposed to look or behave.</p>
     <div class="problem-diagram">
@@ -209,7 +208,6 @@
   </section>
 
   <section class="case-section">
-    <p class="case-section__index type-meta">02</p>
     <h2 class="case-section__heading type-section-heading">Why This Matters</h2>
     <p class="case-section__body type-body"><strong>Inconsistency here is a safety risk.</strong> The screens carry prescriber NPIs, drug NDCs, claim statuses, copay amounts, prior authorization steps. Without a shared library, the same status can look different depending on which screen a pharmacist or technician is looking at. Misreading a status on a controlled substance order risks the wrong drug reaching the wrong patient.</p>
     <p class="case-section__body type-body"><strong>The platform runs at real scale.</strong> OnePulse Connect serves more than 2,000 provider locations across 29 states, managing nearly $1 billion in drug and supplies inventory.</p>
@@ -217,7 +215,6 @@
   </section>
 
   <section class="case-section case-section--alt">
-    <p class="case-section__index type-meta">03</p>
     <h2 class="case-section__heading type-section-heading">Token Architecture</h2>
     <p class="case-section__body type-body"><strong>No tokens existed at the start.</strong> Every screen hardcoded its own colors, spacing, and typography, decided fresh each time. I built a three-layer system as the foundation everything else sits on: primitives (raw values, no meaning attached), semantic aliases (primitives assigned a role, so "pulse-teal-500" becomes "primary"), and mapped tokens (aliases resolved into the specific tokens components actually consume, like bg-fill-default or fg-fill).</p>
     <p class="case-section__body type-body"><strong>Components only ever reference the mapped layer, never a raw value.</strong> Change a primitive or alias and everything downstream updates without touching a single component file. It also became an enforceable rule for Claude Code: never hardcode hex values, always pull from tokens.css.</p>
@@ -229,7 +226,6 @@
   </section>
 
   <section class="case-section">
-    <p class="case-section__index type-meta">04</p>
     <h2 class="case-section__heading type-section-heading">Component Documentation</h2>
     <p class="case-section__body type-body"><strong>I fully documented 25 atoms and 16 patterns.</strong> The 3 global components exist in the coded library as well, but not to the same level of completion. Inline Drawer is the clearest gap: it didn't make it fully into code (more on that below).</p>
     <p class="case-section__body type-body"><strong>Tab Group is the clearest example of a component built to solve a real problem.</strong> In Orders, a single drug can have multiple NDCs that regulatory and administrative rules require to stay together, never split across separate tabs the way different drugs are. I built Tab Group to keep those NDCs grouped under one drug, a gap caught during design before it ever shipped as a problem.</p>
@@ -256,7 +252,6 @@
   </section>
 
   <section class="case-section case-section--alt">
-    <p class="case-section__index type-meta">05</p>
     <h2 class="case-section__heading type-section-heading">Adoption in Production</h2>
     <p class="case-section__body type-body"><strong>By the end, all three designers on the team, myself included, built from this system in Figma as their default.</strong> New flows, one-off screens, static files: all of it came from the same shared components and tokens, not recreated individually each time.</p>
     <p class="case-section__body type-body"><strong>The coded library showed a different pattern this early.</strong> Adoption of the coded component library for rapid prototyping was just beginning as I wrote this case study: real, but nowhere near the norm the Figma system had become.</p>
@@ -272,7 +267,6 @@
   </section>
 
   <section class="case-section case-section--alt">
-    <p class="case-section__index type-meta">06</p>
     <h2 class="case-section__heading type-section-heading">Reasoning &amp; Governance</h2>
     <p class="case-section__body type-body"><strong>The clearest example of this system's reasoning came from an investigation.</strong> Auditing the production codebase, I found three different reds in three different places (the token file, the component library, a hardcoded value in a live button), and none of them agreed.</p>
     <p class="case-section__body type-body"><strong>I traced it to source instead of guessing.</strong> The component library's red matched Figma directly; the token file's value had no clear origin anywhere else. That ruled out treating the token file as correct by default. Confirmed against Figma, corrected the token file at the source.</p>
@@ -285,7 +279,6 @@
   </section>
 
   <section class="case-section">
-    <p class="case-section__index type-meta">07</p>
     <h2 class="case-section__heading type-section-heading">The Design-to-Code Bridge</h2>
     <p class="case-section__body type-body"><strong>This part of the project served two purposes.</strong> Claude Code translated the Figma system into working code, but not blindly. There were moments it pulled from older, outdated token values instead of the current source of truth in tokens.css. I checked its output against tokens.css directly rather than assume it was current, and corrected the references when they didn't match. The same instinct that caught three conflicting reds in production applied here too: trace it, don't guess. I also meant it to be useful on its own: a coded component library designers and PMs could pull from directly for fast, consistent prototyping instead of redrawing screens by hand each time.</p>
     <p class="case-section__body type-body"><strong>This same discipline extended to AI-generated copy:</strong> I triage it the same way. I flag and log a genuine gap. I remove anything that looks plausible but isn't grounded in the design system.</p>
@@ -306,7 +299,6 @@
   </section>
 
   <section class="case-section">
-    <p class="case-section__index type-meta">08</p>
     <h2 class="case-section__heading type-section-heading">What's Next</h2>
     <p class="case-section__body type-body"><strong>Two kinds of remaining work.</strong> Scoped and known: finish the remaining global components (including Inline Drawer), close out flagged NEEDS VERIFICATION and gap-log items. Bigger step: convert the vanilla library into React and get it into Storybook, so engineering has the same source of truth designers already have in Figma.</p>
     <p class="case-section__body type-body"><strong>I don't have the resources to finish Inline Drawer for this case study.</strong> Its cost outgrew its scope partway through, and I chose to stop rather than force it.</p>
