@@ -47,6 +47,10 @@
     .case-title-block__meta {
       display: flex;
       flex-wrap: wrap;
+      width: fit-content; /* .case-title-block is a column flex container, whose
+       * default align-items: stretch was forcing this to full row width —
+       * fit-content hugs it back to just the three meta items, per Figma. */
+      max-width: 100%;
       gap: var(--gap-card);
       padding: var(--space-4) var(--space-8);
       background: var(--bg-surface);
