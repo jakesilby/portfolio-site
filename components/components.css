@@ -162,20 +162,9 @@
 
 .stat-tile__value {
   color: var(--text-primary);
-}
-
-/* --- Featured stat tile: the color-drift-bug tile only, confirmed against
- * Figma — exclusive to this one tile, not a general stat-tile state. --- */
-
-.stat-tile--featured {
-  background: var(--bg-accent-tint);
-  border: 1px solid var(--accent-primary);
-  border-radius: var(--radius-md);
-}
-
-.stat-tile--featured .stat-tile__value {
-  color: var(--accent-primary-dark); /* accent-primary fails 4.5:1 on bg-accent-tint
-   * (3.50:1) — accent-primary-dark clears it at 6.21:1. */
+  font-family: var(--font-family-serif); /* override — .type-case-title (sans)
+   * is shared with .project-row__title on the homepage, so this stays
+   * scoped to the stat-tile value only. Size/weight/color unchanged. */
 }
 
 .stat-tile__label {
