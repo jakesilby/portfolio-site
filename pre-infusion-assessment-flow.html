@@ -56,6 +56,11 @@
       padding: var(--space-4) var(--space-8);
       background: var(--bg-surface);
       color: var(--text-label);
+      letter-spacing: var(--letter-spacing-none); /* was missing here — the
+       * other two case studies' .case-title-block__meta already override
+       * .type-meta's wide tracking, since this line runs long (ROLE/
+       * TIMEFRAME/STACK combined) even before the casing change below, and
+       * wide tracking only reads correctly on all-caps text. */
     }
 
     .case-hero {
@@ -177,9 +182,9 @@
     <h1 class="case-title-block__title type-page-title">Pre-Infusion Assessment Flow</h1>
     <p class="case-title-block__description type-tagline">Designed a framework for OnePulse Connect to select, complete, and review 20 to 40 clinical and module-level assessments through one system, then stress-tested it against the hardest case in the catalog: a 43-question form with hard safety stops.</p>
     <div class="case-title-block__meta type-meta">
-      <span>ROLE: PRODUCT DESIGNER (SOLO)</span>
-      <span>TIMEFRAME: 2026</span>
-      <span>STACK: FIGMA → INTERACTIVE PROTOTYPE (HTML/CSS/JS, AI-DIRECTED VIA CLAUDE)</span>
+      <span>Role: Product Designer (Solo)</span>
+      <span>Timeframe: 2026</span>
+      <span>Stack: Figma → Interactive Prototype (HTML/CSS/JS, AI-Directed via Claude)</span>
     </div>
   </section>
 
