@@ -15,6 +15,13 @@
 .case-header__back {
   color: var(--text-secondary);
   text-decoration: none;
+  letter-spacing: var(--letter-spacing-none); /* was wide-sm (inherited from
+   * .type-label-secondary) — only read correctly while the text was
+   * hardcoded "WORK"; now that it's "Work", wide tracking only reads
+   * correctly on all-caps text, same pairing already fixed on
+   * .case-title-block__eyebrow and others. Missed in that same fix since
+   * this text lives in the shared case-header.js component, not a page's
+   * own <style> block. */
 }
 
 /* --- Case study section (The Problem, Why This Matters, ...) — repeats
