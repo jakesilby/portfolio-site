@@ -220,6 +220,7 @@
   --font-weight-bold: 700;
   --font-weight-extrabold: 800;
 
+  --font-size-10: 10px; /* NEW — About page experience/education entry year labels, confirmed against Figma node 496:156 */
   --font-size-11: 11px;
   --font-size-12: 12px; /* NEW — Token Architecture live-embed card label/name text, confirmed against Figma node 353:108 */
   --font-size-13: 13px;
@@ -323,6 +324,9 @@
   --hero-card-offset-top: 14px; /* NEW — hero card's absolute top offset within its wrapper, confirmed against Figma node 381:487 */
   --hero-card-offset-left: 17px; /* NEW — hero card's absolute left offset within its wrapper, confirmed against Figma node 381:487 */
   --hero-card-glow-offset-left: 3px; /* NEW — glow layer's absolute left offset within the wrapper (top offset is 0), confirmed against Figma node 381:486 */
+  --about-card-offset-top: 14px; /* NEW — About page experience/education card's inset from its own glow layer, confirmed against Figma node 496:156 (496:275) */
+  --about-card-offset-left: 17px; /* NEW — see --about-card-offset-top; same node, left axis */
+  --about-card-glow-offset-left: 3px; /* NEW — About card's glow layer inset from the outer wrapper (top/bottom inset is 0), confirmed against Figma node 496:156 (496:171) */
 
   /* --- Shadows --- */
   --shadow-card: 0 2px 4px rgba(0, 0, 0, 0.1), 0 15px 9px rgba(0, 0, 0, 0.05), 0 41px 11px rgba(0, 0, 0, 0.02); /* 3-layer approximation of Figma's 5-stacked-shadow card spec — reads the same visually. Applied via CSS instead of baked into image assets so it stays themeable and doesn't bleed into the source PNG/WebP crop. */
