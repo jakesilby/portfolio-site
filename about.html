@@ -55,7 +55,13 @@
         var(--color-greenwhite-6) 49%,
         var(--bg-hero) 100%
       );
-      filter: blur(26.9px); /* matched to the homepage hero card's glow — was 13.45px (Figma's literal spec for this node) */
+      filter: blur(13.45px); /* corrected back from 26.9px — this had been
+       * matched to the homepage hero card's glow, but that value was itself
+       * wrong (an uncorroborated correction made without live Figma access).
+       * The homepage's blur has since been verified against Figma node
+       * 507:24 as 13.45px, which is also this node's own literal spec — so
+       * this value was right from the start; the intermediate 26.9px detour
+       * is what needed fixing. */
       opacity: 0.7;
     }
 
