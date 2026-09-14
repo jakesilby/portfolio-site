@@ -203,6 +203,7 @@
   --space-36: 36px;
   --space-48: 48px;
   --space-56: 56px;
+  --space-64: 64px; /* NEW — About page's card/bio column gap, confirmed against latest Figma revision of node 496:156. General rhythm-scale primitive (fits between the existing 56/96 rungs), not a component-scoped one-off — flagging since it's a new addition, per the last two rounds' pattern, even though it needed no judgment call (a clean round number already implied by the surrounding scale). */
   --space-96: 96px;
   --space-128: 128px; /* superseded — kept in case another section needs it */
   --space-160: 160px;
@@ -603,11 +604,13 @@
 }
 
 .type-about-bio-lead {
-  /* Bio's opening sentence — semibold italic, per Figma. */
+  /* Bio's opening sentence — semibold italic, per Figma. Was 24px; latest
+   * Figma revision of node 496:156 specifies 20px for both bio roles
+   * (lead and body), no longer a larger size on the lead alone. */
   font-family: var(--font-family-serif);
   font-style: italic;
   font-weight: var(--font-weight-semibold);
-  font-size: var(--font-size-24);
+  font-size: var(--font-size-20);
   line-height: normal; /* Figma leading-[normal], same deliberate "auto"
    * choice as .type-tagline/.type-token-name — not forced onto the
    * line-height scale. */
@@ -615,9 +618,10 @@
 }
 
 .type-about-bio-body {
+  /* Was 24px — see .type-about-bio-lead above, same revision. */
   font-family: var(--font-family-serif);
   font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-24);
+  font-size: var(--font-size-20);
   line-height: normal;
   letter-spacing: var(--letter-spacing-none);
 }
