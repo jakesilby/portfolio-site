@@ -296,6 +296,13 @@
     <p class="case-section__body type-body"><strong>I built and iterated this as a working HTML/CSS/JS prototype, directed through Claude Code rather than hand-coded.</strong> I wrote the specs, reviewed every change against the design, and made the calls on naming and edge cases. Claude Code wrote the markup and script changes to match.</p>
     <p class="case-section__body type-body"><strong>Every prompt stayed scoped on purpose.</strong> Each one named what should change, down to specific class names and IDs, and closed with an explicit instruction not to touch anything else, a guardrail against letting an AI-assisted change drift outside its scope unnoticed, and a change log where every prompt maps to one reviewable diff. The Associated-to-Linked rename is the clearest example: it touched visible labels, CSS classes, JS function names, and data properties, and required spelling out which needed to change and which structural IDs had to stay put.</p>
     <div class="case-visual">
+      <!-- Intentional exception to the site's 3-5s clip standard (CLAUDE.md):
+           this clip's whole purpose is proving the complete flow works
+           end-to-end (open dialog -> link -> set reference -> save -> view
+           file) - checked frame-by-frame during a hiring-manager-critique
+           pass and found no redundant or idle content to cut without
+           removing one of those steps. The beat-specific short version
+           already exists separately as link-document-flow-short.webm. -->
       <div class="case-clip-video" data-clip-video>
         <video class="case-clip-video__media" poster="videos/link-document-full_poster.jpg" muted loop playsinline aria-label="The full Linked Documents flow running live in-browser: opening a prescription's Edit dialog, linking a document from All Documents, setting it as the Reference Rx, saving, and viewing the linked file.">
           <source src="videos/link-document-full.webm" type="video/webm">
