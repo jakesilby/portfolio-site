@@ -56,6 +56,15 @@
         ],
         "createdAt": "2026-09-15T01:33:59.943Z",
         "reason": "false positive: only 0.08em source on this page is .type-meta, already overridden to letter-spacing:none on .case-title-block__meta (tokens.css comment documents this exact readability fix); actual .type-body copy is letter-spacing:none. Same finding recurred unchanged across 4 prior sessions regardless of edit content."
+      },
+      {
+        "rule": "wide-tracking",
+        "value": "*",
+        "files": [
+          "onepulse-connect.html"
+        ],
+        "createdAt": "2026-09-15T02:44:27.301Z",
+        "reason": "false positive: only 0.08em source on this page is .type-meta, already overridden to letter-spacing:none on both .case-title-block__meta and .stat-tile__label, each with an explicit comment documenting the same wide-tracking-only-reads-correctly-on-all-caps fix. Actual .type-body copy is letter-spacing:none. Same finding recurred unchanged across 2+ prior sessions regardless of edit content, matching the identical pattern already suppressed on pre-infusion-assessment-flow.html."
       }
     ]
   }
