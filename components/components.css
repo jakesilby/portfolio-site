@@ -399,19 +399,23 @@
   gap: var(--gap-inline);
 }
 
-.token-chain__label,
-.token-chain__name {
+.token-chain__label {
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.token-chain__label {
   color: var(--color-teal-label);
 }
 
 .token-chain__name {
+  /* Wraps rather than truncates — unlike .token-chain__label (short, fixed
+   * category names), a resolved token name's length isn't bounded, and
+   * clipping it defeats the point of a widget whose job is showing the
+   * real name. Accent.Primary.fg.fill (178px) was overflowing the card's
+   * 146px width under nowrap+ellipsis; overflow-wrap lets it break even
+   * with no spaces to wrap at. */
+  min-width: 0;
+  overflow-wrap: anywhere;
   color: var(--text-primary);
 }
 
