@@ -359,6 +359,14 @@
   --about-card-offset-top: 14px; /* NEW — About page experience/education card's inset from its own glow layer, confirmed against Figma node 496:156 (496:275) */
   --about-card-offset-left: 17px; /* NEW — see --about-card-offset-top; same node, left axis */
   --about-card-glow-offset-left: 3px; /* NEW — About card's glow layer inset from the outer wrapper (top/bottom inset is 0), confirmed against Figma node 496:156 (496:171) */
+  --project-row-image-width: 640px; /* NEW — was a hardcoded 500px; raised so
+   * homepage thumbnails (e.g. OnePulse Connect's Colors & Typography swatch
+   * grid) render large enough to actually read rather than a full screenshot
+   * shrunk past legibility. Component-scoped one-off card geometry, not part
+   * of the general spacing rhythm scale, same tier as the hero/about card
+   * offsets above. The <720px breakpoint overrides this back to `none`
+   * (stacked layout goes full-width regardless), so this only affects
+   * desktop/tablet. */
 
   /* --- Shadows --- */
   --shadow-card: 0 2px 4px rgba(0, 0, 0, 0.1), 0 15px 9px rgba(0, 0, 0, 0.05), 0 41px 11px rgba(0, 0, 0, 0.02); /* 3-layer approximation of Figma's 5-stacked-shadow card spec — reads the same visually. Applied via CSS instead of baked into image assets so it stays themeable and doesn't bleed into the source PNG/WebP crop. */

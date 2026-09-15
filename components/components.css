@@ -624,8 +624,16 @@
 }
 
 .project-row__image {
-  flex: 0 0 auto;
-  max-width: 500px;
+  /* width:50% (not a fixed px) so this scales down gracefully at desktop
+   * widths just above the 720px stacking breakpoint — a flat px width big
+   * enough to matter at 1440px would leave --project-row-description
+   * almost no room right above 720px. flex-shrink stays enabled (0 1 auto,
+   * not 0 0 auto) so it can actually give up that 50% if the row is ever
+   * tighter than image+gap+description's combined min-content. */
+  flex: 0 1 auto;
+  width: 50%;
+  min-width: 280px;
+  max-width: var(--project-row-image-width);
   overflow: hidden;
   background: var(--bg-placeholder);
   padding: var(--padding-image);
@@ -764,6 +772,8 @@
   }
 
   .project-row__image {
+    width: auto;
+    min-width: 0;
     max-width: none;
   }
 
