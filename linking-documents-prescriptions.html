@@ -40,24 +40,6 @@
       font-size: var(--font-size-40);
     }
 
-    /* Scope note between title and description — Figma node 106:8 has no
-     * equivalent in OnePulse's Title Block, confirmed via a cross-page
-     * structural audit: no existing class covers this role anywhere in
-     * the shared system. Built on .type-meta (the codebase's mono/
-     * uppercase/secondary convention) with the same text-transform/
-     * letter-spacing override already established on .stat-tile__label
-     * for a full sentence at this scale, rather than inventing a new
-     * type step to match Figma's one-off 12px/0.4px numbers (which
-     * don't match any current token anyway — see below). */
-    .case-title-block__context {
-      color: var(--text-label); /* Figma's #4a594c doesn't match any current
-       * text token (closest role-equivalent, the meta row, already resolves
-       * to text-label despite Figma showing the same stale color there too). */
-      max-width: 760px;
-      text-transform: none;
-      letter-spacing: var(--letter-spacing-none);
-    }
-
     .case-title-block__description {
       color: var(--text-secondary);
       max-width: 760px;
