@@ -47,9 +47,21 @@
 
 .case-section__body {
   color: var(--text-primary);
-  max-width: 640px; /* was 760px — rendered ~95 chars/line at this type
-   * scale, well past the ~80ch readability guideline; 640px lands at
-   * ~80 chars/line. */
+  max-width: 56ch; /* was a fixed 640px (before that, 760px) — that px value
+   * was tuned once against a specific type scale and drifted back to
+   * ~92-95 chars/line once the scale changed (Impeccable audit, 2026-09-15).
+   * ch ties the width to the current font's actual character width instead
+   * of a static px guess, so it can't drift the same way again.
+   *
+   * 56ch, not a nominal ~72-75ch, because Barlow's real prose character
+   * width runs narrower than its own ch unit (the '0' glyph the unit is
+   * defined by) here — 72ch measured out to ~90-96 real characters/line
+   * in this component, not ~72-75. Verified directly via
+   * getClientRects()-based per-character line measurement (not estimated):
+   * 56ch = max 78 chars/line on this page, max 79 on Linking Documents &
+   * Prescriptions, the other page sharing this class. Re-verify the same
+   * way if this component's font or type scale changes again — don't
+   * trust the nominal ch count at face value for this font. */
 }
 
 /* --- Case study bulleted rules list (e.g. Reasoning & Governance's
