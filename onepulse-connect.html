@@ -223,7 +223,7 @@
       </span>
       <div class="problem-diagram__group">
         <div class="problem-diagram__image-frame">
-          <img class="problem-diagram__image" src="images/ds_colors.webp" alt="OnePulse Connect design system Colors foundation page, showing the full primitive color palette rows.">
+          <img class="problem-diagram__image" src="images/ds_colors.webp" alt="OnePulse Connect design system Colors foundation page, showing the full primitive color palette rows." loading="lazy">
         </div>
         <p class="problem-diagram__caption problem-diagram__caption--primary type-label-secondary">One shared token &amp; component system</p>
       </div>
@@ -245,7 +245,7 @@
     <p class="case-section__body type-body"><strong>The result:</strong> 671 lines of fully resolved tokens.css, documented section by section: primitives, aliases, applied tokens by accent, action, component, text, surface, then typography, spacing, radius, border width, elevation.</p>
     <script src="components/token-chain.js"></script>
     <div class="case-visual">
-      <img class="case-visual__image case-visual__image--figma-variables" src="images/ds_figmavariables.webp" alt="Figma variables panel showing the OnePulse Connect mapped token collection, listing accent primary and secondary color roles resolved to their underlying palette values." data-lightbox-src="images/large/ds-figmavariables.webp" tabindex="0" role="button">
+      <img class="case-visual__image case-visual__image--figma-variables" src="images/ds_figmavariables.webp" alt="Figma variables panel showing the OnePulse Connect mapped token collection, listing accent primary and secondary color roles resolved to their underlying palette values." loading="lazy" data-lightbox-src="images/large/ds-figmavariables.webp" tabindex="0" role="button">
     </div>
   </section>
 
@@ -254,7 +254,7 @@
     <p class="case-section__body type-body"><strong>I fully documented 25 atoms and 16 patterns.</strong> The 3 global components exist in the coded library as well, but not to the same level of completion. Inline Drawer is the clearest gap: it didn't make it fully into code (more on that below).</p>
     <p class="case-section__body type-body"><strong>Tab Group is the clearest example of a component built to solve a real problem.</strong> In Orders, a single drug can have multiple NDCs that regulatory and administrative rules require to stay together, never split across separate tabs the way different drugs are. I built Tab Group to keep those NDCs grouped under one drug, a gap caught during design before it ever shipped as a problem.</p>
     <div class="case-visual case-visual--transparent">
-      <img class="case-visual__image case-visual__image--tabgroup" src="images/ds_tabgroup.webp" alt="OnePulse Connect Tab Group component showing NDC-grouped tabs for a single drug, Atorvastatin, with dosage and quantity variants as separate tabs and a summary line below the active tab." data-lightbox-src="images/large/ds-tabgroup.webp" tabindex="0" role="button">
+      <img class="case-visual__image case-visual__image--tabgroup" src="images/ds_tabgroup.webp" alt="OnePulse Connect Tab Group component showing NDC-grouped tabs for a single drug, Atorvastatin, with dosage and quantity variants as separate tabs and a summary line below the active tab." loading="lazy" data-lightbox-src="images/large/ds-tabgroup.webp" tabindex="0" role="button">
     </div>
     <p class="case-section__body type-body"><strong>That documentation lives at the component level in Figma, alongside the token file.</strong> Every component includes its purpose, when to use it and when not to, an explanation of each property, layout behavior, common usage patterns, dos and don'ts, and accessibility considerations. Other designers used the system without me in the room because the documentation covered purpose, states, and usage directly, and the code translation worked from it later.</p>
     <p class="case-section__body type-body"><strong>The same instinct shaped Data Table, the system's most consequential component.</strong> OnePulse Connect's core workflows (orders, claims, dispensing, inventory) all live in dense tables. I built two table types, Single Row and Tree Row, designed around AG Grid's capabilities from the start, since that's the framework engineering builds with.</p>
@@ -269,7 +269,7 @@
         </div>
       </div>
       <div class="case-visual case-visual--transparent">
-        <img class="case-visual__image case-visual__image--celltypevariants" src="images/ds_datatable_celltypevariants.webp" alt="OnePulse Connect Data Table Cell Type Variants documentation, listing every supported grid cell type — text and sublabel, text label, numeric, date and time, avatar and name, avatar and link, link, chip, numeric badge, checkbox, radio, button group, button, overflow menu, and icon actions — with an example rendering of each." data-lightbox-src="images/large/ds-datatable-celltypevariants.webp" tabindex="0" role="button">
+        <img class="case-visual__image case-visual__image--celltypevariants" src="images/ds_datatable_celltypevariants.webp" alt="OnePulse Connect Data Table Cell Type Variants documentation, listing every supported grid cell type — text and sublabel, text label, numeric, date and time, avatar and name, avatar and link, link, chip, numeric badge, checkbox, radio, button group, button, overflow menu, and icon actions — with an example rendering of each." loading="lazy" data-lightbox-src="images/large/ds-datatable-celltypevariants.webp" tabindex="0" role="button">
       </div>
     </div>
     <p class="case-section__body type-body"><strong>I flagged every gap explicitly.</strong> I mark a token assignment [NEEDS VERIFICATION] when it can't be verified against Figma dev mode, done over a hundred times across the docs.</p>
@@ -282,10 +282,10 @@
     <p class="case-section__body type-body"><strong>The clearest proof of the system's value came from auditing it against what had already shipped.</strong></p>
     <div class="case-image-stack">
       <div class="case-visual">
-        <img class="case-visual__image case-visual__image--patientprofile" src="images/ds_patientprofile_example.webp" alt="OnePulse Connect Patient Profile Orders view for patient Sarah Chen, showing a medications table with status chips like In Progress, Active, Pending, and Dispensed alongside prescriber and copay details." data-lightbox-src="images/large/ds-patientprofile-example.webp" tabindex="0" role="button">
+        <img class="case-visual__image case-visual__image--patientprofile" src="images/ds_patientprofile_example.webp" alt="OnePulse Connect Patient Profile Orders view for patient Sarah Chen, showing a medications table with status chips like In Progress, Active, Pending, and Dispensed alongside prescriber and copay details." loading="lazy" data-lightbox-src="images/large/ds-patientprofile-example.webp" tabindex="0" role="button">
       </div>
       <div class="case-visual">
-        <img class="case-visual__image case-visual__image--assessmentexample" src="images/ds_assessmentexample.webp" alt="OnePulse Connect Processing Assessments view for patient Sarah Chen, showing a multi-step Pre-Infusion Baseline form with medication verification and vitals fields alongside a Completed Assessments panel of status cards." data-lightbox-src="images/large/ds-assessmentexample.webp" tabindex="0" role="button">
+        <img class="case-visual__image case-visual__image--assessmentexample" src="images/ds_assessmentexample.webp" alt="OnePulse Connect Processing Assessments view for patient Sarah Chen, showing a multi-step Pre-Infusion Baseline form with medication verification and vitals fields alongside a Completed Assessments panel of status cards." loading="lazy" data-lightbox-src="images/large/ds-assessmentexample.webp" tabindex="0" role="button">
       </div>
     </div>
   </section>
