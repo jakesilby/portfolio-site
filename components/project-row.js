@@ -19,7 +19,8 @@ const projectRows = [
   {
     year: '2026',
     type: 'Product Design',
-    title: 'Linking Documents & Prescriptions',
+    title: 'Solving the Document-Prescription Mismatch',
+    subtitle: 'Linking Documents & Prescriptions',
     description: "I designed the interaction that connects prescriptions and documents. Staff used to reconcile two separate views by hand; now one linking action resolves which document prints.",
     href: 'linking-documents-prescriptions.html',
     video: {
@@ -35,7 +36,8 @@ const projectRows = [
   {
     year: '2026',
     type: 'Product Design',
-    title: 'Pre-Infusion Assessment Flow',
+    title: 'Assessments at Scale, Safety Stops Included',
+    subtitle: 'Pre-Infusion Assessment Flow',
     description: "I designed a framework for OnePulse Connect to select, complete, and review clinical assessments at scale, then stress-tested it against the hardest case in the catalog: a 43-question form with hard safety stops.",
     href: 'pre-infusion-assessment-flow.html',
     video: {

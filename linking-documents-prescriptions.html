@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Linking Documents & Prescriptions — Jake Silby</title>
+  <title>Solving the Document-Prescription Mismatch — Jake Silby</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&family=Spline+Sans+Mono:wght@400;500&family=Barlow:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="tokens.css">
@@ -38,6 +38,12 @@
       color: var(--text-primary);
       max-width: 956px;
       font-size: var(--font-size-40);
+    }
+
+    .case-title-block__subtitle {
+      /* Names the actual feature underneath the descriptive headline above —
+       * same treatment as OnePulse Connect's title block. */
+      color: var(--text-label);
     }
 
     .case-title-block__description {
@@ -204,12 +210,13 @@
     }
   </style>
 </head>
-<body data-page="case-study">
+<body data-page="case-study" id="top">
   <script src="components/case-header.js"></script>
 
   <section class="case-title-block">
     <p class="case-title-block__eyebrow type-label-secondary">Case study</p>
-    <h1 class="case-title-block__title type-page-title">Linking Documents &amp; Prescriptions</h1>
+    <h1 class="case-title-block__title type-page-title">Solving the Document-Prescription Mismatch</h1>
+    <p class="case-title-block__subtitle type-label-secondary">Linking Documents &amp; Prescriptions</p>
     <p class="case-title-block__description type-tagline">Linked Documents connects prescriptions and medications to the documents that support them, so staff can attach an incoming document to an existing patient record instead of restarting intake, and the system can resolve exactly which document prints when more than one could. I designed the interaction model and its guardrails inside OnePulse Connect's Global Inline Drawer, the panel that surfaces a patient's documents and prescriptions during dispensing.</p>
     <div class="case-title-block__meta type-meta">
       <span>Role: Product Design (Solo)</span>
@@ -260,7 +267,7 @@
 
   <section class="case-section case-section--alt">
     <h2 class="case-section__heading type-section-heading">Why This Matters</h2>
-    <p class="case-section__body type-body">Jillian, who works documents from the patient profile rather than an active workflow, described hunting for an approval letter after staff had already dispensed the medication, with no reliable way to find it by medication name. Staff were already renaming files "DO NOT USE" as a workaround, since there was no way to deactivate a document without deleting it.</p>
+    <p class="case-section__body type-body">One staff member, who works documents from the patient profile rather than an active workflow, described hunting for an approval letter after staff had already dispensed the medication, with no reliable way to find it by medication name. Staff were already renaming files "DO NOT USE" as a workaround, since there was no way to deactivate a document without deleting it.</p>
     <p class="case-section__body type-body"><strong>Once staff could link a document to multiple medications, "Print Prescription" needed to resolve to exactly one document, even with several Rx Prescription-type documents on file.</strong> Leave it ambiguous, and the system either can't act or a staff member has to guess, in a clinical dispensing context. This tool couldn't leave that loose.</p>
   </section>
 
@@ -299,7 +306,7 @@
         </video>
       </div>
     </div>
-    <p class="case-section__body type-body"><strong>Anardo (Product Manager) and Maribel (Director of Clinical Pharmacy Innovation) reviewed that logic, and it held up without changes. Maribel's standard was direct: staff never delete patient records, and every prescription keeps a source document attached. The only legitimate reason to fully unlink is a patient-mismatch error, and staff handle that at the patient-record level, not in this dialog. Anardo confirmed the removal lock and the reason-capture requirement I'd already built matched that standard. Neither Maribel nor Anardo asked for a single change.</strong></p>
+    <p class="case-section__body type-body"><strong>The Product Manager and the Director of Clinical Pharmacy Innovation reviewed that logic, and it held up without changes. The clinical standard was direct: staff never delete patient records, and every prescription keeps a source document attached. The only legitimate reason to fully unlink is a patient-mismatch error, and staff handle that at the patient-record level, not in this dialog. The Product Manager confirmed the removal lock and the reason-capture requirement I'd already built matched that standard. Neither reviewer asked for a single change.</strong></p>
     <img class="removal-guardrail-image" src="images/removal-guardrail-diagram.webp" alt="Flowchart: saving changes activates removal locks; if the document is the reference, removal is blocked until a replacement is designated; otherwise it can be removed freely." loading="lazy">
     <p class="case-section__body type-body"><strong>An AI assistant helped lay out candidate patterns for the reference-designation problem, weighed against what the design system already had.</strong> I chose a persistent row treatment and pushed it further: a left-stroke highlight and a "Reference Rx" tag on a filled star that doubles as the toggle, kept always visible so staff don't miss it in a fast-moving workflow.</p>
     <div class="case-visual">
@@ -336,7 +343,7 @@
 
   <section class="case-section case-section--alt">
     <h2 class="case-section__heading type-section-heading">Adoption in Production</h2>
-    <p class="case-section__body type-body"><strong>I was moving this into production, into the real OPC app, when I left the team.</strong> I don't have confirmation it reached a full release, and I'm not claiming that it did. I moved this past design and prototype into active implementation, on the strength of the decisions and spec discipline above, including a guardrail that Anardo and Maribel confirmed in review was already correct.</p>
+    <p class="case-section__body type-body"><strong>I was moving this into production, into the real OPC app, when I left the team.</strong> I don't have confirmation it reached a full release, and I'm not claiming that it did. I moved this past design and prototype into active implementation, on the strength of the decisions and spec discipline above, including a guardrail that Product and Clinical Pharmacy leadership confirmed in review was already correct.</p>
   </section>
 
   <section class="case-section">
@@ -349,6 +356,11 @@
     </ul>
     <p class="case-section__body type-body">I'd have kept iterating on all three with the same team that caught the guardrail edge cases early.</p>
   </section>
+
+  <footer class="case-footer-nav">
+    <a class="case-footer-nav__link type-label-secondary" href="#top">Back to top</a>
+    <a class="case-footer-nav__link type-label-secondary" href="pre-infusion-assessment-flow.html">Next: Pre-Infusion Assessment Flow →</a>
+  </footer>
 
   <script src="components/clip-video.js"></script>
   <script src="components/footer.js"></script>

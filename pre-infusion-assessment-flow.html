@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pre-Infusion Assessment Flow — Jake Silby</title>
+  <title>Assessments at Scale, Safety Stops Included — Jake Silby</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&family=Spline+Sans+Mono:wght@400;500&family=Barlow:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="tokens.css">
@@ -38,6 +38,13 @@
       color: var(--text-primary);
       max-width: 956px;
       font-size: var(--font-size-40);
+    }
+
+    .case-title-block__subtitle {
+      /* Names the actual feature underneath the descriptive headline above —
+       * same treatment as OnePulse Connect's and Linking Documents' title
+       * blocks. */
+      color: var(--text-label);
     }
 
     .case-title-block__description {
@@ -189,7 +196,7 @@
     }
   </style>
 </head>
-<body data-page="case-study">
+<body data-page="case-study" id="top">
   <script src="components/case-header.js"></script>
 
   <!-- Working title flagged in the source content file as possibly changing
@@ -198,7 +205,8 @@
        content/case-studies/pre-infusion-assessment-flow.md for the full note. -->
   <section class="case-title-block">
     <p class="case-title-block__eyebrow type-label-secondary">Case study</p>
-    <h1 class="case-title-block__title type-page-title">Pre-Infusion Assessment Flow</h1>
+    <h1 class="case-title-block__title type-page-title">Assessments at Scale, Safety Stops Included</h1>
+    <p class="case-title-block__subtitle type-label-secondary">Pre-Infusion Assessment Flow</p>
     <p class="case-title-block__description type-tagline">Designed a framework for OnePulse Connect to select, complete, and review 20 to 40 clinical and module-level assessments through one system, then stress-tested it against the hardest case in the catalog: a 43-question form with hard safety stops.</p>
     <div class="case-title-block__meta type-meta">
       <span>Role: Product Designer (Solo)</span>
@@ -317,6 +325,11 @@
     <p class="case-section__body type-body">Two things are still open if this were to ship: wiring the framework to real assessment data instead of the CSV-derived example set, and extending past the therapy groups used to validate the pattern during design. The searchable, grouped selection pattern, the config-driven rendering split, and the conditional validation logic described above are the reusable parts, exactly the kind of edge case that surfaces when a framework gets tested against real branching data rather than a single flat form.</p>
     <p class="case-section__body type-body">One idea surfaced during testing but wasn't pursued: since assessment selection happens from within a specific patient's active medication or order, the system already has enough context to filter the picker to just the relevant therapy group automatically, rather than requiring staff to manually navigate the full catalog every time. The gap became visible when testing the prototype with a non-infusion medication (Humira, a self-administered biologic) against infusion-specific assessment options that didn't apply to it at all. The grouped, searchable list still matters for cases where staff are browsing more broadly, Ad Hoc assessments, or working across therapies, but context-aware filtering could cut down how often that manual browsing is needed at all. It's the next thing I'd build if I picked this back up.</p>
   </section>
+
+  <footer class="case-footer-nav">
+    <a class="case-footer-nav__link type-label-secondary" href="#top">Back to top</a>
+    <a class="case-footer-nav__link type-label-secondary" href="index.html">More work →</a>
+  </footer>
 
   <script src="components/clip-video.js"></script>
   <script src="components/footer.js"></script>
