@@ -127,6 +127,25 @@
       object-fit: cover;
     }
 
+    /* --- "At a glance" stat grid — same page-local wrapper as OnePulse
+     * Connect's and Pre-Infusion's; .stat-grid/.stat-tile are shared
+     * (components.css). --- */
+
+    .at-a-glance {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--gap-card);
+      background: var(--bg-page);
+      padding: var(--padding-section-x);
+    }
+
+    .at-a-glance__label {
+      color: var(--text-label);
+      letter-spacing: var(--letter-spacing-none); /* wide tracking only reads
+       * correctly on all-caps text — same fix as .case-title-block__eyebrow. */
+    }
+
     .removal-guardrail-image {
       /* Real diagram, built in Figma to match the site's own visual
        * language — no border/shadow/background frame needed on top of
@@ -205,6 +224,28 @@
         <source src="videos/link-document-flow-short.webm" type="video/webm">
         <source src="videos/link-document-flow-short.mp4" type="video/mp4">
       </video>
+    </div>
+  </section>
+
+  <section class="at-a-glance">
+    <p class="at-a-glance__label type-label-secondary">At a glance</p>
+    <div class="stat-grid">
+      <div class="stat-tile">
+        <p class="stat-tile__value type-case-title">Solo</p>
+        <p class="stat-tile__label type-meta">Interaction model, guardrails, and design-to-code prototype</p>
+      </div>
+      <div class="stat-tile">
+        <p class="stat-tile__value type-case-title">3</p>
+        <p class="stat-tile__label type-meta">Existing components reused (Table Row, Button, Alert) — no new ones shipped</p>
+      </div>
+      <div class="stat-tile">
+        <p class="stat-tile__value type-case-title">5</p>
+        <p class="stat-tile__label type-meta">Document types the linking model accounts for, including eRx</p>
+      </div>
+      <div class="stat-tile">
+        <p class="stat-tile__value type-case-title">0</p>
+        <p class="stat-tile__label type-meta">Changes Product &amp; Clinical Pharmacy leadership requested after guardrail review</p>
+      </div>
     </div>
   </section>
 

@@ -107,6 +107,25 @@
       object-fit: cover;
     }
 
+    /* --- "At a glance" stat grid — same page-local wrapper as OnePulse
+     * Connect's and Linking Documents'; .stat-grid/.stat-tile are shared
+     * (components.css). --- */
+
+    .at-a-glance {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--gap-card);
+      background: var(--bg-page);
+      padding: var(--padding-section-x);
+    }
+
+    .at-a-glance__label {
+      color: var(--text-label);
+      letter-spacing: var(--letter-spacing-none); /* wide tracking only reads
+       * correctly on all-caps text — same fix as .case-title-block__eyebrow. */
+    }
+
     /* --- Real screenshots — each sets its own aspect-ratio from the real
      * capture, same convention as OnePulse's/Linking Documents' ds_ and
      * document- prefixed images. --- */
@@ -193,6 +212,28 @@
       <video class="case-hero__frame" poster="videos/as_infectionscreening_poster.jpg" autoplay muted loop playsinline aria-label="Selecting Yes on the infection screening question, causing fever, cough, and urinary status sub-questions to expand inline directly below it.">
         <source src="videos/as_infectionscreening.mp4" type="video/mp4">
       </video>
+    </div>
+  </section>
+
+  <section class="at-a-glance">
+    <p class="at-a-glance__label type-label-secondary">At a glance</p>
+    <div class="stat-grid">
+      <div class="stat-tile">
+        <p class="stat-tile__value type-case-title">Solo</p>
+        <p class="stat-tile__label type-meta">Framework, selection pattern &amp; validation logic, designed and coded</p>
+      </div>
+      <div class="stat-tile">
+        <p class="stat-tile__value type-case-title">43</p>
+        <p class="stat-tile__label type-meta">Questions in the pre-infusion assessment, the toughest case in the catalog</p>
+      </div>
+      <div class="stat-tile">
+        <p class="stat-tile__value type-case-title">20–40</p>
+        <p class="stat-tile__label type-meta">Clinical &amp; module assessment types the framework generalizes to</p>
+      </div>
+      <div class="stat-tile">
+        <p class="stat-tile__value type-case-title">2</p>
+        <p class="stat-tile__label type-meta">Validation gaps caught and fixed before submission logic shipped correctly</p>
+      </div>
     </div>
   </section>
 
