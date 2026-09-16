@@ -105,6 +105,10 @@
   --color-cosmos-1: #fbeeee;
   --color-cosmos-1-5: #f9edec;
   --color-cosmos-2: #f7ebea;
+  --color-cosmos-2-5: #f3e9e8; /* NEW — requested directly by hex for the
+   * Pre-Infusion Assessment Flow homepage thumbnail's placeholder tray.
+   * Sits between cosmos-2 and cosmos-3 on the existing scale rather than
+   * reusing either neighbor, since it doesn't exactly match either one. */
   --color-cosmos-3: #f5e5e5;
   --color-cosmos-4: #f7dddc;
   --color-cosmos-5: #fecfcd;
@@ -294,6 +298,7 @@
   --bg-inverse: var(--color-greenwhite-5); /* confirmed against Figma node 239:186 — the light-tint hover redesign. Was previously cosmos-9 (dark, node 232:21) — my own local copy of this file was never updated when that fix was given to Claude Code directly, which is likely why it regressed. */
   --bg-placeholder: var(--color-greenwhite-4);
   --bg-placeholder-fill: var(--color-greenwhite-1); /* NEW — inner tone for the two-tone case-study image placeholder */
+  --bg-placeholder-warm: var(--color-cosmos-2-5); /* NEW — Pre-Infusion Assessment Flow's homepage thumbnail tray, requested as an alternate to the shared greenwhite --bg-placeholder */
   --bg-section-alt: var(--color-sage-5); /* NOT migrated — still legacy sage. Used on case study pages, which haven't been redesigned yet */
   --bg-hero: var(--color-elm-0); /* NEW — the 2026 homepage hero panel */
   --bg-surface: var(--color-white); /* NEW — card/tile fill that sits a shade brighter than bg-page, e.g. At a Glance stat tiles */

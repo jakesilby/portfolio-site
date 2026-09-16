@@ -685,6 +685,13 @@
   padding: 0;
 }
 
+.project-row__image--infectionscreening {
+  /* Requested directly: swap this row's placeholder tray from the shared
+   * greenwhite tone to a warmer one, scoped to just this row so the other
+   * two keep the default --bg-placeholder tray. */
+  background: var(--bg-placeholder-warm);
+}
+
 .project-row__image-inner--siteoverview {
   /* Explicit aspect-ratio so the row doesn't flash/reflow before the
    * video's own intrinsic size is known, matching ds_siteoverview.mp4's
