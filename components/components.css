@@ -3,25 +3,52 @@
  * per page, edit here.
  */
 
-/* --- Case header (case study pages — back-link only, no wordmark/nav) --- */
+/* --- Case header (case study pages — back link + About, no wordmark/full
+ * nav) --- */
 
 .case-header {
   display: flex;
   align-items: center;
+  justify-content: space-between; /* NEW — now two links (← Work, About);
+   * space them to opposite ends rather than letting them bunch together
+   * with no gap between them. */
   padding: var(--space-24) var(--padding-section-x);
   background: var(--bg-page);
 }
 
-.case-header__back {
+.case-header__back,
+.case-header__about {
   color: var(--text-secondary);
   text-decoration: none;
   letter-spacing: var(--letter-spacing-none); /* was wide-sm (inherited from
-   * .type-label-secondary) — only read correctly while the text was
-   * hardcoded "WORK"; now that it's "Work", wide tracking only reads
-   * correctly on all-caps text, same pairing already fixed on
+   * .type-label-secondary) — only reads correctly on short all-caps text;
+   * "Work" and "About" are Title Case, same pairing already fixed on
    * .case-title-block__eyebrow and others. Missed in that same fix since
    * this text lives in the shared case-header.js component, not a page's
    * own <style> block. */
+}
+
+/* --- Case footer nav (Back to top / Next case study — end of every case
+ * study's content, before the shared site-footer). Same dashed-divider
+ * and label treatment as .section-label on the homepage, for visual
+ * consistency between the two wayfinding patterns. --- */
+
+.case-footer-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-card);
+  padding: var(--space-24) var(--padding-section-x);
+  border-top: 1px dashed var(--border-divider);
+  background: var(--bg-page);
+}
+
+.case-footer-nav__link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  letter-spacing: var(--letter-spacing-none); /* same wide-tracking fix as
+   * .case-header__back/__about — this is sentence case, not short
+   * all-caps. */
 }
 
 /* --- Case study section (The Problem, Why This Matters, ...) — repeats
@@ -649,11 +676,20 @@
   box-shadow: var(--shadow-card);
 }
 
+.project-row__image--siteoverview {
+  /* The site-overview clip is a self-contained frame — its own background
+   * fills its full bounds — so, unlike a bare screenshot, it doesn't need
+   * to sit inside the shared placeholder tray above. Same reasoning as
+   * .case-hero__placeholder--frameless on the case-study page itself. */
+  background: none;
+  padding: 0;
+}
+
 .project-row__image-inner--siteoverview {
   /* Explicit aspect-ratio so the row doesn't flash/reflow before the
    * video's own intrinsic size is known, matching ds_siteoverview.mp4's
-   * real 1600x986 encode. */
-  aspect-ratio: 1600 / 986;
+   * current 1600x1000 encode (previously 1600/986 for the older clip). */
+  aspect-ratio: 1600 / 1000;
 }
 
 .project-row__image-inner--linkdocflow {
@@ -682,6 +718,22 @@
   display: flex;
   align-items: baseline;
   gap: var(--gap-inline);
+}
+
+.project-row__title-group--stacked {
+  /* Used only where a row carries a subtitle (the product name underneath
+   * a descriptive headline) — overrides the baseline row layout above so
+   * the subtitle sits below the title instead of inline beside it. Scoped
+   * to a modifier rather than changed on the base class so rows without a
+   * subtitle keep their existing single-line layout. */
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.project-row__subtitle {
+  color: var(--text-label);
+  margin: 0;
 }
 
 .project-row__index {

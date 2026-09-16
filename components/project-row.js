@@ -2,8 +2,9 @@ const projectRows = [
   {
     year: '2026',
     type: 'Design Systems',
-    title: 'OnePulse Connect Design System',
-    description: "I built OnePulse Connect's token and component system solo — from scattered, undocumented Figma files to the shared source of truth design and engineering now build from.",
+    title: 'Standardizing a Design System With No Foundation',
+    subtitle: 'OnePulse Connect Design System',
+    description: "I built OnePulse Connect's token and component system solo, replacing scattered, undocumented Figma files with a single source of truth design and engineering now build from.",
     href: 'onepulse-connect.html',
     video: {
       poster: 'videos/ds_siteoverview_poster.jpg',
@@ -19,7 +20,7 @@ const projectRows = [
     year: '2026',
     type: 'Product Design',
     title: 'Linking Documents & Prescriptions',
-    description: "I designed the interaction that connects prescriptions and documents — from two separate views staff reconciled by hand to one linking action that resolves which document prints.",
+    description: "I designed the interaction that connects prescriptions and documents. Staff used to reconcile two separate views by hand; now one linking action resolves which document prints.",
     href: 'linking-documents-prescriptions.html',
     video: {
       poster: 'videos/link-document-flow-short_poster.jpg',
@@ -35,7 +36,7 @@ const projectRows = [
     year: '2026',
     type: 'Product Design',
     title: 'Pre-Infusion Assessment Flow',
-    description: "I designed a framework for OnePulse Connect to select, complete, and review clinical assessments at scale — then stress-tested it against the hardest case in the catalog: a 43-question form with hard safety stops.",
+    description: "I designed a framework for OnePulse Connect to select, complete, and review clinical assessments at scale, then stress-tested it against the hardest case in the catalog: a 43-question form with hard safety stops.",
     href: 'pre-infusion-assessment-flow.html',
     video: {
       poster: 'videos/as_infectionscreening_poster.jpg',
@@ -65,8 +66,9 @@ const projectRowsHtml = projectRows
     return `
 <${tag} class="project-row${modifierClass}"${hrefAttr}>
   <div class="project-row__header">
-    <div class="project-row__title-group">
+    <div class="project-row__title-group${row.subtitle ? ' project-row__title-group--stacked' : ''}">
       <h3 class="project-row__title type-case-title">${row.title}</h3>
+      ${row.subtitle ? `<p class="project-row__subtitle type-label-secondary">${row.subtitle}</p>` : ''}
     </div>
     <div class="project-row__meta">
       <span class="badge type-label-secondary">${row.type}</span>
@@ -74,7 +76,7 @@ const projectRowsHtml = projectRows
     </div>
   </div>
   <div class="project-row__body">
-    <div class="project-row__image">
+    <div class="project-row__image${row.video ? ` project-row__image--${row.video.aspectClass}` : ''}">
       ${imageInner}
     </div>
     <p class="project-row__description type-description">${row.description}</p>

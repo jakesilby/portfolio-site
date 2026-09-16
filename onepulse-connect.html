@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OnePulse Connect Design System — Jake Silby</title>
+  <title>Standardizing a Design System With No Foundation — Jake Silby</title>
+  <meta name="description" content="How I built OnePulse Connect's token and component system solo — from scattered, undocumented Figma files to a documented design system three designers and engineering build from.">
+  <link rel="icon" type="image/png" href="components/brand-mark.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&family=Spline+Sans+Mono:wght@400;500&family=Barlow:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="tokens.css">
@@ -37,6 +39,14 @@
       color: var(--text-primary);
       max-width: 956px;
       font-size: var(--font-size-40);
+    }
+
+    .case-title-block__subtitle {
+      /* Names the actual product underneath the descriptive headline above —
+       * same secondary-label treatment as the "Case study" eyebrow, but
+       * without its accent color, so it reads as a byline rather than a
+       * second category tag. */
+      color: var(--text-label);
     }
 
     .case-title-block__description {
@@ -86,11 +96,29 @@
       }
     }
 
+    /* The site-overview clip (ds_siteoverview.mp4) is a self-contained frame —
+     * its own background fills its full bounds — so it no longer sits inside
+     * the neutral placeholder tray the way a bare screenshot does. Dropping
+     * the tray's background/padding here so the clip isn't double-framed;
+     * .case-hero__placeholder's default styling still applies wherever a
+     * plain screenshot needs the tray. */
+    .case-hero__placeholder--frameless {
+      background: none;
+      padding: 0;
+    }
+
+    @media (max-width: 720px) {
+      .case-hero__placeholder--frameless {
+        padding: 0;
+      }
+    }
+
     .case-hero__frame {
       display: block;
       width: 700px;
       max-width: 100%;
-      aspect-ratio: 1600 / 986;
+      aspect-ratio: 1600 / 1000; /* matches ds_siteoverview.mp4's current
+       * 1600x1000 encode (previously 1600/986 for the older clip) */
       background: var(--bg-page);
       border-radius: var(--radius-md);
       box-shadow: var(--shadow-card);
@@ -153,12 +181,13 @@
     }
   </style>
 </head>
-<body data-page="case-study">
+<body data-page="case-study" id="top">
   <script src="components/case-header.js"></script>
 
   <section class="case-title-block">
     <p class="case-title-block__eyebrow type-label-secondary">Case study</p>
-    <h1 class="case-title-block__title type-page-title">OnePulse Connect Design System</h1>
+    <h1 class="case-title-block__title type-page-title">Standardizing a Design System With No Foundation</h1>
+    <p class="case-title-block__subtitle type-label-secondary">OnePulse Connect Design System</p>
     <p class="case-title-block__description type-tagline">I built the design token and component system the team's three designers, myself included, used as the standard. I audited it against the live app and found three conflicting reds already shipped into production, one hardcoded straight into a button no token file accounted for.</p>
     <div class="case-title-block__meta type-meta">
       <span>Role: Design Systems (Solo)</span>
@@ -168,7 +197,7 @@
   </section>
 
   <section class="case-hero">
-    <div class="case-hero__placeholder">
+    <div class="case-hero__placeholder case-hero__placeholder--frameless">
       <video class="case-hero__frame" poster="videos/ds_siteoverview_poster.jpg" autoplay muted loop playsinline aria-label="OnePulse Connect component library: clicking through the sidebar to load Alert, Data Table, Dialog, and Chip in the documentation viewer.">
         <source src="videos/ds_siteoverview.webm" type="video/webm">
         <source src="videos/ds_siteoverview.mp4" type="video/mp4">
@@ -327,6 +356,11 @@
     <p class="case-section__body type-body"><strong>I don't have the resources to finish Inline Drawer for this case study.</strong> Its cost outgrew its scope partway through, and I chose to stop rather than force it.</p>
     <p class="case-section__body type-body"><strong>This project sharpened what I already knew about token architecture and forced real fluency in translating one into code</strong> — closing the Storybook and React gap it left open is next.</p>
   </section>
+
+  <footer class="case-footer-nav">
+    <a class="case-footer-nav__link type-label-secondary" href="#top">Back to top</a>
+    <a class="case-footer-nav__link type-label-secondary" href="linking-documents-prescriptions.html">Next: Linking Documents &amp; Prescriptions →</a>
+  </footer>
 
   <script src="components/clip-video.js"></script>
   <script src="components/footer.js"></script>
