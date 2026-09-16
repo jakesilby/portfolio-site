@@ -2,9 +2,11 @@
 
 ## Bio
 
-*I am a product designer based in Brooklyn, NY focused on design systems and the handoff between design and code.*
+*I'm a product designer based in Brooklyn, NY, focused on design systems and the handoff between design and code.*
 
-My background is in healthcare software, where I've spent most of my time building the underlying architecture — tokens, components, documentation — alongside the day-to-day product work. I'm interested in the discipline that comes from designing for real complexity, and in using AI-assisted workflows to close the gap between what gets designed and what actually ships.
+My background is in healthcare software. I've spent most of my time building the underlying architecture: tokens, components, documentation, alongside the day-to-day product work. I like designing for real complexity, and using AI-assisted workflows to close the gap between the design and what ships.
+
+I've caught and fixed inconsistencies that had already shipped to production. In a clinical dispensing tool, that kind of drift is a patient-safety risk.
 
 [LinkedIn](https://www.linkedin.com/in/jakesilby/)
 
