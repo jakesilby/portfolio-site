@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About — Jake Silby</title>
+  <meta name="description" content="About Jake Silby — a Brooklyn-based product designer with a background in healthcare software, focused on design systems and AI-assisted design-to-code workflows.">
+  <link rel="icon" type="image/png" href="components/brand-mark.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,600&family=Spline+Sans+Mono:wght@400;500&family=Barlow:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="tokens.css">
@@ -192,13 +194,22 @@
     </div>
 
     <div class="about-bio">
-      <p class="type-about-bio-lead">I am a product designer based in Brooklyn, NY focused on design systems and the handoff between design and code.</p>
-      <p class="type-about-bio-body">My background is in healthcare software, where I've spent most of my time building the underlying architecture — tokens, components, documentation — alongside the day-to-day product work. I'm interested in the discipline that comes from designing for real complexity, and in using AI-assisted workflows to close the gap between what gets designed and what actually ships.</p>
-      <p class="type-about-bio-body">I've caught and fixed inconsistencies already shipped to production — the kind of drift that becomes a patient-safety risk in a clinical dispensing tool if it goes unnoticed.</p>
+      <p class="type-about-bio-lead">I'm a product designer based in Brooklyn, NY, focused on design systems and the handoff between design and code.</p>
+      <p class="type-about-bio-body">My background is in healthcare software. I've spent most of my time building the underlying architecture: tokens, components, documentation, alongside the day-to-day product work. I like designing for real complexity, and using AI-assisted workflows to close the gap between the design and what ships.</p>
+      <p class="type-about-bio-body">I've caught and fixed inconsistencies that had already shipped to production. In a clinical dispensing tool, that kind of drift is a patient-safety risk.</p>
       <p class="type-about-bio-body"><a class="about-contact-link" href="https://www.linkedin.com/in/jakesilby/" target="_blank" rel="noopener">LinkedIn</a></p>
-      <p class="type-about-bio-body">✉️ jake.r.silby[at]gmail.com</p>
+      <p class="type-about-bio-body">✉️ <a class="about-contact-link" id="email-link">jake.r.silby[at]gmail.com</a></p>
     </div>
   </main>
+
+  <script>
+    // href built at runtime rather than written as a literal mailto: in the
+    // source, so the address isn't sitting in plain HTML for a basic
+    // scraper to harvest — same intent as the visible [at] text, just
+    // extended to the actual link target. Link text stays exactly as
+    // written; only the href changes.
+    document.getElementById('email-link').href = 'mailto:' + 'jake.r.silby' + '@' + 'gmail.com';
+  </script>
 
   <script src="components/footer.js"></script>
 </body>
