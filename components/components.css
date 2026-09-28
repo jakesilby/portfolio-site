@@ -550,6 +550,11 @@
    * at the Figma-confirmed 8px; this only grows the invisible hit area. */
   padding: var(--gap-inline);
   border: none;
+  border-bottom: 2px solid transparent; /* reserves the active underline's
+   * 2px on every pill, so active and inactive pills are the same box and
+   * their text sits at the same height. .is-active only changes the
+   * color — it used to add the border itself, shrinking the active pill's
+   * content area and lifting its text 1px above the inactive one. */
   border-radius: 0;
   color: var(--text-primary);
   text-decoration: none;
@@ -563,7 +568,7 @@
    * Which pill gets this class is decided at render time in nav.js from
    * document.body.dataset.page, not hardcoded to a single data-nav value
    * — every page nav.js renders is a real, active-able destination now. */
-  border-bottom: 2px solid var(--border-highlight);
+  border-bottom-color: var(--border-highlight);
 }
 
 @media (prefers-reduced-motion: no-preference) {
