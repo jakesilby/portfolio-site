@@ -57,15 +57,18 @@
         var(--color-greenwhite-6) 49%,
         var(--bg-hero) 100%
       );
-      filter: blur(13.45px); /* corrected back from 26.9px — this had been
+      filter: blur(13.45px) saturate(0.85); /* blur: corrected back from 26.9px — this had been
        * matched to the homepage hero card's glow, but that value was itself
        * wrong (an uncorroborated correction made without live Figma access).
        * The homepage's blur has since been verified against Figma node
        * 507:24 as 13.45px, which is also this node's own literal spec — so
        * this value was right from the start; the intermediate 26.9px detour
-       * is what needed fixing. */
-      opacity: 0.58; /* was 0.7 — softened ~17% on request, a visible but
-       * non-drastic reduction. */
+       * is what needed fixing. saturate(0.85) added 2026-09-28 — desaturated
+       * ~15% on request, same on .hero-card__glow and .about-card__glow.
+       * A filter, not new color stops, because the middle stop is the shared
+       * --color-greenwhite-6 (also --border-divider), which must not move. */
+      opacity: 0.7; /* was 0.58 — matched back to the homepage glow so both
+       * cards share one treatment; saturate() above now does the softening. */
     }
 
     @media (prefers-reduced-motion: no-preference) {
