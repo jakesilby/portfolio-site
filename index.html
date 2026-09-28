@@ -24,7 +24,14 @@
        * ("Site Hero"), which fixes this at 634px. Previous value was
        * hand-tuned to fit rendered copy rather than matched to the frame. */
       max-width: 100%;
-      height: 264px; /* was 268px — corrected against node 507:24. */
+      /* Height is no longer fixed (was 264px, node 507:24) — the card now
+       * sits in flow inside this padding, so the wrapper is always
+       * card-sized plus the Figma offsets, and the glow below (inset 0)
+       * tracks the card at every width instead of a fixed desktop frame.
+       * Right/bottom padding reuse --hero-card-offset-top: node 507:24's
+       * card sits 15px in from the frame's right and bottom edges too
+       * (634 − 19 − 600, 264 − 15 − 234). */
+      padding: var(--hero-card-offset-top) var(--hero-card-offset-top) var(--hero-card-offset-top) var(--hero-card-offset-left);
     }
     @property --gradient-angle {
       syntax: '<angle>';
@@ -34,10 +41,11 @@
 
     .hero-card__glow {
       position: absolute;
-      top: 0;
-      left: var(--hero-card-glow-offset-left);
-      width: 631px; /* was 483px — corrected against Figma node 507:24. */
-      height: 263px; /* was 268px — corrected against node 507:24. */
+      inset: 0 0 0 var(--hero-card-glow-offset-left); /* was top 0 / left
+       * glow-offset-left at a fixed 631×263 (node 507:24) — fixed size left
+       * the glow behind when the card narrowed. Insetting against the
+       * card-sized wrapper gives the same 631px width at desktop; height
+       * is 264px, 1px taller than the frame's 263, under the 13.45px blur. */
       border-radius: var(--radius-lg);
       background: linear-gradient(
         var(--gradient-angle),
@@ -66,12 +74,14 @@
       to { --gradient-angle: 469.04deg; }
     }
     .hero-card__content {
-      position: absolute;
-      top: var(--hero-card-offset-top);
-      left: var(--hero-card-offset-left);
-      width: 600px; /* NEW — node 507:24 fixes the text card at 600×234;
-       * previously unset/intrinsic, sized by content. */
-      height: 234px;
+      position: relative; /* was absolute at top/left offset-top/-left —
+       * now in flow inside .hero-card's padding, which supplies the same
+       * offsets. relative keeps it painting above the absolutely
+       * positioned glow that precedes it in DOM order. */
+      /* width is now auto: 634 − 19 − 15 = 600px at desktop (node 507:24's
+       * 600×234 text card), and narrows with .hero-card below that. */
+      height: 234px; /* node 507:24's text-card height at full width;
+       * released below 730px (see media query) once the card narrows. */
       display: flex;
       flex-direction: column;
       gap: var(--gap-hero-text);
@@ -86,30 +96,20 @@
       color: var(--text-hero-subhead);
     }
 
+    @media (max-width: 729px) {
+      /* Below 634px card + 2 × 48px section padding, .hero-card narrows
+       * and the subhead wraps further — a fixed 234px height would let the
+       * text spill past the card. Height follows content from here down. */
+      .hero-card__content {
+        height: auto;
+      }
+    }
+
     @media (max-width: 599px) {
       .hero-card {
         width: auto;
-        height: auto;
-      }
-      .hero-card__glow {
-        inset: calc(-1 * var(--hero-card-offset-top));
-        width: auto;
-        height: auto;
       }
       .hero-card__content {
-        position: relative; /* was static — static painted below the
-         * still-absolutely-positioned .hero-card__glow sibling, so the
-         * blurred gradient rendered on top of this card's text instead of
-         * behind it. relative keeps the auto width/height sizing below
-         * while restoring correct stacking (this element comes after the
-         * glow in DOM order, so a positioned element here paints above it
-         * again, matching desktop). */
-        width: auto; /* NEW — the base rule now fixes width/height at
-         * 600×234 (node 507:24's desktop text-card size); without an
-         * explicit reset here that fixed size leaked into mobile,
-         * overflowing the viewport and clipping the box short of its
-         * wrapped text. */
-        height: auto;
         white-space: normal;
         padding: var(--space-24);
       }
