@@ -274,6 +274,7 @@
   --line-height-76: 76px; /* added for the 2026 homepage hero headline */
 
   --letter-spacing-none: 0px;
+  --letter-spacing-tight-xs: -0.6px; /* NEW — homepage case study titles (.project-row__title), per the 2026-09-28 title spec; no Figma variable exists for this value. Looser than tight-sm, so xs by the sm/md/lg ordering — but note tight-xs2 (-1px) is tighter than sm despite its name, so xs and xs2 are not neighbours in value. Another reason for the naming pass flagged on tight-xs2. */
   --letter-spacing-tight-sm: -0.8px;
   --letter-spacing-tight-xs2: -1px; /* case study titles (.project-row__title), confirmed against live Figma — sits between tight-sm (-0.8) and tight-md (-1.2). Named awkwardly (xs2) to avoid conflicting with the existing tight/wide naming scale, which isn't strictly ordered (see tight-lg/-xl below) — consider a full naming pass on this scale at some point. */
   --letter-spacing-tight-md: -1.2px;
