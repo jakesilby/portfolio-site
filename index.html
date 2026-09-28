@@ -56,10 +56,13 @@
        * 0/48.83/99.516% — node 507:24 specifies solid stops at these three
        * colors and percentages, with opacity 0.7 applied once to the whole
        * layer (already set below), not baked into each stop. */
-      filter: blur(13.45px); /* verified against Figma node 507:24 on
+      filter: blur(13.45px) saturate(0.85); /* blur: verified against Figma node 507:24 on
        * 2026-09-14 — 13.45px was correct all along; an earlier pass without
        * live Figma access had changed this to 26.9px, which live
-       * verification shows was wrong. */
+       * verification shows was wrong. saturate(0.85) added 2026-09-28 — desaturated
+       * ~15% on request, same on .hero-card__glow and .about-card__glow.
+       * A filter, not new color stops, because the middle stop is the shared
+       * --color-greenwhite-6 (also --border-divider), which must not move. */
       opacity: 0.7;
     }
 
