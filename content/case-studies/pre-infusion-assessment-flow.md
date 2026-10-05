@@ -6,33 +6,33 @@
 
 ---
 
-Designed a framework for OnePulse Connect to select, complete, and review 20 to 40 clinical and module-level assessments through one system, then stress-tested it against the hardest case in the catalog: a 43-question form with hard safety stops.
+I designed a framework for OnePulse Connect to select, complete, and review 20 to 40 clinical and module-level assessments through one system. Then I stress-tested it against the hardest case in the catalog, a 43-question form with hard safety stops.
 
 ---
 
 ## The Problem
 
-**The assessment system in OnePulse started with a single, straightforward case:** a nurse fills out a pre-infusion form for one therapy. As real data came in, from a clinical branching-logic spreadsheet covering therapy groups like Neuro/Rheum, MS, CIDP/MMN, and CVID, it became clear that assessments weren't one thing. Each one carried several independent dimensions: which therapy and phase it applied to, who completed it (staff on-site or a patient completing it remotely), where it fell in the infusion timeline, and its own internal branching logic between questions.
+The assessment system in OnePulse started with one case, a nurse filling out a pre-infusion form for one therapy. Then the clinical data came in. A branching-logic spreadsheet covered therapy groups like Neuro/Rheum, MS, CIDP/MMN, and CVID, and every assessment in it carried several independent dimensions at once: the therapy and phase it applied to, who completed it (staff on-site or a patient remotely), where it fell in the infusion timeline, and the branching between its own questions.
 
-**A flat list of assessment cards was fine for a handful of items.** But even a single therapy group could have four or more assessments across multiple phases, and with multiple therapy groups in the system, the real number was closer to 20 to 40 assessment types. The selection pattern needed to hold up at that scale.
+A flat list of assessment cards worked for a handful of items. One therapy group alone could have four or more assessments across several phases, though, and with multiple groups in the system the count was closer to 20 to 40 assessment types. The selection pattern had to hold up at that size.
 
 ---
 
 ## Why This Matters
 
-Pre-infusion assessments gate whether a patient can proceed to treatment. Certain answers, a positive pregnancy test, a patient refusing consent, have to halt the process on the spot. That's the clinical stakes layer.
+Pre-infusion assessments gate whether a patient can go ahead with treatment. Some answers have to halt the process on the spot, like a positive pregnancy test or a patient refusing consent.
 
-The scale problem compounds it. If the pattern for finding and completing an assessment doesn't generalize, every new therapy program OnePulse adds either gets bolted onto a selection pattern that wasn't built for it, or requires the design to be redone from scratch. Getting the underlying framework right once, instead of per therapy group, is what makes the system able to grow without each addition becoming its own design project.
+OnePulse also keeps adding therapy programs. If the pattern for finding and completing an assessment doesn't generalize, each new program gets bolted onto something that wasn't built for it. I wanted to get the framework right once, so a new therapy group wouldn't turn into its own design project.
 
 ---
 
 ## The Framework
 
-**Two decisions came out of this.** The first was how assessments get selected at scale. Two approaches were considered: a grouped list with collapsible category headers, and a search-first pattern with filter chips. The grouped list was the most familiar but still turned into a long scroll once several categories were expanded. Search-first scaled the best long-term but added complexity that wasn't justified on its own. What stuck was a hybrid of the two: a single searchable list, grouped by therapy category. Adding a new therapy group means adding one entry to that grouped structure. Adding a new assessment means adding one item to that group's list. Nothing about the layout breaks as the catalog grows.
+The first decision was how assessments get selected at scale. I looked at two approaches. The grouped list with collapsible category headers was the most familiar, but once a few categories were expanded it still turned into a long scroll. Search-first with filter chips would scale best long-term, but on its own the complexity wasn't worth it. I went with a hybrid, a single searchable list grouped by therapy category. Adding a therapy group means one new entry in that structure. New assessments slot in under their group.
 
 > **[VISUAL — high priority, STATIC]** Side by side, both at full catalog scale: the same flat-list pattern from the Problem section crowded to 30 ungrouped items, next to the searchable, grouped list at 23 items across 8 therapy groups. One paired image proving both the breakdown and the fix.
 
-**The second decision was where a user encounters an assessment at all, and how it renders once they do.** Module assessments live in the GID's Processing tab, appearing inline as part of whatever a user is already doing there (a status dropdown with a conditional reason field, for example). Clinical assessments, like pre-infusion, live behind a separate Assessments tab and open as a full page, with sections, branching logic, and hard stops. These aren't two outcomes of a shared decision a user makes in the moment, they're two separate paths, and an assessment's config determines which one it belongs to before a user ever sees it. That keeps each path simple and predictable instead of one shared path having to account for both cases. Both decisions solve how staff navigate to an assessment once they're looking for one; whether they should have to browse at all is a separate question, one that comes back later in this case study.
+The second decision was where someone runs into an assessment in the first place, and how it renders. Module assessments live in the Processing tab of the Global Inline Drawer (GID), inline with whatever the user is already doing there, like a status dropdown with a conditional reason field. Clinical assessments like pre-infusion sit behind a separate Assessments tab and open as a full page with sections, branching logic, and hard stops. An assessment's config decides which path it belongs to before anyone sees it, so each path stays simple. Both decisions are about how staff get to an assessment once they're looking for one. Whether they should have to browse at all comes up again near the end.
 
 > **[VISUAL — medium priority, STATIC]** Two separate paths, not a shared branch: GID Processing tab → module assessment → renders inline (e.g. status dropdown), and separately, GID Assessments tab → Select Assessment picker → clinical assessment → renders full-page (e.g. pre-infusion assessment). An assessment's config sets which path it belongs to ahead of time; this isn't a decision a user or the system makes live.
 
@@ -40,23 +40,23 @@ The scale problem compounds it. If the pattern for finding and completing an ass
 
 ## Pre-Infusion as the Worked Example
 
-**Pre-infusion was the right assessment to validate the framework against, the most demanding case in the catalog:** the most sections, the most branching logic, and the only assessment type carrying hard safety stops. If the framework held up here, including for a therapy group like Keytruda where the branching logic is especially dense, it would hold up for the rest of the catalog.
+I picked pre-infusion to test the framework because nothing else in the catalog is harder. It has the most sections and the most branching, and it's the only assessment type with hard safety stops. If the framework held up here, including for a therapy group like Keytruda where the branching gets especially dense, it would hold up for everything else.
 
-The clinical branching-logic data used to pressure-test the framework was the pre-infusion assessment: 35 questions (43 total, with 8 scoped to diagnosis-specific branches) organized into sections in a fixed order: Medication Verification, Vitals, Treatment History, Adherence, Critical Safety Screening, Infection Screening, Adverse Event, Pre-medications, Vascular Access, Diagnosis-Specific, Proceed Decision, Education and Consent, and Notes. As a clinical assessment, it opens as a dedicated full page rather than a dialog, reserving the dialog pattern for the picker that selects it.
+The form has 35 core questions, plus 8 more scoped to diagnosis-specific branches, for 43 total. They fall into thirteen sections, always in this order: Medication Verification, Vitals, Treatment History, Adherence, Critical Safety Screening, Infection Screening, Adverse Event, Pre-medications, Vascular Access, Diagnosis-Specific, Proceed Decision, Education and Consent, and Notes. As a clinical assessment, it opens as a dedicated full page. The picker that selects it is the only dialog.
 
-The page splits into three regions: a vertical section-nav list on the left (Medication Verification, Vitals, Treatment History, and so on, with the active section highlighted), the form itself in the center, and an inline drawer on the right, a collapsible panel similar to the one used elsewhere in the product but scoped specifically to this view, reused here to show completed assessments as a card list so a nurse can reference prior responses without losing their place. An early version tried a progress stepper in place of the plain section-nav list; that was cut because it implied a fixed, linear sequence of steps that the branching logic doesn't actually have.
+The page has three regions. On the left is a vertical list of sections with the active one highlighted, the form sits in the center, and on the right an inline drawer lists completed assessments as cards, so a nurse can check prior responses without losing their place. That drawer belongs to this page. It's separate from the Global Inline Drawer used on Processing pages. An early version swapped the section list for a progress stepper. I cut it because a stepper implies a fixed, linear sequence, and the branching logic doesn't work that way.
 
 > **[VISUAL — high priority, STATIC]** The full assessment page: section nav on the left, form in the center, inline drawer (completed assessments) on the right, so a reader can see the scope of a "full clinical assessment" at a glance.
 
-**The form isn't static.** Certain answers reveal follow-up questions inline, directly below the triggering question, without a page reload or navigation away from where the nurse is working. The form grows and contracts as it's filled out.
+Some answers open follow-up questions inline, right below the question that triggered them, with no page reload and no jump away from where the nurse is working.
 
 > **[VISUAL — high priority, STATIC]** A still frame from the same clip playing in the hero above: "Yes" selected on the infection screening question, with the fever, cough, urinary, and skin sub-questions expanded inline and still unanswered. The live version of this interaction already plays at the top of the page, so this section shows the resulting state rather than repeating the clip.
 
-**Certain answers also carry more weight than others.** A positive pregnancy test or a patient refusing consent needs to stop the workflow immediately rather than let the nurse continue to the next section. Those hard stops surface as alerts placed directly next to the question that triggered them, at the exact point of decision, rather than as a banner at the top of the form.
+A positive pregnancy test or a refused consent has to stop the workflow right there, before the nurse moves to the next section. Those hard stops show up as alerts directly next to the question that triggered them, at the point of decision. A banner at the top of the form is easy to scroll past.
 
 > **[VISUAL — high priority, STATIC]** A hard-stop alert (e.g. positive pregnancy test) shown inline next to its triggering field, using the real design system alert component (error variant, `#fff5f5` bg / `#ffc9cb` border).
 
-**Layout went through a real revision here too.** Fields were originally laid out two or three to a row in places like Vitals (blood pressure and heart rate side by side, for example). That changed to one field per line across the entire form, including Vitals, because a nurse moving through a long form under time pressure benefits more from a predictable, scannable vertical rhythm than from saving vertical space.
+I originally laid out some fields two or three to a row, like blood pressure and heart rate side by side in Vitals. I changed the whole form to one field per line, Vitals included. Someone moving through a long form under time pressure needs a predictable vertical rhythm they can scan, and the space it saved wasn't worth losing that.
 
 > **[VISUAL — medium priority, STATIC]** Before/after of the Vitals section: multi-column layout vs. the single-column revision.
 
@@ -64,11 +64,11 @@ The page splits into three regions: a vertical section-nav list on the left (Med
 
 ## Reasoning Under Iteration
 
-**Yes/No questions started as dropdowns and were changed to radio buttons.** A dropdown needs two interactions to answer a question with only two possible values, and it hides both options until opened, adding friction on a form with dozens of these. Since most of the Yes/No questions trigger branching sub-questions, keeping both options visible also makes the cause-and-effect of a branch opening easier to follow than a closed dropdown does. The first pass at this also added a horizontal layout for short option sets, a rule I invented on the spot rather than pulled from the design system. Once I checked it against the actual system, the guidance was clear: keep this pattern vertical regardless of option count, so that's what shipped.
+Yes/No questions started as dropdowns. A dropdown takes two clicks to answer a question with two possible values and hides both until it's opened, which adds up on a form with dozens of them. Most of those questions also trigger branches, and with both options visible it's easier to see why a set of sub-questions just appeared. I switched them to radio buttons. My first pass also laid short option sets out horizontally, a rule I made up on the spot. When I checked the design system, it said to keep the pattern vertical regardless of option count, so I changed it.
 
-**The completed-assessment view mode started as a two-step chooser:** click a completed assessment, then decide whether to view it standalone or alongside an active assessment. I found that extra step wasn't earning its place for the standalone case, so I removed it for that path. Clicking a completed item now opens directly into a read-only view. The alongside option still exists, but only as an action available from inside an active assessment, since that's the only context where it's actually relevant.
+Clicking a completed assessment used to bring up a chooser asking whether to view it standalone or alongside an active assessment. For the standalone case, that step added a click for no reason. Now a click opens a read-only view directly. The side-by-side option moved inside active assessments, the only place it's relevant.
 
-**The submission confirmation pattern changed after review too.** The original design stacked a confirmation on top of the assessment once submitted, which read as cluttered. That was replaced with an inline transform: the form content is replaced in place by a success state, summary card, and a single "Done" button, on the same surface, with no stacking.
+After review, I also replaced the submission confirmation. It used to stack on top of the assessment, which looked cluttered. Now the form content transforms in place into a success state, a summary card, and a single "Done" button on the same surface.
 
 > **[VISUAL — medium priority, CLIP]** 3-5 second clip: submit an assessment and watch it transform in place to the success state, no second confirmation appearing on top.
 
@@ -76,13 +76,11 @@ The page splits into three regions: a vertical section-nav list on the left (Med
 
 ## Catching a Validation Gap in Testing
 
-**The clearest example of iterating through a real gap, rather than getting a decision right on the first pass, came from required-field validation.**
+The first version of the prototype let a user submit with required fields empty. So Submit needed to stay disabled until those were filled. My first pass at that logic scanned every input on the form instead of only the required ones, and the button stayed disabled even after every requirement was met.
 
-The first version of the prototype let a user submit an assessment with required fields empty. The obvious fix was to disable Submit until required fields were filled. But the first pass at that logic was too strict: it scanned every input on the form instead of just the required ones, so the button stayed disabled even once the real requirements were met.
+Narrowing the validator to an explicit list of required-field IDs fixed that. Another round of testing turned up a second gap, in infection screening. Answering "yes" there opens three follow-up fields (fever, cough, urinary status) that become required. The validator had no idea a branch had opened, so it let submission through with those fields empty.
 
-Narrowing the validator to an explicit list of required-field IDs fixed that. Testing again, I found a second, more specific gap: the infection screening question has its own branching sub-questions. If a user answers "yes" there, three follow-up fields (fever, cough, urinary status) become required. But the validator had no way of knowing a branch had opened, so it still let submission through even when those follow-up fields were empty.
-
-The fix made the required-field set conditional on that branch: answering "yes" to infection screening adds the three follow-up fields to the required set, and switching back to "no" removes that requirement again. It took two rounds of testing to find both gaps, and each needed a different kind of fix: one about scope (which fields to watch), one about state (what "required" means once a branch is open).
+I made the required set conditional on that branch. A "yes" on infection screening adds the three follow-up fields, and switching back to "no" removes them. Finding both gaps took two rounds of testing. The first fix narrowed which fields the validator watched, and the second taught it that a branch opening changes what counts as required.
 
 > **[VISUAL — high priority, CLIP]** 3-5 second clip: attempt to submit with infection screening set to "Yes" and sub-questions empty, showing Submit stays disabled/fields highlight, then fill them and Submit activates. The single most important visual in this section, proves the specific gap and its fix.
 
@@ -90,10 +88,10 @@ The fix made the required-field set conditional on that branch: answering "yes" 
 
 ## Status
 
-This work was fully designed and spec'd, including the branching logic, hard stops, alert placement, and the assessment-selection framework, but it wasn't built into OnePulse's production codebase before I left the company. The prototype is what makes the design tangible: an interactive artifact that demonstrates the framework working end to end, from selecting an assessment through submission, built with AI-assisted coding tools that I directed. The two validation bugs described above are what that direction actually looked like in practice: reading the generated logic closely enough to catch where it was wrong, and prompting a specific fix rather than accepting the first pass.
+I fully designed and spec'd this work, including the branching logic, hard stops, alert placement, and the selection framework. It wasn't built into OnePulse's production codebase before I left. The clips on this page are a working prototype built with AI-assisted coding tools I directed, running end to end from picking an assessment through submission. It was never deployed for public use. The two validation bugs above show what directing that work involved: reading the generated logic closely enough to see where it was wrong, then prompting a specific fix.
 
-The framework covers both clinical assessments (pre-infusion and similar, full-page, branching, section-based) and lighter module-level assessments (inline, scoped to whatever module a user is working in) under the same config-driven rendering split. The inline drawer also includes a reference view showing all assessments run across modules for a given patient, so staff can look back at what's been completed without leaving their current context. What I didn't design is the patient-facing side of assessment completion itself, the experience a patient has when filling one out remotely. That was outside my scope on this project.
+The framework covers clinical assessments like pre-infusion, which open as full pages with sections and branching, and lighter module assessments that render inline in whatever module a user is working in, with config deciding which is which. The inline drawer also has a reference view of every assessment run across modules for a patient, so staff can look back without leaving where they are. I didn't design the patient-facing side, where a patient fills an assessment out remotely. That was outside my scope.
 
-Two things are still open if this were to ship: wiring the framework to real assessment data instead of the CSV-derived example set, and extending past the therapy groups used to validate the pattern during design. The searchable, grouped selection pattern, the config-driven rendering split, and the conditional validation logic described above are the reusable parts, exactly the kind of edge case that surfaces when a framework gets tested against real branching data rather than a single flat form.
+Shipping it would still mean wiring the framework to real assessment data in place of the CSV-derived example set and extending it past the therapy groups I used during design.
 
-One idea surfaced during testing but wasn't pursued: since assessment selection happens from within a specific patient's active medication or order, the system already has enough context to filter the picker to just the relevant therapy group automatically, rather than requiring staff to manually navigate the full catalog every time. The gap became visible when testing the prototype with a non-infusion medication (Humira, a self-administered biologic) against infusion-specific assessment options that didn't apply to it at all. The grouped, searchable list still matters for cases where staff are browsing more broadly, Ad Hoc assessments, or working across therapies, but context-aware filtering could cut down how often that manual browsing is needed at all. It's the next thing I'd build if I picked this back up.
+When I tested with Humira, a self-administered biologic, the picker still offered infusion-specific assessments that didn't apply to it at all. Selection happens from inside a specific patient's active medication or order, so the system already knows enough to filter the picker to the relevant therapy group automatically. Staff would still need the grouped, searchable list for Ad Hoc assessments, broader browsing, or work across therapies. Context-aware filtering is the next thing I'd build if I picked this back up.
