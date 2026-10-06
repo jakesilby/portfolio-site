@@ -285,7 +285,7 @@
     <div class="case-visual case-visual--transparent">
       <img class="case-visual__image case-visual__image--tabgroup" src="images/ds_tabgroup.webp" alt="OnePulse Connect Tab Group component showing NDC-grouped tabs for a single drug, Atorvastatin, with dosage and quantity variants as separate tabs and a summary line below the active tab." loading="lazy" data-lightbox-src="images/large/ds-tabgroup.webp" tabindex="0" role="button">
     </div>
-    <p class="case-section__body type-body">Each component's documentation lives on the component in Figma, next to the token file. It covers purpose, when to use it and when to skip it, every property, layout behavior, common usage patterns, dos and don'ts, and accessibility. Other designers used the system without me in the room, and the code translation later worked from the same docs.</p>
+    <p class="case-section__body type-body">Each component's documentation lives on the component in Figma, next to the token file. It covers purpose, when to use it and when to skip it, every property, layout behavior, common usage patterns, dos and don'ts, and accessibility. The other two designers used the system without me in the room. Engineers built from the same library, and so did the coded prototypes I made later.</p>
     <p class="case-section__body type-body">Data Table carried the most weight, because orders, claims, dispensing, and inventory all live in dense tables. I built two types, Single Row and Tree Row, around AG Grid's capabilities from day one, since that's what engineering builds with.</p>
     <p class="case-section__body type-body">Most of the effort went into rules the table enforces. There are 15 grid cell content types (checkbox, chip, numeric, avatar and name, link, button group, and more), so every column gets typed correctly and no table makes up its own formatting. Disabled rows cascade to every child component, so a disabled row can't leave a clickable link or button behind by accident. Tree rows go one level deep. Pagination treats a parent and its children as one unit that never splits across pages. I also styled checkboxes and radios off native input state, which kept focus and keyboard behavior intact.</p>
     <div class="case-image-stack">
@@ -305,7 +305,7 @@
 
   <section class="case-section case-section--alt">
     <h2 class="case-section__heading type-section-heading">Adoption in Production</h2>
-    <p class="case-section__body type-body">By the end, all three designers, me included, built from this system in Figma by default. New flows, one-off screens, static files all came from the same components and tokens.</p>
+    <p class="case-section__body type-body">By the end, every screen across every module of OnePulse Connect was designed from the system's components and patterns. All three designers, me included, built from it in Figma by default. Engineers built from the same Figma library and from the tokens in Figma and Tokens Studio, and that work was still in progress when I left.</p>
     <p class="case-section__body type-body">The coded library was further behind. When I wrote this, designers were just starting to use it for rapid prototyping. Some real use, but nowhere near the default the Figma system had become.</p>
     <div class="case-image-stack">
       <div class="case-visual">
@@ -321,7 +321,7 @@
     <h2 class="case-section__heading type-section-heading">Reasoning &amp; Governance</h2>
     <p class="case-section__body type-body">While auditing the production codebase, I found three reds in three places: the token file, the component library, and a value hardcoded into a live button. None of them matched.</p>
     <p class="case-section__body type-body">I traced each one back. The component library's red matched Figma. The token file's red didn't match anything I could find, so living in the token file wasn't enough reason to trust it. I confirmed the value against Figma and corrected the token file at the source.</p>
-    <p class="case-section__body type-body">While fixing it, I found part of the codebase pointing at raw primitives and skipping the semantic layer entirely, which meant future token changes would never reach those screens. I rewired those references to the proper layer, and the change went through review and shipped to production.</p>
+    <p class="case-section__body type-body">While fixing it, I found part of the codebase pointing at raw primitives and skipping the semantic layer entirely, which meant future token changes would never reach those screens. I opened a pull request to point those references at the proper layer. An engineer reviewed and approved it, and it shipped to production.</p>
     <p class="case-section__body type-body">Required fields say "(Required)" instead of showing an asterisk, because a word works even when the reader doesn't know the convention. Disabled buttons get their own token set, since in a clinical tool a disabled action that looks available can get clicked.</p>
   </section>
 
