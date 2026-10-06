@@ -201,6 +201,9 @@
 
   /* --- Layout primitives --- */
   --layout-max-width: 1200px;
+  --layout-case-content-width: 760px; /* case-study content column — matches the
+   * hardcoded 760px on .case-visual, .case-image-stack and friends, which
+   * still need moving onto this token */
 
   /* --- Radius primitives --- */
   --radius-full: 99px; /* pill/fully-rounded — safely larger than half the height of anything it's applied to */

@@ -197,6 +197,29 @@
   max-width: 100%;
 }
 
+/* Image + caption pair. .case-visual is a centered flex row with its own
+ * background tray, so a caption placed inside it would sit beside the
+ * image; the figure stacks the caption below the tray instead. */
+.case-figure {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  width: var(--layout-case-content-width);
+  max-width: 100%;
+  margin: 0;
+}
+
+.case-figure__caption {
+  color: var(--text-secondary);
+  letter-spacing: var(--letter-spacing-none); /* .type-meta's wide tracking
+   * is for all-caps text; captions are sentence case. */
+}
+
+.case-figure__caption a {
+  color: var(--text-link); /* same treatment as .about-contact-link */
+  text-decoration: underline;
+}
+
 /* --- Stat Grid (case study "At a Glance") --- */
 
 .stat-grid {

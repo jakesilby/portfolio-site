@@ -4,7 +4,7 @@ const projectRows = [
     type: 'Design Systems',
     title: 'Standardizing a Design System With No Foundation',
     subtitle: 'OnePulse Connect Design System',
-    description: "I built OnePulse Connect's token and component system solo, replacing scattered, undocumented Figma files with a single source of truth design and engineering now build from.",
+    description: "I built OnePulse Connect's token and component system solo, replacing scattered, undocumented Figma files with one source of truth that designers and engineers built from.",
     href: 'onepulse-connect.html',
     video: {
       poster: 'videos/ds_siteoverview_poster.jpg',
