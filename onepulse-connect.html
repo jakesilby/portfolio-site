@@ -270,8 +270,8 @@
     <h2 class="case-section__heading type-section-heading">Token Architecture</h2>
     <p class="case-section__body type-body">There were no tokens when I started. Every screen hardcoded its own colors, spacing, and type, decided fresh each time.</p>
     <p class="case-section__body type-body">I built three layers. Primitives hold raw values with no meaning attached. Semantic aliases give a primitive a role, so "pulse-teal-500" becomes "primary." Mapped tokens resolve those aliases into what components actually consume, like bg-fill-default or fg-fill.</p>
-    <p class="case-section__body type-body">Components only reference the mapped layer. Change a primitive or an alias and everything downstream updates without anyone opening a component file. It also gave me a rule I could hand to Claude Code: never hardcode a hex value, always pull from tokens.css.</p>
-    <p class="case-section__body type-body">tokens.css ended up at 671 lines, documented section by section: primitives, aliases, applied tokens (accent, action, component, text, surface), then typography, spacing, radius, border width, and elevation.</p>
+    <p class="case-section__body type-body">Components only reference the mapped layer. Change a primitive or an alias and everything downstream updates without anyone opening a component file. It also gave every prototype one rule to follow: never hardcode a hex value.</p>
+    <p class="case-section__body type-body">Each section of the token file covers a decision a designer or engineer would otherwise make alone: primitives, aliases, applied tokens (accent, action, component, text, surface), then typography, spacing, radius, border width, and elevation.</p>
     <script src="components/token-chain.js"></script>
     <div class="case-visual">
       <img class="case-visual__image case-visual__image--figma-variables" src="images/ds_figmavariables.webp" alt="Figma variables panel showing the OnePulse Connect mapped token collection, listing accent primary and secondary color roles resolved to their underlying palette values." loading="lazy" data-lightbox-src="images/large/ds-figmavariables.webp" tabindex="0" role="button">
