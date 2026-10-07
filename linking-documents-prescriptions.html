@@ -217,11 +217,11 @@
     <p class="case-title-block__eyebrow type-label-secondary">Case study</p>
     <h1 class="case-title-block__title type-page-title">Solving the Document-Prescription Mismatch</h1>
     <p class="case-title-block__subtitle type-label-secondary">Linking Documents &amp; Prescriptions</p>
-    <p class="case-title-block__description type-tagline">Linked Documents connects prescriptions and medications to the documents that support them, so staff can attach an incoming document to an existing patient record without restarting intake. When more than one document could print, the system knows which one does. I designed the interaction model and its guardrails inside OnePulse Connect's Global Inline Drawer, the panel that shows a patient's documents and prescriptions during dispensing.</p>
+    <p class="case-title-block__description type-tagline">I designed Linked Documents to connect prescriptions and medications to the documents that support them, so staff can attach an incoming document to an existing patient record without restarting intake. When more than one document could print, the system knows which one does. I designed the interaction model and its guardrails inside OnePulse Connect's Global Inline Drawer, a panel already in the product and design system that shows a patient's documents and prescriptions during dispensing.</p>
     <div class="case-title-block__meta type-meta">
       <span>Role: Product Design (Solo)</span>
       <span>Timeframe: 2026 (In Progress at Departure)</span>
-      <span>Stack: Figma → Claude Code</span>
+      <span>Stack: Figma, Claude Code (prototyping)</span>
     </div>
   </section>
 
@@ -251,14 +251,14 @@
       </div>
       <div class="stat-tile">
         <p class="stat-tile__value type-case-title">0</p>
-        <p class="stat-tile__label type-meta">Changes Product &amp; Clinical Pharmacy leadership requested after guardrail review</p>
+        <p class="stat-tile__label type-meta">Changes to the guardrail at leadership review</p>
       </div>
     </div>
   </section>
 
   <section class="case-section">
     <h2 class="case-section__heading type-section-heading">Problem</h2>
-    <p class="case-section__body type-body">During dispensing, staff work across two tabs inside the Global Inline Drawer, one for a patient's documents (authorization letters, EOBs, signed prescriptions, consent forms) and one for prescription info and the medication list, which are different objects with different data behind them. Nothing connected them. Staff reconciled the two by hand.</p>
+    <p class="case-section__body type-body">At Elevate Health Technologies, I worked on OnePulse Connect, its specialty pharmacy platform. During dispensing, staff work across two tabs inside the Global Inline Drawer, one for a patient's documents (authorization letters, EOBs, signed prescriptions, consent forms) and one for prescription info and the medication list, which are different objects with different data behind them. Nothing connected them. Staff reconciled the two by hand.</p>
     <div class="case-visual case-visual--transparent">
       <img class="case-visual__image case-visual__image--before-after-cards" src="images/document-prescription-cards-before-after.webp" alt="Before and after: an original prescription card and document card, and their updated versions after gaining a new Linked Documents section on the prescription card (with a Reference Rx tag) and a Linked Medications section on the document card." loading="lazy">
     </div>
@@ -267,18 +267,14 @@
 
   <section class="case-section case-section--alt">
     <h2 class="case-section__heading type-section-heading">Why This Matters</h2>
-    <p class="case-section__body type-body">One staff member works documents from the patient profile instead of an active workflow. She described hunting for an approval letter after the medication had already been dispensed, with no reliable way to find it by medication name. Staff were also renaming files "DO NOT USE," since the only way to retire a document was to delete it.</p>
+    <p class="case-section__body type-body">One staff member works documents from the patient profile instead of an active workflow. She described hunting for an approval letter after the medication had already been dispensed, with no reliable way to find it by medication name. Renaming files "DO NOT USE" was also a common workaround among staff, since the only way to retire a document was to delete it.</p>
     <p class="case-section__body type-body">Once a document could link to several medications, "Print Prescription" had to resolve to exactly one document, even with several Rx Prescription-type documents on file. Otherwise someone would be guessing which one to print in the middle of dispensing.</p>
   </section>
 
   <section class="case-section">
-    <h2 class="case-section__heading type-section-heading">Component Documentation: Linked Documents</h2>
-    <p class="case-section__body type-body">My first version was a flat list with checkboxes, and it didn't work. Three potential users struggled with it in testing. Under time pressure, the linking action wasn't explicit enough.</p>
-    <p class="case-section__body type-body">From a prescription, a user opens Linked Documents and connects existing patient documents to it. On the documents side, the upload dialog has an optional Linked Medications &amp; Prescriptions field for tying a new document to one or more medications or prescriptions right away. If nothing's selected, the document still uploads and lands on the patient's profile only.</p>
-    <div class="case-visual case-visual--transparent">
-      <img class="case-visual__image case-visual__image--linked-medications-field" src="images/linked-medications-field.webp" alt="The Linked Medications & Prescriptions field in the upload dialog, showing two selected chips (Keytruda 100 mg/4 mL Vial and Humira Pen 40 mg/0.8 mL) and helper text: Optional — if no medication is selected, the document will be added to the patient profile only." loading="lazy">
-    </div>
-    <p class="case-section__body type-body">I replaced the checkbox list with a dialog split into two zones. Linked to this Prescription shows whatever's already connected, or an explicit empty state. All Documents is the full list, and clicking Link on any row moves that document into the first zone.</p>
+    <h2 class="case-section__heading type-section-heading">From Checkbox List to Two-Zone Dialog</h2>
+    <p class="case-section__body type-body">My first version was a flat list with checkboxes, and it didn't work. Three pharmacy staff members struggled with it in testing. Under time pressure, the linking action wasn't explicit enough.</p>
+    <p class="case-section__body type-body">I replaced the checkbox list with a dialog split into two zones. Linked to this Prescription shows whatever's already connected, or an explicit empty state. All Documents is the full list, and clicking Link on any row moves that document into the first zone. I refined the two-zone dialog and its labels across a series of review calls with PMs, the Director of Clinical Pharmacy Innovation, and other stakeholders.</p>
     <div class="case-visual">
       <div class="case-clip-video" data-clip-video>
         <video class="case-clip-video__media" poster="videos/link-document-flow-short_poster.jpg" muted loop playsinline aria-label="Clicking Link on a prescription row in All Documents, watching it move into Linked to this Prescription, then unlinking it again to return to the empty state.">
@@ -287,17 +283,22 @@
         </video>
       </div>
     </div>
-    <p class="case-section__body type-body">Table Row, Button, and Alert all came from the system as-is, and I didn't build any new components for this. Later I folded eRx records into the same model as their own document type. That way a prescription received electronically could be linked and replaced the same way as one that came in by fax.</p>
+    <p class="case-section__body type-body">From a prescription, a user opens Linked Documents and connects existing patient documents to it. On the documents side, the upload dialog has an optional Linked Medications &amp; Prescriptions field for tying a new document to one or more medications or prescriptions right away. If nothing's selected, the document still uploads and lands on the patient's profile only.</p>
+    <div class="case-visual case-visual--transparent">
+      <img class="case-visual__image case-visual__image--linked-medications-field" src="images/linked-medications-field.webp" alt="The Linked Medications & Prescriptions field in the upload dialog, showing two selected chips (Keytruda 100 mg/4 mL Vial and Humira Pen 40 mg/0.8 mL) and helper text: Optional — if no medication is selected, the document will be added to the patient profile only." loading="lazy">
+    </div>
+    <p class="case-section__body type-body">Table Row, Button, and Alert all came from the system, and I didn't build any new components for this. Later I folded eRx records into the same model as their own document type. That way a prescription received electronically could be linked and replaced the same way as one that came in by fax.</p>
     <p class="case-section__body type-body">A patient's file could also hold one document, say an authorization letter, that applied to several medications. I added a muted "Also:" line under the filename that lists the other medications it's linked to, and it only appears when that link exists.</p>
     <div class="case-visual case-visual--transparent">
       <img class="case-visual__image case-visual__image--also-linked-line" src="images/also-linked-medication-line.webp" alt="A Data Sharing Consent document row showing a muted 'Also: Atorvastatin 20 mg, Keytruda... +1 more' line under the filename, with a tooltip revealing the additional linked medication, Adalimumab 40 mg." loading="lazy">
     </div>
-    <p class="case-section__body type-body">I proposed that line live in the first working session, and the team responded to it. No design system pattern covered secondary metadata under a primary label that isn't a filename, so I flagged it as a gap in the system.</p>
+    <p class="case-section__body type-body">I proposed that line live in the first working session, and the team responded to it. No design system pattern covered secondary metadata under a primary label that isn't a filename, so I flagged it as a gap in the system and updated the component to cover it.</p>
   </section>
 
   <section class="case-section case-section--alt">
     <h2 class="case-section__heading type-section-heading">Reasoning &amp; Governance</h2>
     <p class="case-section__body type-body">Once "Print Prescription" depended on exactly one reference document, removing that document could leave a prescription with nothing behind it, in a system that dispenses medication. I designed a rule against that before any formal review.</p>
+    <img class="removal-guardrail-image" src="images/removal-guardrail-diagram.webp" alt="Flowchart: saving changes activates removal locks; if the document is the reference, removal is blocked until a replacement is designated; otherwise it can be removed freely." loading="lazy">
     <p class="case-section__body type-body">Links stay editable until you save, since nothing is committed yet. After saving, you can't remove the reference document outright. You have to designate a replacement first. If you link a new Rx-type document while another is already the reference, a "Linked Prescriptions Found" alert asks whether to replace it, add the new one alongside it, or cancel. Replacing the reference always requires a reason, like a new Rx, an updated Rx, or a strength change.</p>
     <div class="case-visual">
       <div class="case-clip-video" data-clip-video>
@@ -307,9 +308,8 @@
         </video>
       </div>
     </div>
-    <p class="case-section__body type-body">The Product Manager and the Director of Clinical Pharmacy Innovation reviewed that logic and didn't change any of it. Clinically, staff never delete patient records, and every prescription keeps a source document attached. The only legitimate reason to fully unlink is a patient-mismatch error, and that gets handled at the patient-record level, outside this dialog. The PM confirmed that the removal lock and reason capture I'd already built matched that standard.</p>
-    <img class="removal-guardrail-image" src="images/removal-guardrail-diagram.webp" alt="Flowchart: saving changes activates removal locks; if the document is the reference, removal is blocked until a replacement is designated; otherwise it can be removed freely." loading="lazy">
-    <p class="case-section__body type-body">For marking the reference document, I had an AI assistant lay out candidate patterns and weigh them against what the design system already had. I picked a persistent row treatment and took it further with a left-stroke highlight and a "Reference Rx" tag on a filled star. The star doubles as the toggle and stays visible at all times, so staff don't miss it in a fast-moving workflow.</p>
+    <p class="case-section__body type-body">The Product Manager and the Director of Clinical Pharmacy Innovation reviewed that logic and didn't change any of it. Clinically, staff never delete patient records, and every prescription keeps a source document attached. The only legitimate reason to fully unlink is a patient-mismatch error, and that gets handled at the patient-record level, outside this dialog. The PM confirmed that the removal lock and reason capture I'd already designed matched that standard.</p>
+    <p class="case-section__body type-body">For marking the reference document, I used an AI assistant to generate candidate patterns and compare them against what the design system already had. I evaluated the options myself, chose a persistent row treatment, and took it further with a left-stroke highlight and a "Reference Rx" tag on a filled star. The star doubles as the toggle and stays visible at all times, so staff don't miss it in a fast-moving workflow.</p>
     <div class="case-visual">
       <div class="case-clip-video" data-clip-video>
         <video class="case-clip-video__media" poster="videos/reference-toggle_poster.jpg" muted loop playsinline aria-label="Clicking the star toggle on a second linked document, moving the left-stroke highlight and Reference Rx tag from the first row to that row.">
@@ -324,7 +324,6 @@
   <section class="case-section">
     <h2 class="case-section__heading type-section-heading">The Design-to-Code Bridge</h2>
     <p class="case-section__body type-body">I built and iterated on this as a working HTML/CSS/JS prototype, with Claude Code writing the code. I wrote the specs, reviewed every change against the design, and made the calls on naming and edge cases.</p>
-    <p class="case-section__body type-body">Each prompt named exactly what should change, down to class names and IDs, and ended with an instruction to leave everything else alone. That kept AI-assisted changes from drifting out of scope without anyone noticing, and it gave me a change log where each prompt maps to one reviewable diff. The Associated-to-Linked rename was the biggest test of that, since it touched visible labels, CSS classes, JS function names, and data properties, and I had to spell out which ones changed and which structural IDs stayed put.</p>
     <div class="case-visual">
       <!-- Intentional exception to the site's 3-5s clip standard (CLAUDE.md):
            this clip's whole purpose is proving the complete flow works
@@ -334,22 +333,23 @@
            removing one of those steps. The beat-specific short version
            already exists separately as link-document-flow-short.webm. -->
       <div class="case-clip-video" data-clip-video>
-        <video class="case-clip-video__media" poster="videos/link-document-full_poster.jpg" muted loop playsinline aria-label="The full Linked Documents flow running live in-browser: opening a prescription's Edit dialog, linking a document from All Documents, setting it as the Reference Rx, saving, and viewing the linked file.">
+        <video class="case-clip-video__media" poster="videos/link-document-full_poster.jpg" muted loop playsinline aria-label="The full Linked Documents flow running in the coded prototype: opening a prescription's Edit dialog, linking a document from All Documents, setting it as the Reference Rx, saving, and viewing the linked file.">
           <source src="videos/link-document-full.webm" type="video/webm">
           <source src="videos/link-document-full.mp4" type="video/mp4">
         </video>
       </div>
     </div>
+    <p class="case-section__body type-body">Each prompt named exactly what should change, down to class names and IDs, and ended with an instruction to leave everything else alone. That kept AI-assisted changes from drifting out of scope without anyone noticing, and it gave me a change log where each prompt maps to one reviewable diff. The Associated-to-Linked rename was the biggest test of that, since it touched visible labels, CSS classes, JS function names, and data properties, and I had to spell out which ones changed and which structural IDs stayed put.</p>
   </section>
 
   <section class="case-section case-section--alt">
-    <h2 class="case-section__heading type-section-heading">Adoption in Production</h2>
-    <p class="case-section__body type-body">I was moving this into the real OPC app when I left the team. I don't have confirmation it reached a full release, and I'm not claiming it did. It did get past design and prototype into active implementation, with a guardrail Product and Clinical Pharmacy leadership had already signed off on.</p>
+    <h2 class="case-section__heading type-section-heading">Where It Stood When I Left</h2>
+    <p class="case-section__body type-body">I handed this off to engineering, who owned the implementation in OnePulse Connect. When I left, it was in review and on the engineering roadmap, with a guardrail Product and Clinical Pharmacy leadership had already signed off on. I don't know whether it has shipped since.</p>
   </section>
 
   <section class="case-section">
     <h2 class="case-section__heading type-section-heading">What's Next</h2>
-    <p class="case-section__body type-body">A few things were still open when this moved into build:</p>
+    <p class="case-section__body type-body">A few things were still open when I handed this off:</p>
     <ul class="case-rules-list">
       <li class="case-rules-list__item type-body">When to require a captured reason on an unlink: later in a workflow, or during early, fluid intake.</li>
       <li class="case-rules-list__item type-body">An active/inactive status for documents, so staff can retire one without the "DO NOT USE" workaround.</li>

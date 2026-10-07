@@ -21,7 +21,7 @@ const projectRows = [
     type: 'Product Design',
     title: 'Solving the Document-Prescription Mismatch',
     subtitle: 'Linking Documents & Prescriptions',
-    description: "I designed the interaction that connects prescriptions and documents. Staff used to reconcile two separate views by hand; now one linking action resolves which document prints.",
+    description: "Staff were reconciling prescriptions and documents by hand across two separate views. I designed an interaction to link them and settle which document prints, and handed it off to engineering.",
     href: 'linking-documents-prescriptions.html',
     video: {
       poster: 'videos/link-document-flow-short_poster.jpg',
