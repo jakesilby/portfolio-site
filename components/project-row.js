@@ -47,7 +47,7 @@ const projectRows = [
       ],
       aspectClass: 'infectionscreening',
     },
-    imageAlt: "Selecting Yes on the infection screening question, causing fever, cough, and urinary status sub-questions to expand inline directly below it.",
+    imageAlt: "Selecting Yes on the infection screening question, causing fever, cough, urinary status, and skin infection sub-questions to expand inline directly below it.",
   },
 ];
 
