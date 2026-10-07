@@ -269,12 +269,15 @@
 
   <section class="case-section">
     <h2 class="case-section__heading type-section-heading">Pre-Infusion as the Worked Example</h2>
-    <p class="case-section__body type-body">I picked pre-infusion to test the framework because nothing else in the catalog is harder. It has the most sections and the most branching, and it's the only assessment type with hard safety stops. If the framework held up here, including for a therapy group like Keytruda where the branching gets especially dense, it would hold up for everything else.</p>
+    <p class="case-section__body type-body">I picked pre-infusion to test the framework because nothing else in the catalog is harder. It has the most sections and the most branching, and it's the only assessment type with hard safety stops. If the framework held up here, it would hold up for everything else.</p>
     <p class="case-section__body type-body">The form has 35 core questions, plus 8 more scoped to diagnosis-specific branches, for 43 total. They fall into ten sections, always in this order: Medication Verification, Vitals, Treatment History, Critical Safety, Infection Screening, Adverse Event History, Pre-medications, Vascular Access, Proceed Decision, and Education &amp; Consent. PMs, the Director of Clinical Pharmacy Innovation, nurses, and other clinical reviewers reviewed that order and the hard stops. As a clinical assessment, it opens as a dedicated full page, and the picker that selects it is the only dialog.</p>
     <p class="case-section__body type-body">The page has three regions. On the left is a vertical list of sections with the active one highlighted, the form sits in the center, and on the right an inline drawer lists completed assessments as cards, so a nurse can check prior responses without losing their place. That drawer belongs to this page. It's separate from the Global Inline Drawer used on Processing pages. An early version swapped the section list for a progress stepper. I cut it because a stepper implies a fixed, linear sequence, and the branching logic doesn't work that way.</p>
-    <div class="case-visual">
-      <img class="case-visual__image case-visual__image--assessmentpage" src="images/as_assessmentpage.png" alt="Full pre-infusion assessment page showing the section-nav list on the left, the form in the center, and an inline drawer showing completed assessments as a card list on the right." loading="lazy">
-    </div>
+    <figure class="case-figure">
+      <div class="case-visual">
+        <img class="case-visual__image case-visual__image--assessmentpage" src="images/as_assessmentpage.png" alt="Full pre-infusion assessment page showing the section-nav list on the left, the form in the center, and an inline drawer showing completed assessments as a card list on the right." loading="lazy">
+      </div>
+      <figcaption class="case-figure__caption type-meta">Patient, medication, and dose are sample data.</figcaption>
+    </figure>
     <p class="case-section__body type-body">Some answers open follow-up questions inline, right below the question that triggered them, with no page reload and no jump away from where the nurse is working.</p>
     <div class="case-visual">
       <img class="case-visual__image case-visual__image--infectionscreening" src="images/as_infectionscreening_expanded.png" alt="Mid-interaction: Yes selected on the infection screening question, with the fever, cough, urinary status, and skin infection sub-questions expanded inline directly below it, all four required and still unanswered." loading="lazy">
