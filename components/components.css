@@ -91,6 +91,11 @@
    * trust the nominal ch count at face value for this font. */
 }
 
+.case-section__body a {
+  color: var(--text-link); /* same treatment as .case-figure__caption a */
+  text-decoration: underline;
+}
+
 /* --- Case study bulleted rules list (e.g. Reasoning & Governance's
  * "standing rules" list) — a real <ul>, not literal bullet characters in
  * <p> tags like Figma's own authoring, for semantics. --- */

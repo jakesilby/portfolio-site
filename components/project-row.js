@@ -38,7 +38,7 @@ const projectRows = [
     type: 'Product Design',
     title: 'Assessments at Scale, Safety Stops Included',
     subtitle: 'Pre-Infusion Assessment Flow',
-    description: "I designed a framework for OnePulse Connect to select, complete, and review clinical assessments at scale, then stress-tested it against the hardest case in the catalog: a 43-question form with hard safety stops.",
+    description: "I designed a framework for OnePulse Connect to select, complete, and review clinical assessments at scale, then stress-tested it against the hardest case in the catalog: a 43-question form with hard safety stops. I prototyped it, but it was never built.",
     href: 'pre-infusion-assessment-flow.html',
     video: {
       poster: 'videos/as_infectionscreening_poster.jpg',
@@ -47,7 +47,7 @@ const projectRows = [
       ],
       aspectClass: 'infectionscreening',
     },
-    imageAlt: "Selecting Yes on the infection screening question, causing fever, cough, and urinary status sub-questions to expand inline directly below it.",
+    imageAlt: "Selecting Yes on the infection screening question, causing fever, cough, urinary status, and skin infection sub-questions to expand inline directly below it.",
   },
 ];
 
