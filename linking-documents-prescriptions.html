@@ -274,10 +274,6 @@
   <section class="case-section">
     <h2 class="case-section__heading type-section-heading">From Checkbox List to Two-Zone Dialog</h2>
     <p class="case-section__body type-body">My first version was a flat list with checkboxes, and it didn't work. Three pharmacy staff members struggled with it in testing. Under time pressure, the linking action wasn't explicit enough.</p>
-    <p class="case-section__body type-body">From a prescription, a user opens Linked Documents and connects existing patient documents to it. On the documents side, the upload dialog has an optional Linked Medications &amp; Prescriptions field for tying a new document to one or more medications or prescriptions right away. If nothing's selected, the document still uploads and lands on the patient's profile only.</p>
-    <div class="case-visual case-visual--transparent">
-      <img class="case-visual__image case-visual__image--linked-medications-field" src="images/linked-medications-field.webp" alt="The Linked Medications & Prescriptions field in the upload dialog, showing two selected chips (Keytruda 100 mg/4 mL Vial and Humira Pen 40 mg/0.8 mL) and helper text: Optional — if no medication is selected, the document will be added to the patient profile only." loading="lazy">
-    </div>
     <p class="case-section__body type-body">I replaced the checkbox list with a dialog split into two zones. Linked to this Prescription shows whatever's already connected, or an explicit empty state. All Documents is the full list, and clicking Link on any row moves that document into the first zone. I refined the two-zone dialog and its labels across a series of review calls with PMs, the Director of Clinical Pharmacy Innovation, and other stakeholders.</p>
     <div class="case-visual">
       <div class="case-clip-video" data-clip-video>
@@ -286,6 +282,10 @@
           <source src="videos/link-document-flow-short.mp4" type="video/mp4">
         </video>
       </div>
+    </div>
+    <p class="case-section__body type-body">From a prescription, a user opens Linked Documents and connects existing patient documents to it. On the documents side, the upload dialog has an optional Linked Medications &amp; Prescriptions field for tying a new document to one or more medications or prescriptions right away. If nothing's selected, the document still uploads and lands on the patient's profile only.</p>
+    <div class="case-visual case-visual--transparent">
+      <img class="case-visual__image case-visual__image--linked-medications-field" src="images/linked-medications-field.webp" alt="The Linked Medications & Prescriptions field in the upload dialog, showing two selected chips (Keytruda 100 mg/4 mL Vial and Humira Pen 40 mg/0.8 mL) and helper text: Optional — if no medication is selected, the document will be added to the patient profile only." loading="lazy">
     </div>
     <p class="case-section__body type-body">Table Row, Button, and Alert all came from the system, and I didn't build any new components for this. Later I folded eRx records into the same model as their own document type. That way a prescription received electronically could be linked and replaced the same way as one that came in by fax.</p>
     <p class="case-section__body type-body">A patient's file could also hold one document, say an authorization letter, that applied to several medications. I added a muted "Also:" line under the filename that lists the other medications it's linked to, and it only appears when that link exists.</p>
