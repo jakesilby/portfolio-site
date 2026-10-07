@@ -239,8 +239,8 @@
         <p class="stat-tile__label type-meta">Clinical &amp; module assessment types the framework generalizes to</p>
       </div>
       <div class="stat-tile">
-        <p class="stat-tile__value type-case-title">2</p>
-        <p class="stat-tile__label type-meta">Validation gaps caught and fixed in prototype testing</p>
+        <p class="stat-tile__value type-case-title">10</p>
+        <p class="stat-tile__label type-meta">Sections in the pre-infusion assessment, in an order reviewed with clinical staff</p>
       </div>
     </div>
   </section>
@@ -304,10 +304,9 @@
   </section>
 
   <section class="case-section">
-    <h2 class="case-section__heading type-section-heading">Catching a Validation Gap in Testing</h2>
-    <p class="case-section__body type-body">The first version of the prototype let a user submit with required fields empty. So Submit needed to stay disabled until those were filled. My first pass at that logic scanned every input on the form instead of only the required ones, and the button stayed disabled even after every requirement was met.</p>
-    <p class="case-section__body type-body">Narrowing the validator to an explicit list of required-field IDs fixed that. Another round of testing turned up a second gap, in infection screening. Answering "yes" there opens three follow-up fields (fever, cough, urinary status) that become required. The validator had no idea a branch had opened, so it let submission through with those fields empty.</p>
-    <p class="case-section__body type-body">I made the required set conditional on that branch. A "yes" on infection screening adds the three follow-up fields, and switching back to "no" removes them. Finding both gaps took two rounds of testing. The first fix narrowed which fields the validator watched, and the second taught it that a branch opening changes what counts as required.</p>
+    <h2 class="case-section__heading type-section-heading">When a Branch Changes What's Required</h2>
+    <p class="case-section__body type-body">Submit had to stay disabled until every required field was filled. On this form, the required set can't be a fixed list. Answering "yes" on infection screening opens four follow-up fields: fever, cough, urinary status, and skin infection. All four become required, and switching back to "no" removes them from the required set. So the spec defines required fields per branch: opening a branch adds its follow-ups to the required set, and closing it takes them out.</p>
+    <p class="case-section__body type-body">The prototype's validator code was AI-generated, and an early version treated the required set as fixed. It let submission through with all four infection follow-ups empty. I caught that by reviewing the generated logic, then prompted a specific fix so the required set follows the branch.</p>
     <div class="case-visual">
       <div class="case-clip-video" data-clip-video>
         <video class="case-clip-video__media" poster="videos/as_validationgap_poster.jpg" muted loop playsinline aria-label="Attempting to submit with infection screening set to Yes and its sub-questions empty: Submit stays disabled and the empty fields highlight, then filling them enables Submit.">
