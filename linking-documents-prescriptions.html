@@ -298,6 +298,7 @@
   <section class="case-section case-section--alt">
     <h2 class="case-section__heading type-section-heading">Reasoning &amp; Governance</h2>
     <p class="case-section__body type-body">Once "Print Prescription" depended on exactly one reference document, removing that document could leave a prescription with nothing behind it, in a system that dispenses medication. I designed a rule against that before any formal review.</p>
+    <img class="removal-guardrail-image" src="images/removal-guardrail-diagram.webp" alt="Flowchart: saving changes activates removal locks; if the document is the reference, removal is blocked until a replacement is designated; otherwise it can be removed freely." loading="lazy">
     <p class="case-section__body type-body">Links stay editable until you save, since nothing is committed yet. After saving, you can't remove the reference document outright. You have to designate a replacement first. If you link a new Rx-type document while another is already the reference, a "Linked Prescriptions Found" alert asks whether to replace it, add the new one alongside it, or cancel. Replacing the reference always requires a reason, like a new Rx, an updated Rx, or a strength change.</p>
     <div class="case-visual">
       <div class="case-clip-video" data-clip-video>
@@ -308,7 +309,6 @@
       </div>
     </div>
     <p class="case-section__body type-body">The Product Manager and the Director of Clinical Pharmacy Innovation reviewed that logic and didn't change any of it. Clinically, staff never delete patient records, and every prescription keeps a source document attached. The only legitimate reason to fully unlink is a patient-mismatch error, and that gets handled at the patient-record level, outside this dialog. The PM confirmed that the removal lock and reason capture I'd already designed matched that standard.</p>
-    <img class="removal-guardrail-image" src="images/removal-guardrail-diagram.webp" alt="Flowchart: saving changes activates removal locks; if the document is the reference, removal is blocked until a replacement is designated; otherwise it can be removed freely." loading="lazy">
     <p class="case-section__body type-body">For marking the reference document, I used an AI assistant to generate candidate patterns and compare them against what the design system already had. I evaluated the options myself, chose a persistent row treatment, and took it further with a left-stroke highlight and a "Reference Rx" tag on a filled star. The star doubles as the toggle and stays visible at all times, so staff don't miss it in a fast-moving workflow.</p>
     <div class="case-visual">
       <div class="case-clip-video" data-clip-video>
@@ -324,7 +324,6 @@
   <section class="case-section">
     <h2 class="case-section__heading type-section-heading">The Design-to-Code Bridge</h2>
     <p class="case-section__body type-body">I built and iterated on this as a working HTML/CSS/JS prototype, with Claude Code writing the code. I wrote the specs, reviewed every change against the design, and made the calls on naming and edge cases.</p>
-    <p class="case-section__body type-body">Each prompt named exactly what should change, down to class names and IDs, and ended with an instruction to leave everything else alone. That kept AI-assisted changes from drifting out of scope without anyone noticing, and it gave me a change log where each prompt maps to one reviewable diff. The Associated-to-Linked rename was the biggest test of that, since it touched visible labels, CSS classes, JS function names, and data properties, and I had to spell out which ones changed and which structural IDs stayed put.</p>
     <div class="case-visual">
       <!-- Intentional exception to the site's 3-5s clip standard (CLAUDE.md):
            this clip's whole purpose is proving the complete flow works
@@ -340,6 +339,7 @@
         </video>
       </div>
     </div>
+    <p class="case-section__body type-body">Each prompt named exactly what should change, down to class names and IDs, and ended with an instruction to leave everything else alone. That kept AI-assisted changes from drifting out of scope without anyone noticing, and it gave me a change log where each prompt maps to one reviewable diff. The Associated-to-Linked rename was the biggest test of that, since it touched visible labels, CSS classes, JS function names, and data properties, and I had to spell out which ones changed and which structural IDs stayed put.</p>
   </section>
 
   <section class="case-section case-section--alt">
