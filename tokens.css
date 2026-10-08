@@ -204,12 +204,22 @@
   --layout-case-content-width: 760px; /* case-study content column — matches the
    * hardcoded 760px on .case-visual, .case-image-stack and friends, which
    * still need moving onto this token */
+  --layout-case-wide-width: calc(var(--layout-max-width) - 2 * var(--padding-section-x)); /* NEW — wide case-study
+   * figures (Carbon token audit's DevTools/terminal screenshots) that break out
+   * of the 760px text column so small UI text stays legible. Derived, not a new
+   * px value: the full 1200px layout minus the section's own side padding. */
 
   /* --- Radius primitives --- */
   --radius-full: 99px; /* pill/fully-rounded — safely larger than half the height of anything it's applied to */
   --radius-sm: var(--space-4); /* NEW — Problem Diagram resolved-side image frame corners, confirmed against Figma */
   --radius-md: var(--space-8); /* case-study row image corners, confirmed against Figma */
   --radius-lg: var(--space-16); /* NEW — homepage hero card + glow corners, confirmed against Figma node 378:160 (381:486/381:487) */
+
+  /* --- Border width primitives --- */
+  --border-width-hairline: 1px; /* NEW — added for the case-study code block
+   * (.case-code). Same 1px every existing border on the site already uses
+   * inline (.badge, .case-footer-nav, .section-label); those still need
+   * moving onto this token. */
 
   /* --- Spacing primitives --- */
   --space-4: 4px;
@@ -609,6 +619,28 @@
 .type-body strong,
 .type-body .lead-in {
   font-weight: var(--font-weight-semibold);
+}
+
+.type-subsection-heading {
+  /* NEW — h3 inside a case-study section ("Finding one: ...", Carbon token
+   * audit). One step below .type-section-heading (24px bold) on the existing
+   * scale; no Figma frame for this yet. */
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-18);
+  line-height: var(--line-height-24);
+  letter-spacing: var(--letter-spacing-none);
+}
+
+.type-code {
+  /* NEW — SCSS snippets and inline code in case-study prose (Carbon token
+   * audit). Same mono family as .type-meta/.type-token-name, but no wide
+   * tracking: tracking distorts code, where character alignment matters. */
+  font-family: var(--font-family-mono);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-13);
+  line-height: var(--line-height-20);
+  letter-spacing: var(--letter-spacing-none);
 }
 
 /* --- About page additions (introduced while building the About page,

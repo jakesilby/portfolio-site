@@ -28,6 +28,21 @@ A design-systems/design-to-code portfolio: a homepage plus four case studies (Pu
 
 Content and layout stay separate. A case study is a content file rendered through the shared template — updating a case study later means editing the content file, not touching component code. Adding case study #5 means adding a content file, not building a new page from scratch.
 
+**As actually built (confirmed 2026-10-08):** there is no markdown-rendering template yet. Each case study is a root-level hand-coded page (`onepulse-connect.html`, `pre-infusion-assessment-flow.html`, `carbon-token-audit.html`, ...) assembled from shared classes in `components/components.css` and the shared scripts (`case-header.js`, `footer.js`, `lightbox.js`, `clip-video.js`). The `.md` in `/content/case-studies/` is the canonical copy: edit it first, then sync the page to it verbatim. Put a comment near the top of the page that names its content file. Working notes in a content file (a "Notes for you" section after a closing `---`, draft-status lines, `[VISUAL]` notes) are never rendered.
+
+## Case study page conventions
+
+- **Page skeleton:** `case-header.js` → `.case-title-block` → (optional `.case-hero`, `.at-a-glance`) → `.case-section`s alternating `--alt` (first section is `--alt`) → `.case-footer-nav` → `footer.js`, `lightbox.js`. `<body data-page="case-study" id="top">`.
+- **Title block eyebrow:** "Case study" for OPC work, "Personal project" for personal work. If the content file has no description, meta line or stats, leave them out rather than writing new copy.
+- **Homepage listing:** add a row to the `projectRows` array in `components/project-row.js`. Personal projects use `type: 'Personal project'` as the badge, in the same list (decided 2026-10-08, no separate section). Rows take either `video` or a static `image`.
+- **Images:** live flat in `/images/`, named `<project-prefix>-<subject>.<ext>` (e.g. `carbon-classifier-flow.png`, `ds_tabgroup.webp`). An optional `/images/large/` copy serves as the lightbox source when the inline file is downsized. Every real image gets its own `case-visual__image--<name>` modifier with `aspect-ratio` set from the file's real pixel dimensions, plus `loading="lazy" data-lightbox-src="<path>" tabindex="0" role="button"` so it opens full size.
+- **Screenshot vs diagram:** screenshots sit in a `.case-visual` tray (add `--transparent` if the capture has its own light background). Diagrams drawn in the site's own visual language get no tray: use `.case-diagram` (or the older page-local equivalents) directly.
+- **Captions:** wrap image and caption in `.case-figure`, with `<figcaption class="case-figure__caption type-meta">`. Alt text and captions come verbatim from the content file.
+- **Small text in screenshots** (DevTools, terminal, dense UI): use `.case-figure--wide`, which breaks out to `--layout-case-wide-width` while its caption stays at the text-column width. It still opens in the lightbox.
+- **Code:** multi-line or standalone snippets use `<pre class="case-code type-code"><code>…</code></pre>`, which scrolls horizontally and never wraps. Inline code in prose and captions uses `<code class="case-code-inline">`.
+- **Subsections:** `<h3 class="case-section__subheading type-subsection-heading">` inside a `.case-section`.
+- **Lists:** `.case-rules-list` / `.case-rules-list__item type-body`, a real `<ul>`.
+
 ## Component conventions
 
 - BEM-style class naming (matches the Pulse library conventions).
@@ -67,6 +82,6 @@ Every `[VISUAL]` note in a case study draft carries a tag: STATIC, CLIP, or LIVE
 
 ## Open questions to fill in as decided
 
-- Final stack choice (plain static vs. Astro): ___
+- Final stack choice (plain static vs. Astro): plain static in practice, as of 2026-10-08 (hand-coded pages + shared components, no build step). A markdown-rendering template is still undecided.
 - Hosting provider: Vercel (default recommendation — swap this line if you go with Netlify instead)
 - Domain: ___

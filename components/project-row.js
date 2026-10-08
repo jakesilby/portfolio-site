@@ -49,6 +49,20 @@ const projectRows = [
     },
     imageAlt: "Selecting Yes on the infection screening question, causing fever, cough, urinary status, and skin infection sub-questions to expand inline directly below it.",
   },
+  {
+    // Personal project, not OPC work — the type badge says so in place of
+    // a discipline label. Description is lifted verbatim from the draft's
+    // opening (content/case-studies/carbon-token-audit-case-study-v1.md)
+    // until a row-specific line is written.
+    year: '2026',
+    type: 'Personal project',
+    title: 'Auditing Carbon for Token Drift',
+    subtitle: 'Carbon Design System',
+    description: "Design systems document their token scale. Nothing stops a contributor from typing 48px instead of reaching for $spacing-09. I wanted to know how much of that drift shows up in a real, mature design system running in production.",
+    href: 'carbon-token-audit.html',
+    image: 'images/carbon-classifier-flow.png',
+    imageAlt: "Flowchart of the classify() function. A raw pixel value is checked against the spacing scale, then for border, outline or 1px exceptions, then for a real token on the same line, then split by property type into four buckets: spacing candidate, mixed usage, sizing, and verify manually.",
+  },
 ];
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
