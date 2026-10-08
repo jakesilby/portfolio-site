@@ -32,7 +32,7 @@ The first version treated every matching property the same way. Wrong. Design sy
 
 ## Validating the Findings
 
-I ran the script against a clone of Carbon's main branch as of September 15, 2026 (commit `a497938ff2`), across the SCSS files under `packages/` (about 1,300, before the script skips tests, examples and build output). It turned up 19 mixed-usage candidates, 166 spacing candidates, 322 sizing matches, and 868 border, outline and 1px entries to verify manually. I didn't trust the output on its own. A tool that flags things can still be wrong. I picked two candidates from different files and components, and checked each one three separate ways: the source declaration, a live render in Carbon's own Storybook, and the commit history behind the line. A third line, from the mixed-usage bucket, turned out to be a false positive, so the 19 are less solid than they look.
+I ran the script against a clone of Carbon's main branch as of September 15, 2026 (commit `a497938ff2`), across the SCSS files under `packages/` (about 1,300, before the script skips tests, examples and build output). It turned up 19 mixed-usage candidates, 166 spacing candidates, 322 sizing matches, and 868 border, outline and 1px entries to verify manually. I didn't trust the output on its own. A tool that flags things can still be wrong. I picked two candidates from different files and components, and checked each one three separate ways: the source declaration, a live render in Carbon's own Storybook, and the commit history behind the line. A third line, from the same mixed-usage bucket as Finding One, turned out to be a false positive, so the 19 are less solid than they look.
 
 ### Finding One: Fluid ComboBox Validation Message
 
@@ -102,7 +102,9 @@ I'm leaving this one in because a tool with zero false positives usually means n
 
 So how much drift is there? I can't put a number on it yet. The script flagged 185 spacing and mixed-usage lines. I've checked three, and one of those was my tool's mistake. The next pass works through the remaining mixed-usage bucket first, since it's the smallest group, then fixes the classifier's sizing-property gap so a rerun doesn't repeat that false positive. I haven't reported either finding to the Carbon team. Before I do, I want a larger sample behind the report, so it doesn't rest on two examples.
 
-If I owned a system like this, I'd want an automatic check on every proposed code change that flags a raw pixel value on a spacing property that matches a token. A reviewer would see it before it ships, long before anyone ran an audit.
+Carbon's own stylelint setup doesn't catch either finding. Both flagged files pass it without a warning, and the config has no rule that compares a raw value to a token.
+
+If I owned a system like this, I'd want an automatic check on every proposed code change that flags a raw pixel value on a spacing property that matches a token. I'd start with spacing only. Both real findings were spacing declarations, and a check that covered sizing properties would have flagged the tabs formula too. A reviewer would see it before it ships, long before anyone ran an audit.
 
 ---
 
