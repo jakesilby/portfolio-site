@@ -2,7 +2,7 @@
 
 *Draft v1. Working title, structure open to change.*
 
-I directed Claude Code to build a script that finds hardcoded spacing values in IBM's Carbon design system, then checked what it flagged against Storybook and git history. Two of the three lines I checked were real drift. The third was a false positive from my own tool.
+I directed Claude Code to build a script that finds hardcoded spacing values in IBM's Carbon design system. I checked three of the lines it flagged. Two were real drift, confirmed in Storybook and git history. The third was a false positive from my own tool.
 
 ## The Problem
 
@@ -18,13 +18,13 @@ Reviewing SCSS by hand for this is slow and unreliable. A script can flag candid
 
 ## Building the Tool
 
-I directed Claude Code to build a Python script, `token_drift_finder.py`, that scans Carbon's SCSS for raw pixel values and checks each one against the published spacing scale (`$spacing-01` through `$spacing-10`, 2px to 64px). A raw value matching a token gets flagged as a candidate. The script only flags. I checked every finding on this page myself.
+I had Claude Code build a Python script, `token_drift_finder.py`, that scans Carbon's SCSS for raw pixel values and checks each one against the published spacing scale (`$spacing-01` through `$spacing-10`, 2px to 64px). A raw value matching a token gets flagged as a candidate. The script only flags. I checked every finding on this page myself.
 
 The first version treated every matching property the same way. Wrong. Design systems reuse the same numeric scale for both spacing (padding, margin, gap) and sizing (width, height, font-size, line-height) on purpose, so a 40px button height matching `$spacing-08` is just the scale doing its job. The classifier now splits the two apart:
 
 - **Spacing properties** (padding, margin, gap, inset) where a raw value matches a token are real candidates.
 - **Sizing properties** (width, height, font-size, line-height) where a raw value matches a token are expected reuse, shown for reference and not flagged.
-- **Mixed usage**, where a real token and a raw matching value show up in the same declaration, counts as the strongest evidence in this version of the script. It suggests the token system was in use right at that spot. As the false positive below shows, that rule needed a correction.
+- **Mixed usage**, where a real token and a raw matching value show up in the same declaration, counts as the strongest evidence in this version of the script. It suggests the token system was in use right at that spot. As the false positive below shows, that rule is too broad, and I haven't fixed it yet.
 
 ![Flowchart of the classify() function. A raw pixel value is checked against the spacing scale, then for border, outline or 1px exceptions, then for a real token on the same line, then split by property type into four buckets: spacing candidate, mixed usage, sizing, and verify manually.](images/carbon-classifier-flow.png)
 
@@ -32,7 +32,7 @@ The first version treated every matching property the same way. Wrong. Design sy
 
 ## Validating the Findings
 
-I ran the script against a clone of Carbon's main branch as of September 15, 2026 (commit `a497938ff2`), across the SCSS files under `packages/` (about 1,300, before the script skips tests, examples and build output). It turned up 19 mixed-usage candidates, 166 spacing candidates, 322 sizing matches, and 868 border, outline and 1px entries to verify manually. The 19 are less solid than they look: of the two I checked from that bucket, one was real and one was the false positive described below. I didn't trust the output on its own. A tool that flags things can still be wrong. I picked two candidates from different files, different components, and checked each one three separate ways: the source declaration, a live render in Carbon's own Storybook, and the commit history behind the line.
+I ran the script against a clone of Carbon's main branch as of September 15, 2026 (commit `a497938ff2`), across the SCSS files under `packages/` (about 1,300, before the script skips tests, examples and build output). It turned up 19 mixed-usage candidates, 166 spacing candidates, 322 sizing matches, and 868 border, outline and 1px entries to verify manually. I didn't trust the output on its own. A tool that flags things can still be wrong. I picked two candidates from different files and components, and checked each one three separate ways: the source declaration, a live render in Carbon's own Storybook, and the commit history behind the line. A third line, from the mixed-usage bucket, turned out to be a false positive, so the 19 are less solid than they look.
 
 ### Finding One: Fluid ComboBox Validation Message
 
@@ -46,7 +46,7 @@ This is the padding on the validation message that appears under a Fluid ComboBo
 
 **Source code.** A token and a raw matching value, sitting side by side in the same line.
 
-**Live render.** I built the package, ran Carbon's own Storybook locally, set a Fluid ComboBox to its invalid state, and inspected the rendered validation message in DevTools. Computed padding: `8px 64px 8px 16px`. Confirms this rule is live in Carbon's current source.
+**Live render.** I built the package, ran Carbon's own Storybook locally, set a Fluid ComboBox to its invalid state, and inspected the rendered validation message in DevTools. Computed padding: `8px 64px 8px 16px`. Confirms this rule is live in Carbon's source at the commit I scanned.
 
 ![Storybook's Fluid ComboBox in its invalid state, with Chrome DevTools open on the validation message and the Computed tab showing padding of 8px, 64px, 8px and 16px.](images/carbon-fluid-combobox-computed.png)
 
@@ -94,13 +94,15 @@ line-height: calc(#{convert.to-rem(48px)} - (#{$spacing-03} * 2));
 
 On the surface it looks like the same pattern: a raw `48px` next to a real token. Look closer and it's a formula. A 48px-tall tab minus 16px of vertical padding (`$spacing-03` times two, top and bottom) computes a 32px line-height so the label centers correctly. The raw 48px references the component's total height and feeds directly into that calculation.
 
-The bug was in my own classifier. It flagged any line with a nearby token as strongest evidence, even when the raw value sat on a sizing property it was supposed to treat as expected reuse. The sizing carve-out for the simple case didn't survive a raw value and a token showing up in the same computed expression.
+I caught this one in the output and raised it with Claude Code. The bug was in the classifier. It flagged any line with a nearby token as strongest evidence, even when the raw value sat on a sizing property it was supposed to treat as expected reuse. The sizing carve-out for the simple case didn't survive a raw value and a token showing up in the same computed expression.
 
 I'm leaving this one in because a tool with zero false positives usually means nobody looked hard enough at its output.
 
 ## What's Next
 
-So how much drift is there? I can't put a number on it yet. The script flagged 185 spacing and mixed-usage lines. I've checked three, and one of those was my tool's mistake. The next pass works through the remaining mixed-usage bucket first, since it's the smallest group, then fixes the classifier's sizing-property gap so a rerun doesn't repeat that false positive. I haven't reported either finding to the Carbon team.
+So how much drift is there? I can't put a number on it yet. The script flagged 185 spacing and mixed-usage lines. I've checked three, and one of those was my tool's mistake. The next pass works through the remaining mixed-usage bucket first, since it's the smallest group, then fixes the classifier's sizing-property gap so a rerun doesn't repeat that false positive. I haven't reported either finding to the Carbon team. If I do, I want a larger sample behind the report first, so it doesn't rest on two examples.
+
+If I owned a system like this, I'd want an automatic check on every proposed code change that flags a raw pixel value matching a token. A reviewer would see it before it ships, long before anyone ran an audit.
 
 ---
 
