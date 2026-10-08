@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auditing Carbon for Token Drift — Jake Silby</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&family=Spline+Sans+Mono:wght@400;500&family=Barlow:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components/components.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      background: var(--bg-page);
+      color: var(--text-primary);
+      font-family: var(--font-family-sans);
+    }
+
+    /* --- Title block — same page-local pattern as the three OPC case
+     * studies, trimmed to eyebrow + title: this personal project's content
+     * file has no description, meta line, hero or stats, and none were
+     * written for it (see content/case-studies/carbon-token-audit-case-study-v1.md). --- */
+
+    .case-title-block {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-stack);
+      background: var(--bg-page);
+      padding: var(--space-24) var(--padding-section-x) var(--padding-section-x);
+    }
+
+    .case-title-block__eyebrow {
+      color: var(--accent-primary-dark); /* same contrast fix as the other
+       * case studies' eyebrows — accent-primary fails 4.5:1 on bg-page. */
+      letter-spacing: var(--letter-spacing-none);
+    }
+
+    .case-title-block__title {
+      color: var(--text-primary);
+      max-width: var(--layout-case-content-width);
+      font-size: var(--font-size-40);
+    }
+
+    .case-title-block__description {
+      color: var(--text-secondary);
+      max-width: var(--layout-case-content-width);
+    }
+
+    /* --- Real screenshots — each sets its own aspect-ratio from the real
+     * capture, same convention as the other case studies. --- */
+
+    .case-visual__image--fluid-combobox-computed {
+      aspect-ratio: 2696 / 1632;
+    }
+
+    .case-visual__image--blame-fluid-combobox {
+      aspect-ratio: 1864 / 350;
+    }
+
+    .case-visual__image--inline-dropdown-computed {
+      aspect-ratio: 2696 / 1626;
+    }
+
+    .case-visual__image--diff-inline-dropdown {
+      aspect-ratio: 1860 / 566;
+    }
+
+    .case-diagram--classifier-flow {
+      aspect-ratio: 2200 / 1400;
+    }
+  </style>
+</head>
+<body data-page="case-study" id="top">
+  <script src="components/case-header.js"></script>
+
+  <!-- Content source: content/case-studies/carbon-token-audit-case-study-v1.md.
+       Copy is verbatim from that file; edit there first, then sync here.
+       Its "Notes for you" section and the draft-status line under the
+       title are working notes, not page content. -->
+  <section class="case-title-block">
+    <p class="case-title-block__eyebrow type-label-secondary">Personal project</p>
+    <h1 class="case-title-block__title type-page-title">Auditing Carbon for Token Drift</h1>
+    <p class="case-title-block__description type-tagline">I directed Claude Code to build a script that finds hardcoded spacing values in IBM's Carbon design system, then checked what it flagged against Storybook and git history. Two of the three lines I checked were real drift. The third was a false positive from my own tool.</p>
+  </section>
+
+  <section class="case-section case-section--alt">
+    <h2 class="case-section__heading type-section-heading">The Problem</h2>
+    <p class="case-section__body type-body">Design systems document their token scale. Nothing stops a contributor from typing <code class="case-code-inline">48px</code> instead of reaching for <code class="case-code-inline">$spacing-09</code>. Both render identically. The drift stays invisible until someone goes looking for it, and eyeballing a codebase with hundreds of component files doesn't scale.</p>
+    <p class="case-section__body type-body">I wanted to know how much of that drift shows up in a real, mature design system running in production. I picked Carbon, IBM's open-source design system, because it's large, widely used, and still under active development.</p>
+  </section>
+
+  <section class="case-section">
+    <h2 class="case-section__heading type-section-heading">Why This Matters</h2>
+    <p class="case-section__body type-body">A token scale only holds its value when teams actually reference it. Every raw pixel value that happens to match a token is a missed connection. You update <code class="case-code-inline">$spacing-03</code> expecting every 8px gap in the product to move with it, then find a handful of components that never referenced the token at all. The gap shows up later, mid-redesign or during an accessibility pass, after it has already cost someone time.</p>
+    <p class="case-section__body type-body">Reviewing SCSS by hand for this is slow and unreliable. A script can flag candidates quickly, and a person confirms each one. I built the project around that split.</p>
+  </section>
+
+  <section class="case-section case-section--alt">
+    <h2 class="case-section__heading type-section-heading">Building the Tool</h2>
+    <p class="case-section__body type-body">I directed Claude Code to build a Python script, <code class="case-code-inline">token_drift_finder.py</code>, that scans Carbon's SCSS for raw pixel values and checks each one against the published spacing scale (<code class="case-code-inline">$spacing-01</code> through <code class="case-code-inline">$spacing-10</code>, 2px to 64px). A raw value matching a token gets flagged as a candidate. The script only flags. I checked every finding on this page myself.</p>
+    <p class="case-section__body type-body">The first version treated every matching property the same way. Wrong. Design systems reuse the same numeric scale for both spacing (padding, margin, gap) and sizing (width, height, font-size, line-height) on purpose, so a 40px button height matching <code class="case-code-inline">$spacing-08</code> is just the scale doing its job. The classifier now splits the two apart:</p>
+    <ul class="case-rules-list">
+      <li class="case-rules-list__item type-body"><strong>Spacing properties</strong> (padding, margin, gap, inset) where a raw value matches a token are real candidates.</li>
+      <li class="case-rules-list__item type-body"><strong>Sizing properties</strong> (width, height, font-size, line-height) where a raw value matches a token are expected reuse, shown for reference and not flagged.</li>
+      <li class="case-rules-list__item type-body"><strong>Mixed usage</strong>, where a real token and a raw matching value show up in the same declaration, counts as the strongest evidence in this version of the script. It suggests the token system was in use right at that spot. As the false positive below shows, that rule needed a correction.</li>
+    </ul>
+    <figure class="case-figure case-figure--wide">
+      <img class="case-diagram case-diagram--classifier-flow" src="images/carbon-classifier-flow.png" alt="Flowchart of the classify() function. A raw pixel value is checked against the spacing scale, then for border, outline or 1px exceptions, then for a real token on the same line, then split by property type into four buckets: spacing candidate, mixed usage, sizing, and verify manually." loading="lazy" data-lightbox-src="images/carbon-classifier-flow.png" tabindex="0" role="button">
+      <figcaption class="case-figure__caption type-meta">How the classifier sorted each raw pixel value in this run. The order of the checks matters: exceptions are caught before anything is called drift. Letting a token on the same line outrank the property type turned out to be a bug (see below).</figcaption>
+    </figure>
+  </section>
+
+  <section class="case-section">
+    <h2 class="case-section__heading type-section-heading">Validating the Findings</h2>
+    <p class="case-section__body type-body">I ran the script against a clone of Carbon's main branch as of September 15, 2026 (commit <code class="case-code-inline">a497938ff2</code>), across the SCSS files under <code class="case-code-inline">packages/</code> (about 1,300, before the script skips tests, examples and build output). It turned up 19 mixed-usage candidates, 166 spacing candidates, 322 sizing matches, and 868 border, outline and 1px entries to verify manually. The 19 are less solid than they look: of the two I checked from that bucket, one was real and one was the false positive described below. I didn't trust the output on its own. A tool that flags things can still be wrong. I picked two candidates from different files, different components, and checked each one three separate ways: the source declaration, a live render in Carbon's own Storybook, and the commit history behind the line.</p>
+
+    <h3 class="case-section__subheading type-subsection-heading">Finding One: Fluid ComboBox Validation Message</h3>
+    <p class="case-section__body type-body">The flagged line, in <code class="case-code-inline">packages/styles/scss/components/fluid-list-box/_fluid-list-box.scss</code>:</p>
+    <pre class="case-code type-code"><code>padding: convert.to-rem(8px) 4rem convert.to-rem(8px) $spacing-05;</code></pre>
+    <p class="case-section__body type-body">This is the padding on the validation message that appears under a Fluid ComboBox when it's in an invalid or warning state. The left value correctly references <code class="case-code-inline">$spacing-05</code>. The top and bottom values are hardcoded <code class="case-code-inline">8px</code>, the same value as <code class="case-code-inline">$spacing-03</code>. The <code class="case-code-inline">4rem</code> in the middle is raw too, and equals <code class="case-code-inline">$spacing-10</code>.</p>
+    <p class="case-section__body type-body"><strong>Source code.</strong> A token and a raw matching value, sitting side by side in the same line.</p>
+    <p class="case-section__body type-body"><strong>Live render.</strong> I built the package, ran Carbon's own Storybook locally, set a Fluid ComboBox to its invalid state, and inspected the rendered validation message in DevTools. Computed padding: <code class="case-code-inline">8px 64px 8px 16px</code>. Confirms this rule is live in Carbon's current source.</p>
+    <figure class="case-figure case-figure--wide">
+      <div class="case-visual">
+        <img class="case-visual__image case-visual__image--fluid-combobox-computed" src="images/carbon-fluid-combobox-computed.png" alt="Storybook's Fluid ComboBox in its invalid state, with Chrome DevTools open on the validation message and the Computed tab showing padding of 8px, 64px, 8px and 16px." loading="lazy" data-lightbox-src="images/carbon-fluid-combobox-computed.png" tabindex="0" role="button">
+      </div>
+      <figcaption class="case-figure__caption type-meta">The validation message under an invalid Fluid ComboBox in Carbon's own Storybook. Computed padding is 8px 64px 8px 16px, matching the source line.</figcaption>
+    </figure>
+    <p class="case-section__body type-body"><strong>Commit history.</strong> Plain git blame on the line points to a 2023 commit, but that commit is a bulk rename of Carbon's <code class="case-code-inline">rem()</code> function to <code class="case-code-inline">to-rem()</code> across dozens of files. It reformatted the line without writing it. Blaming the file as it stood just before the rename shows the real origin: the October 2022 commit that implemented FluidDropdown, where the line read <code class="case-code-inline">padding: rem(8px) 4rem rem(8px) $spacing-05;</code>. The raw <code class="case-code-inline">8px</code> and the <code class="case-code-inline">$spacing-05</code> token were typed into the same declaration on the same day. That makes it an inconsistency at the point of authorship.</p>
+    <figure class="case-figure case-figure--wide">
+      <div class="case-visual">
+        <img class="case-visual__image case-visual__image--blame-fluid-combobox" src="images/carbon-blame-fluid-combobox.png" alt="Two git blame results for the same line. The current file attributes it to a 2023 rename commit. The file as it stood before that commit attributes it to the original October 2022 commit, reading padding: rem(8px) 4rem rem(8px) $spacing-05." loading="lazy" data-lightbox-src="images/carbon-blame-fluid-combobox.png" tabindex="0" role="button">
+      </div>
+      <figcaption class="case-figure__caption type-meta">Top: blame on today's file stops at a 2023 rename commit. Bottom: blame on the file just before that rename, which lands on the October 2022 commit that first wrote the line.</figcaption>
+    </figure>
+
+    <h3 class="case-section__subheading type-subsection-heading">Finding Two: Inline Dropdown Grid Gap</h3>
+    <p class="case-section__body type-body">The second flagged line, in <code class="case-code-inline">packages/styles/scss/components/dropdown/_dropdown.scss</code>:</p>
+    <pre class="case-code type-code"><code>grid-gap: 0 convert.to-rem(8px);</code></pre>
+    <p class="case-section__body type-body">This sits on <code class="case-code-inline">.cds--dropdown__wrapper--inline</code>, the wrapper that lays out the inline variant of Dropdown, where the label and the field sit side by side instead of stacked. The <code class="case-code-inline">8px</code> controls the horizontal gap between them, hardcoded rather than referencing <code class="case-code-inline">$spacing-03</code>.</p>
+    <p class="case-section__body type-body"><strong>Source code.</strong> A single, standalone raw value on a spacing property. No token anywhere in the declaration. The property itself, <code class="case-code-inline">grid-gap</code>, already settles whether this is spacing or sizing, so nothing neighboring is needed to prove intent.</p>
+    <p class="case-section__body type-body"><strong>Live render.</strong> In Storybook, I opened Dropdown's Inline story, selected the wrapper element in DevTools, and confirmed the computed values: <code class="case-code-inline">column-gap: 8px</code> and <code class="case-code-inline">row-gap: 0px</code>. Chrome splits the <code class="case-code-inline">grid-gap</code> shorthand into those two longhands in its Computed tab, and the Styles tab still shows the authored <code class="case-code-inline">grid-gap: 0 0.5rem</code>. Same number as the source. The rule is live.</p>
+    <figure class="case-figure case-figure--wide">
+      <div class="case-visual">
+        <img class="case-visual__image case-visual__image--inline-dropdown-computed" src="images/carbon-inline-dropdown-computed.png" alt="Storybook's Inline Dropdown with Chrome DevTools open on the wrapper element, and the Computed tab showing column-gap of 8px and row-gap of 0px." loading="lazy" data-lightbox-src="images/carbon-inline-dropdown-computed.png" tabindex="0" role="button">
+      </div>
+      <figcaption class="case-figure__caption type-meta">The inline Dropdown wrapper in Storybook. Computed column-gap is 8px and row-gap is 0px, the two halves of the authored <code class="case-code-inline">grid-gap: 0 0.5rem</code>.</figcaption>
+    </figure>
+    <p class="case-section__body type-body"><strong>Commit history.</strong> Git blame attributes the line to a 13-file commit from April 14, 2026, fixing invalid and warn states across components. The diff shows what that commit did to the line: the <code class="case-code-inline">grid-gap</code> declaration already existed, and the commit changed the value from <code class="case-code-inline">convert.to-rem(24px)</code> to <code class="case-code-inline">convert.to-rem(8px)</code>. Neither value used a token. 24px matches <code class="case-code-inline">$spacing-06</code> and 8px matches <code class="case-code-inline">$spacing-03</code>. So someone edited this exact value in April 2026 and still didn't reach for the token, in a system with a well-documented spacing scale.</p>
+    <figure class="case-figure case-figure--wide">
+      <div class="case-visual">
+        <img class="case-visual__image case-visual__image--diff-inline-dropdown" src="images/carbon-diff-inline-dropdown.png" alt="A git diff from April 2026 showing the grid-gap line changing from convert.to-rem(24px) to convert.to-rem(8px), with no token on either side." loading="lazy" data-lightbox-src="images/carbon-diff-inline-dropdown.png" tabindex="0" role="button">
+      </div>
+      <figcaption class="case-figure__caption type-meta">The April 2026 commit that touched the line. The gap went from a raw 24px to a raw 8px.</figcaption>
+    </figure>
+    <p class="case-section__body type-body">The two findings sit in different components, were written by different people in different years, and both survived the same three-layer check. Two examples can't establish a rate. They do show the drift in both old and new code.</p>
+  </section>
+
+  <section class="case-section case-section--alt">
+    <h2 class="case-section__heading type-section-heading">Catching My Own Tool's False Positive</h2>
+    <p class="case-section__body type-body">Not every flagged line held up. The script's strongest bucket, "mixed usage," also caught this line in <code class="case-code-inline">_tabs.scss</code>:</p>
+    <pre class="case-code type-code"><code>line-height: calc(#{convert.to-rem(48px)} - (#{$spacing-03} * 2));</code></pre>
+    <p class="case-section__body type-body">On the surface it looks like the same pattern: a raw <code class="case-code-inline">48px</code> next to a real token. Look closer and it's a formula. A 48px-tall tab minus 16px of vertical padding (<code class="case-code-inline">$spacing-03</code> times two, top and bottom) computes a 32px line-height so the label centers correctly. The raw 48px references the component's total height and feeds directly into that calculation.</p>
+    <p class="case-section__body type-body">The bug was in my own classifier. It flagged any line with a nearby token as strongest evidence, even when the raw value sat on a sizing property it was supposed to treat as expected reuse. The sizing carve-out for the simple case didn't survive a raw value and a token showing up in the same computed expression.</p>
+    <p class="case-section__body type-body">I'm leaving this one in because a tool with zero false positives usually means nobody looked hard enough at its output.</p>
+  </section>
+
+  <section class="case-section">
+    <h2 class="case-section__heading type-section-heading">What's Next</h2>
+    <p class="case-section__body type-body">So how much drift is there? I can't put a number on it yet. The script flagged 185 spacing and mixed-usage lines. I've checked three, and one of those was my tool's mistake. The next pass works through the remaining mixed-usage bucket first, since it's the smallest group, then fixes the classifier's sizing-property gap so a rerun doesn't repeat that false positive. I haven't reported either finding to the Carbon team.</p>
+  </section>
+
+  <footer class="case-footer-nav">
+    <a class="case-footer-nav__link type-label-secondary" href="#top">Back to top</a>
+    <a class="case-footer-nav__link type-label-secondary" href="index.html">More work →</a>
+  </footer>
+
+  <script src="components/footer.js"></script>
+  <script src="components/lightbox.js"></script>
+</body>
+</html>

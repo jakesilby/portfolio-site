@@ -225,6 +225,89 @@
   text-decoration: underline;
 }
 
+/* Wide figure — breaks out of the 760px text column up to the full layout
+ * width, for screenshots whose small DevTools/terminal text would be
+ * illegible at 712px (Carbon token audit). The tray and image inside drop
+ * their own fixed 760/712px caps so they fill the wider figure. Still
+ * opens full size in the lightbox like every other case-study image. */
+.case-figure--wide {
+  width: var(--layout-case-wide-width);
+}
+
+.case-figure--wide .case-visual {
+  width: 100%;
+}
+
+.case-figure--wide .case-visual__image {
+  max-width: none;
+}
+
+.case-figure--wide .case-figure__caption {
+  max-width: var(--layout-case-content-width); /* the image goes wide; the
+   * caption keeps the text column's line length */
+}
+
+/* Bare diagram — a diagram built in the site's own visual language
+ * (transparent/flat background) gets no .case-visual tray, same as
+ * Linking Documents' .removal-guardrail-image and Pre-Infusion's
+ * .framework-diagram-image (both page-local there). Shared here so a
+ * diagram with a caption can use .case-figure without the tray. */
+.case-diagram {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* --- Case study subsection heading (h3 within a .case-section, e.g.
+ * "Finding one: ...") --- */
+
+.case-section__subheading {
+  color: var(--text-primary);
+  margin-top: var(--gap-section); /* doubles the section's own 20px gap above
+   * a subsection, so it reads as a break rather than another paragraph */
+}
+
+/* --- Case study code block (SCSS snippets in prose). No syntax
+ * highlighting: snippets are one or two lines, and the point is the raw
+ * value next to the token, which reads fine in one color. Scrolls
+ * horizontally rather than wrapping, so a declaration stays on one line
+ * as it does in the source file. --- */
+
+.case-code {
+  width: var(--layout-case-content-width);
+  max-width: 100%;
+  margin: 0;
+  padding: var(--space-16) var(--space-20);
+  overflow-x: auto;
+  background: var(--bg-surface);
+  border: var(--border-width-hairline) solid var(--border-divider);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+}
+
+.case-code code {
+  font: inherit;
+  white-space: pre;
+}
+
+/* Inline code inside body copy and captions — same mono family as
+ * .case-code, sized to sit on the body text's line without raising it. */
+.case-code-inline {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-14);
+  letter-spacing: var(--letter-spacing-none);
+  padding: 0 var(--space-4);
+  background: var(--bg-placeholder);
+  border-radius: var(--radius-sm);
+  overflow-wrap: anywhere; /* long paths like
+   * packages/styles/scss/components/... would otherwise push the
+   * page wider than a phone screen */
+}
+
+.case-figure__caption .case-code-inline {
+  font-size: inherit;
+}
+
 /* --- Stat Grid (case study "At a Glance") --- */
 
 .stat-grid {
