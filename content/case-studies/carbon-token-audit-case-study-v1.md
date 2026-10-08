@@ -100,7 +100,7 @@ I'm leaving this one in because a tool with zero false positives usually means n
 
 ## What's Next
 
-So how much drift is there? I can't put a number on it yet. The script flagged 185 spacing and mixed-usage lines. I've checked three, and one of those was my tool's mistake. The next pass works through the remaining mixed-usage bucket first, since it's the smallest group, then fixes the classifier's sizing-property gap so a rerun doesn't repeat that false positive. I haven't reported either finding to the Carbon team. Before I do, I want a larger sample behind the report first, so it doesn't rest on two examples.
+So how much drift is there? I can't put a number on it yet. The script flagged 185 spacing and mixed-usage lines. I've checked three, and one of those was my tool's mistake. The next pass works through the remaining mixed-usage bucket first, since it's the smallest group, then fixes the classifier's sizing-property gap so a rerun doesn't repeat that false positive. I haven't reported either finding to the Carbon team. Before I do, I want a larger sample behind the report, so it doesn't rest on two examples.
 
 If I owned a system like this, I'd want an automatic check on every proposed code change that flags a raw pixel value on a spacing property that matches a token. A reviewer would see it before it ships, long before anyone ran an audit.
 
