@@ -1,5 +1,7 @@
 // Homepage work grid. Each item is one link: 4:3 media, title, one outcome
-// line, and a "category / year" meta line.
+// line, and a "category / year" meta line. Videos are wrapped in
+// [data-clip-video] so components/clip-video.js (loaded after this script)
+// pauses them offscreen and keeps them on the poster under reduced motion.
 const workItems = [
   {
     title: 'OnePulse Connect design system',
@@ -10,8 +12,8 @@ const workItems = [
     video: {
       poster: 'videos/ds_siteoverview_poster.jpg',
       sources: [
-        { src: 'videos/ds_siteoverview.webm', type: 'video/webm' },
         { src: 'videos/ds_siteoverview.mp4', type: 'video/mp4' },
+        { src: 'videos/ds_siteoverview.webm', type: 'video/webm' },
       ],
     },
     alt: 'OnePulse Connect component library: clicking through the sidebar to load Alert, Data Table, Dialog, and Chip in the documentation viewer.',
@@ -25,8 +27,8 @@ const workItems = [
     video: {
       poster: 'videos/link-document-flow-short_poster.jpg',
       sources: [
-        { src: 'videos/link-document-flow-short.webm', type: 'video/webm' },
         { src: 'videos/link-document-flow-short.mp4', type: 'video/mp4' },
+        { src: 'videos/link-document-flow-short.webm', type: 'video/webm' },
       ],
     },
     alt: 'Clicking Link on a prescription row in All Documents, watching it move into Linked to this Prescription, then unlinking it again to return to the empty state.',
@@ -63,8 +65,8 @@ function workMedia(item) {
     const sources = item.video.sources
       .map((s) => `<source src="${s.src}" type="${s.type}">`)
       .join('');
-    return `<div class="work-grid__media">
-      <video class="work-grid__media-inner" poster="${item.video.poster}"${reduceMotion ? '' : ' autoplay'} muted loop playsinline aria-label="${item.alt}">${sources}</video>
+    return `<div class="work-grid__media" data-clip-video>
+      <video class="work-grid__media-inner" poster="${item.video.poster}"${reduceMotion ? '' : ' autoplay'} muted loop playsinline preload="metadata" role="img" aria-label="${item.alt}">${sources}</video>
     </div>`;
   }
   return `<div class="work-grid__media">

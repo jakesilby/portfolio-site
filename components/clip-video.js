@@ -29,6 +29,8 @@
     });
   }
 
+  // Case study section clips and the homepage work grid (work-grid.js) both
+  // use this wrapper: play while at least half visible, pause offscreen.
   document.querySelectorAll('[data-clip-video]').forEach((wrap) => {
     const video = wrap.querySelector('video');
     if (!video) return;
