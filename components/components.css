@@ -767,6 +767,14 @@
   object-fit: cover;
 }
 
+.work-grid__media--contain {
+  padding: var(--space-24);
+}
+
+.work-grid__media--contain .work-grid__media-inner {
+  object-fit: contain;
+}
+
 .work-grid__title {
   margin-top: var(--gap-stack);
   font: var(--type-h3);

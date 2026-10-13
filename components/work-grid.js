@@ -1,5 +1,6 @@
 // Homepage work grid. Each item is one link: 4:3 media, title, one outcome
-// line, and a "category / year" meta line. Videos are wrapped in
+// line, and a "category / year" meta line. Media crops to fill the 4:3 box;
+// set fit: 'contain' on an item to show it whole instead. Videos are wrapped in
 // [data-clip-video] so components/clip-video.js (loaded after this script)
 // pauses them offscreen and keeps them on the poster under reduced motion.
 const workItems = [
@@ -54,6 +55,7 @@ const workItems = [
     year: '2026',
     href: 'carbon-token-audit.html',
     image: 'images/carbon-classifier-flow.png',
+    fit: 'contain', // a flowchart loses meaning when its edges are cropped
     alt: 'Flowchart of the classify() function. A raw pixel value is checked against the spacing scale, then for border, outline or 1px exceptions, then for a real token on the same line, then split by property type into four buckets: spacing candidate, mixed usage, sizing, and verify manually.',
   },
 ];
@@ -69,7 +71,8 @@ function workMedia(item) {
       <video class="work-grid__media-inner" poster="${item.video.poster}"${reduceMotion ? '' : ' autoplay'} muted loop playsinline preload="metadata" role="img" aria-label="${item.alt}">${sources}</video>
     </div>`;
   }
-  return `<div class="work-grid__media">
+  const fitClass = item.fit === 'contain' ? ' work-grid__media--contain' : '';
+  return `<div class="work-grid__media${fitClass}">
       <img class="work-grid__media-inner" src="${item.image}" alt="${item.alt}" loading="lazy">
     </div>`;
 }
