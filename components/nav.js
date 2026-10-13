@@ -5,10 +5,7 @@ const currentPage = document.body.dataset.page === 'case-study' ? 'work' : docum
 navScript.insertAdjacentHTML('afterend', `
 <header class="site-header">
   <div class="site-header__inner">
-    <a class="site-header__brand" href="/">
-      <img class="site-header__brand-mark" src="components/brand-mark.png" alt="" width="16" height="16">
-      <span class="site-header__brand-text">Jake Silby</span>
-    </a>
+    <a class="site-header__brand" href="/">Jake Silby</a>
     <nav class="site-header__nav" aria-label="Primary">
       <a class="site-header__link" data-nav="work" href="/">Work</a>
       <a class="site-header__link" data-nav="about" href="/about.html">About</a>

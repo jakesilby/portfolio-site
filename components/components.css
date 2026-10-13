@@ -614,18 +614,11 @@
 .site-header__brand {
   display: inline-flex;
   align-items: center;
-  gap: var(--gap-inline);
   min-height: var(--size-tap-target);
   color: var(--text-primary);
   text-decoration: none;
   font: var(--type-brand);
   letter-spacing: var(--type-brand-letter-spacing);
-}
-
-.site-header__brand-mark {
-  display: block;
-  width: var(--space-16);
-  height: var(--space-16);
 }
 
 .site-header__nav {
