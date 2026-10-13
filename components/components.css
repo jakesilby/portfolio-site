@@ -631,34 +631,55 @@
 .site-header__nav {
   display: flex;
   align-items: center;
-  gap: var(--gap-card);
+  gap: var(--gap-tight);
 }
 
+/* Nav pills. The current section is filled; the others are transparent
+ * with a subtle fill on hover. The pill is 36px tall; ::after extends the
+ * hit area to 44px without changing the layout. */
 .site-header__link {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  min-height: var(--size-tap-target);
-  border-bottom: var(--border-width-hairline) solid transparent; /* reserves
-   * the active underline so active and inactive links are the same box */
+  padding: var(--nav-pill-padding-y) var(--nav-pill-padding-x);
+  border-radius: var(--radius-full);
   color: var(--text-primary);
   text-decoration: none;
   font: var(--type-nav);
   letter-spacing: var(--type-nav-letter-spacing);
 }
 
-.site-header__link.is-active {
-  border-bottom-color: var(--border-highlight);
+.site-header__link::after {
+  content: "";
+  position: absolute;
+  inset: var(--nav-pill-hit-inset-y) var(--nav-pill-hit-inset-x);
 }
 
-.site-header__brand:hover,
 .site-header__link:hover {
+  background: var(--accent-fill-hover-subtle);
+}
+
+.site-header__link.is-active {
+  background: var(--accent-fill);
+  color: var(--text-on-accent);
+}
+
+.site-header__link:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--nav-focus-ring-offset);
+}
+
+.site-header__brand:hover {
   color: var(--text-link-hover);
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .site-header__brand,
-  .site-header__link {
+  .site-header__brand {
     transition: color var(--duration-hover) ease-out;
+  }
+
+  .site-header__link {
+    transition: background-color var(--duration-hover) ease-out;
   }
 }
 

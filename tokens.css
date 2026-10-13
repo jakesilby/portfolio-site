@@ -256,7 +256,10 @@
   --space-2: 2px; /* NEW — homepage credibility block, label to value */
   --space-4: 4px;
   --space-8: 8px;
+  --space-7: 7px; /* NEW (v2) — work grid pill, vertical padding */
   --space-12: 12px;
+  --space-13: 13px; /* NEW (v2) — work grid pill, horizontal padding */
+  --space-14: 14px; /* NEW (v2) — nav pill horizontal padding; work grid pill offset above the cursor */
   --space-16: 16px;
   --space-20: 20px;
   --space-24: 24px;
@@ -442,6 +445,13 @@
   --focus-ring-width: var(--border-width-focus);
   --focus-ring-color: var(--accent); /* 7.1:1 on bg-page */
   --focus-ring-offset: var(--space-8);
+  /* Nav pills (v2): 15/20 semibold, 36px tall. A ::after extends the hit
+   * area 4px above and below to 44px. */
+  --nav-pill-padding-y: var(--space-8);
+  --nav-pill-padding-x: var(--space-14);
+  --nav-pill-hit-inset-y: calc(-1 * var(--space-4));
+  --nav-pill-hit-inset-x: calc(-1 * var(--space-2));
+  --nav-focus-ring-offset: var(--space-2);
   /* Raw px below, not primitives: removed in v2 about prompts. */
   --about-card-offset-top: 14px; /* NEW — About page experience/education card's inset from its own glow layer, confirmed against Figma node 496:156 (496:275) */
   --about-card-offset-left: 17px; /* NEW — see --about-card-offset-top; same node, left axis */
