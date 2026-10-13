@@ -745,7 +745,10 @@
 }
 
 /* --- Work grid (homepage). Two columns inside --layout-wide, one below
- * 768px. Each item is a single link; hover changes only the title color. --- */
+ * 768px. Each item is a single link. Hover ("Lift + pill", mouse only):
+ * the media lifts, the other items dim, the title takes the hover color,
+ * and a "Read more" pill follows the cursor (positioned by work-grid.js).
+ * Keyboard focus gets the lift and an outline, no pill. --- */
 
 .work-grid {
   display: grid;
@@ -764,6 +767,7 @@
 }
 
 .work-grid__item {
+  position: relative; /* positioning context for the pill */
   display: flex;
   flex-direction: column;
   color: inherit;
@@ -818,9 +822,64 @@
   color: var(--text-muted);
 }
 
+/* Follows the cursor: work-grid.js sets left/top to the pointer, clamped
+ * so the pill stays inside the item; the transform centers it and lifts
+ * it clear of the cursor point. */
+.work-grid__pill {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, calc(-100% - var(--work-grid-pill-offset)));
+  padding: var(--work-grid-pill-padding-y) var(--work-grid-pill-padding-x);
+  border-radius: var(--radius-full);
+  background: var(--accent-fill);
+  box-shadow: var(--work-grid-pill-shadow);
+  color: var(--text-on-accent);
+  font: var(--type-pill);
+  letter-spacing: var(--type-pill-letter-spacing);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* Pill and dimming only with a mouse or trackpad; on touch, neither. */
+@media (hover: hover) and (pointer: fine) {
+  .work-grid__item:hover .work-grid__pill {
+    opacity: 1;
+  }
+
+  .work-grid:has(.work-grid__item:hover) .work-grid__item:not(:hover) {
+    opacity: var(--work-grid-dim-opacity);
+  }
+}
+
+/* The lift and every transition drop out under reduced motion. */
 @media (prefers-reduced-motion: no-preference) {
+  .work-grid__item:focus-visible .work-grid__media {
+    transform: scale(var(--work-grid-lift-scale));
+  }
+
+  .work-grid__item {
+    transition: opacity var(--work-grid-lift-duration) var(--ease-lift);
+  }
+
+  .work-grid__media {
+    transition: transform var(--work-grid-lift-duration) var(--ease-lift);
+  }
+
   .work-grid__title {
     transition: color var(--duration-hover) ease-out;
+  }
+
+  .work-grid__pill {
+    transition: opacity var(--duration-hover) ease-out;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .work-grid__item:hover .work-grid__media {
+    transform: scale(var(--work-grid-lift-scale));
   }
 }
 

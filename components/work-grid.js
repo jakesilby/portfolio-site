@@ -1,5 +1,6 @@
-// Homepage work grid. Each item is one link: 4:3 media, title, one outcome
-// line, and a "category / year" meta line. Media fills a 16:10 box, the
+// Homepage work grid. Each item is one link: media, title, one outcome
+// line, a "category / year" meta line, and a decorative "Read more" pill
+// shown on mouse hover. Media fills a 16:10 box, the
 // clips' native ratio. Videos are wrapped in
 // [data-clip-video] so components/clip-video.js (loaded after this script)
 // pauses them offscreen and keeps them on the poster under reduced motion.
@@ -82,9 +83,30 @@ const workGridHtml = workItems
       <h3 class="work-grid__title">${item.title}</h3>
       <p class="work-grid__outcome">${item.outcome}</p>
       <p class="work-grid__meta">${item.category} / ${item.year}</p>
+      <span class="work-grid__pill" aria-hidden="true">Read more</span>
     </a>
   </li>`
   )
   .join('');
 
 document.currentScript.insertAdjacentHTML('afterend', `<ul class="work-grid">${workGridHtml}</ul>`);
+
+// "Read more" pill follows the cursor inside the hovered item. CSS only
+// shows it for a fine pointer that can hover. The pill sits centered above
+// the cursor point (see .work-grid__pill), so clamp the point to keep the
+// whole pill inside the item: half its width from either side, and its
+// height plus the offset from the top.
+const pillOffset = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--work-grid-pill-offset'));
+
+document.querySelectorAll('.work-grid__item').forEach((item) => {
+  const pill = item.querySelector('.work-grid__pill');
+  item.addEventListener('mousemove', (event) => {
+    const box = item.getBoundingClientRect();
+    const halfWidth = pill.offsetWidth / 2;
+    const above = pill.offsetHeight + pillOffset;
+    const x = Math.min(Math.max(event.clientX - box.left, halfWidth), box.width - halfWidth);
+    const y = Math.min(Math.max(event.clientY - box.top, above), box.height);
+    pill.style.left = `${x}px`;
+    pill.style.top = `${y}px`;
+  });
+});

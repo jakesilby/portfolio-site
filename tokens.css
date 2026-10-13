@@ -442,6 +442,15 @@
   --hero-section-padding-y: var(--space-80); /* now points at its primitive. NEW — homepage hero section vertical padding, confirmed against Figma node 378:160 */
   --work-grid-gap-column: var(--space-32); /* NEW (v2) — between the two work grid columns */
   --work-grid-gap-row: var(--space-64); /* NEW (v2) — between work grid rows, twice the column gap so each item reads as one unit */
+  /* Work grid hover (v2, "Lift + pill"): the hovered item's media lifts,
+   * the others dim, and a "Read more" pill follows the cursor. */
+  --work-grid-lift-scale: 1.025;
+  --work-grid-lift-duration: var(--duration-300);
+  --work-grid-dim-opacity: .55;
+  --work-grid-pill-padding-y: var(--space-7);
+  --work-grid-pill-padding-x: var(--space-13);
+  --work-grid-pill-offset: var(--space-14); /* gap between the pill and the cursor point */
+  --work-grid-pill-shadow: 0 6px 16px color-mix(in srgb, var(--accent) 24%, transparent), 0 1px 3px color-mix(in srgb, var(--accent) 16%, transparent);
   --focus-ring-width: var(--border-width-focus);
   --focus-ring-color: var(--accent); /* 7.1:1 on bg-page */
   --focus-ring-offset: var(--space-8);
@@ -552,6 +561,14 @@
   --type-nav-line-height: var(--line-height-20);
   --type-nav-letter-spacing: var(--letter-spacing-none);
   --type-nav: var(--type-nav-weight) var(--type-nav-size)/var(--type-nav-line-height) var(--type-nav-family);
+
+  /* Work grid "Read more" pill. */
+  --type-pill-family: var(--font-family-sans);
+  --type-pill-weight: var(--font-weight-semibold);
+  --type-pill-size: var(--font-size-13);
+  --type-pill-line-height: var(--line-height-16);
+  --type-pill-letter-spacing: var(--letter-spacing-none);
+  --type-pill: var(--type-pill-weight) var(--type-pill-size)/var(--type-pill-line-height) var(--type-pill-family);
 
   /* Header name ("Jake Silby"). */
   --type-brand-family: var(--font-family-sans);
