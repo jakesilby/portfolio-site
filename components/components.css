@@ -602,24 +602,29 @@
   }
 }
 
-/* --- Site header --- */
+/* --- Site header (every page, injected by nav.js) --- */
 
-.site-header {
+.site-header__inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: var(--gap-inline);
-  height: 80px;
-  padding: 0 var(--padding-section-x);
+  max-width: var(--layout-wide);
+  margin-inline: auto;
+  padding: var(--space-16) var(--layout-gutter);
 }
 
 .site-header__brand {
   display: inline-flex;
   align-items: center;
   gap: var(--gap-inline);
+  min-height: var(--size-tap-target);
   color: var(--text-primary);
   text-decoration: none;
+  font: var(--type-nav);
+  font-weight: var(--type-h3-weight); /* type/nav at a heading weight */
+  letter-spacing: var(--type-nav-letter-spacing);
 }
 
 .site-header__brand-mark {
@@ -628,74 +633,37 @@
   height: var(--space-16);
 }
 
-.site-header__brand-text-wrap {
-  display: grid;
-}
-
-.site-header__brand-text {
-  grid-area: 1 / 1;
-  opacity: 0;
-  filter: blur(6px);
-  transition: opacity 900ms ease-in-out, filter 900ms ease-in-out;
-}
-
-.site-header__brand-text.is-active {
-  opacity: 1;
-  filter: blur(0);
-}
-
 .site-header__nav {
   display: flex;
   align-items: center;
-  gap: var(--gap-inline);
+  gap: var(--gap-card);
 }
 
-.nav-pill {
-  /* Reworked — border-radius back to 0 (square, reverses the earlier
-   * rounded-pill decision), padding uniform 8px (was 8px/16px), border
-   * moved off the shared base and onto the active .is-active state
-   * only, confirmed against Figma node 378:160. */
+.site-header__link {
   display: inline-flex;
   align-items: center;
-  min-height: 44px; /* WCAG 2.5.5 minimum tap target — visible padding stays
-   * at the Figma-confirmed 8px; this only grows the invisible hit area. */
-  padding: var(--gap-inline);
-  border: none;
-  border-bottom: 2px solid transparent; /* reserves the active underline's
-   * 2px on every pill, so active and inactive pills are the same box and
-   * their text sits at the same height. .is-active only changes the
-   * color — it used to add the border itself, shrinking the active pill's
-   * content area and lifting its text 1px above the inactive one. */
-  border-radius: 0;
+  min-height: var(--size-tap-target);
+  border-bottom: var(--border-width-hairline) solid transparent; /* reserves
+   * the active underline so active and inactive links are the same box */
   color: var(--text-primary);
   text-decoration: none;
-  background: transparent;
+  font: var(--type-nav);
+  letter-spacing: var(--type-nav-letter-spacing);
 }
 
-.nav-pill.is-active {
-  /* Active-tab treatment: bottom border only, 2px, cosmos-6 — reuses
-   * --border-highlight (defined for the Token Architecture hover border,
-   * same color). No fill, no inverse text — both removed per redesign.
-   * Which pill gets this class is decided at render time in nav.js from
-   * document.body.dataset.page, not hardcoded to a single data-nav value
-   * — every page nav.js renders is a real, active-able destination now. */
+.site-header__link.is-active {
   border-bottom-color: var(--border-highlight);
 }
 
+.site-header__brand:hover,
+.site-header__link:hover {
+  color: var(--text-link-hover);
+}
+
 @media (prefers-reduced-motion: no-preference) {
-  .nav-pill {
-    transition: transform 350ms cubic-bezier(0.165, 0.84, 0.44, 1); /* was an
-     * overshoot/bounce curve (0.34, 1.15, 0.64, 1) — swapped for ease-out-quart,
-     * a smooth deceleration instead of a springy snap-back. */
-  }
-
-  .nav-pill:hover {
-    transform: scale(1.025);
-  }
-
-  .nav-pill:active {
-    transform: scale(0.97);
-    transition-duration: 120ms;
+  .site-header__brand,
+  .site-header__link {
+    transition: color var(--duration-hover) ease-out;
   }
 }
 
