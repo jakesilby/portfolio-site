@@ -31,8 +31,8 @@
 .case-footer-nav__link {
   color: var(--text-secondary);
   text-decoration: none;
-  letter-spacing: var(--letter-spacing-none); /* sentence case, not short
-   * all-caps, so no wide tracking. */
+  font: var(--type-nav);
+  letter-spacing: var(--type-nav-letter-spacing);
 }
 
 /* --- Case study section (The Problem, Why This Matters, ...) — repeats
@@ -53,10 +53,14 @@
 }
 
 .case-section__heading {
+  font: var(--type-h2);
+  letter-spacing: var(--type-h2-letter-spacing);
   color: var(--text-primary);
 }
 
 .case-section__body {
+  font: var(--type-body);
+  letter-spacing: var(--type-body-letter-spacing);
   color: var(--text-primary);
   max-width: 56ch; /* was a fixed 640px (before that, 760px) — that px value
    * was tuned once against a specific type scale and drifted back to
@@ -73,6 +77,11 @@
    * Prescriptions, the other page sharing this class. Re-verify the same
    * way if this component's font or type scale changes again — don't
    * trust the nominal ch count at face value for this font. */
+}
+
+.case-section__body strong,
+.case-rules-list__item strong {
+  font-weight: var(--font-weight-semibold);
 }
 
 .case-section__body a {
@@ -98,6 +107,8 @@
 .case-rules-list__item {
   position: relative;
   padding-left: var(--gap-stack);
+  font: var(--type-body);
+  letter-spacing: var(--type-body-letter-spacing);
   color: var(--text-primary);
 }
 
@@ -199,9 +210,9 @@
 }
 
 .case-figure__caption {
+  font: var(--type-caption);
+  letter-spacing: var(--type-caption-letter-spacing);
   color: var(--text-secondary);
-  letter-spacing: var(--letter-spacing-none); /* .type-meta's wide tracking
-   * is for all-caps text; captions are sentence case. */
 }
 
 .case-figure__caption a {
@@ -246,6 +257,8 @@
  * "Finding one: ...") --- */
 
 .case-section__subheading {
+  font: var(--type-h3);
+  letter-spacing: var(--type-h3-letter-spacing);
   color: var(--text-primary);
   margin-top: var(--gap-section); /* doubles the section's own 20px gap above
    * a subsection, so it reads as a break rather than another paragraph */
@@ -266,6 +279,8 @@
   background: var(--bg-surface);
   border: var(--border-width-hairline) solid var(--border-divider);
   border-radius: var(--radius-md);
+  font: var(--type-code-block);
+  letter-spacing: var(--type-code-block-letter-spacing);
   color: var(--text-primary);
 }
 
@@ -274,22 +289,21 @@
   white-space: pre;
 }
 
-/* Inline code inside body copy and captions — same mono family as
- * .case-code, sized to sit on the body text's line without raising it. */
+/* Inline code inside body copy and captions (type/code). Sized in em and
+ * takes the surrounding line-height, so it sits on body and caption lines
+ * alike without raising them. */
 .case-code-inline {
-  font-family: var(--font-family-mono);
-  font-size: var(--font-size-14);
-  letter-spacing: var(--letter-spacing-none);
+  font-family: var(--type-code-family);
+  font-weight: var(--type-code-weight);
+  font-size: var(--type-code-size);
+  line-height: var(--type-code-line-height);
+  letter-spacing: var(--type-code-letter-spacing);
   padding: 0 var(--space-4);
   background: var(--bg-placeholder);
   border-radius: var(--radius-sm);
   overflow-wrap: anywhere; /* long paths like
    * packages/styles/scss/components/... would otherwise push the
    * page wider than a phone screen */
-}
-
-.case-figure__caption .case-code-inline {
-  font-size: inherit;
 }
 
 /* --- Stat Grid (case study "At a Glance") --- */
@@ -310,21 +324,15 @@
 }
 
 .stat-tile__value {
+  font: var(--type-h2);
+  letter-spacing: var(--type-h2-letter-spacing);
   color: var(--text-primary);
-  font-family: var(--font-family-serif); /* override — .type-case-title (sans)
-   * is shared with .project-row__title on the homepage, so this stays
-   * scoped to the stat-tile value only. Size/weight/color unchanged. */
 }
 
 .stat-tile__label {
+  font: var(--type-meta);
+  letter-spacing: var(--type-meta-letter-spacing);
   color: var(--text-label);
-  text-transform: none; /* .type-meta already sets none at the token level;
-   * this is now redundant but left explicit — these are full sentences (up
-   * to 64 chars), not short labels, so all-caps would hurt readability here
-   * regardless of the base value. */
-  letter-spacing: var(--letter-spacing-none); /* wide tracking only reads
-   * correctly on all-caps text — leaving it in place after removing
-   * uppercase left oddly wide-spaced sentence case. */
 }
 
 /* --- Problem Diagram (scattered files -> shared token system illustration,
@@ -394,24 +402,17 @@
   background: var(--bg-canvas);
   border: var(--border-width-hairline) solid var(--border-muted);
   border-radius: var(--radius-sm);
+  font: var(--type-meta);
+  letter-spacing: var(--type-meta-letter-spacing);
   color: var(--text-muted);
   text-align: center;
-  letter-spacing: var(--letter-spacing-none); /* was wide-sm (inherited from
-   * .type-label-secondary) — only read correctly while the text was
-   * hardcoded "FILE A/B/C"; now that it's "File A/B/C", wide tracking only
-   * reads correctly on all-caps text, same pairing already fixed on
-   * .stat-tile__label and others. */
 }
 
 .problem-diagram__caption {
   width: 220px;
+  font: var(--type-meta);
+  letter-spacing: var(--type-meta-letter-spacing);
   text-align: center;
-  text-transform: none; /* .type-label-secondary already sets none at the
-   * token level; this is now redundant but left explicit — these run up to
-   * 46 chars, long enough that all-caps would hurt readability here
-   * regardless of the base value. */
-  letter-spacing: var(--letter-spacing-none); /* same reasoning — wide
-   * tracking belongs to all-caps text, not the sentence case above. */
 }
 
 .problem-diagram__caption--primary {
@@ -525,12 +526,16 @@
   background: var(--pulse-accent-primary-fg-fill);
 }
 
+/* Card text sits at type/meta; the token name inside it is type/code,
+ * whose em size resolves against this. */
 .token-chain__text {
   display: flex;
   flex-direction: column;
   align-self: stretch;
   min-width: 0;
   gap: var(--gap-inline);
+  font: var(--type-meta);
+  letter-spacing: var(--type-meta-letter-spacing);
 }
 
 .token-chain__label {
@@ -550,6 +555,11 @@
    * with no spaces to wrap at. */
   min-width: 0;
   overflow-wrap: anywhere;
+  font-family: var(--type-code-family);
+  font-weight: var(--type-code-weight);
+  font-size: var(--type-code-size);
+  line-height: var(--type-code-line-height);
+  letter-spacing: var(--type-code-letter-spacing);
   color: var(--text-primary);
 }
 
@@ -570,6 +580,8 @@
 .token-chain__caption {
   width: 760px;
   max-width: 100%;
+  font: var(--type-body);
+  letter-spacing: var(--type-body-letter-spacing);
   color: var(--text-secondary);
 }
 
@@ -1044,7 +1056,7 @@ body.lightbox-open {
   justify-content: center;
   width: var(--space-48);
   height: var(--space-48);
-  font-family: var(--font-family-sans);
+  font: inherit;
   font-size: var(--font-size-32);
   line-height: 1;
   color: var(--color-white);

@@ -442,7 +442,9 @@
   --type-page-title-weight: var(--font-weight-medium);
   --type-page-title-size: clamp(var(--font-size-32), 29.183px + 0.7512vw, var(--font-size-40)); /* 32 at 375 → 40 at 1440 */
   --type-page-title-line-height: clamp(var(--line-height-40), 37.183px + 0.7512vw, var(--line-height-48)); /* 40 at 375 → 48 at 1440 */
-  --type-page-title-letter-spacing: var(--letter-spacing-tight-sm);
+  --type-page-title-letter-spacing: var(--letter-spacing-tight-xs); /* -0.6px,
+   * same as --type-hero. At -0.8px the "rn" pair renders joined at 40px on
+   * a 2x screen; -0.6px keeps it apart. */
   --type-page-title: var(--type-page-title-weight) var(--type-page-title-size)/var(--type-page-title-line-height) var(--type-page-title-family);
 
   --type-h2-family: var(--font-family-sans);
