@@ -12,23 +12,35 @@ The site should read as a quiet, systematic frame around the work. Every visual 
 
 Layout
 - Homepage order: header, hero sentence, credibility lines, two-column work grid, footer. Nothing else.
-- No floating hero card, no glow or colored shadows, no decorative gradients.
+- No floating hero card, no glow or colored shadows, no decorative gradients. Two exceptions: the hero highlight's watercolor band, and the accent-tinted shadow on the work grid "Read more" pill.
 - One content container width and one gutter, used on every page. Columns line up across sections.
 - Rules (dividers) are solid hairlines using a border token. No dashed rules.
 - Two container widths only: --layout-wide for the header, grid and media, and --layout-measure for reading text. Both are defined in tokens.css.
 
 Typography (three families, fixed jobs)
 - Cormorant Garamond 500 (--font-family-display): only the single hero sentence at the top of a page (homepage hero, case study title). Nowhere else.
-- Bricolage Grotesque: everything else, including nav, body text, captions, meta, labels, buttons and footer.
+- Bricolage Grotesque: everything else, including nav, body text, captions, meta, labels, buttons and footer. The brand ("Jake Silby" in the header) is Bricolage 500 16/24 (--type-brand).
 - Spline Sans Mono: only literal token names, code, and file names inside case study prose (for example `accent-primary-fg-fill`). Never for labels, meta, nav or captions.
 - No italic body text. No all-caps labels. No eyebrow labels above headings.
 - EB Garamond and --font-family-serif remain only for legacy classes and are removed by the end of v2.
 
+Color ("Clay + juniper" at faint warmth). All values live in tokens.css as clay / juniper / sand primitives behind these aliases:
+- --bg-page #faf9f7. --bg-surface #eeede9 (media wells, code backgrounds). --border-default #e3e2dd (hairlines).
+- --text-primary #1f2a26 (14.1:1 on page). --text-muted #5f6a64 (5.4:1).
+- --accent #2f5d4e (7.1:1): links, focus rings and --text-link-hover.
+- --accent-fill #567a6d (white text on it 4.8:1): the current nav pill and the work grid pill. --accent-fill-hover-subtle #e5e8e5: nav hover.
+- --highlight #dae9e1 and --highlight-2 #f0e3c9: the hero highlight only.
+- The cosmos red link hover is retired. The cosmos / greenwhite / smaltblue / elm primitives stay until nothing references them.
+
 Motion
-- The page itself doesn't animate. Product videos and clips are the only things that move.
+- One load animation: the hero highlight draws in once. Hover: nav pills change background; work grid items lift with a 'Read more' pill. Everything else stays still. All motion respects prefers-reduced-motion.
+- Product videos and clips also move (see Videos below).
 - No scroll-triggered reveals, staggers, blurs or fades on content. Shared chrome (header, footer, work grid, case study chrome) stays as JS-injected components. No content may start hidden and wait for JS or scroll to reveal it. Each page includes a <noscript> block with plain links to Work, About and Email.
-- No smooth-scroll libraries, no custom cursors, no parallax.
-- Hover and focus feedback is a color change only, 150ms ease-out, wrapped in prefers-reduced-motion: no-preference. Focus rings stay visible.
+- No smooth-scroll libraries, no custom cursors, no parallax. The work grid "Read more" pill follows the cursor inside a hovered item, but the system cursor stays.
+- Hero highlight: each `.hero-mark` has a watercolor band behind it (::before) that scales in from the left, 520ms, "complex workflows" at 120ms then "design systems" at 300ms. CSS only, so the marks are fully drawn without JS and under reduced motion.
+- Nav pills: the current section is filled with --accent-fill; the others get --accent-fill-hover-subtle on hover, a 150ms background transition.
+- Work grid ("Lift + pill"): on mouse hover the media scales to 1.025 over 300ms, the other items dim to .55, and the pill follows the cursor. Pill and dimming only for (hover: hover) and (pointer: fine). Keyboard focus gets the lift and an outline, no pill. Reduced motion keeps the pill and dimming and drops the scale and transitions.
+- Other hover and focus feedback (header name, footer links, work grid titles) is a color change only, 150ms ease-out. Every transition is wrapped in prefers-reduced-motion: no-preference. Focus rings stay visible (2px --accent).
 - Videos: autoplay muted loop playsinline, with a poster frame. Pause when offscreen (IntersectionObserver). Under prefers-reduced-motion: reduce, don't autoplay and show the poster.
 
 Copy
@@ -66,7 +78,7 @@ Content and layout stay separate. A case study is a content file rendered throug
 
 - **Page skeleton:** `nav.js` → `.case-title-block` → (optional `.case-hero`, `.at-a-glance`) → `.case-section`s alternating `--alt` (first section is `--alt`) → `.case-footer-nav` → `footer.js`, `lightbox.js`. `<body data-page="case-study" id="top">`.
 - **Title block eyebrow:** "Case study" for OPC work, "Personal project" for personal work. If the content file has no description, meta line or stats, leave them out rather than writing new copy.
-- **Homepage listing:** add an item to the `workItems` array in `components/work-grid.js` (title, one outcome line, category, year, href; media is decorative here, so no alt text or aria-label). Personal projects use `category: 'Personal project'` in the same grid (decided 2026-10-08, no separate section). Items take either `video` (mp4 source first, poster required) or a static `image`; media fills a 16:10 box edge to edge (object-fit: cover), so export grid media at 16:10. Anything more than 3% off 16:10 should use object-fit: contain on the `--bg-canvas` well instead of being cropped. Grid videos are paused offscreen by `components/clip-video.js`, which the homepage loads after the grid.
+- **Homepage listing:** add an item to the `workItems` array in `components/work-grid.js` (title, one outcome line, category, year, href; media is decorative here, so no alt text or aria-label). Personal projects use `category: 'Personal project'` in the same grid (decided 2026-10-08, no separate section). Items take either `video` (mp4 source first, poster required) or a static `image`; media fills a 16:10 box edge to edge (object-fit: cover), so export grid media at 16:10. Anything more than 3% off 16:10 should use object-fit: contain on the `--bg-surface` well instead of being cropped. Grid videos are paused offscreen by `components/clip-video.js`, which the homepage loads after the grid.
 - **Images:** live flat in `/images/`, named `<project-prefix>-<subject>.<ext>` (e.g. `carbon-classifier-flow.png`, `ds_tabgroup.webp`). An optional `/images/large/` copy serves as the lightbox source when the inline file is downsized. Every real image gets its own `case-visual__image--<name>` modifier with `aspect-ratio` set from the file's real pixel dimensions, plus `loading="lazy" data-lightbox-src="<path>" tabindex="0" role="button"` so it opens full size.
 - **Screenshot vs diagram:** screenshots sit in a `.case-visual` tray (add `--transparent` if the capture has its own light background). Diagrams drawn in the site's own visual language get no tray: use `.case-diagram` (or the older page-local equivalents) directly.
 - **Captions:** wrap image and caption in `.case-figure`, with `<figcaption class="case-figure__caption">`. Alt text and captions come verbatim from the content file.
@@ -81,7 +93,7 @@ Content and layout stay separate. A case study is a content file rendered throug
 - BEM-style class naming (matches the Pulse library conventions).
 - Every shared component (nav, footer, case-study template, any repeated card/section pattern) lives in `/components/` and is used everywhere it appears — never copy-pasted and modified per page.
 - Responsive by default — build mobile-first or check mobile at the same time as desktop, not as a separate pass at the end.
-- Work grid item hover: the title changes to the link-hover color token. No background swap, no scale, no shadow. (The dark ProjectRow hover is retired in v2.)
+- Work grid item hover: "Lift + pill" (see Motion above), and the title changes to --text-link-hover. (The dark ProjectRow hover is retired in v2.)
 
 ## Case study visuals: static vs. clip
 
