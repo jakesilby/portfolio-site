@@ -399,18 +399,10 @@
   --focus-ring-width: var(--border-width-focus);
   --focus-ring-color: var(--accent-primary-dark); /* 6.6:1 on bg-page */
   --focus-ring-offset: var(--space-8);
-  /* Raw px below, not primitives: removed in v2 about/grid prompts. */
+  /* Raw px below, not primitives: removed in v2 about prompts. */
   --about-card-offset-top: 14px; /* NEW — About page experience/education card's inset from its own glow layer, confirmed against Figma node 496:156 (496:275) */
   --about-card-offset-left: 17px; /* NEW — see --about-card-offset-top; same node, left axis */
   --about-card-glow-offset-left: 3px; /* NEW — About card's glow layer inset from the outer wrapper (top/bottom inset is 0), confirmed against Figma node 496:156 (496:171) */
-  --project-row-image-width: 640px; /* Raw px: removed in v2 hero/about/grid prompts. NEW — was a hardcoded 500px; raised so
-   * homepage thumbnails (e.g. OnePulse Connect's Colors & Typography swatch
-   * grid) render large enough to actually read rather than a full screenshot
-   * shrunk past legibility. Component-scoped one-off card geometry, not part
-   * of the general spacing rhythm scale, same tier as the hero/about card
-   * offsets above. The <720px breakpoint overrides this back to `none`
-   * (stacked layout goes full-width regardless), so this only affects
-   * desktop/tablet. */
 
   /* --- Layout (v2) — the only two container widths, plus one gutter.
    * --layout-wide is the outer box for the header, work grid and media;
@@ -562,60 +554,10 @@
  * tokens; treat them as the source of truth the same way you'd treat
  * a custom property.
  *
- * Legacy (pre-v2). The case study pages no longer use any of these; they
- * set the v2 type roles above on their own selectors. What's left serves
- * the homepage project rows (.type-meta, .type-case-title,
- * .type-label-secondary, .type-description) and the About page
- * (.type-about-*) until those are rebuilt.
+ * Legacy (pre-v2). The case study pages and the homepage work grid set
+ * the v2 type roles above on their own selectors. What's left serves the
+ * About page (.type-about-*) until it is rebuilt.
  * ============================================================ */
-
-.type-meta {
-  font-family: var(--font-family-mono);
-  font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-13);
-  line-height: var(--line-height-20);
-  letter-spacing: var(--letter-spacing-wide-md);
-  text-transform: none; /* was uppercase — removed in the
-   * frontend-design audit. Most live text using this class is
-   * already hardcoded caps in the HTML itself (section index numbers
-   * aside, which have no case) — this CSS change alone won't visibly
-   * affect those instances; only genuinely mixed-case content (like
-   * the copyright line) changes appearance. */
-}
-
-.type-case-title {
-  font-family: var(--font-family-sans);
-  font-weight: var(--font-weight-extrabold);
-  font-size: var(--font-size-32);
-  line-height: var(--line-height-48);
-  letter-spacing: var(--letter-spacing-tight-md);
-}
-
-.type-label-secondary {
-  font-family: var(--font-family-mono);
-  font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-11);
-  line-height: var(--line-height-16);
-  letter-spacing: var(--letter-spacing-wide-sm);
-  text-transform: none; /* was uppercase — removed in the
-   * frontend-design audit. Most live text using this class is
-   * already hardcoded caps in the HTML (CASE STUDY, FILE A/B/C, WORK) —
-   * this alone won't visibly change those; badge/project-row__index
-   * text (Title Case/numbers in source) is the visible change here. */
-}
-
-.type-description {
-  font-family: var(--font-family-serif);
-  font-style: italic;
-  font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-20);
-  line-height: var(--line-height-32); /* was line-height-24 (1.2x) — same
-   * tight-leading bug as .type-hero-subhead, same fix: 32px/20px = 1.6x.
-   * Unlike the hero card, .project-row__description has no fixed-height
-   * container (flex, align-items: start) — confirmed no re-measurement
-   * needed here. */
-  letter-spacing: var(--letter-spacing-none);
-}
 
 /* --- About page additions (introduced while building the About page,
  * confirmed against Figma node 496:156) --- */
@@ -682,15 +624,8 @@
 
 /* ============================================================
  * COMPONENT INTENT (not yet built) — documented here so it isn't
- * lost before the ProjectRow component exists in code.
+ * lost before it exists in code.
  * ============================================================ */
-
-/*
-.project-row:hover {
-  background: var(--bg-inverse);
-  color: var(--text-inverse);
-}
-*/
 
 /*
  * Hero panel (2026 homepage) — not yet built in code. Reference:
