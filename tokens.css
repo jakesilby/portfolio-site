@@ -224,10 +224,16 @@
    * (.case-code). Every solid border in components.css now uses it; the
    * remaining inline 1px borders are dashed rules that v2 removes. */
 
+  /* --- Size primitives --- */
+  --size-44: 44px; /* NEW (v2) — WCAG 2.5.5 minimum tap target */
+
+  /* --- Motion primitives --- */
+  --duration-150: 150ms; /* NEW (v2) — the only UI transition length */
+
   /* --- Spacing primitives --- */
   --space-4: 4px;
   --space-8: 8px;
-  --space-12: 12px; /* restored — dropped by mistake in v6, still in live use via --gap-hero-text */
+  --space-12: 12px;
   --space-16: 16px;
   --space-20: 20px;
   --space-24: 24px;
@@ -357,10 +363,13 @@
   --border-highlight: var(--color-cosmos-6); /* NEW — nav pill active-tab underline. Stated by the user as #FC7973/cosmos-6; not confirmed via Figma, but cosmos-6 is a real existing primitive. */
   --border-highlight-teal: var(--color-pulse-teal-700); /* NEW — Token Architecture card hover border. Reuses the exact swatch color the widget already demonstrates (pulse-teal.700), kept separate from --border-highlight so this hover treatment doesn't move if the nav pill's underline color ever changes. */
 
+  /* --- Size and motion (v2) --- */
+  --size-tap-target: var(--size-44); /* min-height on header and footer links */
+  --duration-hover: var(--duration-150); /* hover/focus color change, always ease-out */
+
   /* --- Spacing: gaps --- */
   --gap-tight: var(--space-4);
   --gap-inline: var(--space-8);
-  --gap-hero-text: var(--space-12); /* restored — dropped by mistake in v6. Added by Claude Code during the hero panel build (Prompt 4), not present in any version I generated before that — I had no visibility into it until this was flagged. */
   --gap-stack: var(--space-16);
   --gap-section: var(--space-20); /* NEW — gap between index/heading/paragraphs within a numbered case-study section */
   --gap-card: var(--space-24);
@@ -377,16 +386,7 @@
    * belong to a single component's exact Figma geometry, not the general
    * spacing rhythm scale above. Per CLAUDE.md's third token tier. --- */
   --hero-section-padding-y: var(--space-80); /* now points at its primitive. NEW — homepage hero section vertical padding, confirmed against Figma node 378:160 */
-  /* Raw px below, not primitives: removed in v2 hero/about/grid prompts. */
-  --hero-card-offset-top: 15px; /* was 14px — verified against Figma node
-   * 507:24 (fileKey Sv50ruZLmflO9t4vcN7wiH) on 2026-09-14. An earlier pass
-   * without live Figma access read the frame's combined "19px/15px" offset
-   * description as top/left in that order; live verification shows that
-   * assumption had the axes backwards — 15px is top, 19px is left (see
-   * --hero-card-offset-left below). */
-  --hero-card-offset-left: 19px; /* was 17px — verified against Figma node
-   * 507:24 on 2026-09-14; see --hero-card-offset-top above. */
-  --hero-card-glow-offset-left: 3px; /* NEW — glow layer's absolute left offset within the wrapper (top offset is 0), confirmed against Figma node 381:486 */
+  /* Raw px below, not primitives: removed in v2 about/grid prompts. */
   --about-card-offset-top: 14px; /* NEW — About page experience/education card's inset from its own glow layer, confirmed against Figma node 496:156 (496:275) */
   --about-card-offset-left: 17px; /* NEW — see --about-card-offset-top; same node, left axis */
   --about-card-glow-offset-left: 3px; /* NEW — About card's glow layer inset from the outer wrapper (top/bottom inset is 0), confirmed against Figma node 496:156 (496:171) */
@@ -530,30 +530,6 @@
  * a custom property.
  * ============================================================ */
 
-.type-wordmark {
-  /* Updated — font-size 18→14px, line-height 20→16px, confirmed against
-   * Figma node 378:160 (nav redesign). Family/weight/letter-spacing unchanged. */
-  font-family: var(--font-family-sans);
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-14);
-  line-height: var(--line-height-16);
-  letter-spacing: var(--letter-spacing-none);
-}
-
-.type-nav-label {
-  font-family: var(--font-family-mono);
-  font-weight: var(--font-weight-medium);
-  font-size: var(--font-size-11);
-  line-height: var(--line-height-16);
-  letter-spacing: var(--letter-spacing-wide-lg);
-  text-transform: none; /* was uppercase — all-caps mono labels flagged as
-   * an unexamined-default tell (frontend-design audit). Scoped exclusively
-   * to mono-font elements sitewide, confirmed before removing — see the
-   * audit round this was fixed in for the full instance-by-instance check.
-   * Live text here ("Work") is already Title Case in source, so this is
-   * a real visible change, not just removing a no-op. */
-}
-
 .type-eyebrow {
   /* Unused anywhere in the current HTML — confirmed via grep across all
    * pages/components. Fixed for consistency with the other mono classes
@@ -586,37 +562,6 @@
   font-weight: var(--font-weight-semibold);
 }
 
-.type-hero-heading {
-  /* Updated — line-height 56→48px, letter-spacing -1.5px→-1px (now
-   * --letter-spacing-tight-xs2, an exact reuse), confirmed against Figma
-   * node 378:160 (hero card redesign, node 381:488). Font-family/weight/
-   * size unchanged (serif regular 40px). This is at least the third
-   * revision to this class; the hero treatment has iterated repeatedly —
-   * verify against Figma before trusting this file if it's been a while. */
-  font-family: var(--font-family-serif);
-  font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-40);
-  line-height: var(--line-height-48);
-  letter-spacing: var(--letter-spacing-tight-xs2);
-}
-
-.type-hero-subhead {
-  /* NEW — the hero's second line. Playfair Display Regular, confirmed
-   * against live Figma (196:383). Color comes from --text-hero-subhead,
-   * not --text-hero-eyebrow — this is a distinct role. */
-  font-family: var(--font-family-serif);
-  font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-20);
-  line-height: var(--line-height-32); /* was line-height-24 (1.2x) — fine
-   * for the single nowrap line this role held until the 2026 hero rewrite;
-   * now genuinely multi-line, and 1.2x read as tight-leading (Impeccable
-   * flagged it). 32px/20px = 1.6x, matching frontend-design's guidance to
-   * give serif text slightly more leading than the sans-serif body's 1.5x
-   * (--line-height-24 on .type-body, 16px). Reused an existing token
-   * rather than adding a new one. */
-  letter-spacing: var(--letter-spacing-none);
-}
-
 .type-tagline {
   /* Corrected — was 24px/36px, Figma's Title Block description (44:5) is
    * now 20px with line-height: normal (a deliberate "auto" choice, not a
@@ -630,27 +575,14 @@
   letter-spacing: var(--letter-spacing-none);
 }
 
-.type-section-label {
-  /* Updated — font-size 24→16, line-height 32→18, confirmed against live
-   * Figma (196:383) on the "Selected Work" text, which is bound to
-   * text/primary there. letter-spacing (tight-sm, -0.8px) was already
-   * correct and is unchanged. If this class is used anywhere besides
-   * "Selected Work", confirm before applying — see prompt. */
-  font-family: var(--font-family-sans);
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-16);
-  line-height: var(--line-height-18);
-  letter-spacing: var(--letter-spacing-tight-sm);
-}
-
 .type-meta {
   font-family: var(--font-family-mono);
   font-weight: var(--font-weight-regular);
   font-size: var(--font-size-13);
   line-height: var(--line-height-20);
   letter-spacing: var(--letter-spacing-wide-md);
-  text-transform: none; /* was uppercase — see .type-nav-label above for
-   * the audit this was fixed in. Most live text using this class is
+  text-transform: none; /* was uppercase — removed in the
+   * frontend-design audit. Most live text using this class is
    * already hardcoded caps in the HTML itself (section index numbers
    * aside, which have no case) — this CSS change alone won't visibly
    * affect those instances; only genuinely mixed-case content (like
@@ -674,8 +606,8 @@
   font-size: var(--font-size-11);
   line-height: var(--line-height-16);
   letter-spacing: var(--letter-spacing-wide-sm);
-  text-transform: none; /* was uppercase — see .type-nav-label above for
-   * the audit this was fixed in. Most live text using this class is
+  text-transform: none; /* was uppercase — removed in the
+   * frontend-design audit. Most live text using this class is
    * already hardcoded caps in the HTML (CASE STUDY, FILE A/B/C, WORK) —
    * this alone won't visibly change those; badge/project-row__index
    * text (Title Case/numbers in source) is the visible change here.
@@ -694,8 +626,8 @@
   font-size: var(--font-size-12);
   line-height: normal;
   letter-spacing: var(--letter-spacing-wide-sm);
-  text-transform: none; /* was uppercase — see .type-nav-label above for
-   * the audit this was fixed in. All live text here ("Primitive",
+  text-transform: none; /* was uppercase — removed in the
+   * frontend-design audit. All live text here ("Primitive",
    * "Pulse-teal.700", etc.) is Title/mixed case in source, so this is a
    * real visible change on every instance, not a no-op. */
 }

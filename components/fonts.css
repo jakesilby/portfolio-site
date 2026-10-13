@@ -21,7 +21,6 @@
  *   EB Garamond 500           .type-about-heading, .type-about-entry strong
  *                             (About page)
  *   EB Garamond 600 italic    .type-about-bio-lead (About page)
- *   Spline Sans Mono 500      .type-nav-label (nav "Work" pill),
- *                             .type-token-name (OnePulse Connect token chain)
+ *   Spline Sans Mono 500      .type-token-name (OnePulse Connect token chain)
  */
 @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@800&family=EB+Garamond:ital,wght@0,500;1,400;1,600&family=Spline+Sans+Mono:wght@500&display=swap');
