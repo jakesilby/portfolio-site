@@ -606,9 +606,8 @@
   min-height: var(--size-tap-target);
   color: var(--text-primary);
   text-decoration: none;
-  font: var(--type-nav);
-  font-weight: var(--type-h3-weight); /* type/nav at a heading weight */
-  letter-spacing: var(--type-nav-letter-spacing);
+  font: var(--type-brand);
+  letter-spacing: var(--type-brand-letter-spacing);
 }
 
 .site-header__brand-mark {

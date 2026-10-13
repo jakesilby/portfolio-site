@@ -29,21 +29,31 @@
       letter-spacing: var(--type-hero-letter-spacing);
       color: var(--text-primary);
     }
+    .hero-mark {
+      /* Reset only: no visible highlight yet. */
+      background: none;
+      color: inherit;
+    }
     .home-hero__credits {
       display: flex;
       flex-direction: column;
-      gap: var(--gap-inline);
+      gap: var(--space-20);
       max-width: var(--layout-measure);
     }
-    .home-hero__line {
-      font: var(--type-body);
-      letter-spacing: var(--type-body-letter-spacing);
-      color: var(--text-primary);
+    .home-hero__credit {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
     }
     .home-hero__label {
       font: var(--type-meta);
       letter-spacing: var(--type-meta-letter-spacing);
       color: var(--text-muted);
+    }
+    .home-hero__value {
+      font: var(--type-body-sm);
+      letter-spacing: var(--type-body-sm-letter-spacing);
+      color: var(--text-primary);
     }
   </style>
   <script>
@@ -62,11 +72,17 @@
   </noscript>
 
   <section class="home-hero">
-    <h1 class="home-hero__title">Jake Silby is a product designer who builds design systems for healthcare software.</h1>
-    <div class="home-hero__credits">
-      <p class="home-hero__line"><span class="home-hero__label">Most recently:</span> Product Designer at Elevate Health Technologies, on the OnePulse Connect specialty pharmacy platform.</p>
-      <p class="home-hero__line"><span class="home-hero__label">Previously:</span> Elevance Health, BioPlus Specialty Pharmacy, Radish Health.</p>
-    </div>
+    <h1 class="home-hero__title">I design <mark class="hero-mark">complex workflows</mark> for regulated software, and the <mark class="hero-mark">design systems</mark> that hold them together.</h1>
+    <dl class="home-hero__credits">
+      <div class="home-hero__credit">
+        <dt class="home-hero__label">Most recently</dt>
+        <dd class="home-hero__value">Product Designer at Elevate Health Technologies, on the OnePulse Connect medically integrated dispensing platform.</dd>
+      </div>
+      <div class="home-hero__credit">
+        <dt class="home-hero__label">Previously</dt>
+        <dd class="home-hero__value">Elevance Health, BioPlus Specialty Pharmacy, Radish Health.</dd>
+      </div>
+    </dl>
   </section>
 
   <h2 class="visually-hidden">Work</h2>
