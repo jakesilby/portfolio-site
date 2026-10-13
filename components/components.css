@@ -1,4 +1,4 @@
-/* Shared chrome: site-header, site-footer, project-row, case study blocks.
+/* Shared chrome: site-header, site-footer, work grid, case study blocks.
  * Loaded on every page that uses these components — never modify a copy
  * per page, edit here.
  */
@@ -721,6 +721,81 @@
   font: var(--type-nav);
   letter-spacing: var(--type-nav-letter-spacing);
   color: var(--text-link);
+}
+
+/* --- Work grid (homepage). Two columns inside --layout-wide, one below
+ * 768px. Each item is a single link; hover changes only the title color. --- */
+
+.work-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--work-grid-gap-row) var(--work-grid-gap-column);
+  max-width: var(--layout-wide);
+  margin-inline: auto;
+  padding: 0 var(--layout-gutter) var(--work-grid-gap-row);
+  list-style: none;
+}
+
+@media (min-width: 768px) {
+  .work-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.work-grid__item {
+  display: flex;
+  flex-direction: column;
+  color: inherit;
+  text-decoration: none;
+}
+
+.work-grid__item:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.work-grid__media {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--bg-canvas);
+}
+
+.work-grid__media-inner {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.work-grid__title {
+  margin-top: var(--gap-stack);
+  font: var(--type-h3);
+  letter-spacing: var(--type-h3-letter-spacing);
+  color: var(--text-primary);
+}
+
+.work-grid__item:hover .work-grid__title {
+  color: var(--text-link-hover);
+}
+
+.work-grid__outcome {
+  margin-top: var(--gap-tight);
+  font: var(--type-body);
+  letter-spacing: var(--type-body-letter-spacing);
+  color: var(--text-muted);
+}
+
+.work-grid__meta {
+  margin-top: var(--gap-inline);
+  font: var(--type-meta);
+  letter-spacing: var(--type-meta-letter-spacing);
+  color: var(--text-muted);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .work-grid__title {
+    transition: color var(--duration-hover) ease-out;
+  }
 }
 
 /* --- Project row --- */

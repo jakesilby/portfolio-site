@@ -223,6 +223,7 @@
   --border-width-hairline: 1px; /* NEW — added for the case-study code block
    * (.case-code). Every solid border in components.css now uses it; the
    * remaining inline 1px borders are dashed rules that v2 removes. */
+  --border-width-focus: 2px; /* NEW (v2) — focus ring around a whole work grid item */
 
   /* --- Size primitives --- */
   --size-44: 44px; /* NEW (v2) — WCAG 2.5.5 minimum tap target */
@@ -393,6 +394,11 @@
    * belong to a single component's exact Figma geometry, not the general
    * spacing rhythm scale above. Per CLAUDE.md's third token tier. --- */
   --hero-section-padding-y: var(--space-80); /* now points at its primitive. NEW — homepage hero section vertical padding, confirmed against Figma node 378:160 */
+  --work-grid-gap-column: var(--space-32); /* NEW (v2) — between the two work grid columns */
+  --work-grid-gap-row: var(--space-64); /* NEW (v2) — between work grid rows, twice the column gap so each item reads as one unit */
+  --focus-ring-width: var(--border-width-focus);
+  --focus-ring-color: var(--accent-primary-dark); /* 6.6:1 on bg-page */
+  --focus-ring-offset: var(--space-8);
   /* Raw px below, not primitives: removed in v2 about/grid prompts. */
   --about-card-offset-top: 14px; /* NEW — About page experience/education card's inset from its own glow layer, confirmed against Figma node 496:156 (496:275) */
   --about-card-offset-left: 17px; /* NEW — see --about-card-offset-top; same node, left axis */
