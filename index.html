@@ -29,10 +29,49 @@
       letter-spacing: var(--type-hero-letter-spacing);
       color: var(--text-primary);
     }
+    /* Hero highlight: a watercolor band behind each marked phrase. The ink
+     * is a pseudo-element under the text, so the marks need no extra
+     * markup and are fully drawn without JS. Three soft blobs (sand,
+     * juniper, sand) over a centered juniper band, blurred, with faded
+     * ends. */
     .hero-mark {
-      /* Reset only: no visible highlight yet. */
+      position: relative;
+      isolation: isolate;
+      white-space: nowrap;
       background: none;
       color: inherit;
+    }
+    .hero-mark::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      left: var(--hero-mark-inset-x);
+      right: var(--hero-mark-inset-x);
+      bottom: var(--hero-mark-bottom);
+      height: var(--hero-mark-height);
+      background:
+        radial-gradient(ellipse 38% 90% at 14% 60%, var(--highlight-2), transparent 70%),
+        radial-gradient(ellipse 46% 100% at 52% 40%, var(--highlight), transparent 72%),
+        radial-gradient(ellipse 38% 90% at 88% 55%, var(--highlight-2), transparent 70%),
+        linear-gradient(var(--highlight), var(--highlight)) center / 100% 64% no-repeat;
+      filter: blur(var(--hero-mark-blur));
+      -webkit-mask-image: var(--hero-mark-mask);
+      mask-image: var(--hero-mark-mask);
+      transform-origin: left center;
+    }
+    /* Draws in once on load, in reading order. Under reduced motion there
+     * is no animation and both marks show fully drawn. */
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-mark::before {
+        animation: hero-mark-draw var(--hero-mark-duration) var(--ease-draw) var(--hero-mark-delay-1) backwards;
+      }
+      .hero-mark:nth-of-type(2)::before {
+        animation-delay: var(--hero-mark-delay-2);
+      }
+    }
+    @keyframes hero-mark-draw {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
     }
     .home-hero__credits {
       display: flex;

@@ -245,7 +245,12 @@
   --size-44: 44px; /* NEW (v2) — WCAG 2.5.5 minimum tap target */
 
   /* --- Motion primitives --- */
-  --duration-150: 150ms; /* NEW (v2) — the only UI transition length */
+  --duration-120: 120ms; /* NEW (v2) — hero highlight, first mark's delay */
+  --duration-150: 150ms; /* NEW (v2) — hover color and background changes */
+  --duration-300: 300ms; /* NEW (v2) — work grid lift; second hero mark's delay */
+  --duration-520: 520ms; /* NEW (v2) — hero highlight draw-in */
+  --ease-draw: cubic-bezier(.3, .7, .2, 1); /* NEW (v2) — hero highlight */
+  --ease-lift: cubic-bezier(.2, .7, .2, 1); /* NEW (v2) — work grid lift */
 
   /* --- Spacing primitives --- */
   --space-2: 2px; /* NEW — homepage credibility block, label to value */
@@ -401,6 +406,19 @@
   /* --- Size and motion (v2) --- */
   --size-tap-target: var(--size-44); /* min-height on header and footer links */
   --duration-hover: var(--duration-150); /* hover/focus color change, always ease-out */
+
+  /* --- Hero highlight (v2, .hero-mark). A low watercolor band behind the
+   * marked words, drawn in once on load. Geometry is in em so it scales
+   * with the fluid hero size. --- */
+  --hero-mark-inset-x: -0.18em; /* left and right overhang past the words */
+  --hero-mark-bottom: 0.04em;
+  --hero-mark-height: 0.42em;
+  --hero-mark-blur: 0.06em;
+  --hero-mark-edge: 0.3em; /* soft fade at each end */
+  --hero-mark-mask: linear-gradient(to right, transparent 0, #000 var(--hero-mark-edge), #000 calc(100% - var(--hero-mark-edge)), transparent 100%); /* #000 is mask alpha, not a color */
+  --hero-mark-duration: var(--duration-520);
+  --hero-mark-delay-1: var(--duration-120); /* "complex workflows" */
+  --hero-mark-delay-2: var(--duration-300); /* "design systems" */
 
   /* --- Spacing: gaps --- */
   --gap-tight: var(--space-4);
