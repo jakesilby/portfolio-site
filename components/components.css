@@ -651,44 +651,65 @@
   }
 }
 
-/* --- Site footer --- */
+/* --- Site footer (every page, injected by footer.js) --- */
 
-.site-footer {
+.site-footer__inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: var(--gap-stack);
-  padding: var(--padding-section-y) var(--padding-section-x) var(--space-48);
+  max-width: var(--layout-wide);
+  margin-inline: auto;
+  padding: var(--padding-section-y) var(--layout-gutter) var(--space-48);
 }
 
-.site-footer__copy {
+.site-footer__copy,
+.site-footer__links a {
+  font: var(--type-meta);
+  letter-spacing: var(--type-meta-letter-spacing);
   color: var(--text-label);
-  text-transform: none; /* .type-meta already sets none at the token level;
-   * this is now redundant but left explicit — confirmed against Figma node
-   * 48:15 that the copyright line is mixed-case, not all-caps. */
-  letter-spacing: var(--letter-spacing-none); /* was wide-md — missed when
-   * text-transform was fixed above; the copyright line was always mixed
-   * case, never all-caps, so wide tracking never read correctly here,
-   * same pairing as .stat-tile__label and the other mono labels. */
 }
 
 .site-footer__links {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--gap-footer-links);
 }
 
 .site-footer__links a {
   display: inline-flex;
   align-items: center;
-  min-height: 44px; /* WCAG 2.5.5 minimum tap target — text size/position
-   * unchanged, this only grows the invisible hit area. */
-  color: var(--text-label);
+  min-height: var(--size-tap-target);
   text-decoration: none;
 }
 
 .site-footer__links a:hover {
-  color: var(--text-primary);
+  color: var(--text-link-hover);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .site-footer__links a {
+    transition: color var(--duration-hover) ease-out;
+  }
+}
+
+/* --- No-JS links: the header, footer and work grid are all injected by
+ * JS, so every page carries these plain links inside <noscript>. --- */
+
+.noscript-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-card);
+  max-width: var(--layout-wide);
+  margin-inline: auto;
+  padding: var(--space-16) var(--layout-gutter);
+}
+
+.noscript-nav a {
+  font: var(--type-nav);
+  letter-spacing: var(--type-nav-letter-spacing);
+  color: var(--text-link);
 }
 
 /* --- Project row --- */
