@@ -614,7 +614,6 @@
 .site-header__brand {
   display: inline-flex;
   align-items: center;
-  gap: var(--gap-inline);
   min-height: var(--size-tap-target);
   color: var(--text-primary);
   text-decoration: none;
@@ -622,43 +621,58 @@
   letter-spacing: var(--type-brand-letter-spacing);
 }
 
-.site-header__brand-mark {
-  display: block;
-  width: var(--space-16);
-  height: var(--space-16);
-}
-
 .site-header__nav {
   display: flex;
   align-items: center;
-  gap: var(--gap-card);
+  gap: var(--gap-tight);
 }
 
+/* Nav pills. The current section is filled; the others are transparent
+ * with a subtle fill on hover. The pill is 36px tall; ::after extends the
+ * hit area to 44px without changing the layout. */
 .site-header__link {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  min-height: var(--size-tap-target);
-  border-bottom: var(--border-width-hairline) solid transparent; /* reserves
-   * the active underline so active and inactive links are the same box */
+  padding: var(--nav-pill-padding-y) var(--nav-pill-padding-x);
+  border-radius: var(--radius-full);
   color: var(--text-primary);
   text-decoration: none;
   font: var(--type-nav);
   letter-spacing: var(--type-nav-letter-spacing);
 }
 
-.site-header__link.is-active {
-  border-bottom-color: var(--border-highlight);
+.site-header__link::after {
+  content: "";
+  position: absolute;
+  inset: var(--nav-pill-hit-inset-y) var(--nav-pill-hit-inset-x);
 }
 
-.site-header__brand:hover,
 .site-header__link:hover {
+  background: var(--accent-fill-hover-subtle);
+}
+
+.site-header__link.is-active {
+  background: var(--accent-fill);
+  color: var(--text-on-accent);
+}
+
+.site-header__link:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--nav-focus-ring-offset);
+}
+
+.site-header__brand:hover {
   color: var(--text-link-hover);
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .site-header__brand,
-  .site-header__link {
+  .site-header__brand {
     transition: color var(--duration-hover) ease-out;
+  }
+
+  .site-header__link {
+    transition: background-color var(--duration-hover) ease-out;
   }
 }
 
@@ -724,7 +738,10 @@
 }
 
 /* --- Work grid (homepage). Two columns inside --layout-wide, one below
- * 768px. Each item is a single link; hover changes only the title color. --- */
+ * 768px. Each item is a single link. Hover ("Lift + pill", mouse only):
+ * the media lifts, the other items dim, the title takes the hover color,
+ * and a "Read more" pill follows the cursor (positioned by work-grid.js).
+ * Keyboard focus gets the lift and an outline, no pill. --- */
 
 .work-grid {
   display: grid;
@@ -743,6 +760,7 @@
 }
 
 .work-grid__item {
+  position: relative; /* positioning context for the pill */
   display: flex;
   flex-direction: column;
   color: inherit;
@@ -759,10 +777,10 @@
    * 2880x1800). carbon-classifier-flow.png is 2200x1400, 1.8% off, so
    * cover trims about 12px from its top and bottom edges, which are blank
    * margin. Add media more than 3% off 16:10 with object-fit: contain
-   * instead, so the --bg-canvas well shows around it. */
+   * instead, so the --bg-surface well shows around it. */
   aspect-ratio: 16 / 10;
   overflow: hidden; /* also stops a slightly taller image stretching the box */
-  background: var(--bg-canvas);
+  background: var(--bg-surface);
 }
 
 .work-grid__media-inner {
@@ -797,9 +815,64 @@
   color: var(--text-muted);
 }
 
+/* Follows the cursor: work-grid.js sets left/top to the pointer, clamped
+ * so the pill stays inside the item; the transform centers it and lifts
+ * it clear of the cursor point. */
+.work-grid__pill {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, calc(-100% - var(--work-grid-pill-offset)));
+  padding: var(--work-grid-pill-padding-y) var(--work-grid-pill-padding-x);
+  border-radius: var(--radius-full);
+  background: var(--accent-fill);
+  box-shadow: var(--work-grid-pill-shadow);
+  color: var(--text-on-accent);
+  font: var(--type-pill);
+  letter-spacing: var(--type-pill-letter-spacing);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* Pill and dimming only with a mouse or trackpad; on touch, neither. */
+@media (hover: hover) and (pointer: fine) {
+  .work-grid__item:hover .work-grid__pill {
+    opacity: 1;
+  }
+
+  .work-grid:has(.work-grid__item:hover) .work-grid__item:not(:hover) {
+    opacity: var(--work-grid-dim-opacity);
+  }
+}
+
+/* The lift and every transition drop out under reduced motion. */
 @media (prefers-reduced-motion: no-preference) {
+  .work-grid__item:focus-visible .work-grid__media {
+    transform: scale(var(--work-grid-lift-scale));
+  }
+
+  .work-grid__item {
+    transition: opacity var(--work-grid-lift-duration) var(--ease-lift);
+  }
+
+  .work-grid__media {
+    transition: transform var(--work-grid-lift-duration) var(--ease-lift);
+  }
+
   .work-grid__title {
     transition: color var(--duration-hover) ease-out;
+  }
+
+  .work-grid__pill {
+    transition: opacity var(--duration-hover) ease-out;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .work-grid__item:hover .work-grid__media {
+    transform: scale(var(--work-grid-lift-scale));
   }
 }
 
