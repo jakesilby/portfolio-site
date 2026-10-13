@@ -232,6 +232,7 @@
   --duration-150: 150ms; /* NEW (v2) — the only UI transition length */
 
   /* --- Spacing primitives --- */
+  --space-2: 2px; /* NEW — homepage credibility block, label to value */
   --space-4: 4px;
   --space-8: 8px;
   --space-12: 12px;
@@ -281,6 +282,7 @@
   --font-size-12: 12px; /* NEW — Token Architecture live-embed card label/name text, confirmed against Figma node 353:108 */
   --font-size-13: 13px;
   --font-size-14: 14px; /* NEW — homepage nav wordmark ("Welcome"), confirmed against Figma node 378:160 */
+  --font-size-15: 15px; /* NEW — --type-nav */
   --font-size-16: 16px;
   --font-size-18: 18px;
   --font-size-20: 20px;
@@ -471,6 +473,13 @@
   --type-body-lg-letter-spacing: var(--letter-spacing-none);
   --type-body-lg: var(--type-body-lg-weight) var(--type-body-lg-size)/var(--type-body-lg-line-height) var(--type-body-lg-family);
 
+  --type-body-sm-family: var(--font-family-sans);
+  --type-body-sm-weight: var(--font-weight-regular);
+  --type-body-sm-size: var(--font-size-16);
+  --type-body-sm-line-height: var(--line-height-24);
+  --type-body-sm-letter-spacing: var(--letter-spacing-none);
+  --type-body-sm: var(--type-body-sm-weight) var(--type-body-sm-size)/var(--type-body-sm-line-height) var(--type-body-sm-family);
+
   --type-caption-family: var(--font-family-sans);
   --type-caption-weight: var(--font-weight-regular);
   --type-caption-size: var(--font-size-16);
@@ -486,11 +495,19 @@
   --type-meta: var(--type-meta-weight) var(--type-meta-size)/var(--type-meta-line-height) var(--type-meta-family);
 
   --type-nav-family: var(--font-family-sans);
-  --type-nav-weight: var(--font-weight-regular);
-  --type-nav-size: var(--font-size-16);
-  --type-nav-line-height: var(--line-height-24);
+  --type-nav-weight: var(--font-weight-semibold);
+  --type-nav-size: var(--font-size-15);
+  --type-nav-line-height: var(--line-height-20);
   --type-nav-letter-spacing: var(--letter-spacing-none);
   --type-nav: var(--type-nav-weight) var(--type-nav-size)/var(--type-nav-line-height) var(--type-nav-family);
+
+  /* Header name ("Jake Silby"). */
+  --type-brand-family: var(--font-family-sans);
+  --type-brand-weight: var(--font-weight-medium);
+  --type-brand-size: var(--font-size-16);
+  --type-brand-line-height: var(--line-height-24);
+  --type-brand-letter-spacing: var(--letter-spacing-none);
+  --type-brand: var(--type-brand-weight) var(--type-brand-size)/var(--type-brand-line-height) var(--type-brand-family);
 
   /* Inline code: token names, code and file names inside prose. Sized in
    * em so it sits in body and caption text alike, and takes the
