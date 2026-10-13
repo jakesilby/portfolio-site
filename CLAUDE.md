@@ -6,6 +6,34 @@ Read this (along with `tokens.css`) at the start of every Claude Code session on
 
 A design-systems/design-to-code portfolio: a homepage plus four case studies (Pulse Design System, Global Inline Drawer, Pre-Infusion Assessment Flow, one translated healthcare case study). The site itself is part of the pitch — it needs to be clean, code-forward, and not contradict the story the case studies tell. It does not need heavy interactivity or a complex framework.
 
+## Design direction (v2, Oct 2026)
+
+The site should read as a quiet, systematic frame around the work. Every visual choice should look like a rule applied consistently, not a one-off.
+
+Layout
+- Homepage order: header, hero sentence, credibility lines, two-column work grid, footer. Nothing else.
+- No floating hero card, no glow or colored shadows, no decorative gradients.
+- One content container width and one gutter, used on every page. Columns line up across sections.
+- Rules (dividers) are solid hairlines using a border token. No dashed rules.
+
+Typography (three families, fixed jobs)
+- EB Garamond: only the single hero sentence at the top of a page (homepage hero, case study title). Nowhere else.
+- Barlow: everything else, including nav, body text, captions, meta, labels, buttons and footer.
+- Spline Sans Mono: only literal token names, code, and file names inside case study prose (for example `accent-primary-fg-fill`). Never for labels, meta, nav or captions.
+- No italic body text. No all-caps labels. No eyebrow labels above headings.
+
+Motion
+- The page itself doesn't animate. Product videos and clips are the only things that move.
+- No scroll-triggered reveals, staggers, blurs or fades on content. Content is visible without JavaScript.
+- No smooth-scroll libraries, no custom cursors, no parallax.
+- Hover and focus feedback is a color change only, 150ms ease-out, wrapped in prefers-reduced-motion: no-preference. Focus rings stay visible.
+- Videos: autoplay muted loop playsinline, with a poster frame. Pause when offscreen (IntersectionObserver). Under prefers-reduced-motion: reduce, don't autoplay and show the poster.
+
+Copy
+- Plain, specific, sentence case. No arrows appended to link text. No middle-dot separators.
+- Never imply Jake writes production code. He designs systems and directs AI-assisted prototyping; engineers build production.
+- No em dashes in UI copy.
+
 ## Stack
 
 - Static site — plain HTML/CSS/light JS, or Astro if template reuse across 5 pages gets repetitive. No client-side framework needed; nothing here requires app-level state.
@@ -48,7 +76,7 @@ Content and layout stay separate. A case study is a content file rendered throug
 - BEM-style class naming (matches the Pulse library conventions).
 - Every shared component (nav, footer, case-study template, any repeated card/section pattern) lives in `/components/` and is used everywhere it appears — never copy-pasted and modified per page.
 - Responsive by default — build mobile-first or check mobile at the same time as desktop, not as a separate pass at the end.
-- **ProjectRow hover state:** background swaps to `--bg-inverse`; text stays `--text-primary` (does not swap to an inverse text color). `--bg-inverse` was deliberately repointed from a dark color to a light tint in a later Figma revision — this is that revision's intended behavior, not an unfinished implementation. Driven by the same tokens, not a separate hardcoded style.
+- Work grid item hover: the title changes to the link-hover color token. No background swap, no scale, no shadow. (The dark ProjectRow hover is retired in v2.)
 
 ## Case study visuals: static vs. clip
 
@@ -82,6 +110,6 @@ Every `[VISUAL]` note in a case study draft carries a tag: STATIC, CLIP, or LIVE
 
 ## Open questions to fill in as decided
 
-- Final stack choice (plain static vs. Astro): plain static in practice, as of 2026-10-08 (hand-coded pages + shared components, no build step). A markdown-rendering template is still undecided.
-- Hosting provider: Vercel (default recommendation — swap this line if you go with Netlify instead)
+- Final stack choice (plain static vs. Astro): plain static, confirmed 2026-10-13 (hand-coded HTML/CSS/JS pages + shared components, no `package.json`, no build step). A markdown-rendering template is still undecided.
+- Hosting provider: Vercel, confirmed 2026-10-13 (every page loads Vercel Web Analytics from `/_vercel/insights/script.js`).
 - Domain: ___
