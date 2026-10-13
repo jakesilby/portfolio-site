@@ -1,4 +1,4 @@
-/* Shared chrome: site-header, site-footer, project-row, case study blocks.
+/* Shared chrome: site-header, site-footer, work grid, case study blocks.
  * Loaded on every page that uses these components — never modify a copy
  * per page, edit here.
  */
@@ -723,232 +723,87 @@
   color: var(--text-link);
 }
 
-/* --- Project row --- */
+/* --- Work grid (homepage). Two columns inside --layout-wide, one below
+ * 768px. Each item is a single link; hover changes only the title color. --- */
 
-.project-row {
+.work-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--work-grid-gap-row) var(--work-grid-gap-column);
+  max-width: var(--layout-wide);
+  margin-inline: auto;
+  padding: 0 var(--layout-gutter) var(--work-grid-gap-row);
+  list-style: none;
+}
+
+@media (min-width: 768px) {
+  .work-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.work-grid__item {
   display: flex;
   flex-direction: column;
-  gap: var(--gap-card);
-  padding: var(--padding-card-y) var(--padding-section-x);
+  color: inherit;
   text-decoration: none;
-  border-bottom: 1px dashed var(--border-divider);
 }
 
-.project-row:hover {
-  background: var(--bg-inverse);
+.work-grid__item:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
 }
 
-/* Non-clickable rows (no href yet — case study not published) never show
- * the interactive hover treatment; nothing happens on click either way. */
-.project-row--upcoming:hover {
-  background: none;
+.work-grid__media {
+  /* 16:10, the native ratio of every grid clip (1600x1000, 1440x900,
+   * 2880x1800). carbon-classifier-flow.png is 2200x1400, 1.8% off, so
+   * cover trims about 12px from its top and bottom edges, which are blank
+   * margin. Add media more than 3% off 16:10 with object-fit: contain
+   * instead, so the --bg-canvas well shows around it. */
+  aspect-ratio: 16 / 10;
+  overflow: hidden; /* also stops a slightly taller image stretching the box */
+  background: var(--bg-canvas);
 }
 
-.project-row__body {
-  display: flex;
-  align-items: start;
-  gap: var(--padding-section-x);
-}
-
-.project-row__image {
-  /* width:50% (not a fixed px) so this scales down gracefully at desktop
-   * widths just above the 720px stacking breakpoint — a flat px width big
-   * enough to matter at 1440px would leave --project-row-description
-   * almost no room right above 720px. flex-shrink stays enabled (0 1 auto,
-   * not 0 0 auto) so it can actually give up that 50% if the row is ever
-   * tighter than image+gap+description's combined min-content. */
-  flex: 0 1 auto;
-  width: 50%;
-  min-width: 280px;
-  max-width: var(--project-row-image-width);
-  overflow: hidden;
-  background: var(--bg-placeholder);
-  padding: var(--padding-image);
-}
-
-.project-row__image-inner {
+.work-grid__media-inner {
   display: block;
   width: 100%;
-  height: auto;
-  background: var(--bg-page);
+  height: 100%;
   object-fit: cover;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-card);
 }
 
-.project-row__image--siteoverview {
-  /* The site-overview clip is a self-contained frame — its own background
-   * fills its full bounds — so, unlike a bare screenshot, it doesn't need
-   * to sit inside the shared placeholder tray above. Same reasoning as
-   * .case-hero__placeholder--frameless on the case-study page itself. */
-  background: none;
-  padding: 0;
-}
-
-.project-row__image--infectionscreening {
-  /* Requested directly: swap this row's placeholder tray from the shared
-   * greenwhite tone to a warmer one, scoped to just this row so the other
-   * two keep the default --bg-placeholder tray. */
-  background: var(--bg-placeholder-warm);
-}
-
-.project-row__image-inner--siteoverview {
-  /* Explicit aspect-ratio so the row doesn't flash/reflow before the
-   * video's own intrinsic size is known, matching ds_siteoverview.mp4's
-   * current 1600x1000 encode (previously 1600/986 for the older clip). */
-  aspect-ratio: 1600 / 1000;
-}
-
-.project-row__image-inner--linkdocflow {
-  /* Same reasoning as --siteoverview, matching link-document-flow-short.mp4's
-   * real 1440x900 encode. project-row.js derives this class name from each
-   * row's own video.aspectClass rather than hardcoding one modifier for
-   * every video row. */
-  aspect-ratio: 1440 / 900;
-}
-
-.project-row__image-inner--infectionscreening {
-  /* Same reasoning as --siteoverview/--linkdocflow, matching
-   * as_infectionscreening.mp4's real 2880x1800 encode (also the Pre-Infusion
-   * case study page's own hero clip). */
-  aspect-ratio: 2880 / 1800;
-}
-
-.project-row__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--gap-card);
-}
-
-.project-row__title-group {
-  display: flex;
-  align-items: baseline;
-  gap: var(--gap-inline);
-}
-
-.project-row__title-group--stacked {
-  /* Used only where a row carries a subtitle (the product name underneath
-   * a descriptive headline) — overrides the baseline row layout above so
-   * the subtitle sits below the title instead of inline beside it. Scoped
-   * to a modifier rather than changed on the base class so rows without a
-   * subtitle keep their existing single-line layout. */
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-4);
-}
-
-.project-row__subtitle {
-  color: var(--text-label);
-  margin: 0;
-}
-
-.project-row__index {
-  color: var(--accent-primary-dark); /* accent-primary fails 4.5:1 as text on bg-page —
-   * accent-primary-dark clears it at 6.6:1. */
-}
-
-.project-row__title {
+.work-grid__title {
+  margin-top: var(--gap-stack);
+  font: var(--type-h3);
+  letter-spacing: var(--type-h3-letter-spacing);
   color: var(--text-primary);
-  margin: 0;
-  font-size: var(--font-size-24);
-  line-height: var(--line-height-32); /* was 48px, inherited from
-   * .type-case-title. Deliberately 32px, not the current Figma file's
-   * 48px — per the 2026-09-28 title spec. */
-  letter-spacing: var(--letter-spacing-tight-xs); /* was tight-xs2 (-1px) */
 }
 
-.project-row__meta {
-  display: flex;
-  align-items: center;
-  gap: var(--gap-stack);
+.work-grid__item:hover .work-grid__title {
+  color: var(--text-link-hover);
 }
 
-.project-row__year {
-  color: var(--text-label);
+.work-grid__outcome {
+  margin-top: var(--gap-tight);
+  font: var(--type-body);
+  letter-spacing: var(--type-body-letter-spacing);
+  color: var(--text-muted);
 }
 
-.badge {
-  display: inline-block;
-  padding: var(--gap-tight) var(--gap-inline);
-  border: var(--border-width-hairline) solid var(--border-muted);
-  border-radius: var(--radius-sm);
-  color: var(--text-tag);
+.work-grid__meta {
+  margin-top: var(--gap-inline);
+  font: var(--type-meta);
+  letter-spacing: var(--type-meta-letter-spacing);
+  color: var(--text-muted);
 }
 
-.project-row__description {
-  flex: 1 1 0;
-  min-width: 0;
-  color: var(--text-primary);
-  margin: 0;
-}
-
-/* Scroll-triggered stagger reveal — .js-stagger is added by project-row.js
- * only when IntersectionObserver is available and the user hasn't asked
- * for reduced motion, so this never leaves content stuck invisible if JS
- * fails to run. .is-visible is added once per row, on first intersection,
- * and never removed — the reveal fires exactly once. */
 @media (prefers-reduced-motion: no-preference) {
-  .project-row.js-stagger .badge,
-  .project-row.js-stagger .project-row__description {
-    opacity: 0;
-    transition: opacity 340ms ease-out;
+  .work-grid__title {
+    transition: color var(--duration-hover) ease-out;
   }
-
-  .project-row.js-stagger .project-row__title,
-  .project-row.js-stagger .project-row__image {
-    opacity: 0;
-    filter: blur(4px);
-    transition: opacity 340ms ease-out, transform 340ms ease-out, filter 340ms ease-out;
-  }
-
-  .project-row.js-stagger .project-row__title {
-    transform: translateY(6px);
-  }
-
-  .project-row.js-stagger .project-row__image {
-    transform: scale(0.98);
-  }
-
-  .project-row.js-stagger.is-visible .badge,
-  .project-row.js-stagger.is-visible .project-row__description {
-    opacity: 1;
-  }
-
-  .project-row.js-stagger.is-visible .project-row__title,
-  .project-row.js-stagger.is-visible .project-row__image {
-    opacity: 1;
-    transform: none;
-    filter: blur(0);
-  }
-
-  .project-row.js-stagger.is-visible .project-row__title { transition-delay: 60ms; }
-  .project-row.js-stagger.is-visible .badge { transition-delay: 120ms; }
-  .project-row.js-stagger.is-visible .project-row__image { transition-delay: 180ms; }
-  .project-row.js-stagger.is-visible .project-row__description { transition-delay: 240ms; }
 }
 
 @media (max-width: 720px) {
-  .project-row__body {
-    flex-direction: column;
-  }
-
-  .project-row__image {
-    width: auto;
-    min-width: 0;
-    max-width: none;
-  }
-
-  .project-row__header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--gap-stack);
-  }
-
-  .project-row__meta {
-    align-items: flex-start;
-  }
-
   .stat-grid {
     grid-template-columns: 1fr;
   }

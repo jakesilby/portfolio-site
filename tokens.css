@@ -223,6 +223,7 @@
   --border-width-hairline: 1px; /* NEW — added for the case-study code block
    * (.case-code). Every solid border in components.css now uses it; the
    * remaining inline 1px borders are dashed rules that v2 removes. */
+  --border-width-focus: 2px; /* NEW (v2) — focus ring around a whole work grid item */
 
   /* --- Size primitives --- */
   --size-44: 44px; /* NEW (v2) — WCAG 2.5.5 minimum tap target */
@@ -332,7 +333,6 @@
   --bg-inverse: var(--color-greenwhite-5); /* confirmed against Figma node 239:186 — the light-tint hover redesign. Was previously cosmos-9 (dark, node 232:21) — my own local copy of this file was never updated when that fix was given to Claude Code directly, which is likely why it regressed. */
   --bg-placeholder: var(--color-greenwhite-4);
   --bg-placeholder-fill: var(--color-greenwhite-1); /* NEW — inner tone for the two-tone case-study image placeholder */
-  --bg-placeholder-warm: var(--color-cosmos-2-5); /* NEW — Pre-Infusion Assessment Flow's homepage thumbnail tray, requested as an alternate to the shared greenwhite --bg-placeholder */
   --bg-section-alt: var(--color-sage-5); /* NOT migrated — still legacy sage. Used on case study pages, which haven't been redesigned yet */
   --bg-hero: var(--color-elm-0); /* NEW — the 2026 homepage hero panel */
   --bg-surface: var(--color-white); /* NEW — card/tile fill that sits a shade brighter than bg-page, e.g. At a Glance stat tiles */
@@ -350,7 +350,6 @@
   --text-hero-eyebrow: var(--color-cosmos-8-5); /* NEW — status unclear as of the latest hero revision, see chat note */
   --text-hero-heading: var(--color-cosmos-9-5); /* NEW */
   --text-hero-subhead: var(--color-greenwhite-8); /* NEW — the hero's second line ("I am a product designer..."), confirmed against live Figma (196:383) */
-  --text-tag: var(--color-greenwhite-8);
   --text-link: var(--color-elm-5); /* NEW — About page's inline LinkedIn link, confirmed against Figma node 517:67 (#23657f). color-elm-5 already existed as a primitive but had no semantic role assigned yet. */
   --text-link-hover: var(--color-cosmos-8); /* NEW (v2) — hover color for inline
    * links and work grid titles. 6.60:1 on --bg-page, 6.25:1 on --bg-canvas.
@@ -384,27 +383,22 @@
 
   /* --- Spacing: padding --- */
   --padding-section-x: var(--space-48);
-  --padding-card-y: var(--space-36);
   --padding-section-y: var(--space-96);
-  --padding-image: var(--space-32);
   --padding-hero-y: var(--space-160); /* superseded — the full-bleed hero-panel this backed was replaced by the floating hero card (see --hero-section-padding-y below), confirmed against Figma node 378:160. Kept in case a future full-bleed hero treatment needs it again. */
 
   /* --- Spacing: mapped (component-scoped) — one-off positioning values that
    * belong to a single component's exact Figma geometry, not the general
    * spacing rhythm scale above. Per CLAUDE.md's third token tier. --- */
   --hero-section-padding-y: var(--space-80); /* now points at its primitive. NEW — homepage hero section vertical padding, confirmed against Figma node 378:160 */
-  /* Raw px below, not primitives: removed in v2 about/grid prompts. */
+  --work-grid-gap-column: var(--space-32); /* NEW (v2) — between the two work grid columns */
+  --work-grid-gap-row: var(--space-64); /* NEW (v2) — between work grid rows, twice the column gap so each item reads as one unit */
+  --focus-ring-width: var(--border-width-focus);
+  --focus-ring-color: var(--accent-primary-dark); /* 6.6:1 on bg-page */
+  --focus-ring-offset: var(--space-8);
+  /* Raw px below, not primitives: removed in v2 about prompts. */
   --about-card-offset-top: 14px; /* NEW — About page experience/education card's inset from its own glow layer, confirmed against Figma node 496:156 (496:275) */
   --about-card-offset-left: 17px; /* NEW — see --about-card-offset-top; same node, left axis */
   --about-card-glow-offset-left: 3px; /* NEW — About card's glow layer inset from the outer wrapper (top/bottom inset is 0), confirmed against Figma node 496:156 (496:171) */
-  --project-row-image-width: 640px; /* Raw px: removed in v2 hero/about/grid prompts. NEW — was a hardcoded 500px; raised so
-   * homepage thumbnails (e.g. OnePulse Connect's Colors & Typography swatch
-   * grid) render large enough to actually read rather than a full screenshot
-   * shrunk past legibility. Component-scoped one-off card geometry, not part
-   * of the general spacing rhythm scale, same tier as the hero/about card
-   * offsets above. The <720px breakpoint overrides this back to `none`
-   * (stacked layout goes full-width regardless), so this only affects
-   * desktop/tablet. */
 
   /* --- Layout (v2) — the only two container widths, plus one gutter.
    * --layout-wide is the outer box for the header, work grid and media;
@@ -556,60 +550,10 @@
  * tokens; treat them as the source of truth the same way you'd treat
  * a custom property.
  *
- * Legacy (pre-v2). The case study pages no longer use any of these; they
- * set the v2 type roles above on their own selectors. What's left serves
- * the homepage project rows (.type-meta, .type-case-title,
- * .type-label-secondary, .type-description) and the About page
- * (.type-about-*) until those are rebuilt.
+ * Legacy (pre-v2). The case study pages and the homepage work grid set
+ * the v2 type roles above on their own selectors. What's left serves the
+ * About page (.type-about-*) until it is rebuilt.
  * ============================================================ */
-
-.type-meta {
-  font-family: var(--font-family-mono);
-  font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-13);
-  line-height: var(--line-height-20);
-  letter-spacing: var(--letter-spacing-wide-md);
-  text-transform: none; /* was uppercase — removed in the
-   * frontend-design audit. Most live text using this class is
-   * already hardcoded caps in the HTML itself (section index numbers
-   * aside, which have no case) — this CSS change alone won't visibly
-   * affect those instances; only genuinely mixed-case content (like
-   * the copyright line) changes appearance. */
-}
-
-.type-case-title {
-  font-family: var(--font-family-sans);
-  font-weight: var(--font-weight-extrabold);
-  font-size: var(--font-size-32);
-  line-height: var(--line-height-48);
-  letter-spacing: var(--letter-spacing-tight-md);
-}
-
-.type-label-secondary {
-  font-family: var(--font-family-mono);
-  font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-11);
-  line-height: var(--line-height-16);
-  letter-spacing: var(--letter-spacing-wide-sm);
-  text-transform: none; /* was uppercase — removed in the
-   * frontend-design audit. Most live text using this class is
-   * already hardcoded caps in the HTML (CASE STUDY, FILE A/B/C, WORK) —
-   * this alone won't visibly change those; badge/project-row__index
-   * text (Title Case/numbers in source) is the visible change here. */
-}
-
-.type-description {
-  font-family: var(--font-family-serif);
-  font-style: italic;
-  font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-20);
-  line-height: var(--line-height-32); /* was line-height-24 (1.2x) — same
-   * tight-leading bug as .type-hero-subhead, same fix: 32px/20px = 1.6x.
-   * Unlike the hero card, .project-row__description has no fixed-height
-   * container (flex, align-items: start) — confirmed no re-measurement
-   * needed here. */
-  letter-spacing: var(--letter-spacing-none);
-}
 
 /* --- About page additions (introduced while building the About page,
  * confirmed against Figma node 496:156) --- */
@@ -676,15 +620,8 @@
 
 /* ============================================================
  * COMPONENT INTENT (not yet built) — documented here so it isn't
- * lost before the ProjectRow component exists in code.
+ * lost before it exists in code.
  * ============================================================ */
-
-/*
-.project-row:hover {
-  background: var(--bg-inverse);
-  color: var(--text-inverse);
-}
-*/
 
 /*
  * Hero panel (2026 homepage) — not yet built in code. Reference:
