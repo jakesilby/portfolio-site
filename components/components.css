@@ -181,7 +181,7 @@
    * sentences describing what's missing, not short tags, so all-caps would
    * hurt readability here regardless of the base value. */
   letter-spacing: var(--letter-spacing-none); /* wide tracking only reads
-   * correctly on all-caps text — same pairing as .stat-tile__label. */
+   * correctly on all-caps text */
 }
 
 /* --- Case study vertical image stack (a group of .case-visual/
@@ -304,35 +304,6 @@
   overflow-wrap: anywhere; /* long paths like
    * packages/styles/scss/components/... would otherwise push the
    * page wider than a phone screen */
-}
-
-/* --- Stat Grid (case study "At a Glance") --- */
-
-.stat-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--gap-card);
-  width: 100%;
-}
-
-.stat-tile {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-inline);
-  padding: var(--gap-inline);
-  background: var(--bg-surface);
-}
-
-.stat-tile__value {
-  font: var(--type-h2);
-  letter-spacing: var(--type-h2-letter-spacing);
-  color: var(--text-primary);
-}
-
-.stat-tile__label {
-  font: var(--type-meta);
-  letter-spacing: var(--type-meta-letter-spacing);
-  color: var(--text-label);
 }
 
 /* --- Problem Diagram (scattered files -> shared token system illustration,
@@ -877,10 +848,6 @@
 }
 
 @media (max-width: 720px) {
-  .stat-grid {
-    grid-template-columns: 1fr;
-  }
-
   .problem-diagram {
     max-width: 100%;
     overflow-x: auto;

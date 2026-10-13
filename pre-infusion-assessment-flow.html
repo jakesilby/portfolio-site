@@ -116,24 +116,6 @@
       object-fit: cover;
     }
 
-    /* --- "At a glance" stat grid — same page-local wrapper as OnePulse
-     * Connect's and Linking Documents'; .stat-grid/.stat-tile are shared
-     * (components.css). --- */
-
-    .at-a-glance {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: var(--gap-card);
-      background: var(--bg-page);
-      padding: var(--padding-section-x);
-    }
-
-    .at-a-glance__label {
-      font: var(--type-meta);
-      letter-spacing: var(--type-meta-letter-spacing);
-      color: var(--text-label);
-    }
 
     /* --- Real screenshots — each sets its own aspect-ratio from the real
      * capture, same convention as OnePulse's/Linking Documents' ds_ and
@@ -236,27 +218,6 @@
     </div>
   </section>
 
-  <section class="at-a-glance">
-    <p class="at-a-glance__label">At a glance</p>
-    <div class="stat-grid">
-      <div class="stat-tile">
-        <p class="stat-tile__value">Solo designer</p>
-        <p class="stat-tile__label">Framework, selection pattern, and validation rules, working with PMs and clinical reviewers</p>
-      </div>
-      <div class="stat-tile">
-        <p class="stat-tile__value">43</p>
-        <p class="stat-tile__label">Questions in the pre-infusion assessment, the toughest case in the catalog</p>
-      </div>
-      <div class="stat-tile">
-        <p class="stat-tile__value">20–40</p>
-        <p class="stat-tile__label">Clinical &amp; module assessment types in OnePulse Connect while I was designing</p>
-      </div>
-      <div class="stat-tile">
-        <p class="stat-tile__value">10</p>
-        <p class="stat-tile__label">Sections in the pre-infusion assessment, in an order reviewed with clinical staff</p>
-      </div>
-    </div>
-  </section>
 
   <section class="case-section case-section--alt">
     <h2 class="case-section__heading">The Problem</h2>

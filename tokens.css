@@ -364,9 +364,8 @@
   --bg-placeholder-fill: var(--color-clay-0); /* inner tone for the two-tone case-study image placeholder */
   --bg-section-alt: var(--color-sage-5); /* NOT migrated — still legacy sage. Used on case study pages, which haven't been redesigned yet */
   --bg-hero: var(--color-elm-0); /* NEW — the 2026 homepage hero panel */
-  --bg-surface: var(--color-clay-1); /* media wells, code backgrounds, At a
-   * Glance stat tiles. Was white, a shade brighter than the page; now a
-   * shade darker. */
+  --bg-surface: var(--color-clay-1); /* media wells, code backgrounds. Was
+   * white, a shade brighter than the page; now a shade darker. */
   --bg-backdrop: color-mix(in srgb, var(--color-elm-10) 80%, transparent); /* NEW — lightbox/modal backdrop, computed from the elm-10 black primitive via color-mix() instead of a hardcoded rgba() */
 
   /* --- Color: text --- */
@@ -377,8 +376,8 @@
   --text-inverse: var(--color-cosmos-9);
   --text-muted: var(--color-clay-7); /* 5.4:1 on bg-page, 4.8:1 on
    * bg-canvas and bg-surface */
-  --text-label: var(--text-muted); /* footer, stat tile labels, case study
-   * subtitles. Was elm-8, a near-black teal. */
+  --text-label: var(--text-muted); /* footer, case study project names.
+   * Was elm-8, a near-black teal. */
   --text-hero-eyebrow: var(--color-cosmos-8-5); /* NEW — status unclear as of the latest hero revision, see chat note */
   --text-hero-heading: var(--color-cosmos-9-5); /* NEW */
   --text-hero-subhead: var(--color-greenwhite-8); /* NEW — the hero's second line ("I am a product designer..."), confirmed against live Figma (196:383) */
