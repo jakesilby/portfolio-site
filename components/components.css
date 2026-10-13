@@ -755,8 +755,10 @@
 }
 
 .work-grid__media {
+  /* A 4:3 well. Media of any shape (16:10 clips, the Carbon flowchart)
+   * sits whole inside it, inset on every side, never cropped. */
   aspect-ratio: 4 / 3;
-  overflow: hidden;
+  padding: var(--work-grid-media-inset);
   background: var(--bg-canvas);
 }
 
@@ -764,14 +766,6 @@
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-}
-
-.work-grid__media--contain {
-  padding: var(--space-24);
-}
-
-.work-grid__media--contain .work-grid__media-inner {
   object-fit: contain;
 }
 

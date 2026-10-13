@@ -392,6 +392,7 @@
   --hero-section-padding-y: var(--space-80); /* now points at its primitive. NEW — homepage hero section vertical padding, confirmed against Figma node 378:160 */
   --work-grid-gap-column: var(--space-32); /* NEW (v2) — between the two work grid columns */
   --work-grid-gap-row: var(--space-64); /* NEW (v2) — between work grid rows, twice the column gap so each item reads as one unit */
+  --work-grid-media-inset: 8%; /* NEW (v2) — inset of grid media inside its 4:3 well. A percentage, not a --space-* step, so the frame keeps the same proportion at every width (padding % resolves against the item's width on all four sides: about 27px at 375, 43px at 1440). */
   --focus-ring-width: var(--border-width-focus);
   --focus-ring-color: var(--accent-primary-dark); /* 6.6:1 on bg-page */
   --focus-ring-offset: var(--space-8);
