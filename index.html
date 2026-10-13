@@ -29,6 +29,11 @@
       letter-spacing: var(--type-hero-letter-spacing);
       color: var(--text-primary);
     }
+    .hero-mark {
+      /* Reset only: no visible highlight yet. */
+      background: none;
+      color: inherit;
+    }
     .home-hero__credits {
       display: flex;
       flex-direction: column;
@@ -62,9 +67,9 @@
   </noscript>
 
   <section class="home-hero">
-    <h1 class="home-hero__title">Jake Silby is a product designer who builds design systems for healthcare software.</h1>
+    <h1 class="home-hero__title">I design <mark class="hero-mark">complex workflows</mark> for regulated software, and the <mark class="hero-mark">design systems</mark> that hold them together.</h1>
     <div class="home-hero__credits">
-      <p class="home-hero__line"><span class="home-hero__label">Most recently:</span> Product Designer at Elevate Health Technologies, on the OnePulse Connect specialty pharmacy platform.</p>
+      <p class="home-hero__line"><span class="home-hero__label">Most recently:</span> Product Designer at Elevate Health Technologies, on the OnePulse Connect medically integrated dispensing platform.</p>
       <p class="home-hero__line"><span class="home-hero__label">Previously:</span> Elevance Health, BioPlus Specialty Pharmacy, Radish Health.</p>
     </div>
   </section>
