@@ -15,6 +15,118 @@
   white-space: nowrap;
 }
 
+/* --- Case study page base. Each case study page used to carry this in
+ * its own <style>. :where() keeps the reset at zero specificity, so every
+ * component rule below still wins over it. --- */
+
+:where(body[data-page="case-study"], body[data-page="case-study"] *) {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body[data-page="case-study"] {
+  background: var(--bg-page);
+  color: var(--text-primary);
+  font: var(--type-body);
+  letter-spacing: var(--type-body-letter-spacing);
+}
+
+/* --- Case study layout. One column inside --layout-wide, with the same
+ * gutter as the header and footer. Prose is capped at --layout-measure;
+ * the title, hero, figures and clips fill the column. --- */
+
+.case-layout {
+  max-width: var(--layout-wide);
+  margin-inline: auto;
+  padding: var(--space-24) var(--layout-gutter) 0;
+}
+
+/* --- Case study intro: title, project name, description, meta. --- */
+
+.case-intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-stack);
+  padding-bottom: var(--space-48);
+}
+
+.case-intro__eyebrow {
+  font: var(--type-meta);
+  letter-spacing: var(--type-meta-letter-spacing);
+  color: var(--accent);
+}
+
+.case-intro__title {
+  font: var(--type-page-title);
+  letter-spacing: var(--type-page-title-letter-spacing);
+  color: var(--text-primary);
+}
+
+.case-intro__project {
+  font: var(--type-meta);
+  letter-spacing: var(--type-meta-letter-spacing);
+  color: var(--text-label);
+}
+
+.case-intro__description {
+  max-width: var(--layout-measure);
+  font: var(--type-body-lg);
+  letter-spacing: var(--type-body-lg-letter-spacing);
+  color: var(--text-secondary);
+}
+
+.case-intro__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-self: flex-start;
+  gap: var(--gap-card);
+  padding: var(--space-4) var(--space-8);
+  background: var(--bg-surface);
+  font: var(--type-meta);
+  letter-spacing: var(--type-meta-letter-spacing);
+  color: var(--text-label);
+}
+
+/* --- Case study hero. Every hero media file is 16:10 (1600x1000,
+ * 1440x900, 2880x1800). Screenshots sit in the --bg-placeholder tray;
+ * --frameless drops it for a capture that carries its own background. --- */
+
+.case-hero {
+  padding-bottom: var(--space-48);
+}
+
+.case-hero__placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-48) var(--space-24);
+  background: var(--bg-placeholder);
+  border-radius: var(--radius-md);
+}
+
+.case-hero__placeholder--frameless {
+  padding: 0;
+  background: none;
+}
+
+.case-hero__frame {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  background: var(--bg-page);
+  border-radius: var(--radius-md);
+}
+
+@media (max-width: 720px) {
+  .case-hero__placeholder:not(.case-hero__placeholder--frameless) {
+    /* 24px side padding shrinks the hero disproportionately on a phone. */
+    padding: var(--space-48) var(--space-12);
+  }
+}
+
 /* --- Case footer nav (Back to top / Next case study — end of every case
  * study's content, before the shared site-footer). --- */
 
@@ -23,9 +135,8 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--gap-card);
-  padding: var(--space-24) var(--padding-section-x);
+  padding: var(--space-24) 0;
   border-top: 1px dashed var(--border-divider);
-  background: var(--bg-page);
 }
 
 .case-footer-nav__link {
@@ -35,21 +146,16 @@
   letter-spacing: var(--type-nav-letter-spacing);
 }
 
-/* --- Case study section (The Problem, Why This Matters, ...) — repeats
- * identically across every section on a case study page, confirmed against
- * Figma node 44:2. */
+/* --- Case study section (The problem, Why this matters, ...). Sections
+ * are separated by spacing and a hairline, not alternating bands. --- */
 
 .case-section {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: var(--gap-section);
-  padding: var(--padding-section-x);
-  background: var(--bg-page);
-}
-
-.case-section--alt {
-  background: var(--bg-canvas);
+  padding-block: var(--space-48);
+  border-top: var(--border-width-hairline) solid var(--border-default);
 }
 
 .case-section__heading {
@@ -62,21 +168,7 @@
   font: var(--type-body);
   letter-spacing: var(--type-body-letter-spacing);
   color: var(--text-primary);
-  max-width: 56ch; /* was a fixed 640px (before that, 760px) — that px value
-   * was tuned once against a specific type scale and drifted back to
-   * ~92-95 chars/line once the scale changed (Impeccable audit, 2026-09-15).
-   * ch ties the width to the current font's actual character width instead
-   * of a static px guess, so it can't drift the same way again.
-   *
-   * 56ch, not a nominal ~72-75ch, because Barlow's real prose character
-   * width runs narrower than its own ch unit (the '0' glyph the unit is
-   * defined by) here — 72ch measured out to ~90-96 real characters/line
-   * in this component, not ~72-75. Verified directly via
-   * getClientRects()-based per-character line measurement (not estimated):
-   * 56ch = max 78 chars/line on this page, max 79 on Linking Documents &
-   * Prescriptions, the other page sharing this class. Re-verify the same
-   * way if this component's font or type scale changes again — don't
-   * trust the nominal ch count at face value for this font. */
+  max-width: var(--layout-measure);
 }
 
 .case-section__body strong,
@@ -97,8 +189,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--gap-section);
-  width: 736px;
-  max-width: 100%;
+  max-width: var(--layout-measure);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -120,15 +211,15 @@
 
 /* --- Case study inline visual (bg-placeholder wrapper, no radius on the
  * wrapper itself; inner image gets radius + object-fit, no shadow) — reused
- * across every real-screenshot block on a case study page. Each usage sets
- * its own aspect-ratio via a modifier, since that varies per image. --- */
+ * across every real-screenshot block on a case study page. Fills the
+ * article column. Each image sets its own aspect-ratio with a modifier
+ * (see "Case study image ratios" below). --- */
 
 .case-visual {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 760px;
-  max-width: 100%;
+  width: 100%;
   padding: var(--space-24);
   background: var(--bg-placeholder);
 }
@@ -136,7 +227,6 @@
 .case-visual__image {
   display: block;
   width: 100%;
-  max-width: 712px;
   height: auto;
   object-fit: cover;
   border-radius: var(--radius-md);
@@ -193,8 +283,7 @@
   flex-direction: column;
   align-items: flex-start;
   gap: var(--gap-section);
-  width: 760px;
-  max-width: 100%;
+  width: 100%;
 }
 
 /* Image + caption pair. .case-visual is a centered flex row with its own
@@ -204,12 +293,13 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-8);
-  width: var(--layout-case-content-width);
-  max-width: 100%;
+  width: 100%;
   margin: 0;
 }
 
 .case-figure__caption {
+  max-width: var(--layout-measure); /* the image fills the column; the
+   * caption keeps the reading measure */
   font: var(--type-caption);
   letter-spacing: var(--type-caption-letter-spacing);
   color: var(--text-secondary);
@@ -220,33 +310,9 @@
   text-decoration: underline;
 }
 
-/* Wide figure — breaks out of the 760px text column up to the full layout
- * width, for screenshots whose small DevTools/terminal text would be
- * illegible at 712px (Carbon token audit). The tray and image inside drop
- * their own fixed 760/712px caps so they fill the wider figure. Still
- * opens full size in the lightbox like every other case-study image. */
-.case-figure--wide {
-  width: var(--layout-case-wide-width);
-}
-
-.case-figure--wide .case-visual {
-  width: 100%;
-}
-
-.case-figure--wide .case-visual__image {
-  max-width: none;
-}
-
-.case-figure--wide .case-figure__caption {
-  max-width: var(--layout-case-content-width); /* the image goes wide; the
-   * caption keeps the text column's line length */
-}
-
 /* Bare diagram — a diagram built in the site's own visual language
- * (transparent/flat background) gets no .case-visual tray, same as
- * Linking Documents' .removal-guardrail-image and Pre-Infusion's
- * .framework-diagram-image (both page-local there). Shared here so a
- * diagram with a caption can use .case-figure without the tray. */
+ * (transparent/flat background) gets no .case-visual tray. Works on its
+ * own or inside a .case-figure with a caption. */
 .case-diagram {
   display: block;
   width: 100%;
@@ -271,8 +337,7 @@
  * as it does in the source file. --- */
 
 .case-code {
-  width: var(--layout-case-content-width);
-  max-width: 100%;
+  width: 100%;
   margin: 0;
   padding: var(--space-16) var(--space-20);
   overflow-x: auto;
@@ -305,6 +370,62 @@
    * packages/styles/scss/components/... would otherwise push the
    * page wider than a phone screen */
 }
+
+/* --- Case study clip. Scroll-triggered by clip-video.js through
+ * [data-clip-video]. Fills the article column at 16:10, the native ratio
+ * of every clip but the Data Table one. --- */
+
+.case-clip-video {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: var(--bg-placeholder-fill);
+}
+
+.case-clip-video__media {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform-origin: center;
+}
+
+.case-clip-video--datatable {
+  aspect-ratio: 2302 / 1080;
+}
+
+/* --- Case study image ratios. One modifier per real image, set from the
+ * file's pixel dimensions, grouped by page. --- */
+
+/* OnePulse Connect */
+.case-visual__image--figma-variables { aspect-ratio: 712 / 438; }
+.case-visual__image--tabgroup { aspect-ratio: 712 / 102; }
+.case-visual__image--celltypevariants { aspect-ratio: 712 / 479; }
+.case-visual__image--patientprofile,
+.case-visual__image--assessmentexample { aspect-ratio: 712 / 534; }
+
+/* Linking documents & prescriptions */
+.case-visual__image--before-after-cards { aspect-ratio: 1968 / 2192; }
+.case-visual__image--linked-medications-field { aspect-ratio: 1600 / 256; }
+.case-visual__image--also-linked-line { aspect-ratio: 1564 / 195; }
+.case-diagram--removal-guardrail { aspect-ratio: 2352 / 812; }
+
+/* Pre-infusion assessment flow */
+.case-visual__image--selectassessment { aspect-ratio: 3576 / 2892; }
+.case-visual__image--assessmentpage { aspect-ratio: 2904 / 2160; }
+.case-visual__image--infectionscreening,
+.case-visual__image--hardstopalert { aspect-ratio: 2880 / 1800; }
+.case-visual__image--vitalsbanda { aspect-ratio: 1800 / 1360; }
+.case-diagram--framework { aspect-ratio: 1938 / 304; }
+
+/* Carbon token audit */
+.case-visual__image--fluid-combobox-computed { aspect-ratio: 2696 / 1632; }
+.case-visual__image--blame-fluid-combobox { aspect-ratio: 1864 / 350; }
+.case-visual__image--inline-dropdown-computed { aspect-ratio: 2696 / 1626; }
+.case-visual__image--diff-inline-dropdown { aspect-ratio: 1860 / 566; }
+.case-diagram--classifier-flow { aspect-ratio: 2200 / 1400; }
 
 /* --- Problem Diagram (scattered files -> shared token system illustration,
  * case study "The Problem" section only — bespoke, not a reusable pattern) --- */
@@ -424,7 +545,6 @@
   height: 175px;
   object-fit: cover;
   border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-resolved); /* the resolved/elevated cue now stands alone, no border */
 }
 
 /* --- Token Chain (case study "Token Architecture" live embed) — three
@@ -436,8 +556,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 760px;
-  max-width: 100%;
+  width: 100%;
   padding: var(--space-24);
   background: var(--bg-placeholder);
 }
@@ -549,8 +668,7 @@
 }
 
 .token-chain__caption {
-  width: 760px;
-  max-width: 100%;
+  max-width: var(--layout-measure);
   font: var(--type-body);
   letter-spacing: var(--type-body-letter-spacing);
   color: var(--text-secondary);
