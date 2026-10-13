@@ -215,15 +215,14 @@
 
   /* --- Radius primitives --- */
   --radius-full: 99px; /* pill/fully-rounded — safely larger than half the height of anything it's applied to */
-  --radius-sm: var(--space-4); /* NEW — Problem Diagram resolved-side image frame corners, confirmed against Figma */
-  --radius-md: var(--space-8); /* case-study row image corners, confirmed against Figma */
-  --radius-lg: var(--space-16); /* NEW — homepage hero card + glow corners, confirmed against Figma node 378:160 (381:486/381:487) */
+  --radius-sm: 4px; /* own value, no longer aliases --space-4 (radius isn't spacing). NEW — Problem Diagram resolved-side image frame corners, confirmed against Figma */
+  --radius-md: 8px; /* own value, no longer aliases --space-8. case-study row image corners, confirmed against Figma */
+  --radius-lg: 16px; /* own value, no longer aliases --space-16. NEW — homepage hero card + glow corners, confirmed against Figma node 378:160 (381:486/381:487) */
 
   /* --- Border width primitives --- */
   --border-width-hairline: 1px; /* NEW — added for the case-study code block
-   * (.case-code). Same 1px every existing border on the site already uses
-   * inline (.badge, .case-footer-nav, .section-label); those still need
-   * moving onto this token. */
+   * (.case-code). Every solid border in components.css now uses it; the
+   * remaining inline 1px borders are dashed rules that v2 removes. */
 
   /* --- Spacing primitives --- */
   --space-4: 4px;
@@ -377,7 +376,8 @@
   /* --- Spacing: mapped (component-scoped) — one-off positioning values that
    * belong to a single component's exact Figma geometry, not the general
    * spacing rhythm scale above. Per CLAUDE.md's third token tier. --- */
-  --hero-section-padding-y: 80px; /* NEW — homepage hero section vertical padding, confirmed against Figma node 378:160 */
+  --hero-section-padding-y: var(--space-80); /* now points at its primitive. NEW — homepage hero section vertical padding, confirmed against Figma node 378:160 */
+  /* Raw px below, not primitives: removed in v2 hero/about/grid prompts. */
   --hero-card-offset-top: 15px; /* was 14px — verified against Figma node
    * 507:24 (fileKey Sv50ruZLmflO9t4vcN7wiH) on 2026-09-14. An earlier pass
    * without live Figma access read the frame's combined "19px/15px" offset
@@ -390,7 +390,7 @@
   --about-card-offset-top: 14px; /* NEW — About page experience/education card's inset from its own glow layer, confirmed against Figma node 496:156 (496:275) */
   --about-card-offset-left: 17px; /* NEW — see --about-card-offset-top; same node, left axis */
   --about-card-glow-offset-left: 3px; /* NEW — About card's glow layer inset from the outer wrapper (top/bottom inset is 0), confirmed against Figma node 496:156 (496:171) */
-  --project-row-image-width: 640px; /* NEW — was a hardcoded 500px; raised so
+  --project-row-image-width: 640px; /* Raw px: removed in v2 hero/about/grid prompts. NEW — was a hardcoded 500px; raised so
    * homepage thumbnails (e.g. OnePulse Connect's Colors & Typography swatch
    * grid) render large enough to actually read rather than a full screenshot
    * shrunk past legibility. Component-scoped one-off card geometry, not part
