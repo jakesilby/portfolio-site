@@ -201,6 +201,10 @@
 
   /* --- Layout primitives --- */
   --layout-max-width: 1200px;
+  --layout-text-width: 544px; /* NEW (v2) — reading measure. ~71 real
+   * characters per line of 18px Barlow (~75 at 17px). Set as px, not ch:
+   * Barlow's ch (the '0' glyph, 0.565em) is much wider than its average
+   * character (~0.427em), so a literal 68ch measured ~90 characters/line. */
   --layout-case-content-width: 760px; /* case-study content column — matches the
    * hardcoded 760px on .case-visual, .case-image-stack and friends, which
    * still need moving onto this token */
@@ -211,15 +215,14 @@
 
   /* --- Radius primitives --- */
   --radius-full: 99px; /* pill/fully-rounded — safely larger than half the height of anything it's applied to */
-  --radius-sm: var(--space-4); /* NEW — Problem Diagram resolved-side image frame corners, confirmed against Figma */
-  --radius-md: var(--space-8); /* case-study row image corners, confirmed against Figma */
-  --radius-lg: var(--space-16); /* NEW — homepage hero card + glow corners, confirmed against Figma node 378:160 (381:486/381:487) */
+  --radius-sm: 4px; /* own value, no longer aliases --space-4 (radius isn't spacing). NEW — Problem Diagram resolved-side image frame corners, confirmed against Figma */
+  --radius-md: 8px; /* own value, no longer aliases --space-8. case-study row image corners, confirmed against Figma */
+  --radius-lg: 16px; /* own value, no longer aliases --space-16. NEW — homepage hero card + glow corners, confirmed against Figma node 378:160 (381:486/381:487) */
 
   /* --- Border width primitives --- */
   --border-width-hairline: 1px; /* NEW — added for the case-study code block
-   * (.case-code). Same 1px every existing border on the site already uses
-   * inline (.badge, .case-footer-nav, .section-label); those still need
-   * moving onto this token. */
+   * (.case-code). Every solid border in components.css now uses it; the
+   * remaining inline 1px borders are dashed rules that v2 removes. */
 
   /* --- Spacing primitives --- */
   --space-4: 4px;
@@ -273,6 +276,7 @@
   --font-size-32: 32px;
   --font-size-40: 40px; /* hero headline, current — confirmed against live Figma (196:383) */
   --font-size-48: 48px; /* added for case study page titles */
+  --font-size-56: 56px; /* NEW (v2) — top of the --type-hero clamp, at 1440px */
   --font-size-64: 64px; /* superseded — .type-hero-heading moved from Barlow/64px back to Playfair/40px. Kept in case a future treatment needs it again. */
   --font-size-72: 72px; /* unused — kept from an earlier hero iteration in case another hero-scale treatment needs it */
 
@@ -280,10 +284,13 @@
   --line-height-18: 18px; /* "Selected Work" label, current — confirmed against live Figma (196:383) */
   --line-height-20: 20px;
   --line-height-24: 24px;
+  --line-height-28: 28px; /* NEW (v2) — --type-body, --type-h3 */
   --line-height-32: 32px;
   --line-height-36: 36px;
+  --line-height-40: 40px; /* NEW (v2) — bottom of the --type-hero and --type-page-title clamps, at 375px */
   --line-height-48: 48px;
   --line-height-56: 56px; /* added for case study page titles */
+  --line-height-64: 64px; /* NEW (v2) — top of the --type-hero clamp, at 1440px */
   --line-height-76: 76px; /* added for the 2026 homepage hero headline */
 
   --letter-spacing-none: 0px;
@@ -332,6 +339,10 @@
   --text-hero-subhead: var(--color-greenwhite-8); /* NEW — the hero's second line ("I am a product designer..."), confirmed against live Figma (196:383) */
   --text-tag: var(--color-greenwhite-8);
   --text-link: var(--color-elm-5); /* NEW — About page's inline LinkedIn link, confirmed against Figma node 517:67 (#23657f). color-elm-5 already existed as a primitive but had no semantic role assigned yet. */
+  --text-link-hover: var(--color-cosmos-8); /* NEW (v2) — hover color for inline
+   * links and work grid titles. 6.60:1 on --bg-page, 6.25:1 on --bg-canvas.
+   * A different hue from both --text-link (elm-5) and --text-primary, so the
+   * hover reads on teal links and near-black titles alike. */
 
   /* --- Color: accent --- */
   --accent-primary: var(--color-cosmos-7);
@@ -365,7 +376,8 @@
   /* --- Spacing: mapped (component-scoped) — one-off positioning values that
    * belong to a single component's exact Figma geometry, not the general
    * spacing rhythm scale above. Per CLAUDE.md's third token tier. --- */
-  --hero-section-padding-y: 80px; /* NEW — homepage hero section vertical padding, confirmed against Figma node 378:160 */
+  --hero-section-padding-y: var(--space-80); /* now points at its primitive. NEW — homepage hero section vertical padding, confirmed against Figma node 378:160 */
+  /* Raw px below, not primitives: removed in v2 hero/about/grid prompts. */
   --hero-card-offset-top: 15px; /* was 14px — verified against Figma node
    * 507:24 (fileKey Sv50ruZLmflO9t4vcN7wiH) on 2026-09-14. An earlier pass
    * without live Figma access read the frame's combined "19px/15px" offset
@@ -378,7 +390,7 @@
   --about-card-offset-top: 14px; /* NEW — About page experience/education card's inset from its own glow layer, confirmed against Figma node 496:156 (496:275) */
   --about-card-offset-left: 17px; /* NEW — see --about-card-offset-top; same node, left axis */
   --about-card-glow-offset-left: 3px; /* NEW — About card's glow layer inset from the outer wrapper (top/bottom inset is 0), confirmed against Figma node 496:156 (496:171) */
-  --project-row-image-width: 640px; /* NEW — was a hardcoded 500px; raised so
+  --project-row-image-width: 640px; /* Raw px: removed in v2 hero/about/grid prompts. NEW — was a hardcoded 500px; raised so
    * homepage thumbnails (e.g. OnePulse Connect's Colors & Typography swatch
    * grid) render large enough to actually read rather than a full screenshot
    * shrunk past legibility. Component-scoped one-off card geometry, not part
@@ -387,10 +399,124 @@
    * (stacked layout goes full-width regardless), so this only affects
    * desktop/tablet. */
 
+  /* --- Layout (v2) — the only two container widths, plus one gutter.
+   * --layout-wide is the outer box for the header, work grid and media;
+   * the gutter sits inside it as padding, so wide content is 1104px on
+   * desktop (same as --layout-case-wide-width). --layout-measure is the
+   * reading-text box. --layout-gutter steps up in the @media blocks
+   * below :root (20 / 32 / 48). --- */
+  --layout-wide: var(--layout-max-width);
+  --layout-measure: var(--layout-text-width);
+  --layout-gutter: var(--space-20);
+
+  /* --- Type roles (v2) — composite tokens. Each role has five parts plus
+   * a `font` shorthand. Apply with `font: var(--type-body);` and
+   * `letter-spacing: var(--type-body-letter-spacing);`, since the font
+   * shorthand can't carry letter-spacing. Barlow everywhere except hero and
+   * page-title (EB Garamond) and code (Spline Sans Mono). Every
+   * line-height is a multiple of 4. The legacy .type-* classes further
+   * down stay in use until pages migrate onto these roles. --- */
+
+  /* Fluid roles: size and line-height both interpolate linearly between
+   * 375px and 1440px viewports. The endpoints are primitives; values in
+   * between are not always on the 4px grid. */
+  --type-hero-family: var(--font-family-serif);
+  --type-hero-weight: var(--font-weight-regular);
+  --type-hero-size: clamp(var(--font-size-32), 23.55px + 2.2535vw, var(--font-size-56)); /* 32 at 375 → 56 at 1440 */
+  --type-hero-line-height: clamp(var(--line-height-40), 31.55px + 2.2535vw, var(--line-height-64)); /* 40 at 375 → 64 at 1440 */
+  --type-hero-letter-spacing: var(--letter-spacing-tight-xs2);
+  --type-hero: var(--type-hero-weight) var(--type-hero-size)/var(--type-hero-line-height) var(--type-hero-family);
+
+  --type-page-title-family: var(--font-family-serif);
+  --type-page-title-weight: var(--font-weight-regular);
+  --type-page-title-size: clamp(var(--font-size-32), 29.183px + 0.7512vw, var(--font-size-40)); /* 32 at 375 → 40 at 1440 */
+  --type-page-title-line-height: clamp(var(--line-height-40), 37.183px + 0.7512vw, var(--line-height-48)); /* 40 at 375 → 48 at 1440 */
+  --type-page-title-letter-spacing: var(--letter-spacing-tight-sm);
+  --type-page-title: var(--type-page-title-weight) var(--type-page-title-size)/var(--type-page-title-line-height) var(--type-page-title-family);
+
+  --type-h2-family: var(--font-family-sans);
+  --type-h2-weight: var(--font-weight-semibold);
+  --type-h2-size: var(--font-size-24);
+  --type-h2-line-height: var(--line-height-32);
+  --type-h2-letter-spacing: var(--letter-spacing-tight-xs);
+  --type-h2: var(--type-h2-weight) var(--type-h2-size)/var(--type-h2-line-height) var(--type-h2-family);
+
+  --type-h3-family: var(--font-family-sans);
+  --type-h3-weight: var(--font-weight-semibold);
+  --type-h3-size: var(--font-size-20);
+  --type-h3-line-height: var(--line-height-28);
+  --type-h3-letter-spacing: var(--letter-spacing-none);
+  --type-h3: var(--type-h3-weight) var(--type-h3-size)/var(--type-h3-line-height) var(--type-h3-family);
+
+  --type-body-family: var(--font-family-sans);
+  --type-body-weight: var(--font-weight-regular);
+  --type-body-size: var(--font-size-18);
+  --type-body-line-height: var(--line-height-28);
+  --type-body-letter-spacing: var(--letter-spacing-none);
+  --type-body: var(--type-body-weight) var(--type-body-size)/var(--type-body-line-height) var(--type-body-family);
+
+  --type-body-lg-family: var(--font-family-sans);
+  --type-body-lg-weight: var(--font-weight-regular);
+  --type-body-lg-size: var(--font-size-20);
+  --type-body-lg-line-height: var(--line-height-32);
+  --type-body-lg-letter-spacing: var(--letter-spacing-none);
+  --type-body-lg: var(--type-body-lg-weight) var(--type-body-lg-size)/var(--type-body-lg-line-height) var(--type-body-lg-family);
+
+  --type-caption-family: var(--font-family-sans);
+  --type-caption-weight: var(--font-weight-regular);
+  --type-caption-size: var(--font-size-16);
+  --type-caption-line-height: var(--line-height-24);
+  --type-caption-letter-spacing: var(--letter-spacing-none);
+  --type-caption: var(--type-caption-weight) var(--type-caption-size)/var(--type-caption-line-height) var(--type-caption-family);
+
+  --type-meta-family: var(--font-family-sans);
+  --type-meta-weight: var(--font-weight-regular);
+  --type-meta-size: var(--font-size-14);
+  --type-meta-line-height: var(--line-height-20);
+  --type-meta-letter-spacing: var(--letter-spacing-none);
+  --type-meta: var(--type-meta-weight) var(--type-meta-size)/var(--type-meta-line-height) var(--type-meta-family);
+
+  --type-nav-family: var(--font-family-sans);
+  --type-nav-weight: var(--font-weight-regular);
+  --type-nav-size: var(--font-size-16);
+  --type-nav-line-height: var(--line-height-24);
+  --type-nav-letter-spacing: var(--letter-spacing-none);
+  --type-nav: var(--type-nav-weight) var(--type-nav-size)/var(--type-nav-line-height) var(--type-nav-family);
+
+  /* Inline code: token names, code and file names inside prose. Sized in
+   * em so it sits in body and caption text alike, and takes the
+   * surrounding line-height. No `font` shorthand for this role: the
+   * shorthand resets line-height to `normal` and can't take `inherit`, so
+   * apply the parts individually. */
+  --font-size-code-inline: 0.875em;
+  --type-code-family: var(--font-family-mono);
+  --type-code-weight: var(--font-weight-regular);
+  --type-code-size: var(--font-size-code-inline);
+  --type-code-line-height: inherit;
+  --type-code-letter-spacing: var(--letter-spacing-none);
+
+  /* Multi-line code blocks (pre.case-code, Carbon token audit). */
+  --type-code-block-family: var(--font-family-mono);
+  --type-code-block-weight: var(--font-weight-regular);
+  --type-code-block-size: var(--font-size-14);
+  --type-code-block-line-height: var(--line-height-20);
+  --type-code-block-letter-spacing: var(--letter-spacing-none);
+  --type-code-block: var(--type-code-block-weight) var(--type-code-block-size)/var(--type-code-block-line-height) var(--type-code-block-family);
+
   /* --- Shadows --- */
   --shadow-card: 0 2px 4px rgba(0, 0, 0, 0.1), 0 15px 9px rgba(0, 0, 0, 0.05), 0 41px 11px rgba(0, 0, 0, 0.02); /* 3-layer approximation of Figma's 5-stacked-shadow card spec — reads the same visually. Applied via CSS instead of baked into image assets so it stays themeable and doesn't bleed into the source PNG/WebP crop. */
   --shadow-thumbnail: 0 1px 2px rgba(0, 0, 0, 0.1), 0 8px 5px rgba(0, 0, 0, 0.05), 0 14px 5px rgba(0, 0, 0, 0.02); /* NEW — same 3-layer approximation approach as --shadow-card, scaled down for smaller inline thumbnails (e.g. the Problem Diagram's ds_colors image), confirmed against a distinct, tighter 5-layer spec on node 45:2 */
   --shadow-resolved: 0 4px 16px rgba(0, 0, 0, 0.12); /* NEW — single-layer spec, meaningfully simpler than the 3-layer --shadow-card/--shadow-thumbnail approximations. Problem Diagram's resolved/"Token System" side only, confirmed against Figma. */
+}
+
+/* Page gutter steps (v2): 20px below 768, 32px from 768, 48px from 1024
+ * (and at 1440). Breakpoints are literal because custom properties can't
+ * be used inside a media query. */
+@media (min-width: 768px) {
+  :root { --layout-gutter: var(--space-32); }
+}
+@media (min-width: 1024px) {
+  :root { --layout-gutter: var(--space-48); }
 }
 
 
