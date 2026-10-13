@@ -10,11 +10,11 @@
  * Primitives, Spacing collections) — values pulled directly from the Plugin API,
  * not eyeballed from a screenshot.
  *
- * 2026 homepage direction: cosmos / greenwhite / smaltblue / elm are the active
- * primitives for the homepage (see --bg-hero, --text-hero-* below). brown / orange
- * / sage / forest remain in place because --bg-inverse, --bg-section-alt, and
- * --text-muted (used on case study pages / ProjectRow hover) haven't been
- * migrated to the new palette yet — don't delete them until those are addressed.
+ * v2 color (Oct 2026): clay / juniper / sand are the active primitives and
+ * every core semantic alias points at them. cosmos / greenwhite / smaltblue /
+ * elm and the older brown / orange / sage / forest families stay in place
+ * until Prompt 9 confirms nothing references them (the About page glow and
+ * --text-hero-* still do).
  *
  * v2 — restored --layout-max-width and --space-160 (--padding-hero-y), both
  * dropped by mistake in v1's wholesale file replacement rather than a deliberate
@@ -169,6 +169,22 @@
   --color-elm-9: #071419;
   --color-elm-9-5: #030a0d;
   --color-elm-10: #000000;
+
+  /* --- Color primitives: clay + juniper (v2, "Clay + juniper" at faint
+   * warmth). The active palette. Clay is the warm neutral family, juniper
+   * the green, sand the warm second highlight tone. Contrast ratios are on
+   * clay-0 (--bg-page). The cosmos / greenwhite / smaltblue / elm families
+   * above stay until Prompt 9 confirms nothing references them. --- */
+  --color-clay-0: #faf9f7;
+  --color-clay-1: #eeede9;
+  --color-clay-2: #e3e2dd;
+  --color-clay-7: #5f6a64; /* 5.4:1 */
+  --color-juniper-1: #e5e8e5;
+  --color-juniper-1-5: #dae9e1;
+  --color-juniper-6: #567a6d; /* white text on it 4.8:1 */
+  --color-juniper-7: #2f5d4e; /* 7.1:1 */
+  --color-juniper-9: #1f2a26; /* 14.1:1 */
+  --color-sand-2: #f0e3c9;
 
   /* --- Color primitives: white (case-study surface fill — not part of any
    * family scale, an unbound literal white in Figma, not a variable) --- */
@@ -326,44 +342,57 @@
    * ============================================================ */
 
   /* --- Color: backgrounds --- */
-  --bg-page: var(--color-greenwhite-0);
-  --bg-canvas: var(--color-greenwhite-1-5); /* corrected from greenwhite-0-5 (#f5f6f4) to greenwhite-1-5 (#f1f2ef) — confirmed against live Figma variables on node 44:2 ("The Problem" section fill), the token's first actual usage anywhere in the codebase */
+  --bg-page: var(--color-clay-0);
+  --bg-canvas: var(--color-clay-1); /* alternating case study sections. Same
+   * tone as --bg-surface, so anything that needs to read on a --alt section
+   * carries its own border or uses --bg-placeholder. */
   --bg-accent: var(--color-cosmos-4);
   --bg-accent-tint: var(--color-cosmos-1); /* NEW — featured At a Glance stat tile fill, confirmed against Figma (#FBEEEE) */
   --bg-inverse: var(--color-greenwhite-5); /* confirmed against Figma node 239:186 — the light-tint hover redesign. Was previously cosmos-9 (dark, node 232:21) — my own local copy of this file was never updated when that fix was given to Claude Code directly, which is likely why it regressed. */
-  --bg-placeholder: var(--color-greenwhite-4);
-  --bg-placeholder-fill: var(--color-greenwhite-1); /* NEW — inner tone for the two-tone case-study image placeholder */
+  --bg-placeholder: var(--color-clay-2); /* case study screenshot trays and
+   * inline code. One step darker than --bg-canvas so trays still read on
+   * --alt sections. Muted text fails on it (4.3:1); keep it to images and
+   * primary text. */
+  --bg-placeholder-fill: var(--color-clay-0); /* inner tone for the two-tone case-study image placeholder */
   --bg-section-alt: var(--color-sage-5); /* NOT migrated — still legacy sage. Used on case study pages, which haven't been redesigned yet */
   --bg-hero: var(--color-elm-0); /* NEW — the 2026 homepage hero panel */
-  --bg-surface: var(--color-white); /* NEW — card/tile fill that sits a shade brighter than bg-page, e.g. At a Glance stat tiles */
+  --bg-surface: var(--color-clay-1); /* media wells, code backgrounds, At a
+   * Glance stat tiles. Was white, a shade brighter than the page; now a
+   * shade darker. */
   --bg-backdrop: color-mix(in srgb, var(--color-elm-10) 80%, transparent); /* NEW — lightbox/modal backdrop, computed from the elm-10 black primitive via color-mix() instead of a hardcoded rgba() */
 
   /* --- Color: text --- */
-  --text-primary: var(--color-cosmos-9-5);
-  --text-secondary: var(--color-elm-9);
+  --text-primary: var(--color-juniper-9); /* 14.1:1 on bg-page */
+  --text-secondary: var(--text-primary); /* captions and case study
+   * descriptions. Was elm-9, a near-black that read the same as primary. */
+  --text-on-accent: var(--color-white); /* on --accent-fill, 4.8:1 */
   --text-inverse: var(--color-cosmos-9);
-  --text-muted: var(--color-greenwhite-8); /* Migrated off legacy sage-6 (#b4beb5,
-   * 1.7:1 — failed WCAG AA). greenwhite-8 is the lightest step in the active
-   * 2026 palette that still clears 4.5:1 against both bg-page and bg-canvas
-   * (5.48:1 / 5.19:1). */
-  --text-label: var(--color-elm-8);
+  --text-muted: var(--color-clay-7); /* 5.4:1 on bg-page, 4.8:1 on
+   * bg-canvas and bg-surface */
+  --text-label: var(--text-muted); /* footer, stat tile labels, case study
+   * subtitles. Was elm-8, a near-black teal. */
   --text-hero-eyebrow: var(--color-cosmos-8-5); /* NEW — status unclear as of the latest hero revision, see chat note */
   --text-hero-heading: var(--color-cosmos-9-5); /* NEW */
   --text-hero-subhead: var(--color-greenwhite-8); /* NEW — the hero's second line ("I am a product designer..."), confirmed against live Figma (196:383) */
-  --text-link: var(--color-elm-5); /* NEW — About page's inline LinkedIn link, confirmed against Figma node 517:67 (#23657f). color-elm-5 already existed as a primitive but had no semantic role assigned yet. */
-  --text-link-hover: var(--color-cosmos-8); /* NEW (v2) — hover color for inline
-   * links and work grid titles. 6.60:1 on --bg-page, 6.25:1 on --bg-canvas.
-   * A different hue from both --text-link (elm-5) and --text-primary, so the
-   * hover reads on teal links and near-black titles alike. */
+  --text-link: var(--accent);
+  --text-link-hover: var(--accent); /* hover for the header name, footer
+   * links and work grid titles. Retires the cosmos red hover. */
 
-  /* --- Color: accent --- */
-  --accent-primary: var(--color-cosmos-7);
-  --accent-primary-dark: var(--color-cosmos-8); /* NEW — Token Architecture live-embed arrow icon fill, confirmed against Figma node 353:108's exported SVG asset (#b40b04) */
+  /* --- Color: accent (v2) --- */
+  --accent: var(--color-juniper-7); /* links, focus rings, hover text. 7.1:1 on bg-page */
+  --accent-fill: var(--color-juniper-6); /* current nav pill, work grid "Read more" pill */
+  --accent-fill-hover-subtle: var(--color-juniper-1); /* nav pill hover */
+  --highlight: var(--color-juniper-1-5); /* hero highlight, main tone */
+  --highlight-2: var(--color-sand-2); /* hero highlight, second tone */
+  --accent-primary: var(--accent); /* legacy name, was cosmos-7 red */
+  --accent-primary-dark: var(--accent); /* legacy name: case study eyebrows
+   * and token chain arrows. Was cosmos-8 red. */
 
   /* --- Color: borders --- */
-  --border-divider: var(--color-greenwhite-6);
-  --border-muted: var(--color-greenwhite-7);
-  --border-default: var(--color-elm-9-5);
+  --border-default: var(--color-clay-2); /* hairlines */
+  --border-divider: var(--border-default);
+  --border-muted: var(--color-greenwhite-7); /* not migrated: dashed
+   * placeholder and problem diagram card outlines. */
   --border-accent: var(--color-cosmos-9); /* NEW — nav pill button outline */
   --border-interactive: var(--color-smaltblue-7); /* NEW — smaltblue's first assigned role */
   --border-highlight: var(--color-cosmos-6); /* NEW — nav pill active-tab underline. Stated by the user as #FC7973/cosmos-6; not confirmed via Figma, but cosmos-6 is a real existing primitive. */
@@ -393,7 +422,7 @@
   --work-grid-gap-column: var(--space-32); /* NEW (v2) — between the two work grid columns */
   --work-grid-gap-row: var(--space-64); /* NEW (v2) — between work grid rows, twice the column gap so each item reads as one unit */
   --focus-ring-width: var(--border-width-focus);
-  --focus-ring-color: var(--accent-primary-dark); /* 6.6:1 on bg-page */
+  --focus-ring-color: var(--accent); /* 7.1:1 on bg-page */
   --focus-ring-offset: var(--space-8);
   /* Raw px below, not primitives: removed in v2 about prompts. */
   --about-card-offset-top: 14px; /* NEW — About page experience/education card's inset from its own glow layer, confirmed against Figma node 496:156 (496:275) */

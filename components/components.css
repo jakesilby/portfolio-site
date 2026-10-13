@@ -759,10 +759,10 @@
    * 2880x1800). carbon-classifier-flow.png is 2200x1400, 1.8% off, so
    * cover trims about 12px from its top and bottom edges, which are blank
    * margin. Add media more than 3% off 16:10 with object-fit: contain
-   * instead, so the --bg-canvas well shows around it. */
+   * instead, so the --bg-surface well shows around it. */
   aspect-ratio: 16 / 10;
   overflow: hidden; /* also stops a slightly taller image stretching the box */
-  background: var(--bg-canvas);
+  background: var(--bg-surface);
 }
 
 .work-grid__media-inner {
