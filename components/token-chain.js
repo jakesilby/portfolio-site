@@ -35,5 +35,5 @@ tokenChainScript.insertAdjacentHTML('afterend', `
     </div>
   </div>
 </div>
-<p class="token-chain__caption">accent-primary-fg-fill resolves through primary.dark, not primary.main: a deliberately darker shade for foreground contrast against the accent background.</p>
+<p class="token-chain__caption"><code class="case-code-inline">accent-primary-fg-fill</code> resolves through <code class="case-code-inline">primary.dark</code>, not <code class="case-code-inline">primary.main</code>: a deliberately darker shade for foreground contrast against the accent background.</p>
 `);
