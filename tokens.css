@@ -260,10 +260,8 @@
   --space-36: 36px;
   --space-48: 48px;
   --space-56: 56px;
-  --space-64: 64px; /* superseded — was the About page's card/bio column gap
-   * for one revision of node 496:156; the next revision moved that gap to
-   * 80px (see --space-80 below). Kept, same as --space-128/--font-size-64,
-   * in case a future section lands on this rung again. */
+  --space-64: 64px; /* homepage hero top, work grid row gap, case study
+   * nav column gap */
   --space-80: 80px; /* NEW — About page's card/bio column gap, now 80px per
    * the latest revision of node 496:156/517:67 (was 64px, see --space-64
    * above). 80px already exists as a literal value on --hero-section-padding-y
@@ -277,7 +275,7 @@
   --space-128: 128px; /* superseded — kept in case another section needs it */
   --space-160: 160px;
   --space-180: 180px; /* hero panel padding, current — confirmed against live Figma (196:383). Third revision to this value; see chat history if it changes again. */
-  --space-200: 200px; /* superseded — kept in case another section needs it */
+  --space-200: 200px; /* case study "On this page" column (--case-toc-width) */
 
   /* --- Typography primitives --- */
   --font-family-display: 'Cormorant Garamond', Garamond, serif; /* v2 hero
@@ -465,6 +463,13 @@
   --layout-wide: var(--layout-max-width);
   --layout-measure: var(--layout-text-width);
   --layout-gutter: var(--space-20);
+  /* Case study pages. From 1100px the "On this page" nav is a column
+   * beside the article: 200 + 64 leaves an 840px article at 1440. */
+  --case-toc-width: var(--space-200);
+  --case-toc-gap: var(--space-64);
+  --case-anchor-offset: var(--space-24); /* where an H2 lands after an
+   * anchor jump, and the nav's sticky top. The header isn't sticky, so
+   * this is breathing room only. */
 
   /* --- Type roles (v2) — composite tokens. Each role has five parts plus
    * a `font` shorthand. Apply with `font: var(--type-body);` and

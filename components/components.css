@@ -32,14 +32,85 @@ body[data-page="case-study"] {
   letter-spacing: var(--type-body-letter-spacing);
 }
 
-/* --- Case study layout. One column inside --layout-wide, with the same
- * gutter as the header and footer. Prose is capped at --layout-measure;
- * the title, hero, figures and clips fill the column. --- */
+/* --- Case study layout, inside --layout-wide with the same gutter as the
+ * header and footer. One column below 1100px: intro, section nav, then
+ * the article. From 1100px the section nav moves into a column on the
+ * left (see .case-toc). Prose is capped at --layout-measure; the title,
+ * hero, figures and clips fill the article column. --- */
 
 .case-layout {
   max-width: var(--layout-wide);
   margin-inline: auto;
   padding: var(--space-24) var(--layout-gutter) 0;
+}
+
+/* --- Case study section nav ("On this page"), filled by case-toc.js from
+ * the page's H2s. Below 1100px it's a plain list between the intro and
+ * the article. From 1100px it's a sticky column beside the article, and
+ * the section being read takes the link color, with no transition. Empty
+ * without JS, so it collapses. --- */
+
+.case-toc:empty {
+  display: none;
+}
+
+.case-toc {
+  padding-bottom: var(--space-48);
+}
+
+.case-toc__label {
+  margin-bottom: var(--gap-inline);
+  font: var(--type-meta);
+  letter-spacing: var(--type-meta-letter-spacing);
+  color: var(--text-muted);
+}
+
+.case-toc__list {
+  list-style: none;
+}
+
+.case-toc__link {
+  display: inline-block;
+  padding-block: var(--space-4);
+  font: var(--type-body-sm);
+  letter-spacing: var(--type-body-sm-letter-spacing);
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.case-toc__link:hover,
+.case-toc__link[aria-current] {
+  color: var(--text-link);
+}
+
+.case-toc__link:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--nav-focus-ring-offset);
+}
+
+/* 1100 is literal: custom properties can't be used in a media query. */
+@media (min-width: 1100px) {
+  .case-layout {
+    display: grid;
+    grid-template-columns: var(--case-toc-width) minmax(0, 1fr);
+    grid-template-areas:
+      "toc intro"
+      "toc body";
+    column-gap: var(--case-toc-gap);
+  }
+
+  .case-intro { grid-area: intro; }
+  .case-body { grid-area: body; }
+
+  .case-toc {
+    grid-area: toc;
+    padding-bottom: 0;
+  }
+
+  .case-toc__inner {
+    position: sticky;
+    top: var(--case-anchor-offset);
+  }
 }
 
 /* --- Case study intro: title, project name, description, meta. --- */
@@ -162,6 +233,7 @@ body[data-page="case-study"] {
   font: var(--type-h2);
   letter-spacing: var(--type-h2-letter-spacing);
   color: var(--text-primary);
+  scroll-margin-top: var(--case-anchor-offset); /* anchor jumps from the section nav */
 }
 
 .case-section__body {
