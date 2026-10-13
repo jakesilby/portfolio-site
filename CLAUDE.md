@@ -18,10 +18,11 @@ Layout
 - Two container widths only: --layout-wide for the header, grid and media, and --layout-measure for reading text. Both are defined in tokens.css.
 
 Typography (three families, fixed jobs)
-- EB Garamond: only the single hero sentence at the top of a page (homepage hero, case study title). Nowhere else.
-- Barlow: everything else, including nav, body text, captions, meta, labels, buttons and footer.
+- Cormorant Garamond 500 (--font-family-display): only the single hero sentence at the top of a page (homepage hero, case study title). Nowhere else.
+- Bricolage Grotesque: everything else, including nav, body text, captions, meta, labels, buttons and footer.
 - Spline Sans Mono: only literal token names, code, and file names inside case study prose (for example `accent-primary-fg-fill`). Never for labels, meta, nav or captions.
 - No italic body text. No all-caps labels. No eyebrow labels above headings.
+- EB Garamond and --font-family-serif remain only for legacy classes and are removed by the end of v2.
 
 Motion
 - The page itself doesn't animate. Product videos and clips are the only things that move.
