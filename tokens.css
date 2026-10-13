@@ -201,10 +201,11 @@
 
   /* --- Layout primitives --- */
   --layout-max-width: 1200px;
-  --layout-text-width: 544px; /* NEW (v2) — reading measure. ~71 real
-   * characters per line of 18px Barlow (~75 at 17px). Set as px, not ch:
-   * Barlow's ch (the '0' glyph, 0.565em) is much wider than its average
-   * character (~0.427em), so a literal 68ch measured ~90 characters/line. */
+  --layout-text-width: 584px; /* reading measure, ~70 real characters per
+   * line of 18px Bricolage Grotesque (average character 8.35px, measured
+   * over OnePulse Connect's prose). Was 544px, ~71 characters of Barlow.
+   * Set as px, not ch: Bricolage's ch (the '0' glyph, 0.651em) is much
+   * wider than its average character (0.464em). */
   --layout-case-content-width: 760px; /* case-study content column — matches the
    * hardcoded 760px on .case-visual, .case-image-stack and friends, which
    * still need moving onto this token */
@@ -261,9 +262,14 @@
   --space-200: 200px; /* superseded — kept in case another section needs it */
 
   /* --- Typography primitives --- */
-  --font-family-serif: 'EB Garamond', serif; /* changed again from Cormorant Infant. Cascades to every composite class below. */
+  --font-family-display: 'Cormorant Garamond', Garamond, serif; /* v2 hero
+   * sentence and case study title only (--type-hero, --type-page-title) */
+  --font-family-serif: 'EB Garamond', serif; /* legacy classes only; removed
+   * by the end of v2 */
   --font-family-mono: 'Spline Sans Mono', monospace;
-  --font-family-sans: 'Barlow', sans-serif;
+  --font-family-sans: 'Bricolage Grotesque', system-ui, sans-serif; /* opsz
+   * axis: font-optical-sizing stays auto (the default), so text is neutral
+   * at body size and gets more character at heading sizes */
 
   --font-weight-regular: 400;
   --font-weight-medium: 500;
@@ -412,23 +418,26 @@
   /* --- Type roles (v2) — composite tokens. Each role has five parts plus
    * a `font` shorthand. Apply with `font: var(--type-body);` and
    * `letter-spacing: var(--type-body-letter-spacing);`, since the font
-   * shorthand can't carry letter-spacing. Barlow everywhere except hero and
-   * page-title (EB Garamond) and code (Spline Sans Mono). Every
+   * shorthand can't carry letter-spacing. Bricolage Grotesque everywhere
+   * except hero and page-title (Cormorant Garamond) and code (Spline Sans
+   * Mono). Every
    * line-height is a multiple of 4. The legacy .type-* classes further
    * down stay in use until pages migrate onto these roles. --- */
 
   /* Fluid roles: size and line-height both interpolate linearly between
    * 375px and 1440px viewports. The endpoints are primitives; values in
    * between are not always on the 4px grid. */
-  --type-hero-family: var(--font-family-serif);
-  --type-hero-weight: var(--font-weight-regular);
+  --type-hero-family: var(--font-family-display);
+  --type-hero-weight: var(--font-weight-medium);
   --type-hero-size: clamp(var(--font-size-32), 23.55px + 2.2535vw, var(--font-size-56)); /* 32 at 375 → 56 at 1440 */
   --type-hero-line-height: clamp(var(--line-height-40), 31.55px + 2.2535vw, var(--line-height-64)); /* 40 at 375 → 64 at 1440 */
-  --type-hero-letter-spacing: var(--letter-spacing-tight-xs2);
+  --type-hero-letter-spacing: var(--letter-spacing-tight-xs); /* -0.6px.
+   * Was -1px for EB Garamond; at 56px that crowds Cormorant Garamond's
+   * tighter default fit ("rn", "gn" start to touch). Still 2 lines at 1440. */
   --type-hero: var(--type-hero-weight) var(--type-hero-size)/var(--type-hero-line-height) var(--type-hero-family);
 
-  --type-page-title-family: var(--font-family-serif);
-  --type-page-title-weight: var(--font-weight-regular);
+  --type-page-title-family: var(--font-family-display);
+  --type-page-title-weight: var(--font-weight-medium);
   --type-page-title-size: clamp(var(--font-size-32), 29.183px + 0.7512vw, var(--font-size-40)); /* 32 at 375 → 40 at 1440 */
   --type-page-title-line-height: clamp(var(--line-height-40), 37.183px + 0.7512vw, var(--line-height-48)); /* 40 at 375 → 48 at 1440 */
   --type-page-title-letter-spacing: var(--letter-spacing-tight-sm);
