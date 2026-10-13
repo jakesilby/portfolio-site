@@ -854,8 +854,7 @@
   font-size: var(--font-size-24);
   line-height: var(--line-height-32); /* was 48px, inherited from
    * .type-case-title. Deliberately 32px, not the current Figma file's
-   * 48px — per the 2026-09-28 title spec. Overridden here, not on
-   * .type-case-title, so case study stat tiles keep 32/48. */
+   * 48px — per the 2026-09-28 title spec. */
   letter-spacing: var(--letter-spacing-tight-xs); /* was tight-xs2 (-1px) */
 }
 

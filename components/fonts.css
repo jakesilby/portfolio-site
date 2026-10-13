@@ -17,18 +17,13 @@
 /*
  * Legacy, remove when roles migrate. Still used by pre-v2 type classes in
  * tokens.css; drop each face once nothing references it.
- *   Bricolage Grotesque 800   .type-case-title (homepage project titles),
- *                             .type-page-title (case study H1s)
+ *   Bricolage Grotesque 800   .type-case-title (homepage project titles)
  *   EB Garamond 400           .type-about-entry, .type-about-bio-body
  *                             (About page)
  *   EB Garamond 400 italic    .type-description (homepage project
- *                             descriptions), .type-tagline (case study
- *                             title-block descriptions)
+ *                             descriptions)
  *   EB Garamond 500           .type-about-heading, .type-about-entry strong
- *                             (About page); also .stat-tile__value
- *                             (components.css, OnePulse at a glance), which
- *                             asks for 800 and falls back to this face
+ *                             (About page)
  *   EB Garamond 600 italic    .type-about-bio-lead (About page)
- *   Spline Sans Mono 500      .type-token-name (OnePulse Connect token chain)
  */
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,600&family=Spline+Sans+Mono:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,600&display=swap');
