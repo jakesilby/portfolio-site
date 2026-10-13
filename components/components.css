@@ -1,32 +1,7 @@
-/* Shared chrome: site-header, site-footer, project-row, case-header.
+/* Shared chrome: site-header, site-footer, project-row, case study blocks.
  * Loaded on every page that uses these components — never modify a copy
  * per page, edit here.
  */
-
-/* --- Case header (case study pages — back link + About, no wordmark/full
- * nav) --- */
-
-.case-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* NEW — now two links (← Work, About);
-   * space them to opposite ends rather than letting them bunch together
-   * with no gap between them. */
-  padding: var(--space-24) var(--padding-section-x);
-  background: var(--bg-page);
-}
-
-.case-header__back,
-.case-header__about {
-  color: var(--text-secondary);
-  text-decoration: none;
-  letter-spacing: var(--letter-spacing-none); /* was wide-sm (inherited from
-   * .type-label-secondary) — only reads correctly on short all-caps text;
-   * "Work" and "About" are Title Case, same pairing already fixed on
-   * .case-title-block__eyebrow and others. Missed in that same fix since
-   * this text lives in the shared case-header.js component, not a page's
-   * own <style> block. */
-}
 
 /* --- Case footer nav (Back to top / Next case study — end of every case
  * study's content, before the shared site-footer). Same dashed-divider
@@ -46,9 +21,8 @@
 .case-footer-nav__link {
   color: var(--text-secondary);
   text-decoration: none;
-  letter-spacing: var(--letter-spacing-none); /* same wide-tracking fix as
-   * .case-header__back/__about — this is sentence case, not short
-   * all-caps. */
+  letter-spacing: var(--letter-spacing-none); /* sentence case, not short
+   * all-caps, so no wide tracking. */
 }
 
 /* --- Case study section (The Problem, Why This Matters, ...) — repeats
