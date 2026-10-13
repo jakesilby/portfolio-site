@@ -755,10 +755,13 @@
 }
 
 .work-grid__media {
-  /* A 4:3 well. Media of any shape (16:10 clips, the Carbon flowchart)
-   * sits whole inside it, inset on every side, never cropped. */
-  aspect-ratio: 4 / 3;
-  padding: var(--work-grid-media-inset);
+  /* 16:10, the native ratio of every grid clip (1600x1000, 1440x900,
+   * 2880x1800). carbon-classifier-flow.png is 2200x1400, 1.8% off, so
+   * cover trims about 12px from its top and bottom edges, which are blank
+   * margin. Add media more than 3% off 16:10 with object-fit: contain
+   * instead, so the --bg-canvas well shows around it. */
+  aspect-ratio: 16 / 10;
+  overflow: hidden; /* also stops a slightly taller image stretching the box */
   background: var(--bg-canvas);
 }
 
@@ -766,7 +769,7 @@
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .work-grid__title {

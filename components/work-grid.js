@@ -1,6 +1,6 @@
 // Homepage work grid. Each item is one link: 4:3 media, title, one outcome
-// line, and a "category / year" meta line. Media sits whole inside a 4:3
-// well, never cropped. Videos are wrapped in
+// line, and a "category / year" meta line. Media fills a 16:10 box, the
+// clips' native ratio. Videos are wrapped in
 // [data-clip-video] so components/clip-video.js (loaded after this script)
 // pauses them offscreen and keeps them on the poster under reduced motion.
 // Media is decorative here: the link's name comes from the title, and the
