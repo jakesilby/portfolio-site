@@ -15,6 +15,7 @@ Layout
 - No floating hero card, no glow or colored shadows, no decorative gradients.
 - One content container width and one gutter, used on every page. Columns line up across sections.
 - Rules (dividers) are solid hairlines using a border token. No dashed rules.
+- Two container widths only: --layout-wide for the header, grid and media, and --layout-measure for reading text. Both are defined in tokens.css.
 
 Typography (three families, fixed jobs)
 - EB Garamond: only the single hero sentence at the top of a page (homepage hero, case study title). Nowhere else.
@@ -24,15 +25,17 @@ Typography (three families, fixed jobs)
 
 Motion
 - The page itself doesn't animate. Product videos and clips are the only things that move.
-- No scroll-triggered reveals, staggers, blurs or fades on content. Content is visible without JavaScript.
+- No scroll-triggered reveals, staggers, blurs or fades on content. Shared chrome (header, footer, work grid, case study chrome) stays as JS-injected components. No content may start hidden and wait for JS or scroll to reveal it. Each page includes a <noscript> block with plain links to Work, About and Email.
 - No smooth-scroll libraries, no custom cursors, no parallax.
 - Hover and focus feedback is a color change only, 150ms ease-out, wrapped in prefers-reduced-motion: no-preference. Focus rings stay visible.
 - Videos: autoplay muted loop playsinline, with a poster frame. Pause when offscreen (IntersectionObserver). Under prefers-reduced-motion: reduce, don't autoplay and show the poster.
 
 Copy
 - Plain, specific, sentence case. No arrows appended to link text. No middle-dot separators.
-- Never imply Jake writes production code. He designs systems and directs AI-assisted prototyping; engineers build production.
+- Don't overstate Jake's engineering role. He designs systems and directs AI-assisted prototyping, and engineers built production. Exception: the OnePulse Connect token-reference fix is accurate as written. Jake made that fix in code, opened the PR, and an engineer approved it and shipped it. Don't remove or reword it.
 - No em dashes in UI copy.
+- Headings are sentence case. Proper nouns keep their capitals (OnePulse Connect, Carbon, Figma, Tokens Studio, Claude Code).
+- Page titles use the format 'Page name | Jake Silby'. The homepage title is 'Jake Silby | Product designer'.
 
 ## Stack
 
