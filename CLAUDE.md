@@ -69,11 +69,12 @@ Content and layout stay separate. A case study is a content file rendered throug
 - **Homepage listing:** add a row to the `projectRows` array in `components/project-row.js`. Personal projects use `type: 'Personal project'` as the badge, in the same list (decided 2026-10-08, no separate section). Rows take either `video` or a static `image`.
 - **Images:** live flat in `/images/`, named `<project-prefix>-<subject>.<ext>` (e.g. `carbon-classifier-flow.png`, `ds_tabgroup.webp`). An optional `/images/large/` copy serves as the lightbox source when the inline file is downsized. Every real image gets its own `case-visual__image--<name>` modifier with `aspect-ratio` set from the file's real pixel dimensions, plus `loading="lazy" data-lightbox-src="<path>" tabindex="0" role="button"` so it opens full size.
 - **Screenshot vs diagram:** screenshots sit in a `.case-visual` tray (add `--transparent` if the capture has its own light background). Diagrams drawn in the site's own visual language get no tray: use `.case-diagram` (or the older page-local equivalents) directly.
-- **Captions:** wrap image and caption in `.case-figure`, with `<figcaption class="case-figure__caption type-meta">`. Alt text and captions come verbatim from the content file.
+- **Captions:** wrap image and caption in `.case-figure`, with `<figcaption class="case-figure__caption">`. Alt text and captions come verbatim from the content file.
 - **Small text in screenshots** (DevTools, terminal, dense UI): use `.case-figure--wide`, which breaks out to `--layout-case-wide-width` while its caption stays at the text-column width. It still opens in the lightbox.
-- **Code:** multi-line or standalone snippets use `<pre class="case-code type-code"><code>…</code></pre>`, which scrolls horizontally and never wraps. Inline code in prose and captions uses `<code class="case-code-inline">`.
-- **Subsections:** `<h3 class="case-section__subheading type-subsection-heading">` inside a `.case-section`.
-- **Lists:** `.case-rules-list` / `.case-rules-list__item type-body`, a real `<ul>`.
+- **Code:** multi-line or standalone snippets use `<pre class="case-code"><code>…</code></pre>`, which scrolls horizontally and never wraps. Inline code in prose and captions uses `<code class="case-code-inline">`.
+- **Type:** no `type-*` classes in case-page markup. Each BEM selector sets its own v2 role in CSS, for example `.case-figure__caption { font: var(--type-caption); letter-spacing: var(--type-caption-letter-spacing); }`. type/code has no `font` shorthand, so set its parts individually (see `.case-code-inline`).
+- **Subsections:** `<h3 class="case-section__subheading">` inside a `.case-section`.
+- **Lists:** `.case-rules-list` / `.case-rules-list__item`, a real `<ul>`.
 
 ## Component conventions
 

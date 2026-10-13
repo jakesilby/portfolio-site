@@ -13,27 +13,27 @@ tokenChainScript.insertAdjacentHTML('afterend', `
     <div class="token-chain__card">
       <span class="token-chain__swatch token-chain__swatch--primitive"></span>
       <div class="token-chain__text">
-        <p class="token-chain__label type-token-name">Primitive</p>
-        <p class="token-chain__name type-token-name">Pulse-teal.700</p>
+        <p class="token-chain__label">Primitive</p>
+        <p class="token-chain__name">Pulse-teal.700</p>
       </div>
     </div>
     ${tokenChainArrow}
     <div class="token-chain__card">
       <span class="token-chain__swatch token-chain__swatch--alias"></span>
       <div class="token-chain__text">
-        <p class="token-chain__label type-token-name">Semantic Alias</p>
-        <p class="token-chain__name type-token-name">Primary.Dark</p>
+        <p class="token-chain__label">Semantic Alias</p>
+        <p class="token-chain__name">Primary.Dark</p>
       </div>
     </div>
     ${tokenChainArrow}
     <div class="token-chain__card">
       <span class="token-chain__swatch token-chain__swatch--mapped"></span>
       <div class="token-chain__text">
-        <p class="token-chain__label type-token-name">Mapped Token</p>
-        <p class="token-chain__name type-token-name">Accent.Primary.fg.fill</p>
+        <p class="token-chain__label">Mapped Token</p>
+        <p class="token-chain__name">Accent.Primary.fg.fill</p>
       </div>
     </div>
   </div>
 </div>
-<p class="token-chain__caption type-body">accent-primary-fg-fill resolves through primary.dark, not primary.main: a deliberately darker shade for foreground contrast against the accent background.</p>
+<p class="token-chain__caption"><code class="case-code-inline">accent-primary-fg-fill</code> resolves through <code class="case-code-inline">primary.dark</code>, not <code class="case-code-inline">primary.main</code>: a deliberately darker shade for foreground contrast against the accent background.</p>
 `);
