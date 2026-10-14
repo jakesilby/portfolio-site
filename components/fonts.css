@@ -4,24 +4,12 @@
  * fonts.gstatic.com) instead of its own Google Fonts URL.
  *
  * v2 faces (CLAUDE.md, Typography):
- *   Barlow 400, 600, 700     everything except the hero sentence and code
- *   EB Garamond 400          hero sentence and case study title only
+ *   Bricolage Grotesque      everything except the hero sentence, page
+ *     opsz 12..96,           titles and code. Variable on both axes, so
+ *     wght 400..700          optical size follows font-size automatically.
+ *                            Weights in use: 400 (body, meta), 500 (header
+ *                            name), 600 (nav, h2, h3), 700.
+ *   Cormorant Garamond 500   hero sentence and case study title only
  *   Spline Sans Mono 400     token names, code and file names in prose
  */
-@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700&family=EB+Garamond&family=Spline+Sans+Mono&display=swap');
-
-/*
- * Legacy, remove when roles migrate. Still used by pre-v2 type classes in
- * tokens.css; drop each face once nothing references it.
- *   Barlow 800                .type-case-title (homepage project titles),
- *                             .type-page-title (case study H1s)
- *   EB Garamond 400 italic    .type-description (homepage project
- *                             descriptions), .type-tagline (case study
- *                             title-block descriptions)
- *   EB Garamond 500           .type-about-heading, .type-about-entry strong
- *                             (About page)
- *   EB Garamond 600 italic    .type-about-bio-lead (About page)
- *   Spline Sans Mono 500      .type-nav-label (nav "Work" pill),
- *                             .type-token-name (OnePulse Connect token chain)
- */
-@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@800&family=EB+Garamond:ital,wght@0,500;1,400;1,600&family=Spline+Sans+Mono:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Cormorant+Garamond:wght@500&family=Spline+Sans+Mono&display=swap');

@@ -1,94 +1,260 @@
-/* Shared chrome: site-header, site-footer, project-row, case-header.
+/* Shared chrome: site-header, site-footer, work grid, case study blocks.
  * Loaded on every page that uses these components — never modify a copy
  * per page, edit here.
  */
 
-/* --- Case header (case study pages — back link + About, no wordmark/full
- * nav) --- */
+/* --- Visually hidden: in the accessibility tree, not on screen. Used for
+ * headings that structure a page without a visible label. --- */
 
-.case-header {
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* --- Case study page base. Each case study page used to carry this in
+ * its own <style>. :where() keeps the reset at zero specificity, so every
+ * component rule below still wins over it. --- */
+
+:where(body[data-page="case-study"], body[data-page="case-study"] *) {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body[data-page="case-study"] {
+  background: var(--bg-page);
+  color: var(--text-primary);
+  font: var(--type-body);
+  letter-spacing: var(--type-body-letter-spacing);
+}
+
+/* --- Case study layout, inside --layout-wide with the same gutter as the
+ * header and footer. One column below 1100px: intro, section nav, then
+ * the article. From 1100px the section nav moves into a column on the
+ * left (see .case-toc). Prose is capped at --layout-measure; the title,
+ * hero, figures and clips fill the article column. --- */
+
+.case-layout {
+  max-width: var(--layout-wide);
+  margin-inline: auto;
+  padding: var(--space-24) var(--layout-gutter) 0;
+}
+
+/* --- Case study section nav ("On this page"), filled by case-toc.js from
+ * the page's H2s. Below 1100px it's a plain list between the intro and
+ * the article. From 1100px it's a sticky column beside the article, and
+ * the section being read takes the link color, with no transition. Empty
+ * without JS, so it collapses. --- */
+
+.case-toc:empty {
+  display: none;
+}
+
+.case-toc {
+  padding-bottom: var(--space-48);
+}
+
+.case-toc__label {
+  margin-bottom: var(--gap-inline);
+  font: var(--type-meta);
+  letter-spacing: var(--type-meta-letter-spacing);
+  color: var(--text-muted);
+}
+
+.case-toc__list {
+  list-style: none;
+}
+
+.case-toc__link {
+  display: inline-block;
+  padding-block: var(--space-4);
+  font: var(--type-body-sm);
+  letter-spacing: var(--type-body-sm-letter-spacing);
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.case-toc__link:hover,
+.case-toc__link[aria-current] {
+  color: var(--text-link);
+}
+
+.case-toc__link:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--nav-focus-ring-offset);
+}
+
+/* 1100 is literal: custom properties can't be used in a media query. */
+@media (min-width: 1100px) {
+  .case-layout {
+    display: grid;
+    grid-template-columns: var(--case-toc-width) minmax(0, 1fr);
+    grid-template-areas:
+      "toc intro"
+      "toc body";
+    column-gap: var(--case-toc-gap);
+  }
+
+  .case-intro { grid-area: intro; }
+  .case-body { grid-area: body; }
+
+  .case-toc {
+    grid-area: toc;
+    padding-bottom: 0;
+  }
+
+  .case-toc__inner {
+    position: sticky;
+    top: var(--case-anchor-offset);
+  }
+}
+
+/* --- Case study intro: title, project name, description, meta. --- */
+
+.case-intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-stack);
+  padding-bottom: var(--space-48);
+}
+
+.case-intro__title {
+  font: var(--type-page-title);
+  letter-spacing: var(--type-page-title-letter-spacing);
+  color: var(--text-primary);
+}
+
+.case-intro__project {
+  font: var(--type-meta);
+  letter-spacing: var(--type-meta-letter-spacing);
+  color: var(--text-label);
+}
+
+.case-intro__description {
+  max-width: var(--layout-measure);
+  font: var(--type-body-lg);
+  letter-spacing: var(--type-body-lg-letter-spacing);
+  color: var(--text-secondary);
+}
+
+.case-intro__meta {
+  font: var(--type-meta);
+  letter-spacing: var(--type-meta-letter-spacing);
+  color: var(--text-muted);
+}
+
+/* --- Case study hero. Every hero media file is 16:10 (1600x1000,
+ * 1440x900, 2880x1800). Screenshots sit in the --bg-placeholder tray;
+ * --frameless drops it for a capture that carries its own background. --- */
+
+.case-hero {
+  padding-bottom: var(--space-48);
+}
+
+.case-hero__placeholder {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* NEW — now two links (← Work, About);
-   * space them to opposite ends rather than letting them bunch together
-   * with no gap between them. */
-  padding: var(--space-24) var(--padding-section-x);
+  justify-content: center;
+  padding: var(--space-48) var(--space-24);
+  background: var(--bg-placeholder);
+  border-radius: var(--radius-md);
+}
+
+.case-hero__placeholder--frameless {
+  padding: 0;
+  background: none;
+}
+
+.case-hero__frame {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
   background: var(--bg-page);
+  border-radius: var(--radius-md);
 }
 
-.case-header__back,
-.case-header__about {
-  color: var(--text-secondary);
-  text-decoration: none;
-  letter-spacing: var(--letter-spacing-none); /* was wide-sm (inherited from
-   * .type-label-secondary) — only reads correctly on short all-caps text;
-   * "Work" and "About" are Title Case, same pairing already fixed on
-   * .case-title-block__eyebrow and others. Missed in that same fix since
-   * this text lives in the shared case-header.js component, not a page's
-   * own <style> block. */
+@media (max-width: 720px) {
+  .case-hero__placeholder:not(.case-hero__placeholder--frameless) {
+    /* 24px side padding shrinks the hero disproportionately on a phone. */
+    padding: var(--space-48) var(--space-12);
+  }
 }
 
-/* --- Case footer nav (Back to top / Next case study — end of every case
- * study's content, before the shared site-footer). Same dashed-divider
- * and label treatment as .section-label on the homepage, for visual
- * consistency between the two wayfinding patterns. --- */
+/* --- Next case study, at the end of every case study's article. Order
+ * matches the homepage grid and wraps from the last back to the first. --- */
 
-.case-footer-nav {
+.case-next {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--gap-card);
-  padding: var(--space-24) var(--padding-section-x);
-  border-top: 1px dashed var(--border-divider);
-  background: var(--bg-page);
+  flex-direction: column;
+  gap: var(--gap-tight);
+  padding-block: var(--space-48);
+  border-top: var(--border-width-hairline) solid var(--border-default);
 }
 
-.case-footer-nav__link {
-  color: var(--text-secondary);
+.case-next__label {
+  font: var(--type-meta);
+  letter-spacing: var(--type-meta-letter-spacing);
+  color: var(--text-muted);
+}
+
+.case-next__link {
+  align-self: flex-start;
+  font: var(--type-h3);
+  letter-spacing: var(--type-h3-letter-spacing);
+  color: var(--text-primary);
   text-decoration: none;
-  letter-spacing: var(--letter-spacing-none); /* same wide-tracking fix as
-   * .case-header__back/__about — this is sentence case, not short
-   * all-caps. */
 }
 
-/* --- Case study section (The Problem, Why This Matters, ...) — repeats
- * identically across every section on a case study page, confirmed against
- * Figma node 44:2. */
+.case-next__link:hover {
+  color: var(--text-link-hover);
+}
+
+.case-next__link:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--nav-focus-ring-offset);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .case-next__link {
+    transition: color var(--duration-hover) ease-out;
+  }
+}
+
+/* --- Case study section (The problem, Why this matters, ...). Sections
+ * are separated by spacing and a hairline, not alternating bands. --- */
 
 .case-section {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: var(--gap-section);
-  padding: var(--padding-section-x);
-  background: var(--bg-page);
-}
-
-.case-section--alt {
-  background: var(--bg-canvas);
+  padding-block: var(--space-48);
+  border-top: var(--border-width-hairline) solid var(--border-default);
 }
 
 .case-section__heading {
+  font: var(--type-h2);
+  letter-spacing: var(--type-h2-letter-spacing);
   color: var(--text-primary);
+  scroll-margin-top: var(--case-anchor-offset); /* anchor jumps from the section nav */
 }
 
 .case-section__body {
+  font: var(--type-body);
+  letter-spacing: var(--type-body-letter-spacing);
   color: var(--text-primary);
-  max-width: 56ch; /* was a fixed 640px (before that, 760px) — that px value
-   * was tuned once against a specific type scale and drifted back to
-   * ~92-95 chars/line once the scale changed (Impeccable audit, 2026-09-15).
-   * ch ties the width to the current font's actual character width instead
-   * of a static px guess, so it can't drift the same way again.
-   *
-   * 56ch, not a nominal ~72-75ch, because Barlow's real prose character
-   * width runs narrower than its own ch unit (the '0' glyph the unit is
-   * defined by) here — 72ch measured out to ~90-96 real characters/line
-   * in this component, not ~72-75. Verified directly via
-   * getClientRects()-based per-character line measurement (not estimated):
-   * 56ch = max 78 chars/line on this page, max 79 on Linking Documents &
-   * Prescriptions, the other page sharing this class. Re-verify the same
-   * way if this component's font or type scale changes again — don't
-   * trust the nominal ch count at face value for this font. */
+  max-width: var(--layout-measure);
+}
+
+.case-section__body strong,
+.case-rules-list__item strong {
+  font-weight: var(--font-weight-semibold);
 }
 
 .case-section__body a {
@@ -104,8 +270,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--gap-section);
-  width: 736px;
-  max-width: 100%;
+  max-width: var(--layout-measure);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -114,6 +279,8 @@
 .case-rules-list__item {
   position: relative;
   padding-left: var(--gap-stack);
+  font: var(--type-body);
+  letter-spacing: var(--type-body-letter-spacing);
   color: var(--text-primary);
 }
 
@@ -125,15 +292,15 @@
 
 /* --- Case study inline visual (bg-placeholder wrapper, no radius on the
  * wrapper itself; inner image gets radius + object-fit, no shadow) — reused
- * across every real-screenshot block on a case study page. Each usage sets
- * its own aspect-ratio via a modifier, since that varies per image. --- */
+ * across every real-screenshot block on a case study page. Fills the
+ * article column. Each image sets its own aspect-ratio with a modifier
+ * (see "Case study image ratios" below). --- */
 
 .case-visual {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 760px;
-  max-width: 100%;
+  width: 100%;
   padding: var(--space-24);
   background: var(--bg-placeholder);
 }
@@ -141,7 +308,6 @@
 .case-visual__image {
   display: block;
   width: 100%;
-  max-width: 712px;
   height: auto;
   object-fit: cover;
   border-radius: var(--radius-md);
@@ -186,7 +352,7 @@
    * sentences describing what's missing, not short tags, so all-caps would
    * hurt readability here regardless of the base value. */
   letter-spacing: var(--letter-spacing-none); /* wide tracking only reads
-   * correctly on all-caps text — same pairing as .stat-tile__label. */
+   * correctly on all-caps text */
 }
 
 /* --- Case study vertical image stack (a group of .case-visual/
@@ -198,8 +364,7 @@
   flex-direction: column;
   align-items: flex-start;
   gap: var(--gap-section);
-  width: 760px;
-  max-width: 100%;
+  width: 100%;
 }
 
 /* Image + caption pair. .case-visual is a centered flex row with its own
@@ -209,15 +374,16 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-8);
-  width: var(--layout-case-content-width);
-  max-width: 100%;
+  width: 100%;
   margin: 0;
 }
 
 .case-figure__caption {
+  max-width: var(--layout-measure); /* the image fills the column; the
+   * caption keeps the reading measure */
+  font: var(--type-caption);
+  letter-spacing: var(--type-caption-letter-spacing);
   color: var(--text-secondary);
-  letter-spacing: var(--letter-spacing-none); /* .type-meta's wide tracking
-   * is for all-caps text; captions are sentence case. */
 }
 
 .case-figure__caption a {
@@ -225,33 +391,9 @@
   text-decoration: underline;
 }
 
-/* Wide figure — breaks out of the 760px text column up to the full layout
- * width, for screenshots whose small DevTools/terminal text would be
- * illegible at 712px (Carbon token audit). The tray and image inside drop
- * their own fixed 760/712px caps so they fill the wider figure. Still
- * opens full size in the lightbox like every other case-study image. */
-.case-figure--wide {
-  width: var(--layout-case-wide-width);
-}
-
-.case-figure--wide .case-visual {
-  width: 100%;
-}
-
-.case-figure--wide .case-visual__image {
-  max-width: none;
-}
-
-.case-figure--wide .case-figure__caption {
-  max-width: var(--layout-case-content-width); /* the image goes wide; the
-   * caption keeps the text column's line length */
-}
-
 /* Bare diagram — a diagram built in the site's own visual language
- * (transparent/flat background) gets no .case-visual tray, same as
- * Linking Documents' .removal-guardrail-image and Pre-Infusion's
- * .framework-diagram-image (both page-local there). Shared here so a
- * diagram with a caption can use .case-figure without the tray. */
+ * (transparent/flat background) gets no .case-visual tray. Works on its
+ * own or inside a .case-figure with a caption. */
 .case-diagram {
   display: block;
   width: 100%;
@@ -262,6 +404,8 @@
  * "Finding one: ...") --- */
 
 .case-section__subheading {
+  font: var(--type-h3);
+  letter-spacing: var(--type-h3-letter-spacing);
   color: var(--text-primary);
   margin-top: var(--gap-section); /* doubles the section's own 20px gap above
    * a subsection, so it reads as a break rather than another paragraph */
@@ -274,14 +418,15 @@
  * as it does in the source file. --- */
 
 .case-code {
-  width: var(--layout-case-content-width);
-  max-width: 100%;
+  width: 100%;
   margin: 0;
   padding: var(--space-16) var(--space-20);
   overflow-x: auto;
   background: var(--bg-surface);
   border: var(--border-width-hairline) solid var(--border-divider);
   border-radius: var(--radius-md);
+  font: var(--type-code-block);
+  letter-spacing: var(--type-code-block-letter-spacing);
   color: var(--text-primary);
 }
 
@@ -290,12 +435,15 @@
   white-space: pre;
 }
 
-/* Inline code inside body copy and captions — same mono family as
- * .case-code, sized to sit on the body text's line without raising it. */
+/* Inline code inside body copy and captions (type/code). Sized in em and
+ * takes the surrounding line-height, so it sits on body and caption lines
+ * alike without raising them. */
 .case-code-inline {
-  font-family: var(--font-family-mono);
-  font-size: var(--font-size-14);
-  letter-spacing: var(--letter-spacing-none);
+  font-family: var(--type-code-family);
+  font-weight: var(--type-code-weight);
+  font-size: var(--type-code-size);
+  line-height: var(--type-code-line-height);
+  letter-spacing: var(--type-code-letter-spacing);
   padding: 0 var(--space-4);
   background: var(--bg-placeholder);
   border-radius: var(--radius-sm);
@@ -304,44 +452,60 @@
    * page wider than a phone screen */
 }
 
-.case-figure__caption .case-code-inline {
-  font-size: inherit;
-}
+/* --- Case study clip. Scroll-triggered by clip-video.js through
+ * [data-clip-video]. Fills the article column at 16:10, the native ratio
+ * of every clip but the Data Table one. --- */
 
-/* --- Stat Grid (case study "At a Glance") --- */
-
-.stat-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--gap-card);
+.case-clip-video {
+  position: relative;
   width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: var(--bg-placeholder-fill);
 }
 
-.stat-tile {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-inline);
-  padding: var(--gap-inline);
-  background: var(--bg-surface);
+.case-clip-video__media {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform-origin: center;
 }
 
-.stat-tile__value {
-  color: var(--text-primary);
-  font-family: var(--font-family-serif); /* override — .type-case-title (sans)
-   * is shared with .project-row__title on the homepage, so this stays
-   * scoped to the stat-tile value only. Size/weight/color unchanged. */
+.case-clip-video--datatable {
+  aspect-ratio: 2298 / 1094; /* the encode's real size */
 }
 
-.stat-tile__label {
-  color: var(--text-label);
-  text-transform: none; /* .type-meta already sets none at the token level;
-   * this is now redundant but left explicit — these are full sentences (up
-   * to 64 chars), not short labels, so all-caps would hurt readability here
-   * regardless of the base value. */
-  letter-spacing: var(--letter-spacing-none); /* wide tracking only reads
-   * correctly on all-caps text — leaving it in place after removing
-   * uppercase left oddly wide-spaced sentence case. */
-}
+/* --- Case study image ratios. One modifier per real image, set from the
+ * file's pixel dimensions, grouped by page. --- */
+
+/* OnePulse Connect */
+.case-visual__image--figma-variables { aspect-ratio: 712 / 438; }
+.case-visual__image--tabgroup { aspect-ratio: 712 / 102; }
+.case-visual__image--celltypevariants { aspect-ratio: 712 / 479; }
+.case-visual__image--patientprofile,
+.case-visual__image--assessmentexample { aspect-ratio: 712 / 534; }
+
+/* Linking documents & prescriptions */
+.case-visual__image--before-after-cards { aspect-ratio: 1968 / 2192; }
+.case-visual__image--linked-medications-field { aspect-ratio: 1600 / 256; }
+.case-visual__image--also-linked-line { aspect-ratio: 1564 / 195; }
+.case-diagram--removal-guardrail { aspect-ratio: 2352 / 812; }
+
+/* Pre-infusion assessment flow */
+.case-visual__image--selectassessment { aspect-ratio: 3576 / 2892; }
+.case-visual__image--assessmentpage { aspect-ratio: 2904 / 2160; }
+.case-visual__image--hardstopalert { aspect-ratio: 2880 / 1800; }
+.case-visual__image--vitalsbanda { aspect-ratio: 1800 / 1360; }
+.case-diagram--framework { aspect-ratio: 1938 / 304; }
+
+/* Carbon token audit */
+.case-visual__image--fluid-combobox-computed { aspect-ratio: 2696 / 1632; }
+.case-visual__image--blame-fluid-combobox { aspect-ratio: 1864 / 350; }
+.case-visual__image--inline-dropdown-computed { aspect-ratio: 2696 / 1626; }
+.case-visual__image--diff-inline-dropdown { aspect-ratio: 1860 / 566; }
+.case-diagram--classifier-flow { aspect-ratio: 2200 / 1400; }
 
 /* --- Problem Diagram (scattered files -> shared token system illustration,
  * case study "The Problem" section only — bespoke, not a reusable pattern) --- */
@@ -410,24 +574,17 @@
   background: var(--bg-canvas);
   border: var(--border-width-hairline) solid var(--border-muted);
   border-radius: var(--radius-sm);
+  font: var(--type-meta);
+  letter-spacing: var(--type-meta-letter-spacing);
   color: var(--text-muted);
   text-align: center;
-  letter-spacing: var(--letter-spacing-none); /* was wide-sm (inherited from
-   * .type-label-secondary) — only read correctly while the text was
-   * hardcoded "FILE A/B/C"; now that it's "File A/B/C", wide tracking only
-   * reads correctly on all-caps text, same pairing already fixed on
-   * .stat-tile__label and others. */
 }
 
 .problem-diagram__caption {
   width: 220px;
+  font: var(--type-meta);
+  letter-spacing: var(--type-meta-letter-spacing);
   text-align: center;
-  text-transform: none; /* .type-label-secondary already sets none at the
-   * token level; this is now redundant but left explicit — these run up to
-   * 46 chars, long enough that all-caps would hurt readability here
-   * regardless of the base value. */
-  letter-spacing: var(--letter-spacing-none); /* same reasoning — wide
-   * tracking belongs to all-caps text, not the sentence case above. */
 }
 
 .problem-diagram__caption--primary {
@@ -468,7 +625,6 @@
   height: 175px;
   object-fit: cover;
   border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-resolved); /* the resolved/elevated cue now stands alone, no border */
 }
 
 /* --- Token Chain (case study "Token Architecture" live embed) — three
@@ -480,8 +636,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 760px;
-  max-width: 100%;
+  width: 100%;
   padding: var(--space-24);
   background: var(--bg-placeholder);
 }
@@ -541,12 +696,16 @@
   background: var(--pulse-accent-primary-fg-fill);
 }
 
+/* Card text sits at type/meta; the token name inside it is type/code,
+ * whose em size resolves against this. */
 .token-chain__text {
   display: flex;
   flex-direction: column;
   align-self: stretch;
   min-width: 0;
   gap: var(--gap-inline);
+  font: var(--type-meta);
+  letter-spacing: var(--type-meta-letter-spacing);
 }
 
 .token-chain__label {
@@ -566,6 +725,11 @@
    * with no spaces to wrap at. */
   min-width: 0;
   overflow-wrap: anywhere;
+  font-family: var(--type-code-family);
+  font-weight: var(--type-code-weight);
+  font-size: var(--type-code-size);
+  line-height: var(--type-code-line-height);
+  letter-spacing: var(--type-code-letter-spacing);
   color: var(--text-primary);
 }
 
@@ -584,8 +748,9 @@
 }
 
 .token-chain__caption {
-  width: 760px;
-  max-width: 100%;
+  max-width: var(--layout-measure);
+  font: var(--type-body);
+  letter-spacing: var(--type-body-letter-spacing);
   color: var(--text-secondary);
 }
 
@@ -602,374 +767,285 @@
   }
 }
 
-/* --- Site header --- */
+/* --- Site header (every page, injected by nav.js) --- */
 
-.site-header {
+.site-header__inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: var(--gap-inline);
-  height: 80px;
-  padding: 0 var(--padding-section-x);
+  max-width: var(--layout-wide);
+  margin-inline: auto;
+  padding: var(--space-16) var(--layout-gutter);
 }
 
 .site-header__brand {
   display: inline-flex;
   align-items: center;
-  gap: var(--gap-inline);
+  min-height: var(--size-tap-target);
   color: var(--text-primary);
   text-decoration: none;
-}
-
-.site-header__brand-mark {
-  display: block;
-  width: var(--space-16);
-  height: var(--space-16);
-}
-
-.site-header__brand-text-wrap {
-  display: grid;
-}
-
-.site-header__brand-text {
-  grid-area: 1 / 1;
-  opacity: 0;
-  filter: blur(6px);
-  transition: opacity 900ms ease-in-out, filter 900ms ease-in-out;
-}
-
-.site-header__brand-text.is-active {
-  opacity: 1;
-  filter: blur(0);
+  font: var(--type-brand);
+  letter-spacing: var(--type-brand-letter-spacing);
 }
 
 .site-header__nav {
   display: flex;
   align-items: center;
-  gap: var(--gap-inline);
+  gap: var(--gap-tight);
 }
 
-.nav-pill {
-  /* Reworked — border-radius back to 0 (square, reverses the earlier
-   * rounded-pill decision), padding uniform 8px (was 8px/16px), border
-   * moved off the shared base and onto the active .is-active state
-   * only, confirmed against Figma node 378:160. */
+/* Nav pills. The current section is filled; the others are transparent
+ * with a subtle fill on hover. The pill is 36px tall; ::after extends the
+ * hit area to 44px without changing the layout. */
+.site-header__link {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  min-height: 44px; /* WCAG 2.5.5 minimum tap target — visible padding stays
-   * at the Figma-confirmed 8px; this only grows the invisible hit area. */
-  padding: var(--gap-inline);
-  border: none;
-  border-bottom: 2px solid transparent; /* reserves the active underline's
-   * 2px on every pill, so active and inactive pills are the same box and
-   * their text sits at the same height. .is-active only changes the
-   * color — it used to add the border itself, shrinking the active pill's
-   * content area and lifting its text 1px above the inactive one. */
-  border-radius: 0;
+  padding: var(--nav-pill-padding-y) var(--nav-pill-padding-x);
+  border-radius: var(--radius-full);
   color: var(--text-primary);
   text-decoration: none;
-  background: transparent;
+  font: var(--type-nav);
+  letter-spacing: var(--type-nav-letter-spacing);
 }
 
-.nav-pill.is-active {
-  /* Active-tab treatment: bottom border only, 2px, cosmos-6 — reuses
-   * --border-highlight (defined for the Token Architecture hover border,
-   * same color). No fill, no inverse text — both removed per redesign.
-   * Which pill gets this class is decided at render time in nav.js from
-   * document.body.dataset.page, not hardcoded to a single data-nav value
-   * — every page nav.js renders is a real, active-able destination now. */
-  border-bottom-color: var(--border-highlight);
+.site-header__link::after {
+  content: "";
+  position: absolute;
+  inset: var(--nav-pill-hit-inset-y) var(--nav-pill-hit-inset-x);
+}
+
+.site-header__link:hover {
+  background: var(--accent-fill-hover-subtle);
+}
+
+.site-header__link.is-active {
+  background: var(--accent-fill);
+  color: var(--text-on-accent);
+}
+
+.site-header__link:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--nav-focus-ring-offset);
+}
+
+.site-header__brand:hover {
+  color: var(--text-link-hover);
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .nav-pill {
-    transition: transform 350ms cubic-bezier(0.165, 0.84, 0.44, 1); /* was an
-     * overshoot/bounce curve (0.34, 1.15, 0.64, 1) — swapped for ease-out-quart,
-     * a smooth deceleration instead of a springy snap-back. */
+  .site-header__brand {
+    transition: color var(--duration-hover) ease-out;
   }
 
-  .nav-pill:hover {
-    transform: scale(1.025);
-  }
-
-  .nav-pill:active {
-    transform: scale(0.97);
-    transition-duration: 120ms;
+  .site-header__link {
+    transition: background-color var(--duration-hover) ease-out;
   }
 }
 
-/* --- Site footer --- */
+/* --- Site footer (every page, injected by footer.js) --- */
 
-.site-footer {
+.site-footer__inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: var(--gap-stack);
-  padding: var(--padding-section-y) var(--padding-section-x) var(--space-48);
+  max-width: var(--layout-wide);
+  margin-inline: auto;
+  padding: var(--padding-section-y) var(--layout-gutter) var(--space-48);
 }
 
-.site-footer__copy {
+.site-footer__copy,
+.site-footer__links a {
+  font: var(--type-meta);
+  letter-spacing: var(--type-meta-letter-spacing);
   color: var(--text-label);
-  text-transform: none; /* .type-meta already sets none at the token level;
-   * this is now redundant but left explicit — confirmed against Figma node
-   * 48:15 that the copyright line is mixed-case, not all-caps. */
-  letter-spacing: var(--letter-spacing-none); /* was wide-md — missed when
-   * text-transform was fixed above; the copyright line was always mixed
-   * case, never all-caps, so wide tracking never read correctly here,
-   * same pairing as .stat-tile__label and the other mono labels. */
 }
 
 .site-footer__links {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--gap-footer-links);
 }
 
 .site-footer__links a {
   display: inline-flex;
   align-items: center;
-  min-height: 44px; /* WCAG 2.5.5 minimum tap target — text size/position
-   * unchanged, this only grows the invisible hit area. */
-  color: var(--text-label);
+  min-height: var(--size-tap-target);
   text-decoration: none;
 }
 
 .site-footer__links a:hover {
-  color: var(--text-primary);
+  color: var(--text-link-hover);
 }
 
-/* --- Project row --- */
+@media (prefers-reduced-motion: no-preference) {
+  .site-footer__links a {
+    transition: color var(--duration-hover) ease-out;
+  }
+}
 
-.project-row {
+/* --- No-JS links: the header, footer and work grid are all injected by
+ * JS, so every page carries these plain links inside <noscript>. --- */
+
+.noscript-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-card);
+  max-width: var(--layout-wide);
+  margin-inline: auto;
+  padding: var(--space-16) var(--layout-gutter);
+}
+
+.noscript-nav a {
+  font: var(--type-nav);
+  letter-spacing: var(--type-nav-letter-spacing);
+  color: var(--text-link);
+}
+
+/* --- Work grid (homepage). Two columns inside --layout-wide, one below
+ * 768px. Each item is a single link. Hover ("Lift + pill", mouse only):
+ * the media lifts, the other items dim, the title takes the hover color,
+ * and a "Read more" pill follows the cursor (positioned by work-grid.js).
+ * Keyboard focus gets the lift and an outline, no pill. --- */
+
+.work-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--work-grid-gap-row) var(--work-grid-gap-column);
+  max-width: var(--layout-wide);
+  margin-inline: auto;
+  padding: 0 var(--layout-gutter) var(--work-grid-gap-row);
+  list-style: none;
+}
+
+@media (min-width: 768px) {
+  .work-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.work-grid__item {
+  position: relative; /* positioning context for the pill */
   display: flex;
   flex-direction: column;
-  gap: var(--gap-card);
-  padding: var(--padding-card-y) var(--padding-section-x);
+  color: inherit;
   text-decoration: none;
-  border-bottom: 1px dashed var(--border-divider);
 }
 
-.project-row:hover {
-  background: var(--bg-inverse);
+.work-grid__item:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
 }
 
-/* Non-clickable rows (no href yet — case study not published) never show
- * the interactive hover treatment; nothing happens on click either way. */
-.project-row--upcoming:hover {
-  background: none;
+.work-grid__media {
+  /* 16:10, the native ratio of every grid clip (1600x1000, 1440x900,
+   * 2880x1800). carbon-classifier-flow.png is 2200x1400, 1.8% off, so
+   * cover trims about 12px from its top and bottom edges, which are blank
+   * margin. Add media more than 3% off 16:10 with object-fit: contain
+   * instead, so the --bg-surface well shows around it. */
+  aspect-ratio: 16 / 10;
+  overflow: hidden; /* also stops a slightly taller image stretching the box */
+  background: var(--bg-surface);
 }
 
-.project-row__body {
-  display: flex;
-  align-items: start;
-  gap: var(--padding-section-x);
-}
-
-.project-row__image {
-  /* width:50% (not a fixed px) so this scales down gracefully at desktop
-   * widths just above the 720px stacking breakpoint — a flat px width big
-   * enough to matter at 1440px would leave --project-row-description
-   * almost no room right above 720px. flex-shrink stays enabled (0 1 auto,
-   * not 0 0 auto) so it can actually give up that 50% if the row is ever
-   * tighter than image+gap+description's combined min-content. */
-  flex: 0 1 auto;
-  width: 50%;
-  min-width: 280px;
-  max-width: var(--project-row-image-width);
-  overflow: hidden;
-  background: var(--bg-placeholder);
-  padding: var(--padding-image);
-}
-
-.project-row__image-inner {
+.work-grid__media-inner {
   display: block;
   width: 100%;
-  height: auto;
-  background: var(--bg-page);
+  height: 100%;
   object-fit: cover;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-card);
 }
 
-.project-row__image--siteoverview {
-  /* The site-overview clip is a self-contained frame — its own background
-   * fills its full bounds — so, unlike a bare screenshot, it doesn't need
-   * to sit inside the shared placeholder tray above. Same reasoning as
-   * .case-hero__placeholder--frameless on the case-study page itself. */
-  background: none;
-  padding: 0;
-}
-
-.project-row__image--infectionscreening {
-  /* Requested directly: swap this row's placeholder tray from the shared
-   * greenwhite tone to a warmer one, scoped to just this row so the other
-   * two keep the default --bg-placeholder tray. */
-  background: var(--bg-placeholder-warm);
-}
-
-.project-row__image-inner--siteoverview {
-  /* Explicit aspect-ratio so the row doesn't flash/reflow before the
-   * video's own intrinsic size is known, matching ds_siteoverview.mp4's
-   * current 1600x1000 encode (previously 1600/986 for the older clip). */
-  aspect-ratio: 1600 / 1000;
-}
-
-.project-row__image-inner--linkdocflow {
-  /* Same reasoning as --siteoverview, matching link-document-flow-short.mp4's
-   * real 1440x900 encode. project-row.js derives this class name from each
-   * row's own video.aspectClass rather than hardcoding one modifier for
-   * every video row. */
-  aspect-ratio: 1440 / 900;
-}
-
-.project-row__image-inner--infectionscreening {
-  /* Same reasoning as --siteoverview/--linkdocflow, matching
-   * as_infectionscreening.mp4's real 2880x1800 encode (also the Pre-Infusion
-   * case study page's own hero clip). */
-  aspect-ratio: 2880 / 1800;
-}
-
-.project-row__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--gap-card);
-}
-
-.project-row__title-group {
-  display: flex;
-  align-items: baseline;
-  gap: var(--gap-inline);
-}
-
-.project-row__title-group--stacked {
-  /* Used only where a row carries a subtitle (the product name underneath
-   * a descriptive headline) — overrides the baseline row layout above so
-   * the subtitle sits below the title instead of inline beside it. Scoped
-   * to a modifier rather than changed on the base class so rows without a
-   * subtitle keep their existing single-line layout. */
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-4);
-}
-
-.project-row__subtitle {
-  color: var(--text-label);
-  margin: 0;
-}
-
-.project-row__index {
-  color: var(--accent-primary-dark); /* accent-primary fails 4.5:1 as text on bg-page —
-   * accent-primary-dark clears it at 6.6:1. */
-}
-
-.project-row__title {
+.work-grid__title {
+  margin-top: var(--gap-stack);
+  font: var(--type-h3);
+  letter-spacing: var(--type-h3-letter-spacing);
   color: var(--text-primary);
-  margin: 0;
-  font-size: var(--font-size-24);
-  line-height: var(--line-height-32); /* was 48px, inherited from
-   * .type-case-title. Deliberately 32px, not the current Figma file's
-   * 48px — per the 2026-09-28 title spec. Overridden here, not on
-   * .type-case-title, so case study stat tiles keep 32/48. */
-  letter-spacing: var(--letter-spacing-tight-xs); /* was tight-xs2 (-1px) */
 }
 
-.project-row__meta {
-  display: flex;
-  align-items: center;
-  gap: var(--gap-stack);
+.work-grid__item:hover .work-grid__title {
+  color: var(--text-link-hover);
 }
 
-.project-row__year {
-  color: var(--text-label);
+.work-grid__outcome {
+  margin-top: var(--gap-tight);
+  font: var(--type-body);
+  letter-spacing: var(--type-body-letter-spacing);
+  color: var(--text-muted);
 }
 
-.badge {
-  display: inline-block;
-  padding: var(--gap-tight) var(--gap-inline);
-  border: var(--border-width-hairline) solid var(--border-muted);
-  border-radius: var(--radius-sm);
-  color: var(--text-tag);
+.work-grid__meta {
+  margin-top: var(--gap-inline);
+  font: var(--type-meta);
+  letter-spacing: var(--type-meta-letter-spacing);
+  color: var(--text-muted);
 }
 
-.project-row__description {
-  flex: 1 1 0;
-  min-width: 0;
-  color: var(--text-primary);
-  margin: 0;
+/* Follows the cursor: work-grid.js sets left/top to the pointer, clamped
+ * so the pill stays inside the item; the transform centers it and lifts
+ * it clear of the cursor point. */
+.work-grid__pill {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, calc(-100% - var(--work-grid-pill-offset)));
+  padding: var(--work-grid-pill-padding-y) var(--work-grid-pill-padding-x);
+  border-radius: var(--radius-full);
+  background: var(--accent-fill);
+  box-shadow: var(--work-grid-pill-shadow);
+  color: var(--text-on-accent);
+  font: var(--type-pill);
+  letter-spacing: var(--type-pill-letter-spacing);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
 }
 
-/* Scroll-triggered stagger reveal — .js-stagger is added by project-row.js
- * only when IntersectionObserver is available and the user hasn't asked
- * for reduced motion, so this never leaves content stuck invisible if JS
- * fails to run. .is-visible is added once per row, on first intersection,
- * and never removed — the reveal fires exactly once. */
+/* Pill and dimming only with a mouse or trackpad; on touch, neither. */
+@media (hover: hover) and (pointer: fine) {
+  .work-grid__item:hover .work-grid__pill {
+    opacity: 1;
+  }
+
+  .work-grid:has(.work-grid__item:hover) .work-grid__item:not(:hover) {
+    opacity: var(--work-grid-dim-opacity);
+  }
+}
+
+/* The lift and every transition drop out under reduced motion. */
 @media (prefers-reduced-motion: no-preference) {
-  .project-row.js-stagger .badge,
-  .project-row.js-stagger .project-row__description {
-    opacity: 0;
-    transition: opacity 340ms ease-out;
+  .work-grid__item:focus-visible .work-grid__media {
+    transform: scale(var(--work-grid-lift-scale));
   }
 
-  .project-row.js-stagger .project-row__title,
-  .project-row.js-stagger .project-row__image {
-    opacity: 0;
-    filter: blur(4px);
-    transition: opacity 340ms ease-out, transform 340ms ease-out, filter 340ms ease-out;
+  .work-grid__item {
+    transition: opacity var(--work-grid-lift-duration) var(--ease-lift);
   }
 
-  .project-row.js-stagger .project-row__title {
-    transform: translateY(6px);
+  .work-grid__media {
+    transition: transform var(--work-grid-lift-duration) var(--ease-lift);
   }
 
-  .project-row.js-stagger .project-row__image {
-    transform: scale(0.98);
+  .work-grid__title {
+    transition: color var(--duration-hover) ease-out;
   }
 
-  .project-row.js-stagger.is-visible .badge,
-  .project-row.js-stagger.is-visible .project-row__description {
-    opacity: 1;
+  .work-grid__pill {
+    transition: opacity var(--duration-hover) ease-out;
   }
+}
 
-  .project-row.js-stagger.is-visible .project-row__title,
-  .project-row.js-stagger.is-visible .project-row__image {
-    opacity: 1;
-    transform: none;
-    filter: blur(0);
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .work-grid__item:hover .work-grid__media {
+    transform: scale(var(--work-grid-lift-scale));
   }
-
-  .project-row.js-stagger.is-visible .project-row__title { transition-delay: 60ms; }
-  .project-row.js-stagger.is-visible .badge { transition-delay: 120ms; }
-  .project-row.js-stagger.is-visible .project-row__image { transition-delay: 180ms; }
-  .project-row.js-stagger.is-visible .project-row__description { transition-delay: 240ms; }
 }
 
 @media (max-width: 720px) {
-  .project-row__body {
-    flex-direction: column;
-  }
-
-  .project-row__image {
-    width: auto;
-    min-width: 0;
-    max-width: none;
-  }
-
-  .project-row__header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--gap-stack);
-  }
-
-  .project-row__meta {
-    align-items: flex-start;
-  }
-
-  .stat-grid {
-    grid-template-columns: 1fr;
-  }
-
   .problem-diagram {
     max-width: 100%;
     overflow-x: auto;
@@ -1072,7 +1148,7 @@ body.lightbox-open {
   justify-content: center;
   width: var(--space-48);
   height: var(--space-48);
-  font-family: var(--font-family-sans);
+  font: inherit;
   font-size: var(--font-size-32);
   line-height: 1;
   color: var(--color-white);

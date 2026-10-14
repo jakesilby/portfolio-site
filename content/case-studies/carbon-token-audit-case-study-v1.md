@@ -1,22 +1,22 @@
-# Auditing Carbon for Token Drift
+# Auditing Carbon for token drift
 
 *Draft v1. Working title, structure open to change.*
 
 I directed Claude Code to build a script that finds hardcoded spacing values in IBM's Carbon design system. I checked three of the lines it flagged. Two were real drift, confirmed in Storybook and git history. The third was a false positive from my own tool.
 
-## The Problem
+## The problem
 
 Design systems document their token scale. Nothing stops a contributor from typing `48px` instead of reaching for `$spacing-09`. Both render identically. The drift stays invisible until someone goes looking for it, and eyeballing a codebase with hundreds of component files doesn't scale.
 
 I wanted to know how much of that drift shows up in a real, mature design system running in production. I picked Carbon, IBM's open-source design system, because it's large, widely used, and still under active development.
 
-## Why This Matters
+## Why this matters
 
 A token scale only holds its value when teams actually reference it. Every raw pixel value that happens to match a token is a missed connection. You update `$spacing-03` expecting every 8px gap in the product to move with it, then find a handful of components that never referenced the token at all. The gap shows up later, mid-redesign or during an accessibility pass, after it has already cost someone time.
 
 Reviewing SCSS by hand for this is slow and unreliable. A script can flag candidates quickly, and a person confirms each one. I built the project around that split.
 
-## Building the Tool
+## Building the tool
 
 I had Claude Code build a Python script, `token_drift_finder.py`, that scans Carbon's SCSS for raw pixel values and checks each one against the published spacing scale (`$spacing-01` through `$spacing-10`, 2px to 64px). A raw value matching a token gets flagged as a candidate. The script only flags. I checked every finding on this page myself.
 
@@ -30,11 +30,11 @@ The first version treated every matching property the same way. Wrong. Design sy
 
 *How the classifier sorted each raw pixel value in this run. The order of the checks matters: exceptions are caught before anything is called drift. Letting a token on the same line outrank the property type turned out to be a bug (see below).*
 
-## Validating the Findings
+## Validating the findings
 
-I ran the script against a clone of Carbon's main branch as of September 15, 2026 (commit `a497938ff2`), across the SCSS files under `packages/` (about 1,300, before the script skips tests, examples and build output). It turned up 19 mixed-usage candidates, 166 spacing candidates, 322 sizing matches, and 868 border, outline and 1px entries to verify manually. I didn't trust the output on its own. A tool that flags things can still be wrong. I picked two candidates from different files and components, and checked each one three separate ways: the source declaration, a live render in Carbon's own Storybook, and the commit history behind the line. A third line, from the same mixed-usage bucket as Finding One, turned out to be a false positive, so the 19 are less solid than they look.
+I ran the script against a clone of Carbon's main branch as of September 15, 2026 (commit `a497938ff2`), across the SCSS files under `packages/` (about 1,300, before the script skips tests, examples and build output). It turned up 19 mixed-usage candidates, 166 spacing candidates, 322 sizing matches, and 868 border, outline and 1px entries to verify manually. I didn't trust the output on its own. A tool that flags things can still be wrong. I picked two candidates from different files and components, and checked each one three separate ways: the source declaration, a live render in Carbon's own Storybook, and the commit history behind the line. A third line, from the same mixed-usage bucket as Finding one, turned out to be a false positive, so the 19 are less solid than they look.
 
-### Finding One: Fluid ComboBox Validation Message
+### Finding one: Fluid ComboBox validation message
 
 The flagged line, in `packages/styles/scss/components/fluid-list-box/_fluid-list-box.scss`:
 
@@ -58,7 +58,7 @@ This is the padding on the validation message that appears under a Fluid ComboBo
 
 *Top: blame on today's file stops at a 2023 rename commit. Bottom: blame on the file just before that rename, which lands on the October 2022 commit that first wrote the line.*
 
-### Finding Two: Inline Dropdown Grid Gap
+### Finding two: Inline Dropdown grid gap
 
 The second flagged line, in `packages/styles/scss/components/dropdown/_dropdown.scss`:
 
@@ -84,7 +84,7 @@ This sits on `.cds--dropdown__wrapper--inline`, the wrapper that lays out the in
 
 The two findings sit in different components, were written by different people in different years, and both survived the same three-layer check. Two examples can't establish a rate. They do show the drift in both old and new code.
 
-## Catching My Own Tool's False Positive
+## Catching my own tool's false positive
 
 Not every flagged line held up. The script's strongest bucket, "mixed usage," also caught this line in `_tabs.scss`:
 
@@ -98,7 +98,7 @@ I caught this one in the output and raised it with Claude Code. The bug was in t
 
 I'm leaving this one in because a tool with zero false positives usually means nobody looked hard enough at its output.
 
-## What's Next
+## What's next
 
 So how much drift is there? I can't put a number on it yet. The script flagged 185 spacing and mixed-usage lines. I've checked three, and one of those was my tool's mistake. The next pass works through the remaining mixed-usage bucket first, since it's the smallest group, then fixes the classifier's sizing-property gap so a rerun doesn't repeat that false positive. I haven't reported either finding to the Carbon team. Before I do, I want a larger sample behind the report, so it doesn't rest on two examples.
 

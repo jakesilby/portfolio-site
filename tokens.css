@@ -10,17 +10,16 @@
  * Primitives, Spacing collections) — values pulled directly from the Plugin API,
  * not eyeballed from a screenshot.
  *
- * 2026 homepage direction: cosmos / greenwhite / smaltblue / elm are the active
- * primitives for the homepage (see --bg-hero, --text-hero-* below). brown / orange
- * / sage / forest remain in place because --bg-inverse, --bg-section-alt, and
- * --text-muted (used on case study pages / ProjectRow hover) haven't been
- * migrated to the new palette yet — don't delete them until those are addressed.
+ * v2 color (Oct 2026): clay / juniper / sand are the active primitives and
+ * every core semantic alias points at them. cosmos / greenwhite / smaltblue /
+ * elm and the older brown / orange / sage / forest families stay in place
+ * until Prompt 9 confirms nothing references them (the About page glow and
+ * --text-hero-* still do).
  *
  * v2 — restored --layout-max-width and --space-160 (--padding-hero-y), both
  * dropped by mistake in v1's wholesale file replacement rather than a deliberate
  * change. --text-accent was NOT restored — --text-hero-eyebrow is its intended
- * successor, scoped to the not-yet-built .hero-panel structure. Migrate
- * .hero__eyebrow to .type-hero-eyebrow when the hero panel gets built; don't
+ * successor, scoped to the not-yet-built .hero-panel structure. Don't
  * bring --text-accent back.
  */
 
@@ -171,6 +170,22 @@
   --color-elm-9-5: #030a0d;
   --color-elm-10: #000000;
 
+  /* --- Color primitives: clay + juniper (v2, "Clay + juniper" at faint
+   * warmth). The active palette. Clay is the warm neutral family, juniper
+   * the green, sand the warm second highlight tone. Contrast ratios are on
+   * clay-0 (--bg-page). The cosmos / greenwhite / smaltblue / elm families
+   * above stay until Prompt 9 confirms nothing references them. --- */
+  --color-clay-0: #faf9f7;
+  --color-clay-1: #eeede9;
+  --color-clay-2: #e3e2dd;
+  --color-clay-7: #5f6a64; /* 5.4:1 */
+  --color-juniper-1: #e5e8e5;
+  --color-juniper-1-5: #dae9e1;
+  --color-juniper-6: #567a6d; /* white text on it 4.8:1 */
+  --color-juniper-7: #2f5d4e; /* 7.1:1 */
+  --color-juniper-9: #1f2a26; /* 14.1:1 */
+  --color-sand-2: #f0e3c9;
+
   /* --- Color primitives: white (case-study surface fill — not part of any
    * family scale, an unbound literal white in Figma, not a variable) --- */
   --color-white: #ffffff;
@@ -201,17 +216,11 @@
 
   /* --- Layout primitives --- */
   --layout-max-width: 1200px;
-  --layout-text-width: 544px; /* NEW (v2) — reading measure. ~71 real
-   * characters per line of 18px Barlow (~75 at 17px). Set as px, not ch:
-   * Barlow's ch (the '0' glyph, 0.565em) is much wider than its average
-   * character (~0.427em), so a literal 68ch measured ~90 characters/line. */
-  --layout-case-content-width: 760px; /* case-study content column — matches the
-   * hardcoded 760px on .case-visual, .case-image-stack and friends, which
-   * still need moving onto this token */
-  --layout-case-wide-width: calc(var(--layout-max-width) - 2 * var(--padding-section-x)); /* NEW — wide case-study
-   * figures (Carbon token audit's DevTools/terminal screenshots) that break out
-   * of the 760px text column so small UI text stays legible. Derived, not a new
-   * px value: the full 1200px layout minus the section's own side padding. */
+  --layout-text-width: 584px; /* reading measure, ~70 real characters per
+   * line of 18px Bricolage Grotesque (average character 8.35px, measured
+   * over OnePulse Connect's prose). Was 544px, ~71 characters of Barlow.
+   * Set as px, not ch: Bricolage's ch (the '0' glyph, 0.651em) is much
+   * wider than its average character (0.464em). */
 
   /* --- Radius primitives --- */
   --radius-full: 99px; /* pill/fully-rounded — safely larger than half the height of anything it's applied to */
@@ -223,11 +232,27 @@
   --border-width-hairline: 1px; /* NEW — added for the case-study code block
    * (.case-code). Every solid border in components.css now uses it; the
    * remaining inline 1px borders are dashed rules that v2 removes. */
+  --border-width-focus: 2px; /* NEW (v2) — focus ring around a whole work grid item */
+
+  /* --- Size primitives --- */
+  --size-44: 44px; /* NEW (v2) — WCAG 2.5.5 minimum tap target */
+
+  /* --- Motion primitives --- */
+  --duration-120: 120ms; /* NEW (v2) — hero highlight, first mark's delay */
+  --duration-150: 150ms; /* NEW (v2) — hover color and background changes */
+  --duration-300: 300ms; /* NEW (v2) — work grid lift; second hero mark's delay */
+  --duration-520: 520ms; /* NEW (v2) — hero highlight draw-in */
+  --ease-draw: cubic-bezier(.3, .7, .2, 1); /* NEW (v2) — hero highlight */
+  --ease-lift: cubic-bezier(.2, .7, .2, 1); /* NEW (v2) — work grid lift */
 
   /* --- Spacing primitives --- */
+  --space-2: 2px; /* NEW — homepage credibility block, label to value */
   --space-4: 4px;
   --space-8: 8px;
-  --space-12: 12px; /* restored — dropped by mistake in v6, still in live use via --gap-hero-text */
+  --space-7: 7px; /* NEW (v2) — work grid pill, vertical padding */
+  --space-12: 12px;
+  --space-13: 13px; /* NEW (v2) — work grid pill, horizontal padding */
+  --space-14: 14px; /* NEW (v2) — nav pill horizontal padding; work grid pill offset above the cursor */
   --space-16: 16px;
   --space-20: 20px;
   --space-24: 24px;
@@ -235,29 +260,22 @@
   --space-36: 36px;
   --space-48: 48px;
   --space-56: 56px;
-  --space-64: 64px; /* superseded — was the About page's card/bio column gap
-   * for one revision of node 496:156; the next revision moved that gap to
-   * 80px (see --space-80 below). Kept, same as --space-128/--font-size-64,
-   * in case a future section lands on this rung again. */
-  --space-80: 80px; /* NEW — About page's card/bio column gap, now 80px per
-   * the latest revision of node 496:156/517:67 (was 64px, see --space-64
-   * above). 80px already exists as a literal value on --hero-section-padding-y
-   * below, but that token is named and scoped for the homepage hero
-   * section's padding role, not a general gap value; reusing it here would
-   * be the same kind of name/role mismatch flagged for --border-muted in
-   * the first About audit, so this gets its own general-scale primitive
-   * instead, consistent with how --space-64 was added last round rather
-   * than reused from elsewhere. */
+  --space-64: 64px; /* homepage hero top, work grid row gap, case study
+   * nav column gap */
+  --space-80: 80px; /* homepage hero bottom padding */
   --space-96: 96px;
   --space-128: 128px; /* superseded — kept in case another section needs it */
   --space-160: 160px;
   --space-180: 180px; /* hero panel padding, current — confirmed against live Figma (196:383). Third revision to this value; see chat history if it changes again. */
-  --space-200: 200px; /* superseded — kept in case another section needs it */
+  --space-200: 200px; /* case study "On this page" column (--case-toc-width) */
 
   /* --- Typography primitives --- */
-  --font-family-serif: 'EB Garamond', serif; /* changed again from Cormorant Infant. Cascades to every composite class below. */
+  --font-family-display: 'Cormorant Garamond', Garamond, serif; /* v2 hero
+   * sentence and case study title only (--type-hero, --type-page-title) */
   --font-family-mono: 'Spline Sans Mono', monospace;
-  --font-family-sans: 'Barlow', sans-serif;
+  --font-family-sans: 'Bricolage Grotesque', system-ui, sans-serif; /* opsz
+   * axis: font-optical-sizing stays auto (the default), so text is neutral
+   * at body size and gets more character at heading sizes */
 
   --font-weight-regular: 400;
   --font-weight-medium: 500;
@@ -269,6 +287,7 @@
   --font-size-12: 12px; /* NEW — Token Architecture live-embed card label/name text, confirmed against Figma node 353:108 */
   --font-size-13: 13px;
   --font-size-14: 14px; /* NEW — homepage nav wordmark ("Welcome"), confirmed against Figma node 378:160 */
+  --font-size-15: 15px; /* NEW — --type-nav */
   --font-size-16: 16px;
   --font-size-18: 18px;
   --font-size-20: 20px;
@@ -312,55 +331,78 @@
    * ============================================================ */
 
   /* --- Color: backgrounds --- */
-  --bg-page: var(--color-greenwhite-0);
-  --bg-canvas: var(--color-greenwhite-1-5); /* corrected from greenwhite-0-5 (#f5f6f4) to greenwhite-1-5 (#f1f2ef) — confirmed against live Figma variables on node 44:2 ("The Problem" section fill), the token's first actual usage anywhere in the codebase */
+  --bg-page: var(--color-clay-0);
+  --bg-canvas: var(--color-clay-1); /* problem diagram file cards. Same
+   * tone as --bg-surface. */
   --bg-accent: var(--color-cosmos-4);
   --bg-accent-tint: var(--color-cosmos-1); /* NEW — featured At a Glance stat tile fill, confirmed against Figma (#FBEEEE) */
   --bg-inverse: var(--color-greenwhite-5); /* confirmed against Figma node 239:186 — the light-tint hover redesign. Was previously cosmos-9 (dark, node 232:21) — my own local copy of this file was never updated when that fix was given to Claude Code directly, which is likely why it regressed. */
-  --bg-placeholder: var(--color-greenwhite-4);
-  --bg-placeholder-fill: var(--color-greenwhite-1); /* NEW — inner tone for the two-tone case-study image placeholder */
-  --bg-placeholder-warm: var(--color-cosmos-2-5); /* NEW — Pre-Infusion Assessment Flow's homepage thumbnail tray, requested as an alternate to the shared greenwhite --bg-placeholder */
+  --bg-placeholder: var(--color-clay-2); /* case study screenshot trays and
+   * inline code. Muted text fails on it (4.3:1); keep it to images and
+   * primary text. */
+  --bg-placeholder-fill: var(--color-clay-0); /* inner tone for the two-tone case-study image placeholder */
   --bg-section-alt: var(--color-sage-5); /* NOT migrated — still legacy sage. Used on case study pages, which haven't been redesigned yet */
   --bg-hero: var(--color-elm-0); /* NEW — the 2026 homepage hero panel */
-  --bg-surface: var(--color-white); /* NEW — card/tile fill that sits a shade brighter than bg-page, e.g. At a Glance stat tiles */
+  --bg-surface: var(--color-clay-1); /* media wells, code backgrounds. Was
+   * white, a shade brighter than the page; now a shade darker. */
   --bg-backdrop: color-mix(in srgb, var(--color-elm-10) 80%, transparent); /* NEW — lightbox/modal backdrop, computed from the elm-10 black primitive via color-mix() instead of a hardcoded rgba() */
 
   /* --- Color: text --- */
-  --text-primary: var(--color-cosmos-9-5);
-  --text-secondary: var(--color-elm-9);
+  --text-primary: var(--color-juniper-9); /* 14.1:1 on bg-page */
+  --text-secondary: var(--text-primary); /* captions and case study
+   * descriptions. Was elm-9, a near-black that read the same as primary. */
+  --text-on-accent: var(--color-white); /* on --accent-fill, 4.8:1 */
   --text-inverse: var(--color-cosmos-9);
-  --text-muted: var(--color-greenwhite-8); /* Migrated off legacy sage-6 (#b4beb5,
-   * 1.7:1 — failed WCAG AA). greenwhite-8 is the lightest step in the active
-   * 2026 palette that still clears 4.5:1 against both bg-page and bg-canvas
-   * (5.48:1 / 5.19:1). */
-  --text-label: var(--color-elm-8);
+  --text-muted: var(--color-clay-7); /* 5.4:1 on bg-page, 4.8:1 on
+   * bg-canvas and bg-surface */
+  --text-label: var(--text-muted); /* footer, case study project names.
+   * Was elm-8, a near-black teal. */
   --text-hero-eyebrow: var(--color-cosmos-8-5); /* NEW — status unclear as of the latest hero revision, see chat note */
   --text-hero-heading: var(--color-cosmos-9-5); /* NEW */
-  --text-hero-subhead: var(--color-greenwhite-8); /* NEW — the hero's second line ("I am a product designer..."), confirmed against live Figma (196:383) */
-  --text-tag: var(--color-greenwhite-8);
-  --text-link: var(--color-elm-5); /* NEW — About page's inline LinkedIn link, confirmed against Figma node 517:67 (#23657f). color-elm-5 already existed as a primitive but had no semantic role assigned yet. */
-  --text-link-hover: var(--color-cosmos-8); /* NEW (v2) — hover color for inline
-   * links and work grid titles. 6.60:1 on --bg-page, 6.25:1 on --bg-canvas.
-   * A different hue from both --text-link (elm-5) and --text-primary, so the
-   * hover reads on teal links and near-black titles alike. */
+  --text-link: var(--accent);
+  --text-link-hover: var(--accent); /* hover for the header name, footer
+   * links and work grid titles. Retires the cosmos red hover. */
 
-  /* --- Color: accent --- */
-  --accent-primary: var(--color-cosmos-7);
-  --accent-primary-dark: var(--color-cosmos-8); /* NEW — Token Architecture live-embed arrow icon fill, confirmed against Figma node 353:108's exported SVG asset (#b40b04) */
+  /* --- Color: accent (v2) --- */
+  --accent: var(--color-juniper-7); /* links, focus rings, hover text. 7.1:1 on bg-page */
+  --accent-fill: var(--color-juniper-6); /* current nav pill, work grid "Read more" pill */
+  --accent-fill-hover-subtle: var(--color-juniper-1); /* nav pill hover */
+  --highlight: var(--color-juniper-1-5); /* hero highlight, main tone */
+  --highlight-2: var(--color-sand-2); /* hero highlight, second tone */
+  --accent-primary: var(--accent); /* legacy name, was cosmos-7 red */
+  --accent-primary-dark: var(--accent); /* legacy name: case study eyebrows
+   * and token chain arrows. Was cosmos-8 red. */
 
   /* --- Color: borders --- */
-  --border-divider: var(--color-greenwhite-6);
-  --border-muted: var(--color-greenwhite-7);
-  --border-default: var(--color-elm-9-5);
+  --border-default: var(--color-clay-2); /* hairlines */
+  --border-divider: var(--border-default);
+  --border-muted: var(--color-greenwhite-7); /* not migrated: dashed
+   * placeholder and problem diagram card outlines. */
   --border-accent: var(--color-cosmos-9); /* NEW — nav pill button outline */
   --border-interactive: var(--color-smaltblue-7); /* NEW — smaltblue's first assigned role */
   --border-highlight: var(--color-cosmos-6); /* NEW — nav pill active-tab underline. Stated by the user as #FC7973/cosmos-6; not confirmed via Figma, but cosmos-6 is a real existing primitive. */
   --border-highlight-teal: var(--color-pulse-teal-700); /* NEW — Token Architecture card hover border. Reuses the exact swatch color the widget already demonstrates (pulse-teal.700), kept separate from --border-highlight so this hover treatment doesn't move if the nav pill's underline color ever changes. */
 
+  /* --- Size and motion (v2) --- */
+  --size-tap-target: var(--size-44); /* min-height on header and footer links */
+  --duration-hover: var(--duration-150); /* hover/focus color change, always ease-out */
+
+  /* --- Hero highlight (v2, .hero-mark). A low watercolor band behind the
+   * marked words, drawn in once on load. Geometry is in em so it scales
+   * with the fluid hero size. --- */
+  --hero-mark-inset-x: -0.18em; /* left and right overhang past the words */
+  --hero-mark-bottom: 0.04em;
+  --hero-mark-height: 0.42em;
+  --hero-mark-blur: 0.06em;
+  --hero-mark-edge: 0.3em; /* soft fade at each end */
+  --hero-mark-mask: linear-gradient(to right, transparent 0, #000 var(--hero-mark-edge), #000 calc(100% - var(--hero-mark-edge)), transparent 100%); /* #000 is mask alpha, not a color */
+  --hero-mark-duration: var(--duration-520);
+  --hero-mark-delay-1: var(--duration-120); /* "complex workflows" */
+  --hero-mark-delay-2: var(--duration-300); /* "design systems" */
+
   /* --- Spacing: gaps --- */
   --gap-tight: var(--space-4);
   --gap-inline: var(--space-8);
-  --gap-hero-text: var(--space-12); /* restored — dropped by mistake in v6. Added by Claude Code during the hero panel build (Prompt 4), not present in any version I generated before that — I had no visibility into it until this was flagged. */
   --gap-stack: var(--space-16);
   --gap-section: var(--space-20); /* NEW — gap between index/heading/paragraphs within a numbered case-study section */
   --gap-card: var(--space-24);
@@ -368,70 +410,79 @@
 
   /* --- Spacing: padding --- */
   --padding-section-x: var(--space-48);
-  --padding-card-y: var(--space-36);
   --padding-section-y: var(--space-96);
-  --padding-image: var(--space-32);
-  --padding-hero-y: var(--space-160); /* superseded — the full-bleed hero-panel this backed was replaced by the floating hero card (see --hero-section-padding-y below), confirmed against Figma node 378:160. Kept in case a future full-bleed hero treatment needs it again. */
+  --padding-hero-y: var(--space-160); /* superseded — the full-bleed hero-panel this backed was replaced by the floating hero card, confirmed against Figma node 378:160. Kept in case a future full-bleed hero treatment needs it again. */
 
   /* --- Spacing: mapped (component-scoped) — one-off positioning values that
    * belong to a single component's exact Figma geometry, not the general
    * spacing rhythm scale above. Per CLAUDE.md's third token tier. --- */
-  --hero-section-padding-y: var(--space-80); /* now points at its primitive. NEW — homepage hero section vertical padding, confirmed against Figma node 378:160 */
-  /* Raw px below, not primitives: removed in v2 hero/about/grid prompts. */
-  --hero-card-offset-top: 15px; /* was 14px — verified against Figma node
-   * 507:24 (fileKey Sv50ruZLmflO9t4vcN7wiH) on 2026-09-14. An earlier pass
-   * without live Figma access read the frame's combined "19px/15px" offset
-   * description as top/left in that order; live verification shows that
-   * assumption had the axes backwards — 15px is top, 19px is left (see
-   * --hero-card-offset-left below). */
-  --hero-card-offset-left: 19px; /* was 17px — verified against Figma node
-   * 507:24 on 2026-09-14; see --hero-card-offset-top above. */
-  --hero-card-glow-offset-left: 3px; /* NEW — glow layer's absolute left offset within the wrapper (top offset is 0), confirmed against Figma node 381:486 */
-  --about-card-offset-top: 14px; /* NEW — About page experience/education card's inset from its own glow layer, confirmed against Figma node 496:156 (496:275) */
-  --about-card-offset-left: 17px; /* NEW — see --about-card-offset-top; same node, left axis */
-  --about-card-glow-offset-left: 3px; /* NEW — About card's glow layer inset from the outer wrapper (top/bottom inset is 0), confirmed against Figma node 496:156 (496:171) */
-  --project-row-image-width: 640px; /* Raw px: removed in v2 hero/about/grid prompts. NEW — was a hardcoded 500px; raised so
-   * homepage thumbnails (e.g. OnePulse Connect's Colors & Typography swatch
-   * grid) render large enough to actually read rather than a full screenshot
-   * shrunk past legibility. Component-scoped one-off card geometry, not part
-   * of the general spacing rhythm scale, same tier as the hero/about card
-   * offsets above. The <720px breakpoint overrides this back to `none`
-   * (stacked layout goes full-width regardless), so this only affects
-   * desktop/tablet. */
+  --work-grid-gap-column: var(--space-32); /* NEW (v2) — between the two work grid columns */
+  --work-grid-gap-row: var(--space-64); /* NEW (v2) — between work grid rows, twice the column gap so each item reads as one unit */
+  /* Work grid hover (v2, "Lift + pill"): the hovered item's media lifts,
+   * the others dim, and a "Read more" pill follows the cursor. */
+  --work-grid-lift-scale: 1.025;
+  --work-grid-lift-duration: var(--duration-300);
+  --work-grid-dim-opacity: .55;
+  --work-grid-pill-padding-y: var(--space-7);
+  --work-grid-pill-padding-x: var(--space-13);
+  --work-grid-pill-offset: var(--space-14); /* gap between the pill and the cursor point */
+  --work-grid-pill-shadow: 0 6px 16px color-mix(in srgb, var(--accent) 24%, transparent), 0 1px 3px color-mix(in srgb, var(--accent) 16%, transparent);
+  --focus-ring-width: var(--border-width-focus);
+  --focus-ring-color: var(--accent); /* 7.1:1 on bg-page */
+  --focus-ring-offset: var(--space-8);
+  /* Nav pills (v2): 15/20 semibold, 36px tall. A ::after extends the hit
+   * area 4px above and below to 44px. */
+  --nav-pill-padding-y: var(--space-8);
+  --nav-pill-padding-x: var(--space-14);
+  --nav-pill-hit-inset-y: calc(-1 * var(--space-4));
+  --nav-pill-hit-inset-x: calc(-1 * var(--space-2));
+  --nav-focus-ring-offset: var(--space-2);
 
   /* --- Layout (v2) — the only two container widths, plus one gutter.
    * --layout-wide is the outer box for the header, work grid and media;
    * the gutter sits inside it as padding, so wide content is 1104px on
-   * desktop (same as --layout-case-wide-width). --layout-measure is the
+   * desktop. --layout-measure is the
    * reading-text box. --layout-gutter steps up in the @media blocks
    * below :root (20 / 32 / 48). --- */
   --layout-wide: var(--layout-max-width);
   --layout-measure: var(--layout-text-width);
   --layout-gutter: var(--space-20);
+  /* Case study pages. From 1100px the "On this page" nav is a column
+   * beside the article: 200 + 64 leaves an 840px article at 1440. */
+  --case-toc-width: var(--space-200);
+  --case-toc-gap: var(--space-64);
+  --case-anchor-offset: var(--space-24); /* where an H2 lands after an
+   * anchor jump, and the nav's sticky top. The header isn't sticky, so
+   * this is breathing room only. */
 
   /* --- Type roles (v2) — composite tokens. Each role has five parts plus
    * a `font` shorthand. Apply with `font: var(--type-body);` and
    * `letter-spacing: var(--type-body-letter-spacing);`, since the font
-   * shorthand can't carry letter-spacing. Barlow everywhere except hero and
-   * page-title (EB Garamond) and code (Spline Sans Mono). Every
+   * shorthand can't carry letter-spacing. Bricolage Grotesque everywhere
+   * except hero and page-title (Cormorant Garamond) and code (Spline Sans
+   * Mono). Every
    * line-height is a multiple of 4. The legacy .type-* classes further
    * down stay in use until pages migrate onto these roles. --- */
 
   /* Fluid roles: size and line-height both interpolate linearly between
    * 375px and 1440px viewports. The endpoints are primitives; values in
    * between are not always on the 4px grid. */
-  --type-hero-family: var(--font-family-serif);
-  --type-hero-weight: var(--font-weight-regular);
+  --type-hero-family: var(--font-family-display);
+  --type-hero-weight: var(--font-weight-medium);
   --type-hero-size: clamp(var(--font-size-32), 23.55px + 2.2535vw, var(--font-size-56)); /* 32 at 375 → 56 at 1440 */
   --type-hero-line-height: clamp(var(--line-height-40), 31.55px + 2.2535vw, var(--line-height-64)); /* 40 at 375 → 64 at 1440 */
-  --type-hero-letter-spacing: var(--letter-spacing-tight-xs2);
+  --type-hero-letter-spacing: var(--letter-spacing-tight-xs); /* -0.6px.
+   * Was -1px for EB Garamond; at 56px that crowds Cormorant Garamond's
+   * tighter default fit ("rn", "gn" start to touch). Still 2 lines at 1440. */
   --type-hero: var(--type-hero-weight) var(--type-hero-size)/var(--type-hero-line-height) var(--type-hero-family);
 
-  --type-page-title-family: var(--font-family-serif);
-  --type-page-title-weight: var(--font-weight-regular);
+  --type-page-title-family: var(--font-family-display);
+  --type-page-title-weight: var(--font-weight-medium);
   --type-page-title-size: clamp(var(--font-size-32), 29.183px + 0.7512vw, var(--font-size-40)); /* 32 at 375 → 40 at 1440 */
   --type-page-title-line-height: clamp(var(--line-height-40), 37.183px + 0.7512vw, var(--line-height-48)); /* 40 at 375 → 48 at 1440 */
-  --type-page-title-letter-spacing: var(--letter-spacing-tight-sm);
+  --type-page-title-letter-spacing: var(--letter-spacing-tight-xs); /* -0.6px,
+   * same as --type-hero. At -0.8px the "rn" pair renders joined at 40px on
+   * a 2x screen; -0.6px keeps it apart. */
   --type-page-title: var(--type-page-title-weight) var(--type-page-title-size)/var(--type-page-title-line-height) var(--type-page-title-family);
 
   --type-h2-family: var(--font-family-sans);
@@ -462,6 +513,13 @@
   --type-body-lg-letter-spacing: var(--letter-spacing-none);
   --type-body-lg: var(--type-body-lg-weight) var(--type-body-lg-size)/var(--type-body-lg-line-height) var(--type-body-lg-family);
 
+  --type-body-sm-family: var(--font-family-sans);
+  --type-body-sm-weight: var(--font-weight-regular);
+  --type-body-sm-size: var(--font-size-16);
+  --type-body-sm-line-height: var(--line-height-24);
+  --type-body-sm-letter-spacing: var(--letter-spacing-none);
+  --type-body-sm: var(--type-body-sm-weight) var(--type-body-sm-size)/var(--type-body-sm-line-height) var(--type-body-sm-family);
+
   --type-caption-family: var(--font-family-sans);
   --type-caption-weight: var(--font-weight-regular);
   --type-caption-size: var(--font-size-16);
@@ -477,11 +535,27 @@
   --type-meta: var(--type-meta-weight) var(--type-meta-size)/var(--type-meta-line-height) var(--type-meta-family);
 
   --type-nav-family: var(--font-family-sans);
-  --type-nav-weight: var(--font-weight-regular);
-  --type-nav-size: var(--font-size-16);
-  --type-nav-line-height: var(--line-height-24);
+  --type-nav-weight: var(--font-weight-semibold);
+  --type-nav-size: var(--font-size-15);
+  --type-nav-line-height: var(--line-height-20);
   --type-nav-letter-spacing: var(--letter-spacing-none);
   --type-nav: var(--type-nav-weight) var(--type-nav-size)/var(--type-nav-line-height) var(--type-nav-family);
+
+  /* Work grid "Read more" pill. */
+  --type-pill-family: var(--font-family-sans);
+  --type-pill-weight: var(--font-weight-semibold);
+  --type-pill-size: var(--font-size-13);
+  --type-pill-line-height: var(--line-height-16);
+  --type-pill-letter-spacing: var(--letter-spacing-none);
+  --type-pill: var(--type-pill-weight) var(--type-pill-size)/var(--type-pill-line-height) var(--type-pill-family);
+
+  /* Header name ("Jake Silby"). */
+  --type-brand-family: var(--font-family-sans);
+  --type-brand-weight: var(--font-weight-medium);
+  --type-brand-size: var(--font-size-16);
+  --type-brand-line-height: var(--line-height-24);
+  --type-brand-letter-spacing: var(--letter-spacing-none);
+  --type-brand: var(--type-brand-weight) var(--type-brand-size)/var(--type-brand-line-height) var(--type-brand-family);
 
   /* Inline code: token names, code and file names inside prose. Sized in
    * em so it sits in body and caption text alike, and takes the
@@ -504,9 +578,7 @@
   --type-code-block: var(--type-code-block-weight) var(--type-code-block-size)/var(--type-code-block-line-height) var(--type-code-block-family);
 
   /* --- Shadows --- */
-  --shadow-card: 0 2px 4px rgba(0, 0, 0, 0.1), 0 15px 9px rgba(0, 0, 0, 0.05), 0 41px 11px rgba(0, 0, 0, 0.02); /* 3-layer approximation of Figma's 5-stacked-shadow card spec — reads the same visually. Applied via CSS instead of baked into image assets so it stays themeable and doesn't bleed into the source PNG/WebP crop. */
-  --shadow-thumbnail: 0 1px 2px rgba(0, 0, 0, 0.1), 0 8px 5px rgba(0, 0, 0, 0.05), 0 14px 5px rgba(0, 0, 0, 0.02); /* NEW — same 3-layer approximation approach as --shadow-card, scaled down for smaller inline thumbnails (e.g. the Problem Diagram's ds_colors image), confirmed against a distinct, tighter 5-layer spec on node 45:2 */
-  --shadow-resolved: 0 4px 16px rgba(0, 0, 0, 0.12); /* NEW — single-layer spec, meaningfully simpler than the 3-layer --shadow-card/--shadow-thumbnail approximations. Problem Diagram's resolved/"Token System" side only, confirmed against Figma. */
+  --shadow-thumbnail: 0 1px 2px rgba(0, 0, 0, 0.1), 0 8px 5px rgba(0, 0, 0, 0.05), 0 14px 5px rgba(0, 0, 0, 0.02); /* NEW — 3-layer approximation of Figma's stacked shadows, for smaller inline thumbnails (e.g. the Problem Diagram's ds_colors image), confirmed against a distinct, tighter 5-layer spec on node 45:2 */
 }
 
 /* Page gutter steps (v2): 20px below 768, 32px from 768, 48px from 1024
@@ -521,330 +593,9 @@
 
 
 /* ============================================================
- * TYPOGRAPHY — COMPOSITE TOKENS
- * fontSize/lineHeight/fontWeight can't be expressed as a single CSS
- * custom property (same limitation the Pulse tokens.css documented
- * for its 30 skipped composite tokens) — compose the primitives above
- * into a class per role instead. These classes ARE the type-scale
- * tokens; treat them as the source of truth the same way you'd treat
- * a custom property.
- * ============================================================ */
-
-.type-wordmark {
-  /* Updated — font-size 18→14px, line-height 20→16px, confirmed against
-   * Figma node 378:160 (nav redesign). Family/weight/letter-spacing unchanged. */
-  font-family: var(--font-family-sans);
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-14);
-  line-height: var(--line-height-16);
-  letter-spacing: var(--letter-spacing-none);
-}
-
-.type-nav-label {
-  font-family: var(--font-family-mono);
-  font-weight: var(--font-weight-medium);
-  font-size: var(--font-size-11);
-  line-height: var(--line-height-16);
-  letter-spacing: var(--letter-spacing-wide-lg);
-  text-transform: none; /* was uppercase — all-caps mono labels flagged as
-   * an unexamined-default tell (frontend-design audit). Scoped exclusively
-   * to mono-font elements sitewide, confirmed before removing — see the
-   * audit round this was fixed in for the full instance-by-instance check.
-   * Live text here ("Work") is already Title Case in source, so this is
-   * a real visible change, not just removing a no-op. */
-}
-
-.type-eyebrow {
-  /* Unused anywhere in the current HTML — confirmed via grep across all
-   * pages/components. Fixed for consistency with the other mono classes
-   * rather than left uppercase, in case this gets picked up later. */
-  font-family: var(--font-family-mono);
-  font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-16);
-  line-height: var(--line-height-20);
-  letter-spacing: var(--letter-spacing-wide-md);
-  text-transform: none;
-}
-.type-eyebrow strong,
-.type-eyebrow .emphasis {
-  font-weight: var(--font-weight-semibold);
-}
-
-.type-hero-eyebrow {
-  /* NEW — 2026 homepage hero. Same family as .type-eyebrow, larger and
-   * wider-tracked. Also unused anywhere in the current HTML — same
-   * for-consistency fix as .type-eyebrow above. */
-  font-family: var(--font-family-mono);
-  font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-18);
-  line-height: var(--line-height-20);
-  letter-spacing: var(--letter-spacing-wide-xl);
-  text-transform: none;
-}
-.type-hero-eyebrow strong,
-.type-hero-eyebrow .emphasis {
-  font-weight: var(--font-weight-semibold);
-}
-
-.type-hero-heading {
-  /* Updated — line-height 56→48px, letter-spacing -1.5px→-1px (now
-   * --letter-spacing-tight-xs2, an exact reuse), confirmed against Figma
-   * node 378:160 (hero card redesign, node 381:488). Font-family/weight/
-   * size unchanged (serif regular 40px). This is at least the third
-   * revision to this class; the hero treatment has iterated repeatedly —
-   * verify against Figma before trusting this file if it's been a while. */
-  font-family: var(--font-family-serif);
-  font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-40);
-  line-height: var(--line-height-48);
-  letter-spacing: var(--letter-spacing-tight-xs2);
-}
-
-.type-hero-subhead {
-  /* NEW — the hero's second line. Playfair Display Regular, confirmed
-   * against live Figma (196:383). Color comes from --text-hero-subhead,
-   * not --text-hero-eyebrow — this is a distinct role. */
-  font-family: var(--font-family-serif);
-  font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-20);
-  line-height: var(--line-height-32); /* was line-height-24 (1.2x) — fine
-   * for the single nowrap line this role held until the 2026 hero rewrite;
-   * now genuinely multi-line, and 1.2x read as tight-leading (Impeccable
-   * flagged it). 32px/20px = 1.6x, matching frontend-design's guidance to
-   * give serif text slightly more leading than the sans-serif body's 1.5x
-   * (--line-height-24 on .type-body, 16px). Reused an existing token
-   * rather than adding a new one. */
-  letter-spacing: var(--letter-spacing-none);
-}
-
-.type-tagline {
-  /* Corrected — was 24px/36px, Figma's Title Block description (44:5) is
-   * now 20px with line-height: normal (a deliberate "auto" choice, not a
-   * fixed value). Only used here, so updated directly rather than adding
-   * an override. */
-  font-family: var(--font-family-serif);
-  font-style: italic;
-  font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-20);
-  line-height: normal;
-  letter-spacing: var(--letter-spacing-none);
-}
-
-.type-section-label {
-  /* Updated — font-size 24→16, line-height 32→18, confirmed against live
-   * Figma (196:383) on the "Selected Work" text, which is bound to
-   * text/primary there. letter-spacing (tight-sm, -0.8px) was already
-   * correct and is unchanged. If this class is used anywhere besides
-   * "Selected Work", confirm before applying — see prompt. */
-  font-family: var(--font-family-sans);
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-16);
-  line-height: var(--line-height-18);
-  letter-spacing: var(--letter-spacing-tight-sm);
-}
-
-.type-meta {
-  font-family: var(--font-family-mono);
-  font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-13);
-  line-height: var(--line-height-20);
-  letter-spacing: var(--letter-spacing-wide-md);
-  text-transform: none; /* was uppercase — see .type-nav-label above for
-   * the audit this was fixed in. Most live text using this class is
-   * already hardcoded caps in the HTML itself (section index numbers
-   * aside, which have no case) — this CSS change alone won't visibly
-   * affect those instances; only genuinely mixed-case content (like
-   * the copyright line) changes appearance. .case-title-block__context
-   * and .stat-tile__label both already set text-transform: none
-   * downstream to counter this rule — now redundant, left in place,
-   * not cleaned up as part of this fix. */
-}
-
-.type-case-title {
-  font-family: var(--font-family-sans);
-  font-weight: var(--font-weight-extrabold);
-  font-size: var(--font-size-32);
-  line-height: var(--line-height-48);
-  letter-spacing: var(--letter-spacing-tight-md);
-}
-
-.type-label-secondary {
-  font-family: var(--font-family-mono);
-  font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-11);
-  line-height: var(--line-height-16);
-  letter-spacing: var(--letter-spacing-wide-sm);
-  text-transform: none; /* was uppercase — see .type-nav-label above for
-   * the audit this was fixed in. Most live text using this class is
-   * already hardcoded caps in the HTML (CASE STUDY, FILE A/B/C, WORK) —
-   * this alone won't visibly change those; badge/project-row__index
-   * text (Title Case/numbers in source) is the visible change here.
-   * .problem-diagram__caption already sets text-transform: none
-   * downstream to counter this rule — now redundant, left in place. */
-}
-
-.type-token-name {
-  /* NEW — Token Architecture live-embed card label/name text, confirmed
-   * against Figma node 353:108. Medium weight (not regular), 12px (no
-   * existing class matched), line-height "normal" is a deliberate Figma
-   * choice (leading-[normal], not a fixed px value) so it's left as the
-   * literal CSS keyword rather than forced onto the line-height scale. */
-  font-family: var(--font-family-mono);
-  font-weight: var(--font-weight-medium);
-  font-size: var(--font-size-12);
-  line-height: normal;
-  letter-spacing: var(--letter-spacing-wide-sm);
-  text-transform: none; /* was uppercase — see .type-nav-label above for
-   * the audit this was fixed in. All live text here ("Primitive",
-   * "Pulse-teal.700", etc.) is Title/mixed case in source, so this is a
-   * real visible change on every instance, not a no-op. */
-}
-
-.type-description {
-  font-family: var(--font-family-serif);
-  font-style: italic;
-  font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-20);
-  line-height: var(--line-height-32); /* was line-height-24 (1.2x) — same
-   * tight-leading bug as .type-hero-subhead, same fix: 32px/20px = 1.6x.
-   * Unlike the hero card, .project-row__description has no fixed-height
-   * container (flex, align-items: start) — confirmed no re-measurement
-   * needed here. */
-  letter-spacing: var(--letter-spacing-none);
-}
-
-/* --- Case study page additions (introduced while building the Pulse
- * case study page; not present on the homepage) --- */
-
-.type-page-title {
-  font-family: var(--font-family-sans);
-  font-weight: var(--font-weight-extrabold);
-  font-size: var(--font-size-48);
-  line-height: var(--line-height-56);
-  letter-spacing: var(--letter-spacing-tight-lg);
-}
-
-.type-section-heading {
-  /* NEW — numbered case-study section headings ("01 The Problem"), confirmed
-   * against Figma. Distinct from .type-section-label (16px, "Selected Work"
-   * on the homepage) despite the similar name — different scale, different role. */
-  font-family: var(--font-family-sans);
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-24);
-  line-height: var(--line-height-32);
-  letter-spacing: var(--letter-spacing-tight-sm);
-}
-
-.type-body {
-  font-family: var(--font-family-sans);
-  font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-16);
-  line-height: var(--line-height-24);
-  letter-spacing: var(--letter-spacing-none);
-}
-.type-body strong,
-.type-body .lead-in {
-  font-weight: var(--font-weight-semibold);
-}
-
-.type-subsection-heading {
-  /* NEW — h3 inside a case-study section ("Finding one: ...", Carbon token
-   * audit). One step below .type-section-heading (24px bold) on the existing
-   * scale; no Figma frame for this yet. */
-  font-family: var(--font-family-sans);
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-18);
-  line-height: var(--line-height-24);
-  letter-spacing: var(--letter-spacing-none);
-}
-
-.type-code {
-  /* NEW — SCSS snippets and inline code in case-study prose (Carbon token
-   * audit). Same mono family as .type-meta/.type-token-name, but no wide
-   * tracking: tracking distorts code, where character alignment matters. */
-  font-family: var(--font-family-mono);
-  font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-13);
-  line-height: var(--line-height-20);
-  letter-spacing: var(--letter-spacing-none);
-}
-
-/* --- About page additions (introduced while building the About page,
- * confirmed against Figma node 496:156) --- */
-
-.type-about-heading {
-  /* "Experience:" / "Education:" card headings. */
-  font-family: var(--font-family-serif);
-  font-weight: var(--font-weight-medium);
-  font-size: var(--font-size-18);
-  line-height: var(--line-height-24);
-  letter-spacing: var(--letter-spacing-none);
-}
-
-.type-about-entry {
-  /* Role/org line per experience & education entry. Role name is Medium
-   * weight, org name Regular — same in-line emphasis pattern as
-   * .type-eyebrow/.type-body (bold via a nested element, not a second
-   * class), here on <strong> for the role name. */
-  font-family: var(--font-family-serif);
-  font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-14);
-  line-height: var(--line-height-24);
-  letter-spacing: var(--letter-spacing-none);
-}
-.type-about-entry strong {
-  font-weight: var(--font-weight-medium);
-}
-
-.type-about-entry-years {
-  /* Mono year/range under each entry. Figma specs this at 10px, but that's
-   * under the site's 11px functional-text floor (flagged by the impeccable
-   * design-quality hook) — bumped to 11px, matching the floor every other
-   * mono label on the site already sits on. No letter-spacing in the Figma
-   * export (unlike the wide-tracked mono labels elsewhere) — left at
-   * none rather than assumed. */
-  font-family: var(--font-family-mono);
-  font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-11);
-  line-height: var(--line-height-24);
-  letter-spacing: var(--letter-spacing-none);
-}
-
-.type-about-bio-lead {
-  /* Bio's opening sentence — semibold italic, per Figma. Was 24px; latest
-   * Figma revision of node 496:156 specifies 20px for both bio roles
-   * (lead and body), no longer a larger size on the lead alone. */
-  font-family: var(--font-family-serif);
-  font-style: italic;
-  font-weight: var(--font-weight-semibold);
-  font-size: var(--font-size-20);
-  line-height: normal; /* Figma leading-[normal], same deliberate "auto"
-   * choice as .type-tagline/.type-token-name — not forced onto the
-   * line-height scale. */
-  letter-spacing: var(--letter-spacing-none);
-}
-
-.type-about-bio-body {
-  /* Was 24px — see .type-about-bio-lead above, same revision. */
-  font-family: var(--font-family-serif);
-  font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-20);
-  line-height: normal;
-  letter-spacing: var(--letter-spacing-none);
-}
-
-
-/* ============================================================
  * COMPONENT INTENT (not yet built) — documented here so it isn't
- * lost before the ProjectRow component exists in code.
+ * lost before it exists in code.
  * ============================================================ */
-
-/*
-.project-row:hover {
-  background: var(--bg-inverse);
-  color: var(--text-inverse);
-}
-*/
 
 /*
  * Hero panel (2026 homepage) — not yet built in code. Reference:

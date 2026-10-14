@@ -74,6 +74,15 @@
         ],
         "createdAt": "2026-09-15T02:58:39.443Z",
         "reason": "false positive: same root cause already suppressed on onepulse-connect.html and pre-infusion-assessment-flow.html. The only 0.08em source on this page is .type-meta, already overridden to letter-spacing:none on .case-title-block__meta (line 77-79, explicit comment citing the same fix as .case-title-block__context and .stat-tile__label). Actual .type-body/.type-tagline copy is letter-spacing:none."
+      },
+      {
+        "rule": "flat-type-hierarchy",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-13T22:57:57.435Z",
+        "reason": "Claude triage: index.html sets type through tokens (hero is --type-hero, 32 to 56px, against 14 to 16px meta/body, at least 2x); the hook can't resolve var() roles. No type sizes changed on this branch."
       }
     ]
   }
