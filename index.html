@@ -3,7 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jake Silby — Portfolio</title>
+  <title>Jake Silby | Product designer</title>
+  <meta name="description" content="Jake Silby designs complex workflows for regulated software, and the design systems that hold them together.">
+  <link rel="canonical" href="https://jakesilby.xyz/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Jake Silby | Product designer">
+  <meta property="og:description" content="Jake Silby designs complex workflows for regulated software, and the design systems that hold them together.">
+  <meta property="og:url" content="https://jakesilby.xyz/">
+  <meta property="og:image" content="https://jakesilby.xyz/images/og/site.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="components/fonts.css">
@@ -101,6 +113,7 @@
   <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body data-page="work">
+  <a class="skip-link" href="#main">Skip to content</a>
   <script src="components/nav.js"></script>
   <noscript>
     <nav class="noscript-nav" aria-label="Primary">
@@ -110,23 +123,25 @@
     </nav>
   </noscript>
 
-  <section class="home-hero">
-    <h1 class="home-hero__title">I design <mark class="hero-mark">complex workflows</mark> for regulated software, and the <mark class="hero-mark">design systems</mark> that hold them together.</h1>
-    <dl class="home-hero__credits">
-      <div class="home-hero__credit">
-        <dt class="home-hero__label">Most recently</dt>
-        <dd class="home-hero__value">Product Designer at Elevate Health Technologies, on the OnePulse Connect medically integrated dispensing platform.</dd>
-      </div>
-      <div class="home-hero__credit">
-        <dt class="home-hero__label">Previously</dt>
-        <dd class="home-hero__value">Elevance Health, BioPlus Specialty Pharmacy, Radish Health.</dd>
-      </div>
-    </dl>
-  </section>
+  <main id="main">
+    <section class="home-hero">
+      <h1 class="home-hero__title">I design <mark class="hero-mark">complex workflows</mark> for regulated software, and the <mark class="hero-mark">design systems</mark> that hold them together.</h1>
+      <dl class="home-hero__credits">
+        <div class="home-hero__credit">
+          <dt class="home-hero__label">Most recently</dt>
+          <dd class="home-hero__value">Product Designer at Elevate Health Technologies, on the OnePulse Connect medically integrated dispensing platform.</dd>
+        </div>
+        <div class="home-hero__credit">
+          <dt class="home-hero__label">Previously</dt>
+          <dd class="home-hero__value">Elevance Health, BioPlus Specialty Pharmacy, Radish Health.</dd>
+        </div>
+      </dl>
+    </section>
 
-  <h2 class="visually-hidden">Work</h2>
-  <script src="components/work-grid.js"></script>
-  <script src="components/clip-video.js"></script>
+    <h2 class="visually-hidden">Work</h2>
+    <script src="components/work-grid.js"></script>
+    <script src="components/clip-video.js"></script>
+  </main>
 
   <script src="components/footer.js"></script>
 </body>

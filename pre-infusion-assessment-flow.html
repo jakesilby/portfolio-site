@@ -3,7 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Assessments at Scale, Safety Stops Included — Jake Silby</title>
+  <title>Assessments at scale, safety stops included | Jake Silby</title>
+  <meta name="description" content="I designed a framework for OnePulse Connect to select, complete, and review the 20 to 40 clinical and module-level assessment types it had at the time, all…">
+  <link rel="canonical" href="https://jakesilby.xyz/pre-infusion-assessment-flow.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Assessments at scale, safety stops included | Jake Silby">
+  <meta property="og:description" content="I designed a framework for OnePulse Connect to select, complete, and review the 20 to 40 clinical and module-level assessment types it had at the time, all…">
+  <meta property="og:url" content="https://jakesilby.xyz/pre-infusion-assessment-flow.html">
+  <meta property="og:image" content="https://jakesilby.xyz/images/og/pre-infusion-assessment-flow.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="components/fonts.css">
@@ -15,6 +27,7 @@
   <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body data-page="case-study" id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
   <script src="components/nav.js"></script>
   <noscript>
     <nav class="noscript-nav" aria-label="Primary">
@@ -28,7 +41,7 @@
        before this goes live (draft alternative: "Scaling the Assessment
        System") — kept as written here pending a decision; see
        content/case-studies/pre-infusion-assessment-flow.md for the full note. -->
-  <main class="case-layout">
+  <main class="case-layout" id="main">
     <header class="case-intro">
       <h1 class="case-intro__title">Assessments at scale, safety stops included</h1>
       <p class="case-intro__project">Pre-Infusion Assessment Flow</p>
@@ -82,7 +95,7 @@
         <p class="case-section__body">Some answers open follow-up questions inline, right below the question that triggered them, with no page reload and no jump away from where the nurse is working.</p>
         <div class="case-visual">
           <div class="case-clip-video" data-clip-video>
-            <video class="case-clip-video__media" poster="videos/as_infectionscreening_poster.jpg" muted loop playsinline aria-label="Selecting Yes on the infection screening question, causing fever, cough, urinary status, and skin infection sub-questions to expand inline directly below it.">
+            <video class="case-clip-video__media" role="img" preload="metadata" poster="videos/as_infectionscreening_poster.jpg" muted loop playsinline aria-label="Selecting Yes on the infection screening question, causing fever, cough, urinary status, and skin infection sub-questions to expand inline directly below it.">
               <source src="videos/as_infectionscreening.mp4" type="video/mp4">
             </video>
           </div>
@@ -104,7 +117,7 @@
         <p class="case-section__body">After feedback from a PM, I also replaced the submission confirmation. It used to stack on top of the assessment, which looked cluttered. Now the form content transforms in place into a success state, a summary card, and a single "Done" button on the same surface.</p>
         <div class="case-visual">
           <div class="case-clip-video" data-clip-video>
-            <video class="case-clip-video__media" poster="videos/as_submitassessment_poster.jpg" muted loop playsinline aria-label="Submitting an assessment and watching the form content transform in place into a success state with a summary card and Done button, no second confirmation on top.">
+            <video class="case-clip-video__media" role="img" preload="metadata" poster="videos/as_submitassessment_poster.jpg" muted loop playsinline aria-label="Submitting an assessment and watching the form content transform in place into a success state with a summary card and Done button, no second confirmation on top.">
               <source src="videos/as_submitassessment.mp4" type="video/mp4">
             </video>
           </div>
@@ -117,7 +130,7 @@
         <p class="case-section__body">The prototype's validator code was AI-generated, and an early version treated the required set as fixed. It let submission through with all four infection follow-ups empty. I caught that by reviewing the generated logic, then prompted a specific fix so the required set follows the branch.</p>
         <div class="case-visual">
           <div class="case-clip-video" data-clip-video>
-            <video class="case-clip-video__media" poster="videos/as_validationgap_poster.jpg" muted loop playsinline aria-label="Attempting to submit with infection screening set to Yes and its sub-questions empty: Submit stays disabled and the empty fields highlight, then filling them enables Submit.">
+            <video class="case-clip-video__media" role="img" preload="metadata" poster="videos/as_validationgap_poster.jpg" muted loop playsinline aria-label="Attempting to submit with infection screening set to Yes and its sub-questions empty: Submit stays disabled and the empty fields highlight, then filling them enables Submit.">
               <source src="videos/as_validationgap.mp4" type="video/mp4">
             </video>
           </div>

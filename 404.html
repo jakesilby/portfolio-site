@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page not found | Jake Silby</title>
+  <meta name="description" content="This page doesn't exist.">
+  <meta name="robots" content="noindex">
+  <!-- Vercel serves this file for any missing path, at that path, so every
+       asset and link here is root-relative. -->
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/components/fonts.css">
+  <link rel="stylesheet" href="/tokens.css">
+  <link rel="stylesheet" href="/components/components.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      background: var(--bg-page);
+      color: var(--text-primary);
+      font-family: var(--font-family-sans);
+    }
+
+    .not-found {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-32);
+      max-width: var(--layout-wide);
+      margin-inline: auto;
+      padding: var(--space-64) var(--layout-gutter) var(--space-80);
+    }
+
+    .not-found__title {
+      max-width: var(--layout-measure);
+      font: var(--type-hero);
+      letter-spacing: var(--type-hero-letter-spacing);
+      color: var(--text-primary);
+    }
+
+    .not-found__link {
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      min-height: var(--size-tap-target);
+      font: var(--type-body);
+      letter-spacing: var(--type-body-letter-spacing);
+      color: var(--text-link);
+      text-decoration: underline;
+    }
+
+    .not-found__link:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring-color);
+      outline-offset: var(--nav-focus-ring-offset);
+    }
+  </style>
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body data-page="not-found">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <script src="/components/nav.js"></script>
+  <noscript>
+    <nav class="noscript-nav" aria-label="Primary">
+      <a href="/">Work</a>
+      <a href="/about.html">About</a>
+      <a href="mailto:jake.r.silby@gmail.com">Email</a>
+    </nav>
+  </noscript>
+
+  <main class="not-found" id="main">
+    <h1 class="not-found__title">This page doesn't exist.</h1>
+    <a class="not-found__link" href="/">All work</a>
+  </main>
+
+  <script src="/components/footer.js"></script>
+</body>
+</html>
