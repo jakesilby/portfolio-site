@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="/components/fonts.css">
+<link rel="stylesheet" href="/tokens.css">
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; background: var(--bg-page); }
+  body { display: flex; flex-direction: column; justify-content: space-between; padding: 88px 96px 76px; }
+  .brand { font: 500 28px/36px var(--font-family-sans); color: var(--text-primary); }
+  .hero { font: 500 66px/82px var(--font-family-display); letter-spacing: -0.6px; color: var(--text-primary); }
+  .hero-mark { position: relative; isolation: isolate; white-space: nowrap; background: none; color: inherit; }
+  .hero-mark::before { content: ""; position: absolute; z-index: -1; left: var(--hero-mark-inset-x); right: var(--hero-mark-inset-x); bottom: var(--hero-mark-bottom); height: var(--hero-mark-height); background: var(--hero-mark-ink); filter: blur(var(--hero-mark-blur)); -webkit-mask-image: var(--hero-mark-mask); mask-image: var(--hero-mark-mask); }
+</style></head>
+<body><div class="brand">Jake Silby</div>
+<h1 class="hero">I design <mark class="hero-mark">complex workflows</mark> for<br>regulated software, and the<br><mark class="hero-mark">design systems</mark> that hold them together.</h1>
+</body></html>
