@@ -1,7 +1,10 @@
 /*
- * Shared font include — the only place web fonts are requested. Every page
- * links this file (plus preconnects to fonts.googleapis.com and
- * fonts.gstatic.com) instead of its own Google Fonts URL.
+ * Shared font include — the only place web fonts are declared. Every page
+ * links this file. All three families are self-hosted from /fonts/ (Latin
+ * subset woff2, SIL Open Font License, licenses alongside), so no page makes
+ * a request to Google Fonts. Each page's <head> preloads the Atkinson and
+ * Cormorant files; Spline Sans Mono only appears inside case study prose,
+ * so it loads on demand.
  *
  * v2 faces (CLAUDE.md, Typography):
  *   Atkinson Hyperlegible Next   everything except the hero sentence, page
@@ -12,4 +15,26 @@
  *   Cormorant Garamond 500       hero sentence and case study title only
  *   Spline Sans Mono 400         token names, code and file names in prose
  */
-@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400..600&family=Cormorant+Garamond:wght@500&family=Spline+Sans+Mono&display=swap');
+@font-face {
+  font-family: 'Atkinson Hyperlegible Next';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('../fonts/atkinson-hyperlegible-next-latin-wght.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../fonts/cormorant-garamond-latin-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Spline Sans Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/spline-sans-mono-latin-400.woff2') format('woff2');
+}
