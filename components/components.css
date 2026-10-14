@@ -122,12 +122,6 @@ body[data-page="case-study"] {
   padding-bottom: var(--space-48);
 }
 
-.case-intro__eyebrow {
-  font: var(--type-meta);
-  letter-spacing: var(--type-meta-letter-spacing);
-  color: var(--accent);
-}
-
 .case-intro__title {
   font: var(--type-page-title);
   letter-spacing: var(--type-page-title-letter-spacing);
@@ -148,15 +142,9 @@ body[data-page="case-study"] {
 }
 
 .case-intro__meta {
-  display: flex;
-  flex-wrap: wrap;
-  align-self: flex-start;
-  gap: var(--gap-card);
-  padding: var(--space-4) var(--space-8);
-  background: var(--bg-surface);
   font: var(--type-meta);
   letter-spacing: var(--type-meta-letter-spacing);
-  color: var(--text-label);
+  color: var(--text-muted);
 }
 
 /* --- Case study hero. Every hero media file is 16:10 (1600x1000,
