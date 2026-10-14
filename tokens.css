@@ -594,9 +594,7 @@
   --type-code-block: var(--type-code-block-weight) var(--type-code-block-size)/var(--type-code-block-line-height) var(--type-code-block-family);
 
   /* --- Shadows --- */
-  --shadow-card: 0 2px 4px rgba(0, 0, 0, 0.1), 0 15px 9px rgba(0, 0, 0, 0.05), 0 41px 11px rgba(0, 0, 0, 0.02); /* 3-layer approximation of Figma's 5-stacked-shadow card spec — reads the same visually. Applied via CSS instead of baked into image assets so it stays themeable and doesn't bleed into the source PNG/WebP crop. */
-  --shadow-thumbnail: 0 1px 2px rgba(0, 0, 0, 0.1), 0 8px 5px rgba(0, 0, 0, 0.05), 0 14px 5px rgba(0, 0, 0, 0.02); /* NEW — same 3-layer approximation approach as --shadow-card, scaled down for smaller inline thumbnails (e.g. the Problem Diagram's ds_colors image), confirmed against a distinct, tighter 5-layer spec on node 45:2 */
-  --shadow-resolved: 0 4px 16px rgba(0, 0, 0, 0.12); /* NEW — single-layer spec, meaningfully simpler than the 3-layer --shadow-card/--shadow-thumbnail approximations. Problem Diagram's resolved/"Token System" side only, confirmed against Figma. */
+  --shadow-thumbnail: 0 1px 2px rgba(0, 0, 0, 0.1), 0 8px 5px rgba(0, 0, 0, 0.05), 0 14px 5px rgba(0, 0, 0, 0.02); /* NEW — 3-layer approximation of Figma's stacked shadows, for smaller inline thumbnails (e.g. the Problem Diagram's ds_colors image), confirmed against a distinct, tighter 5-layer spec on node 45:2 */
 }
 
 /* Page gutter steps (v2): 20px below 768, 32px from 768, 48px from 1024

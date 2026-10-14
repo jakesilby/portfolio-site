@@ -474,7 +474,7 @@ body[data-page="case-study"] {
 }
 
 .case-clip-video--datatable {
-  aspect-ratio: 2302 / 1080;
+  aspect-ratio: 2298 / 1094; /* the encode's real size */
 }
 
 /* --- Case study image ratios. One modifier per real image, set from the
