@@ -118,6 +118,7 @@ body[data-page="case-study"] {
   text-decoration: none;
 }
 
+/* No transition: hover and the current section change color instantly. */
 .case-toc__link:hover,
 .case-toc__link[aria-current] {
   color: var(--text-link);
@@ -214,7 +215,8 @@ body[data-page="case-study"] {
   border-radius: var(--radius-md);
 }
 
-@media (max-width: 720px) {
+/* 767 is literal: the last width before the 768 gutter step. */
+@media (max-width: 767px) {
   .case-hero__placeholder:not(.case-hero__placeholder--frameless) {
     /* 24px side padding shrinks the hero disproportionately on a phone. */
     padding: var(--space-48) var(--space-12);
@@ -578,7 +580,7 @@ body[data-page="case-study"] {
   height: var(--problem-diagram-card-height);
   padding: var(--space-32) var(--gap-stack);
   background: var(--bg-canvas);
-  border: var(--border-width-hairline) solid var(--border-muted);
+  border: var(--border-width-hairline) solid var(--border-default);
   border-radius: var(--radius-sm);
   font: var(--type-meta);
   letter-spacing: var(--type-meta-letter-spacing);
@@ -1046,9 +1048,9 @@ body[data-page="case-study"] {
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 767px) {
   .case-visual {
-    /* 24px fixed padding eats ~17% of a 279px mobile container width vs.
+    /* 24px fixed padding eats ~17% of a 335px mobile column vs.
      * ~3% of the desktop column, shrinking Tab Group, Data Table, and
      * Cell Type Variants down to an illegible size inside an
      * oversized empty box. 12px keeps a visible inset without the

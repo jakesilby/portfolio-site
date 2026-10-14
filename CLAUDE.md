@@ -39,7 +39,9 @@ Motion
 - Hero highlight: each `.hero-mark` has a watercolor band behind it (::before) that scales in from the left, 520ms, "complex workflows" at 120ms then "design systems" at 300ms. CSS only, so the marks are fully drawn without JS and under reduced motion.
 - Nav pills: the current section is filled with --accent-fill; the others get --accent-fill-hover-subtle on hover, a 150ms background transition.
 - Work grid ("Lift + pill"): on mouse hover the media scales to 1.025 over 300ms, the other items dim to .55, and the pill follows the cursor. Pill and dimming only for (hover: hover) and (pointer: fine). Keyboard focus gets the lift and an outline, no pill. Reduced motion keeps the pill and dimming and drops the scale and transitions.
-- Other hover and focus feedback (header name, footer links, work grid titles) is a color change only, 150ms ease-out. Every transition is wrapped in prefers-reduced-motion: no-preference. Focus rings stay visible (2px --accent).
+- Other hover and focus feedback (header name, footer links, work grid titles, token chain border) is a color change only, 150ms ease-out. The "On this page" links are the exception: hover and the current section change color instantly, with no transition.
+- Allowed transitions, and nothing else: color or background-color at 150ms ease-out; the work grid lift (transform) and dimming (opacity) at 300ms with --ease-lift; the work grid pill fade (opacity) at 150ms ease-out; the lightbox open and close (opacity, plus the image scaling from .96 to 1) at 200ms ease-out. Every transition is wrapped in prefers-reduced-motion: no-preference.
+- Focus rings: every focusable element gets the same 2px --accent ring through one global :focus-visible rule in components.css, with no browser default ring on mouse focus. Work grid items offset theirs further (--focus-ring-offset).
 - Videos: autoplay muted loop playsinline, with a poster frame. Pause when offscreen (IntersectionObserver). Under prefers-reduced-motion: reduce, don't autoplay and show the poster.
 
 Copy

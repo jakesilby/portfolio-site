@@ -13,7 +13,7 @@
  * v2 color (Oct 2026): clay / juniper / sand are the active primitives and
  * every core semantic alias points at them. The cosmos / greenwhite /
  * smaltblue / elm and brown / orange / sage / forest families are gone
- * (Oct 14 2026): only the two steps below were still referenced.
+ * (Oct 14 2026): only elm-10 below is still referenced.
  *
  * Every token in this file is referenced somewhere on the site. Remove a
  * token in the same change that removes its last use.
@@ -26,10 +26,8 @@
    * these directly in components; go through the semantic layer below.
    * ============================================================ */
 
-  /* --- Color primitives: legacy steps still referenced. greenwhite-7
-   * backs --border-muted (problem diagram card outlines); elm-10 is the
+  /* --- Color primitives: legacy step still referenced. elm-10 is the
    * black behind --bg-backdrop. --- */
-  --color-greenwhite-7: #919a75;
   --color-elm-10: #000000;
 
   /* --- Color primitives: clay + juniper (v2, "Clay + juniper" at faint
@@ -203,8 +201,6 @@
   /* --- Color: borders --- */
   --border-default: var(--color-clay-2); /* hairlines */
   --border-divider: var(--border-default);
-  --border-muted: var(--color-greenwhite-7); /* not migrated: problem
-   * diagram card outlines. */
   --border-highlight-teal: var(--color-pulse-teal-700); /* NEW — Token Architecture card hover border. Reuses the exact swatch color the widget already demonstrates (pulse-teal.700), kept separate from the site accent so this hover treatment doesn't move if the site palette changes. */
 
   /* --- Size and motion (v2) --- */
