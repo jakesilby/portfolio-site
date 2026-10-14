@@ -46,7 +46,7 @@
         <h2 class="case-section__heading" id="problem">Problem</h2>
         <p class="case-section__body">At Elevate Health Technologies, I worked on OnePulse Connect, its specialty pharmacy platform. During dispensing, staff work across two tabs inside the Global Inline Drawer, one for a patient's documents (authorization letters, EOBs, signed prescriptions, consent forms) and one for prescription info and the medication list, which are different objects with different data behind them. Nothing connected them. Staff reconciled the two by hand.</p>
         <div class="case-visual case-visual--transparent">
-          <img class="case-visual__image case-visual__image--before-after-cards" src="images/document-prescription-cards-before-after.webp" alt="Before and after: an original prescription card and document card, and their updated versions after gaining a new Linked Documents section on the prescription card (with a Reference Rx tag) and a Linked Medications section on the document card." loading="lazy">
+          <img class="case-visual__image case-visual__image--before-after-cards" src="images/document-prescription-cards-before-after.webp" alt="Before and after: an original prescription card and document card, and their updated versions after gaining a new Linked Documents section on the prescription card (with a Reference Rx tag) and a Linked Medications section on the document card." loading="lazy" data-lightbox-src="images/document-prescription-cards-before-after.webp" tabindex="0" role="button">
         </div>
         <p class="case-section__body">When a doctor sent an eRx for a patient already in workflow, staff couldn't attach it to the existing record. They had to restart intake from scratch. One document could also need to cover more than one medication, like an authorization letter for two dosage variants of the same drug, and the system had no way to say so. We scoped the fix with the team in a working session on June 5, 2026.</p>
       </section>
@@ -71,12 +71,12 @@
         </div>
         <p class="case-section__body">From a prescription, a user opens Linked Documents and connects existing patient documents to it. On the documents side, the upload dialog has an optional Linked Medications &amp; Prescriptions field for tying a new document to one or more medications or prescriptions right away. If nothing's selected, the document still uploads and lands on the patient's profile only.</p>
         <div class="case-visual case-visual--transparent">
-          <img class="case-visual__image case-visual__image--linked-medications-field" src="images/linked-medications-field.webp" alt="The Linked Medications & Prescriptions field in the upload dialog, showing two selected chips (Keytruda 100 mg/4 mL Vial and Humira Pen 40 mg/0.8 mL) and helper text: Optional, if no medication is selected, the document will be added to the patient profile only." loading="lazy">
+          <img class="case-visual__image case-visual__image--linked-medications-field" src="images/linked-medications-field.webp" alt="The Linked Medications & Prescriptions field in the upload dialog, showing two selected chips (Keytruda 100 mg/4 mL Vial and Humira Pen 40 mg/0.8 mL) and helper text: Optional, if no medication is selected, the document will be added to the patient profile only." loading="lazy" data-lightbox-src="images/linked-medications-field.webp" tabindex="0" role="button">
         </div>
         <p class="case-section__body">Table Row, Button, and Alert all came from the system, and I didn't build any new components for this. Later I folded eRx records into the same model as their own document type. That way a prescription received electronically could be linked and replaced the same way as one that came in by fax.</p>
         <p class="case-section__body">A patient's file could also hold one document, say an authorization letter, that applied to several medications. I added a muted "Also:" line under the filename that lists the other medications it's linked to, and it only appears when that link exists.</p>
         <div class="case-visual case-visual--transparent">
-          <img class="case-visual__image case-visual__image--also-linked-line" src="images/also-linked-medication-line.webp" alt="A Data Sharing Consent document row showing a muted 'Also: Atorvastatin 20 mg, Keytruda... +1 more' line under the filename, with a tooltip revealing the additional linked medication, Adalimumab 40 mg." loading="lazy">
+          <img class="case-visual__image case-visual__image--also-linked-line" src="images/also-linked-medication-line.webp" alt="A Data Sharing Consent document row showing a muted 'Also: Atorvastatin 20 mg, Keytruda... +1 more' line under the filename, with a tooltip revealing the additional linked medication, Adalimumab 40 mg." loading="lazy" data-lightbox-src="images/also-linked-medication-line.webp" tabindex="0" role="button">
         </div>
         <p class="case-section__body">I proposed that line live in the first working session, and the team responded to it. No design system pattern covered secondary metadata under a primary label that isn't a filename, so I flagged it as a gap in the system and updated the component to cover it.</p>
       </section>
@@ -84,7 +84,7 @@
       <section class="case-section">
         <h2 class="case-section__heading" id="reasoning-governance">Reasoning &amp; governance</h2>
         <p class="case-section__body">Once "Print Prescription" depended on exactly one reference document, removing that document could leave a prescription with nothing behind it, in a system that dispenses medication. I designed a rule against that before any formal review.</p>
-        <img class="case-diagram case-diagram--removal-guardrail" src="images/removal-guardrail-diagram.webp" alt="Flowchart: saving changes activates removal locks; if the document is the reference, removal is blocked until a replacement is designated; otherwise it can be removed freely." loading="lazy">
+        <img class="case-diagram case-diagram--removal-guardrail" src="images/removal-guardrail-diagram.webp" alt="Flowchart: saving changes activates removal locks; if the document is the reference, removal is blocked until a replacement is designated; otherwise it can be removed freely." loading="lazy" data-lightbox-src="images/removal-guardrail-diagram.webp" tabindex="0" role="button">
         <p class="case-section__body">Links stay editable until you save, since nothing is committed yet. After saving, you can't remove the reference document outright. You have to designate a replacement first. If you link a new Rx-type document while another is already the reference, a "Linked Prescriptions Found" alert asks whether to replace it, add the new one alongside it, or cancel. Replacing the reference always requires a reason, like a new Rx, an updated Rx, or a strength change.</p>
         <div class="case-visual">
           <div class="case-clip-video" data-clip-video>
@@ -154,5 +154,6 @@
   <script src="components/clip-video.js"></script>
   <script src="components/case-toc.js"></script>
   <script src="components/footer.js"></script>
+  <script src="components/lightbox.js"></script>
 </body>
 </html>
