@@ -19,9 +19,9 @@
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Hero video isn't wrapped in [data-clip-video] — it autoplays natively via
-  // the HTML attribute. Under reduced motion, drop that attribute and stay on
-  // the poster frame instead, per CLAUDE.md's stated fallback.
+  // Any video that autoplays natively through the HTML attribute: under
+  // reduced motion, drop the attribute and stay on the poster frame, per
+  // CLAUDE.md's stated fallback. Case study heroes are static images.
   if (reduceMotion) {
     document.querySelectorAll('video[autoplay]').forEach((video) => {
       video.removeAttribute('autoplay');

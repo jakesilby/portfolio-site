@@ -221,13 +221,6 @@
    * over OnePulse Connect's prose). Was 544px, ~71 characters of Barlow.
    * Set as px, not ch: Bricolage's ch (the '0' glyph, 0.651em) is much
    * wider than its average character (0.464em). */
-  --layout-case-content-width: 760px; /* case-study content column — matches the
-   * hardcoded 760px on .case-visual, .case-image-stack and friends, which
-   * still need moving onto this token */
-  --layout-case-wide-width: calc(var(--layout-max-width) - 2 * var(--padding-section-x)); /* NEW — wide case-study
-   * figures (Carbon token audit's DevTools/terminal screenshots) that break out
-   * of the 760px text column so small UI text stays legible. Derived, not a new
-   * px value: the full 1200px layout minus the section's own side padding. */
 
   /* --- Radius primitives --- */
   --radius-full: 99px; /* pill/fully-rounded — safely larger than half the height of anything it's applied to */
@@ -267,10 +260,8 @@
   --space-36: 36px;
   --space-48: 48px;
   --space-56: 56px;
-  --space-64: 64px; /* superseded — was the About page's card/bio column gap
-   * for one revision of node 496:156; the next revision moved that gap to
-   * 80px (see --space-80 below). Kept, same as --space-128/--font-size-64,
-   * in case a future section lands on this rung again. */
+  --space-64: 64px; /* homepage hero top, work grid row gap, case study
+   * nav column gap */
   --space-80: 80px; /* NEW — About page's card/bio column gap, now 80px per
    * the latest revision of node 496:156/517:67 (was 64px, see --space-64
    * above). 80px already exists as a literal value on --hero-section-padding-y
@@ -284,7 +275,7 @@
   --space-128: 128px; /* superseded — kept in case another section needs it */
   --space-160: 160px;
   --space-180: 180px; /* hero panel padding, current — confirmed against live Figma (196:383). Third revision to this value; see chat history if it changes again. */
-  --space-200: 200px; /* superseded — kept in case another section needs it */
+  --space-200: 200px; /* case study "On this page" column (--case-toc-width) */
 
   /* --- Typography primitives --- */
   --font-family-display: 'Cormorant Garamond', Garamond, serif; /* v2 hero
@@ -351,22 +342,19 @@
 
   /* --- Color: backgrounds --- */
   --bg-page: var(--color-clay-0);
-  --bg-canvas: var(--color-clay-1); /* alternating case study sections. Same
-   * tone as --bg-surface, so anything that needs to read on a --alt section
-   * carries its own border or uses --bg-placeholder. */
+  --bg-canvas: var(--color-clay-1); /* problem diagram file cards. Same
+   * tone as --bg-surface. */
   --bg-accent: var(--color-cosmos-4);
   --bg-accent-tint: var(--color-cosmos-1); /* NEW — featured At a Glance stat tile fill, confirmed against Figma (#FBEEEE) */
   --bg-inverse: var(--color-greenwhite-5); /* confirmed against Figma node 239:186 — the light-tint hover redesign. Was previously cosmos-9 (dark, node 232:21) — my own local copy of this file was never updated when that fix was given to Claude Code directly, which is likely why it regressed. */
   --bg-placeholder: var(--color-clay-2); /* case study screenshot trays and
-   * inline code. One step darker than --bg-canvas so trays still read on
-   * --alt sections. Muted text fails on it (4.3:1); keep it to images and
+   * inline code. Muted text fails on it (4.3:1); keep it to images and
    * primary text. */
   --bg-placeholder-fill: var(--color-clay-0); /* inner tone for the two-tone case-study image placeholder */
   --bg-section-alt: var(--color-sage-5); /* NOT migrated — still legacy sage. Used on case study pages, which haven't been redesigned yet */
   --bg-hero: var(--color-elm-0); /* NEW — the 2026 homepage hero panel */
-  --bg-surface: var(--color-clay-1); /* media wells, code backgrounds, At a
-   * Glance stat tiles. Was white, a shade brighter than the page; now a
-   * shade darker. */
+  --bg-surface: var(--color-clay-1); /* media wells, code backgrounds. Was
+   * white, a shade brighter than the page; now a shade darker. */
   --bg-backdrop: color-mix(in srgb, var(--color-elm-10) 80%, transparent); /* NEW — lightbox/modal backdrop, computed from the elm-10 black primitive via color-mix() instead of a hardcoded rgba() */
 
   /* --- Color: text --- */
@@ -377,8 +365,8 @@
   --text-inverse: var(--color-cosmos-9);
   --text-muted: var(--color-clay-7); /* 5.4:1 on bg-page, 4.8:1 on
    * bg-canvas and bg-surface */
-  --text-label: var(--text-muted); /* footer, stat tile labels, case study
-   * subtitles. Was elm-8, a near-black teal. */
+  --text-label: var(--text-muted); /* footer, case study project names.
+   * Was elm-8, a near-black teal. */
   --text-hero-eyebrow: var(--color-cosmos-8-5); /* NEW — status unclear as of the latest hero revision, see chat note */
   --text-hero-heading: var(--color-cosmos-9-5); /* NEW */
   --text-hero-subhead: var(--color-greenwhite-8); /* NEW — the hero's second line ("I am a product designer..."), confirmed against live Figma (196:383) */
@@ -469,12 +457,19 @@
   /* --- Layout (v2) — the only two container widths, plus one gutter.
    * --layout-wide is the outer box for the header, work grid and media;
    * the gutter sits inside it as padding, so wide content is 1104px on
-   * desktop (same as --layout-case-wide-width). --layout-measure is the
+   * desktop. --layout-measure is the
    * reading-text box. --layout-gutter steps up in the @media blocks
    * below :root (20 / 32 / 48). --- */
   --layout-wide: var(--layout-max-width);
   --layout-measure: var(--layout-text-width);
   --layout-gutter: var(--space-20);
+  /* Case study pages. From 1100px the "On this page" nav is a column
+   * beside the article: 200 + 64 leaves an 840px article at 1440. */
+  --case-toc-width: var(--space-200);
+  --case-toc-gap: var(--space-64);
+  --case-anchor-offset: var(--space-24); /* where an H2 lands after an
+   * anchor jump, and the nav's sticky top. The header isn't sticky, so
+   * this is breathing room only. */
 
   /* --- Type roles (v2) — composite tokens. Each role has five parts plus
    * a `font` shorthand. Apply with `font: var(--type-body);` and
@@ -599,9 +594,7 @@
   --type-code-block: var(--type-code-block-weight) var(--type-code-block-size)/var(--type-code-block-line-height) var(--type-code-block-family);
 
   /* --- Shadows --- */
-  --shadow-card: 0 2px 4px rgba(0, 0, 0, 0.1), 0 15px 9px rgba(0, 0, 0, 0.05), 0 41px 11px rgba(0, 0, 0, 0.02); /* 3-layer approximation of Figma's 5-stacked-shadow card spec — reads the same visually. Applied via CSS instead of baked into image assets so it stays themeable and doesn't bleed into the source PNG/WebP crop. */
-  --shadow-thumbnail: 0 1px 2px rgba(0, 0, 0, 0.1), 0 8px 5px rgba(0, 0, 0, 0.05), 0 14px 5px rgba(0, 0, 0, 0.02); /* NEW — same 3-layer approximation approach as --shadow-card, scaled down for smaller inline thumbnails (e.g. the Problem Diagram's ds_colors image), confirmed against a distinct, tighter 5-layer spec on node 45:2 */
-  --shadow-resolved: 0 4px 16px rgba(0, 0, 0, 0.12); /* NEW — single-layer spec, meaningfully simpler than the 3-layer --shadow-card/--shadow-thumbnail approximations. Problem Diagram's resolved/"Token System" side only, confirmed against Figma. */
+  --shadow-thumbnail: 0 1px 2px rgba(0, 0, 0, 0.1), 0 8px 5px rgba(0, 0, 0, 0.05), 0 14px 5px rgba(0, 0, 0, 0.02); /* NEW — 3-layer approximation of Figma's stacked shadows, for smaller inline thumbnails (e.g. the Problem Diagram's ds_colors image), confirmed against a distinct, tighter 5-layer spec on node 45:2 */
 }
 
 /* Page gutter steps (v2): 20px below 768, 32px from 768, 48px from 1024
