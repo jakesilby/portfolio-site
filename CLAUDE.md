@@ -19,7 +19,7 @@ Layout
 
 Typography (three families, fixed jobs)
 - Cormorant Garamond 500 (--font-family-display): only the single hero sentence at the top of a page (homepage hero, case study title). Nowhere else.
-- Bricolage Grotesque: everything else, including nav, body text, captions, meta, labels, buttons and footer. The brand ("Jake Silby" in the header) is Bricolage 500 16/24 (--type-brand).
+- Atkinson Hyperlegible Next: everything else, including nav, body text, captions, meta, labels, buttons and footer. The brand ("Jake Silby" in the header) is Atkinson Hyperlegible Next 500 16/24 (--type-brand). Weight axis only (400 to 600); it has no optical size axis, so no font-optical-sizing or opsz settings.
 - Spline Sans Mono: only literal token names, code, and file names inside case study prose (for example `accent-primary-fg-fill`). Never for labels, meta, nav or captions.
 - No italic body text. No all-caps labels. No eyebrow labels above headings.
 

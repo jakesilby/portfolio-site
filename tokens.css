@@ -75,11 +75,10 @@
 
   /* --- Layout primitives --- */
   --layout-max-width: 1200px;
-  --layout-text-width: 584px; /* reading measure, ~70 real characters per
-   * line of 18px Bricolage Grotesque (average character 8.35px, measured
-   * over OnePulse Connect's prose). Was 544px, ~71 characters of Barlow.
-   * Set as px, not ch: Bricolage's ch (the '0' glyph, 0.651em) is much
-   * wider than its average character (0.464em). */
+  --layout-text-width: 552px; /* reading measure, ~66 characters per full
+   * line of 18px Atkinson Hyperlegible Next (average character 7.90px,
+   * measured over OnePulse Connect's prose). Set as px, not ch, since a
+   * font's ch (the '0' glyph) isn't its average character. */
 
   /* --- Radius primitives --- */
   --radius-full: 99px; /* pill/fully-rounded — safely larger than half the height of anything it's applied to */
@@ -127,9 +126,8 @@
   --font-family-display: 'Cormorant Garamond', Garamond, serif; /* v2 hero
    * sentence and case study title only (--type-hero, --type-page-title) */
   --font-family-mono: 'Spline Sans Mono', monospace;
-  --font-family-sans: 'Bricolage Grotesque', system-ui, sans-serif; /* opsz
-   * axis: font-optical-sizing stays auto (the default), so text is neutral
-   * at body size and gets more character at heading sizes */
+  --font-family-sans: 'Atkinson Hyperlegible Next', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; /* weight
+   * axis only, 400..600 */
 
   --font-weight-regular: 400;
   --font-weight-medium: 500;
@@ -329,7 +327,7 @@
   /* --- Type roles (v2) — composite tokens. Each role has five parts plus
    * a `font` shorthand. Apply with `font: var(--type-body);` and
    * `letter-spacing: var(--type-body-letter-spacing);`, since the font
-   * shorthand can't carry letter-spacing. Bricolage Grotesque everywhere
+   * shorthand can't carry letter-spacing. Atkinson Hyperlegible Next everywhere
    * except hero and page-title (Cormorant Garamond) and code (Spline Sans
    * Mono). Every
    * line-height is a multiple of 4. --- */
