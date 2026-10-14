@@ -15,6 +15,37 @@
   white-space: nowrap;
 }
 
+/* --- Skip link: first element in every page's <body>, before the JS
+ * header. Visually hidden until it takes keyboard focus, then sits over
+ * the top-left of the header. --- */
+.skip-link {
+  position: absolute;
+  top: var(--space-8);
+  left: var(--layout-gutter);
+  z-index: 1001;
+  padding: var(--space-8) var(--space-14);
+  border-radius: var(--radius-full);
+  background: var(--bg-page);
+  color: var(--text-link);
+  font: var(--type-nav);
+  letter-spacing: var(--type-nav-letter-spacing);
+  text-decoration: none;
+}
+
+.skip-link:not(:focus) {
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.skip-link:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--nav-focus-ring-offset);
+}
+
 /* --- Case study page base. Each case study page used to carry this in
  * its own <style>. :where() keeps the reset at zero specificity, so every
  * component rule below still wins over it. --- */

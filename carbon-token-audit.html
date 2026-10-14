@@ -15,6 +15,7 @@
   <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body data-page="case-study" id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
   <script src="components/nav.js"></script>
   <noscript>
     <nav class="noscript-nav" aria-label="Primary">
@@ -28,7 +29,7 @@
        Copy is verbatim from that file; edit there first, then sync here.
        Its "Notes for you" section and the draft-status line under the
        title are working notes, not page content. -->
-  <main class="case-layout">
+  <main class="case-layout" id="main">
     <header class="case-intro">
       <h1 class="case-intro__title">Auditing Carbon for token drift</h1>
       <p class="case-intro__description">I directed Claude Code to build a script that finds hardcoded spacing values in IBM's Carbon design system. I checked three of the lines it flagged. Two were real drift, confirmed in Storybook and git history. The third was a false positive from my own tool.</p>
