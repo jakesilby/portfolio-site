@@ -91,7 +91,7 @@
   /* --- Border width primitives --- */
   --border-width-hairline: 1px; /* every border and divider rule on the
    * site. All rules are solid. */
-  --border-width-focus: 2px; /* NEW (v2) — focus ring around a whole work grid item */
+  --border-width-focus: 2px; /* NEW (v2) — the focus ring on every focusable element */
 
   /* --- Size primitives --- */
   --size-1: 1px; /* visually hidden elements */
@@ -304,14 +304,14 @@
   --z-skip-link: 1001;
   --focus-ring-width: var(--border-width-focus);
   --focus-ring-color: var(--accent); /* 7.1:1 on bg-page */
-  --focus-ring-offset: var(--space-8);
+  --focus-ring-offset-default: var(--space-2); /* every :focus-visible ring */
+  --focus-ring-offset: var(--space-8); /* work grid items, ring clear of the lifted media */
   /* Nav pills (v2): 15/20 semibold, 36px tall. A ::after extends the hit
    * area 4px above and below to 44px. */
   --nav-pill-padding-y: var(--space-8);
   --nav-pill-padding-x: var(--space-14);
   --nav-pill-hit-inset-y: calc(-1 * var(--space-4));
   --nav-pill-hit-inset-x: calc(-1 * var(--space-2));
-  --nav-focus-ring-offset: var(--space-2);
 
   /* --- Layout (v2) — the only two container widths, plus one gutter.
    * --layout-wide is the outer box for the header, work grid and media;
