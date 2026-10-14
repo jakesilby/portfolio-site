@@ -46,7 +46,7 @@ The page has three regions. On the left is a vertical list of sections with the 
 
 Some answers open follow-up questions inline, right below the question that triggered them, with no page reload and no jump away from where the nurse is working.
 
-> **[VISUAL — CLIP]** The infection screening clip (`as_infectionscreening.mp4`): "Yes" selected, sub-questions expanding inline. Moved here from the hero, which is now its static poster.
+> **[VISUAL — CLIP]** The infection screening clip (`as_infectionscreening.mp4`): "Yes" selected, sub-questions expanding inline. The same clip also loops in the hero.
 
 A positive pregnancy test or a refused consent triggers a hard stop. Those hard stops show up as alerts directly next to the question that triggered them, at the point of decision. A banner at the top of the form is easy to scroll past. The nurse can still submit the assessment, and it's recorded as a hard stop, meaning the assessment couldn't be fully performed.
 
