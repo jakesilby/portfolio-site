@@ -262,15 +262,7 @@
   --space-56: 56px;
   --space-64: 64px; /* homepage hero top, work grid row gap, case study
    * nav column gap */
-  --space-80: 80px; /* NEW — About page's card/bio column gap, now 80px per
-   * the latest revision of node 496:156/517:67 (was 64px, see --space-64
-   * above). 80px already exists as a literal value on --hero-section-padding-y
-   * below, but that token is named and scoped for the homepage hero
-   * section's padding role, not a general gap value; reusing it here would
-   * be the same kind of name/role mismatch flagged for --border-muted in
-   * the first About audit, so this gets its own general-scale primitive
-   * instead, consistent with how --space-64 was added last round rather
-   * than reused from elsewhere. */
+  --space-80: 80px; /* homepage hero bottom padding */
   --space-96: 96px;
   --space-128: 128px; /* superseded — kept in case another section needs it */
   --space-160: 160px;
@@ -280,8 +272,6 @@
   /* --- Typography primitives --- */
   --font-family-display: 'Cormorant Garamond', Garamond, serif; /* v2 hero
    * sentence and case study title only (--type-hero, --type-page-title) */
-  --font-family-serif: 'EB Garamond', serif; /* legacy classes only; removed
-   * by the end of v2 */
   --font-family-mono: 'Spline Sans Mono', monospace;
   --font-family-sans: 'Bricolage Grotesque', system-ui, sans-serif; /* opsz
    * axis: font-optical-sizing stays auto (the default), so text is neutral
@@ -449,10 +439,6 @@
   --nav-pill-hit-inset-y: calc(-1 * var(--space-4));
   --nav-pill-hit-inset-x: calc(-1 * var(--space-2));
   --nav-focus-ring-offset: var(--space-2);
-  /* Raw px below, not primitives: removed in v2 about prompts. */
-  --about-card-offset-top: 14px; /* NEW — About page experience/education card's inset from its own glow layer, confirmed against Figma node 496:156 (496:275) */
-  --about-card-offset-left: 17px; /* NEW — see --about-card-offset-top; same node, left axis */
-  --about-card-glow-offset-left: 3px; /* NEW — About card's glow layer inset from the outer wrapper (top/bottom inset is 0), confirmed against Figma node 496:156 (496:171) */
 
   /* --- Layout (v2) — the only two container widths, plus one gutter.
    * --layout-wide is the outer box for the header, work grid and media;
@@ -605,83 +591,6 @@
 }
 @media (min-width: 1024px) {
   :root { --layout-gutter: var(--space-48); }
-}
-
-
-/* ============================================================
- * TYPOGRAPHY — COMPOSITE TOKENS
- * fontSize/lineHeight/fontWeight can't be expressed as a single CSS
- * custom property (same limitation the Pulse tokens.css documented
- * for its 30 skipped composite tokens) — compose the primitives above
- * into a class per role instead. These classes ARE the type-scale
- * tokens; treat them as the source of truth the same way you'd treat
- * a custom property.
- *
- * Legacy (pre-v2). The case study pages and the homepage work grid set
- * the v2 type roles above on their own selectors. What's left serves the
- * About page (.type-about-*) until it is rebuilt.
- * ============================================================ */
-
-/* --- About page additions (introduced while building the About page,
- * confirmed against Figma node 496:156) --- */
-
-.type-about-heading {
-  /* "Experience:" / "Education:" card headings. */
-  font-family: var(--font-family-serif);
-  font-weight: var(--font-weight-medium);
-  font-size: var(--font-size-18);
-  line-height: var(--line-height-24);
-  letter-spacing: var(--letter-spacing-none);
-}
-
-.type-about-entry {
-  /* Role/org line per experience & education entry. Role name is Medium
-   * weight, org name Regular — bold via a nested <strong> on the role
-   * name, not a second class. */
-  font-family: var(--font-family-serif);
-  font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-14);
-  line-height: var(--line-height-24);
-  letter-spacing: var(--letter-spacing-none);
-}
-.type-about-entry strong {
-  font-weight: var(--font-weight-medium);
-}
-
-.type-about-entry-years {
-  /* Mono year/range under each entry. Figma specs this at 10px, but that's
-   * under the site's 11px functional-text floor (flagged by the impeccable
-   * design-quality hook) — bumped to 11px, matching the floor every other
-   * mono label on the site already sits on. No letter-spacing in the Figma
-   * export (unlike the wide-tracked mono labels elsewhere) — left at
-   * none rather than assumed. */
-  font-family: var(--font-family-mono);
-  font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-11);
-  line-height: var(--line-height-24);
-  letter-spacing: var(--letter-spacing-none);
-}
-
-.type-about-bio-lead {
-  /* Bio's opening sentence — semibold italic, per Figma. Was 24px; latest
-   * Figma revision of node 496:156 specifies 20px for both bio roles
-   * (lead and body), no longer a larger size on the lead alone. */
-  font-family: var(--font-family-serif);
-  font-style: italic;
-  font-weight: var(--font-weight-semibold);
-  font-size: var(--font-size-20);
-  line-height: normal; /* Figma leading-[normal], a deliberate "auto"
-   * choice — not forced onto the line-height scale. */
-  letter-spacing: var(--letter-spacing-none);
-}
-
-.type-about-bio-body {
-  /* Was 24px — see .type-about-bio-lead above, same revision. */
-  font-family: var(--font-family-serif);
-  font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-20);
-  line-height: normal;
-  letter-spacing: var(--letter-spacing-none);
 }
 
 

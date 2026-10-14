@@ -13,14 +13,3 @@
  *   Spline Sans Mono 400     token names, code and file names in prose
  */
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Cormorant+Garamond:wght@500&family=Spline+Sans+Mono&display=swap');
-
-/*
- * Legacy, remove when roles migrate. Still used by pre-v2 type classes in
- * tokens.css; drop each face once nothing references it.
- *   EB Garamond 400           .type-about-entry, .type-about-bio-body
- *                             (About page)
- *   EB Garamond 500           .type-about-heading, .type-about-entry strong
- *                             (About page)
- *   EB Garamond 600 italic    .type-about-bio-lead (About page)
- */
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,600&display=swap');

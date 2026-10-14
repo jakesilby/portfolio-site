@@ -19,116 +19,109 @@
       font-family: var(--font-family-sans);
     }
 
-    .about-section {
-      display: flex;
-      align-items: flex-start;
-      gap: var(--space-80);
-      padding: var(--hero-section-padding-y) var(--padding-section-x);
-    }
-
-    .about-card {
-      position: relative;
-      width: 456px;
-      max-width: 100%;
-      flex-shrink: 0;
-    }
-
-    @property --about-glow-angle {
-      syntax: '<angle>';
-      initial-value: 109.04deg;
-      inherits: false;
-    }
-
-    .about-card__glow {
-      position: absolute;
-      inset: 0 var(--about-card-glow-offset-left);
-      border-radius: var(--radius-lg);
-      background: linear-gradient(
-        var(--about-glow-angle),
-        var(--bg-accent) 0%,
-        var(--color-greenwhite-6) 49%,
-        var(--bg-hero) 100%
-      );
-      filter: blur(13.45px) saturate(0.85); /* blur: corrected back from 26.9px — this had been
-       * matched to the homepage hero card's glow, but that value was itself
-       * wrong (an uncorroborated correction made without live Figma access).
-       * The homepage's blur has since been verified against Figma node
-       * 507:24 as 13.45px, which is also this node's own literal spec — so
-       * this value was right from the start; the intermediate 26.9px detour
-       * is what needed fixing. saturate(0.85) added 2026-09-28 — desaturated
-       * ~15% on request, same on .hero-card__glow and .about-card__glow.
-       * A filter, not new color stops, because the middle stop is the shared
-       * --color-greenwhite-6 (also --border-divider), which must not move. */
-      opacity: 0.7; /* was 0.58 — matched back to the homepage glow so both
-       * cards share one treatment; saturate() above now does the softening. */
-    }
-
-    @media (prefers-reduced-motion: no-preference) {
-      .about-card__glow {
-        animation: about-glow-rotate 48s linear infinite;
-      }
-    }
-
-    @keyframes about-glow-rotate {
-      from { --about-glow-angle: 109.04deg; }
-      to { --about-glow-angle: 469.04deg; }
-    }
-
-    .about-card__content {
-      position: relative;
+    /* One column inside --layout-wide, same gutter as the header. Text,
+     * lists included, is capped at --layout-measure. */
+    .about {
       display: flex;
       flex-direction: column;
-      gap: var(--space-16);
-      margin: var(--about-card-offset-top) var(--about-card-offset-left);
-      padding: var(--space-48);
-      border-radius: var(--radius-lg);
-      background: var(--bg-page);
+      gap: var(--space-32);
+      max-width: var(--layout-wide);
+      margin-inline: auto;
+      padding: var(--space-64) var(--layout-gutter) 0;
     }
 
-    .about-card__heading {
+    .about > * {
+      max-width: var(--layout-measure);
+    }
+
+    .about__title {
+      font: var(--type-hero);
+      letter-spacing: var(--type-hero-letter-spacing);
       color: var(--text-primary);
     }
 
-    .about-entry {
+    .about__bio {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-stack);
+    }
+
+    .about__text {
+      font: var(--type-body);
+      letter-spacing: var(--type-body-letter-spacing);
       color: var(--text-primary);
     }
 
-    .about-entry__years {
-      display: block;
-      color: var(--text-hero-subhead);
-    }
-
-    .about-divider {
-      width: 100%;
-      border: none;
-      border-top: 1px dashed var(--border-divider);
-    }
-
-    .about-bio {
+    .about__contact {
       display: flex;
-      flex-direction: column;
-      gap: var(--space-16);
-      max-width: 379px;
-      color: var(--text-hero-subhead);
+      flex-wrap: wrap;
+      gap: var(--gap-card);
     }
 
-    .about-contact-link {
+    .about__contact a {
+      display: inline-flex;
+      align-items: center;
+      min-height: var(--size-tap-target);
+      font: var(--type-body);
+      letter-spacing: var(--type-body-letter-spacing);
       color: var(--text-link);
       text-decoration: underline;
     }
 
-    @media (max-width: 720px) {
-      .about-section {
-        flex-direction: column;
-        padding: var(--space-48) var(--padding-section-x);
+    .about__section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-stack);
+    }
+
+    .about__section + .about__section {
+      padding-top: var(--space-32);
+      border-top: var(--border-width-hairline) solid var(--border-default);
+    }
+
+    .about__heading {
+      font: var(--type-h2);
+      letter-spacing: var(--type-h2-letter-spacing);
+      color: var(--text-primary);
+    }
+
+    .about__list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-inline);
+      list-style: none;
+    }
+
+    /* Dates stack under the role on narrow screens and right-align on
+     * wide ones. */
+    .about-entry {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .about-entry__role {
+      font: var(--type-body);
+      letter-spacing: var(--type-body-letter-spacing);
+      color: var(--text-primary);
+    }
+
+    .about-entry__dates {
+      font: var(--type-meta);
+      letter-spacing: var(--type-meta-letter-spacing);
+      color: var(--text-muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    @media (min-width: 768px) {
+      .about-entry {
+        flex-direction: row;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: var(--gap-card);
       }
 
-      .about-card__content {
-        padding: var(--space-24);
-      }
-
-      .about-bio {
-        max-width: none;
+      .about-entry__dates {
+        flex-shrink: 0;
       }
     }
   </style>
@@ -147,75 +140,68 @@
     </nav>
   </noscript>
 
-  <h1 class="visually-hidden">About</h1>
+  <main class="about">
+    <h1 class="about__title">About</h1>
 
-  <main class="about-section">
-    <div class="about-card">
-      <div class="about-card__glow" aria-hidden="true"></div>
-      <div class="about-card__content">
-        <h2 class="about-card__heading type-about-heading">Experience:</h2>
-
-        <p class="about-entry type-about-entry">
-          <strong>UX/UI Designer</strong> / Elevate Health Technologies
-          <span class="about-entry__years type-about-entry-years">2025-2026</span>
-        </p>
-        <p class="about-entry type-about-entry">
-          <strong>Product Designer</strong> / Elevance Health
-          <span class="about-entry__years type-about-entry-years">2023-2025</span>
-        </p>
-        <p class="about-entry type-about-entry">
-          <strong>UX/UI Designer</strong> / BioPlus Specialty Pharmacy
-          <span class="about-entry__years type-about-entry-years">2022-2023</span>
-        </p>
-        <p class="about-entry type-about-entry">
-          <strong>Freelance UX Designer</strong> / Aperture
-          <span class="about-entry__years type-about-entry-years">2022</span>
-        </p>
-        <p class="about-entry type-about-entry">
-          <strong>Freelance UX/UI Designer</strong> / Radish Health
-          <span class="about-entry__years type-about-entry-years">2022</span>
-        </p>
-
-        <hr class="about-divider">
-
-        <h2 class="about-card__heading type-about-heading">Education:</h2>
-
-        <p class="about-entry type-about-entry">
-          <strong>Design Systems Certificate</strong> / Memorisely
-          <span class="about-entry__years type-about-entry-years">2024</span>
-        </p>
-        <p class="about-entry type-about-entry">
-          <strong>UX Design Career Track Certificate</strong> / Springboard
-          <span class="about-entry__years type-about-entry-years">2021</span>
-        </p>
-        <p class="about-entry type-about-entry">
-          <strong>Masters of Fine Arts</strong> / School of the Art Institute of Chicago
-          <span class="about-entry__years type-about-entry-years">2019</span>
-        </p>
-        <p class="about-entry type-about-entry">
-          <strong>Bachelor of Design (1st Class Honors)</strong> / Massey University
-          <span class="about-entry__years type-about-entry-years">2015</span>
-        </p>
-      </div>
+    <div class="about__bio">
+      <p class="about__text">I'm a product designer based in Brooklyn, NY, focused on design systems and the handoff between design and code.</p>
+      <p class="about__text">My background is in healthcare software. I've spent most of my time building the underlying architecture: tokens, components, documentation, alongside the day-to-day product work. I like designing for real complexity, and using AI-assisted workflows to close the gap between the design and what ships.</p>
+      <p class="about__text">I've caught and fixed inconsistencies that had already shipped to production. In a clinical dispensing tool, that kind of drift is a patient-safety risk.</p>
     </div>
 
-    <div class="about-bio">
-      <p class="type-about-bio-lead">I'm a product designer based in Brooklyn, NY, focused on design systems and the handoff between design and code.</p>
-      <p class="type-about-bio-body">My background is in healthcare software. I've spent most of my time building the underlying architecture: tokens, components, documentation, alongside the day-to-day product work. I like designing for real complexity, and using AI-assisted workflows to close the gap between the design and what ships.</p>
-      <p class="type-about-bio-body">I've caught and fixed inconsistencies that had already shipped to production. In a clinical dispensing tool, that kind of drift is a patient-safety risk.</p>
-      <p class="type-about-bio-body"><a class="about-contact-link" href="https://www.linkedin.com/in/jakesilby/" target="_blank" rel="noopener">LinkedIn</a></p>
-      <p class="type-about-bio-body">✉️ <a class="about-contact-link" id="email-link">jake.r.silby[at]gmail.com</a></p>
-    </div>
+    <p class="about__contact">
+      <a href="mailto:jake.r.silby@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/jakesilby/" target="_blank" rel="noopener">LinkedIn</a>
+    </p>
+
+    <section class="about__section" aria-labelledby="experience">
+      <h2 class="about__heading" id="experience">Experience</h2>
+      <ul class="about__list">
+        <li class="about-entry">
+          <span class="about-entry__role">UX/UI Designer, Elevate Health Technologies</span>
+          <span class="about-entry__dates">2025–2026</span>
+        </li>
+        <li class="about-entry">
+          <span class="about-entry__role">Product Designer, Elevance Health</span>
+          <span class="about-entry__dates">2023–2025</span>
+        </li>
+        <li class="about-entry">
+          <span class="about-entry__role">UX/UI Designer, BioPlus Specialty Pharmacy</span>
+          <span class="about-entry__dates">2022–2023</span>
+        </li>
+        <li class="about-entry">
+          <span class="about-entry__role">Freelance UX Designer, Aperture</span>
+          <span class="about-entry__dates">2022</span>
+        </li>
+        <li class="about-entry">
+          <span class="about-entry__role">Freelance UX/UI Designer, Radish Health</span>
+          <span class="about-entry__dates">2022</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="about__section" aria-labelledby="education">
+      <h2 class="about__heading" id="education">Education</h2>
+      <ul class="about__list">
+        <li class="about-entry">
+          <span class="about-entry__role">Design Systems Certificate, Memorisely</span>
+          <span class="about-entry__dates">2024</span>
+        </li>
+        <li class="about-entry">
+          <span class="about-entry__role">UX Design Career Track Certificate, Springboard</span>
+          <span class="about-entry__dates">2021</span>
+        </li>
+        <li class="about-entry">
+          <span class="about-entry__role">Masters of Fine Arts, School of the Art Institute of Chicago</span>
+          <span class="about-entry__dates">2019</span>
+        </li>
+        <li class="about-entry">
+          <span class="about-entry__role">Bachelor of Design (1st Class Honors), Massey University</span>
+          <span class="about-entry__dates">2015</span>
+        </li>
+      </ul>
+    </section>
   </main>
-
-  <script>
-    // href built at runtime rather than written as a literal mailto: in the
-    // source, so the address isn't sitting in plain HTML for a basic
-    // scraper to harvest — same intent as the visible [at] text, just
-    // extended to the actual link target. Link text stays exactly as
-    // written; only the href changes.
-    document.getElementById('email-link').href = 'mailto:' + 'jake.r.silby' + '@' + 'gmail.com';
-  </script>
 
   <script src="components/footer.js"></script>
 </body>

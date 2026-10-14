@@ -22,7 +22,6 @@ Typography (three families, fixed jobs)
 - Bricolage Grotesque: everything else, including nav, body text, captions, meta, labels, buttons and footer. The brand ("Jake Silby" in the header) is Bricolage 500 16/24 (--type-brand).
 - Spline Sans Mono: only literal token names, code, and file names inside case study prose (for example `accent-primary-fg-fill`). Never for labels, meta, nav or captions.
 - No italic body text. No all-caps labels. No eyebrow labels above headings.
-- EB Garamond and --font-family-serif remain only for legacy classes and are removed by the end of v2.
 
 Color ("Clay + juniper" at faint warmth). All values live in tokens.css as clay / juniper / sand primitives behind these aliases:
 - --bg-page #faf9f7. --bg-surface #eeede9 (media wells, code backgrounds). --border-default #e3e2dd (hairlines).
