@@ -21,7 +21,7 @@ tokenChainScript.insertAdjacentHTML('afterend', `
     <div class="token-chain__card">
       <span class="token-chain__swatch token-chain__swatch--alias"></span>
       <div class="token-chain__text">
-        <p class="token-chain__label">Semantic Alias</p>
+        <p class="token-chain__label">Semantic alias</p>
         <p class="token-chain__name">Primary.Dark</p>
       </div>
     </div>
@@ -29,7 +29,7 @@ tokenChainScript.insertAdjacentHTML('afterend', `
     <div class="token-chain__card">
       <span class="token-chain__swatch token-chain__swatch--mapped"></span>
       <div class="token-chain__text">
-        <p class="token-chain__label">Mapped Token</p>
+        <p class="token-chain__label">Mapped token</p>
         <p class="token-chain__name">Accent.Primary.fg.fill</p>
       </div>
     </div>

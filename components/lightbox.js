@@ -2,10 +2,10 @@
   const lightboxScript = document.currentScript;
 
   lightboxScript.insertAdjacentHTML('afterend', `
-<div class="lightbox" id="lightbox" aria-hidden="true">
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" aria-hidden="true">
   <div class="lightbox__backdrop"></div>
   <button type="button" class="lightbox__close" aria-label="Close">&times;</button>
-  <div class="lightbox__content" role="dialog" aria-modal="true" aria-label="Image preview">
+  <div class="lightbox__content">
     <img class="lightbox__image" src="" alt="">
   </div>
 </div>
@@ -26,6 +26,9 @@
     triggerEl = trigger;
     image.src = src;
     image.alt = trigger.getAttribute('alt') || '';
+    // The dialog wraps the close button and the image, and takes its name
+    // from the image's alt text.
+    lightbox.setAttribute('aria-label', image.alt || 'Image viewer');
 
     lightbox.classList.add('is-open');
     lightbox.setAttribute('aria-hidden', 'false');
