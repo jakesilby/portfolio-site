@@ -259,7 +259,7 @@
   /* Problem diagram (OnePulse Connect, The problem): a fixed-size
    * illustration of three scattered file cards and the token system they
    * become. Exact Figma geometry, so mapped values rather than the
-   * spacing scale. Scrolls sideways below 720px. */
+   * spacing scale. Scrolls sideways when the column is narrower. */
   --problem-diagram-thumbs-width: 270px;
   --problem-diagram-thumbs-height: 220px;
   --problem-diagram-thumb-a-top: 61px;

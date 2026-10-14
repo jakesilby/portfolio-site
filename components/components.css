@@ -518,6 +518,9 @@ body[data-page="case-study"] {
   display: flex;
   align-items: center;
   gap: var(--space-32);
+  max-width: 100%; /* fixed-size illustration: scrolls sideways inside
+   * the column whenever the column is narrower than it */
+  overflow-x: auto;
   padding: var(--gap-stack);
   background: var(--bg-surface);
 }
@@ -1050,11 +1053,6 @@ body[data-page="case-study"] {
 }
 
 @media (max-width: 720px) {
-  .problem-diagram {
-    max-width: 100%;
-    overflow-x: auto;
-  }
-
   .case-visual {
     /* 24px fixed padding eats ~17% of a 279px mobile container width vs.
      * ~3% of the desktop column, shrinking Tab Group, Data Table, and
