@@ -1,8 +1,4 @@
-# Assessments at scale, safety stops included
-
-*(Pre-Infusion Assessment Flow)*
-
-*(Working title — this is really about the assessment framework, with pre-infusion as the worked example.)*
+# Pre-infusion assessment flow
 
 ---
 

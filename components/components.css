@@ -164,12 +164,6 @@ body[data-page="case-study"] {
   color: var(--text-primary);
 }
 
-.case-intro__project {
-  font: var(--type-meta);
-  letter-spacing: var(--type-meta-letter-spacing);
-  color: var(--text-label);
-}
-
 .case-intro__description {
   max-width: var(--layout-measure);
   font: var(--type-body-lg);
