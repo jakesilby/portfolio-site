@@ -52,8 +52,6 @@ Some answers open follow-up questions inline, right below the question that trig
 
 > **[VISUAL — CLIP]** The infection screening clip (`as_infectionscreening.mp4`): "Yes" selected, sub-questions expanding inline. Moved here from the hero, which is now its static poster.
 
-> **[VISUAL — high priority, STATIC]** A still frame from the same clip playing in the hero above: "Yes" selected on the infection screening question, with the fever, cough, urinary status, and skin infection sub-questions expanded inline, all four required and still unanswered. The live version of this interaction already plays at the top of the page, so this section shows the resulting state rather than repeating the clip.
-
 A positive pregnancy test or a refused consent triggers a hard stop. Those hard stops show up as alerts directly next to the question that triggered them, at the point of decision. A banner at the top of the form is easy to scroll past. The nurse can still submit the assessment, and it's recorded as a hard stop, meaning the assessment couldn't be fully performed.
 
 > **[VISUAL — high priority, STATIC]** A hard-stop alert (e.g. positive pregnancy test) shown inline next to its triggering field, using the real design system alert component (error variant, `#fff5f5` bg / `#ffc9cb` border).
