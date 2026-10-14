@@ -696,7 +696,7 @@ body[data-page="case-study"] {
 
 @media (prefers-reduced-motion: no-preference) {
   .token-chain__card {
-    transition: border-color 200ms ease-out;
+    transition: border-color var(--duration-hover) ease-out;
   }
 }
 
