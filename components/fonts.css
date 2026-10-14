@@ -8,7 +8,8 @@
  *     opsz 12..96,           titles and code. Variable on both axes, so
  *     wght 400..700          optical size follows font-size automatically.
  *                            Weights in use: 400 (body, meta), 500 (header
- *                            name), 600 (nav, h2, h3), 700.
+ *                            name), 600 (nav, h2, h3). The range runs to
+ *                            700 per the v2 spec; one variable file either way.
  *   Cormorant Garamond 500   hero sentence and case study title only
  *   Spline Sans Mono 400     token names, code and file names in prose
  */
