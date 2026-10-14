@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="/components/fonts.css">
+<link rel="stylesheet" href="/tokens.css">
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  html, body { width: 700px; height: 630px; background: var(--bg-page); }
+  body { display: flex; flex-direction: column; justify-content: space-between; padding: 96px 96px 96px 96px; }
+  .brand { font: 500 24px/32px var(--font-family-sans); color: var(--text-muted); }
+  .title { font: 500 64px/68px var(--font-family-display); letter-spacing: -0.6px; color: var(--text-primary); }
+  .desc { margin-top: 28px; max-width: 508px; font: 400 26px/36px var(--font-family-sans); color: var(--text-primary); }
+</style></head>
+<body><div class="brand">Jake Silby</div><div><h1 class="title"></h1><p class="desc"></p></div>
+<script>
+  const q = new URLSearchParams(location.search);
+  document.querySelector('.title').innerHTML = q.get('t');
+  document.querySelector('.desc').textContent = q.get('d');
+</script></body></html>
