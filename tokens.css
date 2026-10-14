@@ -359,7 +359,6 @@
    * Was elm-8, a near-black teal. */
   --text-hero-eyebrow: var(--color-cosmos-8-5); /* NEW — status unclear as of the latest hero revision, see chat note */
   --text-hero-heading: var(--color-cosmos-9-5); /* NEW */
-  --text-hero-subhead: var(--color-greenwhite-8); /* NEW — the hero's second line ("I am a product designer..."), confirmed against live Figma (196:383) */
   --text-link: var(--accent);
   --text-link-hover: var(--accent); /* hover for the header name, footer
    * links and work grid titles. Retires the cosmos red hover. */
@@ -412,12 +411,11 @@
   /* --- Spacing: padding --- */
   --padding-section-x: var(--space-48);
   --padding-section-y: var(--space-96);
-  --padding-hero-y: var(--space-160); /* superseded — the full-bleed hero-panel this backed was replaced by the floating hero card (see --hero-section-padding-y below), confirmed against Figma node 378:160. Kept in case a future full-bleed hero treatment needs it again. */
+  --padding-hero-y: var(--space-160); /* superseded — the full-bleed hero-panel this backed was replaced by the floating hero card, confirmed against Figma node 378:160. Kept in case a future full-bleed hero treatment needs it again. */
 
   /* --- Spacing: mapped (component-scoped) — one-off positioning values that
    * belong to a single component's exact Figma geometry, not the general
    * spacing rhythm scale above. Per CLAUDE.md's third token tier. --- */
-  --hero-section-padding-y: var(--space-80); /* now points at its primitive. NEW — homepage hero section vertical padding, confirmed against Figma node 378:160 */
   --work-grid-gap-column: var(--space-32); /* NEW (v2) — between the two work grid columns */
   --work-grid-gap-row: var(--space-64); /* NEW (v2) — between work grid rows, twice the column gap so each item reads as one unit */
   /* Work grid hover (v2, "Lift + pill"): the hovered item's media lifts,
