@@ -235,11 +235,13 @@
   --border-width-focus: 2px; /* NEW (v2) — focus ring around a whole work grid item */
 
   /* --- Size primitives --- */
+  --size-1: 1px; /* visually hidden elements */
   --size-44: 44px; /* NEW (v2) — WCAG 2.5.5 minimum tap target */
 
   /* --- Motion primitives --- */
   --duration-120: 120ms; /* NEW (v2) — hero highlight, first mark's delay */
   --duration-150: 150ms; /* NEW (v2) — hover color and background changes */
+  --duration-200: 200ms; /* lightbox open and close */
   --duration-300: 300ms; /* NEW (v2) — work grid lift; second hero mark's delay */
   --duration-520: 520ms; /* NEW (v2) — hero highlight draw-in */
   --ease-draw: cubic-bezier(.3, .7, .2, 1); /* NEW (v2) — hero highlight */
@@ -396,6 +398,13 @@
   --hero-mark-blur: 0.06em;
   --hero-mark-edge: 0.3em; /* soft fade at each end */
   --hero-mark-mask: linear-gradient(to right, transparent 0, #000 var(--hero-mark-edge), #000 calc(100% - var(--hero-mark-edge)), transparent 100%); /* #000 is mask alpha, not a color */
+  /* The ink: three soft blobs (sand, juniper, sand) over a centered
+   * juniper band. Positions and sizes are percentages of the band. */
+  --hero-mark-ink:
+    radial-gradient(ellipse 34% 75% at 18% 58%, var(--highlight-2) 0%, transparent 72%),
+    radial-gradient(ellipse 46% 85% at 58% 42%, var(--highlight) 0%, transparent 74%),
+    radial-gradient(ellipse 30% 70% at 88% 60%, var(--highlight-2) 0%, transparent 72%),
+    linear-gradient(var(--highlight), var(--highlight)) center / 96% 52% no-repeat;
   --hero-mark-duration: var(--duration-520);
   --hero-mark-delay-1: var(--duration-120); /* "complex workflows" */
   --hero-mark-delay-2: var(--duration-300); /* "design systems" */
@@ -427,6 +436,52 @@
   --work-grid-pill-padding-x: var(--space-13);
   --work-grid-pill-offset: var(--space-14); /* gap between the pill and the cursor point */
   --work-grid-pill-shadow: 0 6px 16px color-mix(in srgb, var(--accent) 24%, transparent), 0 1px 3px color-mix(in srgb, var(--accent) 16%, transparent);
+  /* Problem diagram (OnePulse Connect, The problem): a fixed-size
+   * illustration of three scattered file cards and the token system they
+   * become. Exact Figma geometry, so mapped values rather than the
+   * spacing scale. Scrolls sideways below 720px. */
+  --problem-diagram-thumbs-width: 270px;
+  --problem-diagram-thumbs-height: 220px;
+  --problem-diagram-thumb-a-top: 61px;
+  --problem-diagram-thumb-a-width: 160px;
+  --problem-diagram-thumb-a-height: 108px;
+  --problem-diagram-thumb-a-rotate: 7deg;
+  --problem-diagram-thumb-b-left: 112px;
+  --problem-diagram-thumb-b-width: 157px;
+  --problem-diagram-thumb-b-height: 103px;
+  --problem-diagram-thumb-b-rotate: -5deg;
+  --problem-diagram-thumb-c-left: 67px;
+  --problem-diagram-thumb-c-top: 119px;
+  --problem-diagram-thumb-c-width: 156px;
+  --problem-diagram-thumb-c-height: 100px;
+  --problem-diagram-thumb-c-rotate: 4deg;
+  --problem-diagram-card-width: 150px;
+  --problem-diagram-card-height: 90px;
+  --problem-diagram-caption-width: 220px;
+  --problem-diagram-image-frame-width: 280px;
+  --problem-diagram-image-frame-height: 220px;
+  --problem-diagram-image-top: 22px;
+  --problem-diagram-image-height: 175px;
+  /* Arrow between diagram steps (problem diagram and token chain), the
+   * SVG's own viewBox size. Turns to point down when the token chain
+   * stacks. */
+  --diagram-arrow-width: 14px;
+  --diagram-arrow-height: 14.7279px;
+  --diagram-arrow-rotate-down: 90deg;
+  /* Token chain (OnePulse Connect, Token architecture live embed). */
+  --token-chain-gap-row: var(--size-1);
+  --token-chain-card-min-height: 110px;
+  /* Lightbox: the one motion besides hover color, the hero highlight and
+   * the work grid lift. Fades in while the image scales up from .96. */
+  --lightbox-duration: var(--duration-200);
+  --lightbox-scale-from: .96;
+  --lightbox-close-line-height: 1;
+  --lightbox-close-hover-bg: color-mix(in srgb, var(--color-white) 15%, transparent);
+  /* Stacking: the lightbox covers the page, and the skip link sits above
+   * everything when focused. */
+  --z-work-grid-pill: 1;
+  --z-lightbox: 1000;
+  --z-skip-link: 1001;
   --focus-ring-width: var(--border-width-focus);
   --focus-ring-color: var(--accent); /* 7.1:1 on bg-page */
   --focus-ring-offset: var(--space-8);

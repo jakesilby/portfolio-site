@@ -8,8 +8,8 @@
 
 .visually-hidden {
   position: absolute;
-  width: 1px;
-  height: 1px;
+  width: var(--size-1);
+  height: var(--size-1);
   overflow: hidden;
   clip-path: inset(50%);
   white-space: nowrap;
@@ -22,7 +22,7 @@
   position: absolute;
   top: var(--space-8);
   left: var(--layout-gutter);
-  z-index: 1001;
+  z-index: var(--z-skip-link);
   padding: var(--space-8) var(--space-14);
   border-radius: var(--radius-full);
   background: var(--bg-page);
@@ -33,8 +33,8 @@
 }
 
 .skip-link:not(:focus) {
-  width: 1px;
-  height: 1px;
+  width: var(--size-1);
+  height: var(--size-1);
   padding: 0;
   overflow: hidden;
   clip-path: inset(50%);
@@ -533,8 +533,8 @@ body[data-page="case-study"] {
 
 .problem-diagram__thumbs {
   position: relative;
-  width: 270px;
-  height: 220px;
+  width: var(--problem-diagram-thumbs-width);
+  height: var(--problem-diagram-thumbs-height);
 }
 
 .problem-diagram__thumb-wrap {
@@ -546,34 +546,34 @@ body[data-page="case-study"] {
 
 .problem-diagram__thumb-wrap--a {
   left: 0;
-  top: 61px;
-  width: 160px;
-  height: 108px;
-  transform: rotate(7deg);
+  top: var(--problem-diagram-thumb-a-top);
+  width: var(--problem-diagram-thumb-a-width);
+  height: var(--problem-diagram-thumb-a-height);
+  transform: rotate(var(--problem-diagram-thumb-a-rotate));
 }
 
 .problem-diagram__thumb-wrap--b {
-  left: 112px;
+  left: var(--problem-diagram-thumb-b-left);
   top: 0;
-  width: 157px;
-  height: 103px;
-  transform: rotate(-5deg);
+  width: var(--problem-diagram-thumb-b-width);
+  height: var(--problem-diagram-thumb-b-height);
+  transform: rotate(var(--problem-diagram-thumb-b-rotate));
 }
 
 .problem-diagram__thumb-wrap--c {
-  left: 67px;
-  top: 119px;
-  width: 156px;
-  height: 100px;
-  transform: rotate(4deg);
+  left: var(--problem-diagram-thumb-c-left);
+  top: var(--problem-diagram-thumb-c-top);
+  width: var(--problem-diagram-thumb-c-width);
+  height: var(--problem-diagram-thumb-c-height);
+  transform: rotate(var(--problem-diagram-thumb-c-rotate));
 }
 
 .problem-diagram__card {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 150px;
-  height: 90px;
+  width: var(--problem-diagram-card-width);
+  height: var(--problem-diagram-card-height);
   padding: var(--space-32) var(--gap-stack);
   background: var(--bg-canvas);
   border: var(--border-width-hairline) solid var(--border-muted);
@@ -585,7 +585,7 @@ body[data-page="case-study"] {
 }
 
 .problem-diagram__caption {
-  width: 220px;
+  width: var(--problem-diagram-caption-width);
   font: var(--type-meta);
   letter-spacing: var(--type-meta-letter-spacing);
   text-align: center;
@@ -604,8 +604,8 @@ body[data-page="case-study"] {
    * for visual consistency between the two arrow usages on this page. */
   display: flex;
   flex-shrink: 0;
-  width: 14px;
-  height: 14.7279px;
+  width: var(--diagram-arrow-width);
+  height: var(--diagram-arrow-height);
   color: var(--accent-primary-dark);
 }
 
@@ -617,16 +617,16 @@ body[data-page="case-study"] {
 
 .problem-diagram__image-frame {
   position: relative;
-  width: 280px;
-  height: 220px;
+  width: var(--problem-diagram-image-frame-width);
+  height: var(--problem-diagram-image-frame-height);
 }
 
 .problem-diagram__image {
   position: absolute;
   left: 0;
-  top: 22px;
-  width: 280px;
-  height: 175px;
+  top: var(--problem-diagram-image-top);
+  width: var(--problem-diagram-image-frame-width);
+  height: var(--problem-diagram-image-height);
   object-fit: cover;
   border-radius: var(--radius-sm);
 }
@@ -649,7 +649,7 @@ body[data-page="case-study"] {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 1px var(--gap-card);
+  gap: var(--token-chain-gap-row) var(--gap-card);
   width: 100%;
 }
 
@@ -659,7 +659,7 @@ body[data-page="case-study"] {
   align-items: flex-start;
   flex: 1 0 0;
   min-width: 0;
-  min-height: 110px;
+  min-height: var(--token-chain-card-min-height);
   gap: var(--gap-stack);
   padding: var(--space-16) var(--space-8);
   background: var(--bg-page);
@@ -740,8 +740,8 @@ body[data-page="case-study"] {
 .token-chain__arrow {
   display: flex;
   flex-shrink: 0;
-  width: 14px;
-  height: 14.7279px;
+  width: var(--diagram-arrow-width);
+  height: var(--diagram-arrow-height);
   color: var(--accent-primary-dark);
 }
 
@@ -767,7 +767,7 @@ body[data-page="case-study"] {
 
   .token-chain__arrow {
     align-self: center;
-    transform: rotate(90deg);
+    transform: rotate(var(--diagram-arrow-rotate-down));
   }
 }
 
@@ -993,7 +993,7 @@ body[data-page="case-study"] {
  * it clear of the cursor point. */
 .work-grid__pill {
   position: absolute;
-  z-index: 1;
+  z-index: var(--z-work-grid-pill);
   left: 50%;
   top: 50%;
   transform: translate(-50%, calc(-100% - var(--work-grid-pill-offset)));
@@ -1057,7 +1057,7 @@ body[data-page="case-study"] {
 
   .case-visual {
     /* 24px fixed padding eats ~17% of a 279px mobile container width vs.
-     * ~3% of the 712px desktop one, shrinking Tab Group, Data Table, and
+     * ~3% of the desktop column, shrinking Tab Group, Data Table, and
      * Cell Type Variants down to an illegible size inside an
      * oversized empty box. 12px keeps a visible inset without the
      * disproportionate shrink. */
@@ -1074,8 +1074,8 @@ body[data-page="case-study"] {
 }
 
 [data-lightbox-src]:focus-visible {
-  outline: 2px solid var(--accent-primary);
-  outline-offset: 2px;
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--nav-focus-ring-offset);
 }
 
 body.lightbox-open {
@@ -1085,7 +1085,7 @@ body.lightbox-open {
 .lightbox {
   position: fixed;
   inset: 0;
-  z-index: 1000;
+  z-index: var(--z-lightbox);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1101,11 +1101,11 @@ body.lightbox-open {
 
 @media (prefers-reduced-motion: no-preference) {
   .lightbox {
-    transition: opacity 200ms ease-out, visibility 0s linear 200ms;
+    transition: opacity var(--lightbox-duration) ease-out, visibility 0s linear var(--lightbox-duration);
   }
 
   .lightbox.is-open {
-    transition: opacity 200ms ease-out, visibility 0s linear 0s;
+    transition: opacity var(--lightbox-duration) ease-out, visibility 0s linear 0s;
   }
 }
 
@@ -1120,7 +1120,7 @@ body.lightbox-open {
   display: flex;
   max-width: 100%;
   max-height: 100%;
-  transform: scale(0.96);
+  transform: scale(var(--lightbox-scale-from));
 }
 
 .lightbox.is-open .lightbox__content {
@@ -1129,7 +1129,7 @@ body.lightbox-open {
 
 @media (prefers-reduced-motion: no-preference) {
   .lightbox__content {
-    transition: transform 200ms ease-out;
+    transition: transform var(--lightbox-duration) ease-out;
   }
 }
 
@@ -1154,7 +1154,7 @@ body.lightbox-open {
   height: var(--space-48);
   font: inherit;
   font-size: var(--font-size-32);
-  line-height: 1;
+  line-height: var(--lightbox-close-line-height);
   color: var(--color-white);
   background: transparent;
   border: none;
@@ -1164,7 +1164,7 @@ body.lightbox-open {
 
 .lightbox__close:hover,
 .lightbox__close:focus-visible {
-  background: color-mix(in srgb, var(--color-white) 15%, transparent);
+  background: var(--lightbox-close-hover-bg);
 }
 
 @media (max-width: 600px) {
