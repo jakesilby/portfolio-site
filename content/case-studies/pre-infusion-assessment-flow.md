@@ -8,7 +8,7 @@ I designed a framework for OnePulse Connect to select, complete, and review the 
 
 ## The problem
 
-At Elevate Health Technologies, I was the solo designer on the assessment system for OnePulse Connect, its specialty pharmacy platform. It started with one case, a nurse filling out a pre-infusion form for one therapy. Then the clinical data came in directly from clinical staff. The branching-logic spreadsheet they provided covered therapy groups like Neuro/Rheum, MS, CIDP/MMN, and CVID, and every assessment in it carried several independent dimensions at once: the therapy and phase it applied to, who completed it (staff on-site or a patient remotely), where it fell in the infusion timeline, and the branching between its own questions.
+At Elevate Health Technologies, I was the solo designer on the assessment system for OnePulse Connect, its medically integrated dispensing platform. It started with one case, a nurse filling out a pre-infusion form for one therapy. Then the clinical data came in directly from clinical staff. The branching-logic spreadsheet they provided covered therapy groups like Neuro/Rheum, MS, CIDP/MMN, and CVID, and every assessment in it carried several independent dimensions at once: the therapy and phase it applied to, who completed it (staff on-site or a patient remotely), where it fell in the infusion timeline, and the branching between its own questions.
 
 A flat list of assessment cards worked for a handful of items. One therapy group alone could have four or more assessments across several phases, though, and with multiple groups in the system the count was closer to 20 to 40 assessment types. The selection pattern had to hold up at that size.
 
