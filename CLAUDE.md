@@ -4,7 +4,7 @@ Read this (along with `tokens.css`) at the start of every Claude Code session on
 
 ## What this site is
 
-A design-systems/design-to-code portfolio: a homepage plus four case studies (Pulse Design System, Global Inline Drawer, Pre-Infusion Assessment Flow, one translated healthcare case study). The site itself is part of the pitch — it needs to be clean, code-forward, and not contradict the story the case studies tell. It does not need heavy interactivity or a complex framework.
+A design-systems/design-to-code portfolio: a homepage plus five case studies, in work grid order: Treating an AI draft like an unverified order (personal project), OnePulse Connect design system, Linking documents & prescriptions, Pre-infusion assessment flow, and Auditing Carbon for token drift (personal project). The site itself is part of the pitch — it needs to be clean, code-forward, and not contradict the story the case studies tell. It does not need heavy interactivity or a complex framework.
 
 ## Design direction (v2, Oct 2026)
 
@@ -89,7 +89,8 @@ Content and layout stay separate. A case study is a content file rendered throug
 - **Type:** no `type-*` classes in case-page markup. Each BEM selector sets its own v2 role in CSS, for example `.case-figure__caption { font: var(--type-caption); letter-spacing: var(--type-caption-letter-spacing); }`. type/code has no `font` shorthand, so set its parts individually (see `.case-code-inline`).
 - **Section nav:** every H2 (`.case-section__heading`) carries a stable `id` (its text, lowercased and hyphenated). `components/case-toc.js` builds the "On this page" list from them, so never write the list by hand. From 1100px it's a sticky column beside an 840px article; below that it's a plain list after the intro.
 - **Subsections:** `<h3 class="case-section__subheading">` inside a `.case-section`.
-- **Lists:** `.case-rules-list` / `.case-rules-list__item`, a real `<ul>`.
+- **Lists:** `.case-rules-list` / `.case-rules-list__item`, a real `<ul>`. Numbered lists (steps, ordered rules, sources) are an `<ol>` with `.case-rules-list--ordered`.
+- **Tables:** `<div class="case-table" role="region" aria-labelledby="…" tabindex="0">` around `<table class="case-table__table">` with `.case-table__head` (`scope="col"`) and `.case-table__cell`. It fills the column and scrolls sideways below `--layout-measure`. Label the region with the nearest heading or lead-in paragraph id.
 
 ## Component conventions
 

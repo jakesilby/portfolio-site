@@ -8,6 +8,20 @@
 // case study pages carry the full media descriptions.
 const workItems = [
   {
+    title: 'Treating an AI draft like an unverified order',
+    outcome: 'A review and sign-off flow for AI-drafted visit notes, with a working prototype.',
+    category: 'Personal project',
+    year: '2026',
+    href: 'ai-note-review.html',
+    video: {
+      poster: 'videos/fn_dose-check_poster.jpg',
+      sources: [
+        { src: 'videos/fn_dose-check.mp4', type: 'video/mp4' },
+        { src: 'videos/fn_dose-check.webm', type: 'video/webm' },
+      ],
+    },
+  },
+  {
     title: 'OnePulse Connect design system',
     outcome: 'The token and component system every OnePulse Connect screen was designed from.',
     category: 'Design systems',

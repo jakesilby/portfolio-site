@@ -24,6 +24,8 @@ OG = ROOT / 'images' / 'og'
 # Card file name -> (H1 with its line break, work grid outcome line).
 # Keep both in step with the case study H1s and components/work-grid.js.
 CASES = {
+    'ai-note-review': ('Treating an AI<br>draft like an<br>unverified order',
+        'A review and sign-off flow for AI-drafted visit notes, with a working prototype.'),
     'onepulse-connect': ('OnePulse Connect<br>design system',
         'The token and component system every OnePulse Connect screen was designed from.'),
     'linking-documents-prescriptions': ('Linking documents<br>&amp; prescriptions',

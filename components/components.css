@@ -283,9 +283,17 @@ body[data-page="case-study"] {
   font-weight: var(--font-weight-semibold);
 }
 
-.case-section__body a {
+.case-section__body a,
+.case-intro__description a,
+.case-rules-list__item a {
   color: var(--text-link); /* same treatment as .case-figure__caption a */
   text-decoration: underline;
+}
+
+/* Source URLs are long unbroken strings that would push a phone screen
+ * wider than the viewport. */
+.case-rules-list__item a {
+  overflow-wrap: anywhere;
 }
 
 /* --- Case study bulleted rules list (e.g. Reasoning & Governance's
@@ -314,6 +322,58 @@ body[data-page="case-study"] {
   content: "•";
   position: absolute;
   left: 0;
+}
+
+/* Numbered variant on an <ol> (steps, rules that run in order, sources).
+ * Wider indent so two-digit numbers clear the text. */
+.case-rules-list--ordered {
+  counter-reset: case-rules-list;
+}
+
+.case-rules-list--ordered .case-rules-list__item {
+  padding-left: var(--space-24);
+  counter-increment: case-rules-list;
+}
+
+.case-rules-list--ordered .case-rules-list__item::before {
+  content: counter(case-rules-list) ".";
+}
+
+/* --- Case study table. A real <table> that fills the article column like
+ * a code block. Below --layout-measure it stops shrinking and the wrapper
+ * scrolls sideways (role="region", tabindex="0" so the keyboard can
+ * scroll it), so three columns of prose never squeeze to a word per line.
+ * Rows are separated by hairlines, no fills or vertical rules. --- */
+
+.case-table {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.case-table__table {
+  width: 100%;
+  min-width: var(--layout-measure);
+  border-collapse: collapse;
+}
+
+.case-table__head,
+.case-table__cell {
+  padding: var(--space-12) var(--space-16) var(--space-12) 0;
+  font: var(--type-body-sm);
+  letter-spacing: var(--type-body-sm-letter-spacing);
+  color: var(--text-primary);
+  text-align: left;
+  vertical-align: top;
+  border-bottom: var(--border-width-hairline) solid var(--border-default);
+}
+
+.case-table__head {
+  font-weight: var(--font-weight-semibold);
+}
+
+.case-table__head:last-child,
+.case-table__cell:last-child {
+  padding-right: 0;
 }
 
 /* --- Case study inline visual (bg-placeholder wrapper, no radius on the
@@ -498,6 +558,19 @@ body[data-page="case-study"] {
 .case-visual__image--hardstopalert { aspect-ratio: 2880 / 1800; }
 .case-visual__image--vitalsbanda { aspect-ratio: 1800 / 1360; }
 .case-diagram--framework { aspect-ratio: 1938 / 304; }
+
+/* Treating an AI draft like an unverified order */
+.case-visual__image--fn-directions-a-to-d { aspect-ratio: 3008 / 2388; }
+.case-visual__image--fn-review,
+.case-visual__image--fn-transcript-drawer,
+.case-visual__image--fn-second-look,
+.case-visual__image--fn-review-and-sign,
+.case-visual__image--fn-signed { aspect-ratio: 2880 / 2200; }
+.case-visual__image--fn-rail-wording-before-after { aspect-ratio: 2004 / 1962; }
+.case-visual__image--fn-metformin-check { aspect-ratio: 1960 / 1592; }
+.case-visual__image--fn-sign-all-caught-and-misses { aspect-ratio: 2472 / 1749; }
+.case-visual__image--fn-color-rebalance { aspect-ratio: 2652 / 1239; }
+.case-visual__image--fn-grayscale-and-fieldnote { aspect-ratio: 3008 / 1226; }
 
 /* Carbon token audit */
 .case-visual__image--fluid-combobox-computed { aspect-ratio: 2696 / 1632; }
