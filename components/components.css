@@ -339,6 +339,18 @@ body[data-page="case-study"] {
   content: counter(case-rules-list) ".";
 }
 
+/* Sources variant: a numbered list at caption size with a tighter gap, so
+ * the citations stay complete without reading as part of the argument. */
+.case-rules-list--sources {
+  gap: var(--gap-inline);
+}
+
+.case-rules-list--sources .case-rules-list__item {
+  font: var(--type-caption);
+  letter-spacing: var(--type-caption-letter-spacing);
+  color: var(--text-secondary);
+}
+
 /* --- Case study table. A real <table> that fills the article column like
  * a code block. Below --layout-measure it stops shrinking and the wrapper
  * scrolls sideways (role="region", tabindex="0" so the keyboard can
@@ -567,11 +579,8 @@ body[data-page="case-study"] {
 .case-visual__image--fn-directions-a-to-d { aspect-ratio: 3008 / 2388; }
 .case-visual__image--fn-review,
 .case-visual__image--fn-transcript-drawer,
-.case-visual__image--fn-second-look,
-.case-visual__image--fn-review-and-sign,
 .case-visual__image--fn-signed { aspect-ratio: 2880 / 2200; }
 .case-visual__image--fn-rail-wording-before-after { aspect-ratio: 2004 / 1962; }
-.case-visual__image--fn-metformin-check { aspect-ratio: 1960 / 1592; }
 .case-visual__image--fn-sign-all-caught-and-misses { aspect-ratio: 2472 / 1749; }
 .case-visual__image--fn-color-rebalance { aspect-ratio: 2652 / 1239; }
 .case-visual__image--fn-grayscale-and-fieldnote { aspect-ratio: 3008 / 1226; }

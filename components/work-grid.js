@@ -14,10 +14,10 @@ const workItems = [
     year: '2026',
     href: 'ai-note-review.html',
     video: {
-      poster: 'videos/fn_dose-check_poster.jpg',
+      poster: 'videos/fn_no-source_poster.jpg',
       sources: [
-        { src: 'videos/fn_dose-check.mp4', type: 'video/mp4' },
-        { src: 'videos/fn_dose-check.webm', type: 'video/webm' },
+        { src: 'videos/fn_no-source.mp4', type: 'video/mp4' },
+        { src: 'videos/fn_no-source.webm', type: 'video/webm' },
       ],
     },
   },
