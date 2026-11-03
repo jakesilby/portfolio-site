@@ -14,7 +14,7 @@ const workItems = [
     year: '2026',
     href: 'ai-note-review.html',
     video: {
-      poster: 'videos/fn_no-source_poster.jpg',
+      poster: 'videos/fn_no-source_grid-poster.jpg',
       sources: [
         { src: 'videos/fn_no-source.mp4', type: 'video/mp4' },
         { src: 'videos/fn_no-source.webm', type: 'video/webm' },

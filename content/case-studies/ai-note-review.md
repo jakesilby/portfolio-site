@@ -105,7 +105,9 @@ With those rules in place, the rail reads like a table of contents for unfinishe
 
 Dana opens Dennis's draft at the end of the day. Seven items are open in the rail. Four are checks still waiting, one is a line with no source, and two are things from the visit that never made the note. She's already verified the allergy line and the A1c order. The sign button is locked.
 
-**The dose (Error 1).** This is the hardest one to catch, since 1,000 mg twice a day is a normal dose. The check shows the change as before and after, and puts the daily total on its own line, 1,000 → 2,000 mg. Below that sits every moment the dose came up in the visit, with the one the draft used marked. At 07:09 Dana floats a thousand twice a day. At 07:18 she drops it. Her recap at 09:13 says 1,000 in the morning and 500 at night.
+### The dose (Error 1)
+
+This is the hardest one to catch, since 1,000 mg twice a day is a normal dose. The check shows the change as before and after, and puts the daily total on its own line, 1,000 → 2,000 mg. Below that sits every moment the dose came up in the visit, with the one the draft used marked. At 07:09 Dana floats a thousand twice a day. At 07:18 she drops it. Her recap at 09:13 says 1,000 in the morning and 500 at night.
 
 > **[VISUAL — CLIP]** `videos/fn_dose-check.mp4`. The same clip loops in the hero; this copy carries the label. Label: "Selecting the metformin change shows the 07:09 moment the draft used above the 07:18 moment that contradicts it. The dose is edited to 1000 mg with breakfast and 500 mg with dinner, and the daily total counts down from 2,000 to 1,500 mg."
 
@@ -121,13 +123,17 @@ For more context, the Transcript button opens the full transcript next to the no
 
 She edits the line to 1,000 mg with breakfast and 500 mg with dinner. The daily total drops to 1,500, and the edit goes into the attestation.
 
-**The unsupported line (Error 2).** "Denies chest pain or shortness of breath" carries a No source badge, the words "Not found in the transcript," and an amber dashed border. The three negatives around it, which she did ask about, stay plain. She can delete it, or keep it if she remembers asking. The record shows which.
+### The unsupported line (Error 2)
+
+"Denies chest pain or shortness of breath" carries a No source badge, the words "Not found in the transcript," and an amber dashed border. The three negatives around it, which she did ask about, stay plain. She can delete it, or keep it if she remembers asking. The record shows which.
 
 > **[VISUAL — CLIP]** `videos/fn_no-source.mp4`. Label: "Selecting the amber line with no source and deleting it. The line is struck through and the rail's open count drops by one."
 
 *Deleting the line with no source. The rail's open count drops by one.*
 
-**The missing symptom (Error 3).** The lightheadedness sits in the history as a suggested line, right after the sentence about Dennis walking his dog, about where Dana would have put it herself. It carries the timestamp and a note that she gave advice at 02:25. One click adds it.
+### The missing symptom (Error 3)
+
+The lightheadedness sits in the history as a suggested line, right after the sentence about Dennis walking his dog, about where Dana would have put it herself. It carries the timestamp and a note that she gave advice at 02:25. One click adds it.
 
 Dismissing it brings up a second look. The card quotes what she told Dennis at the time ("If it gets worse, or you ever fall or pass out, I want you to call me") and says that dismissing leaves her advice out of the signed note. Add is the primary button. Dismiss takes one more click and asks for no reason. The bikes comment just below goes away in one click. Dana did mention the bikes again later ("Your wife's onto something"). That was encouragement, and there's no advice for the note to carry.
 
