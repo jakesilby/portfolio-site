@@ -513,7 +513,7 @@ body[data-page="case-study"] {
 
 /* --- Case study clip. Scroll-triggered by clip-video.js through
  * [data-clip-video]. Fills the article column at 16:10, the native ratio
- * of every clip but the Data Table one. --- */
+ * of every clip but the Data Table and Fieldnote sign ones. --- */
 
 .case-clip-video {
   position: relative;
@@ -534,6 +534,10 @@ body[data-page="case-study"] {
 
 .case-clip-video--datatable {
   aspect-ratio: 2298 / 1094; /* the encode's real size */
+}
+
+.case-clip-video--fn-sign {
+  aspect-ratio: 1520 / 1600; /* the encode's real size */
 }
 
 /* --- Case study image ratios. One modifier per real image, set from the
