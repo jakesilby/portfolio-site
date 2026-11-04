@@ -8,20 +8,6 @@
 // case study pages carry the full media descriptions.
 const workItems = [
   {
-    title: 'Treating an AI draft like an unverified order',
-    outcome: 'A review and sign-off flow for AI-drafted visit notes, with a working prototype.',
-    category: 'Personal project',
-    year: '2026',
-    href: 'ai-note-review.html',
-    video: {
-      poster: 'videos/fn_no-source_grid-poster.jpg',
-      sources: [
-        { src: 'videos/fn_no-source_grid.mp4', type: 'video/mp4' },
-        { src: 'videos/fn_no-source_grid.webm', type: 'video/webm' },
-      ],
-    },
-  },
-  {
     title: 'OnePulse Connect design system',
     outcome: 'The token and component system every OnePulse Connect screen was designed from.',
     category: 'Design systems',
@@ -46,6 +32,22 @@ const workItems = [
       sources: [
         { src: 'videos/link-document-flow-short.mp4', type: 'video/mp4' },
         { src: 'videos/link-document-flow-short.webm', type: 'video/webm' },
+      ],
+    },
+  },
+  {
+    title: 'Treating an AI draft like an unverified order',
+    outcome: 'A review and sign-off flow for AI-drafted visit notes, with a working prototype.',
+    category: 'Personal project',
+    year: '2026',
+    href: 'ai-note-review.html',
+    // Grid-only clip: the screen inset on --color-sand-2 (#f0e3c9), baked into
+    // the video. The case study page uses the plain fn_no-source clip.
+    video: {
+      poster: 'videos/fn_no-source_grid-poster.jpg',
+      sources: [
+        { src: 'videos/fn_no-source_grid.mp4', type: 'video/mp4' },
+        { src: 'videos/fn_no-source_grid.webm', type: 'video/webm' },
       ],
     },
   },
