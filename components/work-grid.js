@@ -16,8 +16,8 @@ const workItems = [
     video: {
       poster: 'videos/fn_no-source_grid-poster.jpg',
       sources: [
-        { src: 'videos/fn_no-source.mp4', type: 'video/mp4' },
-        { src: 'videos/fn_no-source.webm', type: 'video/webm' },
+        { src: 'videos/fn_no-source_grid.mp4', type: 'video/mp4' },
+        { src: 'videos/fn_no-source_grid.webm', type: 'video/webm' },
       ],
     },
   },
