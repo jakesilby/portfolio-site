@@ -4,7 +4,7 @@ Read this (along with `tokens.css`) at the start of every Claude Code session on
 
 ## What this site is
 
-A design-systems/design-to-code portfolio: a homepage plus five case studies, in work grid order: Treating an AI draft like an unverified order (personal project), OnePulse Connect design system, Linking documents & prescriptions, Pre-infusion assessment flow, and Auditing Carbon for token drift (personal project). The site itself is part of the pitch — it needs to be clean, code-forward, and not contradict the story the case studies tell. It does not need heavy interactivity or a complex framework.
+A design-systems/design-to-code portfolio: a homepage plus five case studies, in work grid order: OnePulse Connect design system, Linking documents & prescriptions, Treating an AI draft like an unverified order (personal project), Pre-infusion assessment flow, and Auditing Carbon for token drift (personal project). The site itself is part of the pitch — it needs to be clean, code-forward, and not contradict the story the case studies tell. It does not need heavy interactivity or a complex framework.
 
 ## Design direction (v2, Oct 2026)
 
