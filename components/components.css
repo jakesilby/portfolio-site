@@ -73,8 +73,9 @@ body[data-page="case-study"] {
 }
 
 /* --- Case study layout, inside --layout-wide with the same gutter as the
- * header and footer. One column below 1100px: intro, section nav, then
- * the article. From 1100px the section nav moves into a column on the
+ * header and footer. One column below 1100px: intro, hero, the collapsed
+ * section nav, then the rest of the article (see the max-width block
+ * after .case-toc), so phones reach media on the first screen. From 1100px the section nav moves into a column on the
  * left (see .case-toc). Prose is capped at --layout-measure; the title,
  * hero, figures and clips fill the article column. --- */
 
@@ -85,8 +86,8 @@ body[data-page="case-study"] {
 }
 
 /* --- Case study section nav ("On this page"), filled by case-toc.js from
- * the page's H2s. Below 1100px it's a plain list between the intro and
- * the article. From 1100px it's a sticky column beside the article, and
+ * the page's H2s. Below 1100px it's one closed 44px "On this page" button
+ * after the hero that opens to the list. From 1100px it's a sticky column beside the article, and
  * the section being read takes the link color, with no transition. Empty
  * without JS, so it collapses. --- */
 
@@ -130,7 +131,75 @@ body[data-page="case-study"] {
   font-weight: var(--font-weight-semibold);
 }
 
-/* 1100 is literal: custom properties can't be used in a media query. */
+/* The disclosure button only exists below 1100px; wide screens show the
+ * plain label and the open list. */
+.case-toc__toggle {
+  display: none;
+}
+
+/* 1099.98 and 1100 are literal: custom properties can't be used in a
+ * media query. Below 1100px: the hero moves above the section nav
+ * (.case-body is display: contents so its children order with the intro
+ * and nav; the hero is aria-hidden, so reading order is unchanged), and
+ * the nav collapses to a 44px toggle with 44px links. */
+@media (max-width: 1099.98px) {
+  .case-layout {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .case-body { display: contents; }
+  .case-intro { order: 1; }
+  .case-hero { order: 2; }
+  .case-toc { order: 3; }
+  .case-body > :not(.case-hero) { order: 4; }
+
+  .case-toc__label {
+    display: none;
+  }
+
+  .case-toc__toggle {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-inline);
+    min-height: var(--size-tap-target);
+    padding: 0;
+    border: 0;
+    background: none;
+    font: var(--type-body-sm);
+    letter-spacing: var(--type-body-sm-letter-spacing);
+    color: var(--text-primary);
+    cursor: pointer;
+  }
+
+  /* Disclosure triangle: points right when closed, down when open. Instant,
+   * like the rest of the section nav. */
+  .case-toc__toggle::before {
+    content: "";
+    border-left: var(--space-8) solid currentColor;
+    border-block: var(--space-4) solid transparent;
+  }
+
+  .case-toc__toggle[aria-expanded="true"]::before {
+    transform: rotate(90deg);
+  }
+
+  .case-toc__toggle:hover {
+    color: var(--text-link);
+  }
+
+  .case-toc__toggle[aria-expanded="false"] + .case-toc__list {
+    display: none;
+  }
+
+  .case-toc__link {
+    display: flex;
+    align-items: center;
+    min-height: var(--size-tap-target);
+    padding-block: 0;
+  }
+}
+
 @media (min-width: 1100px) {
   .case-layout {
     display: grid;
@@ -192,6 +261,7 @@ body[data-page="case-study"] {
 }
 
 .case-hero__placeholder {
+  position: relative; /* anchors the clip pause control */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -360,7 +430,8 @@ body[data-page="case-study"] {
 /* --- Case study table. A real <table> that fills the article column like
  * a code block. Below --layout-measure it stops shrinking and the wrapper
  * scrolls sideways (role="region", tabindex="0" so the keyboard can
- * scroll it), so three columns of prose never squeeze to a word per line.
+ * scroll it; components/case-table.js drops the tab stop while nothing
+ * overflows), so three columns of prose never squeeze to a word per line.
  * Rows are separated by hairlines, no fills or vertical rules. --- */
 
 .case-table {
@@ -460,12 +531,19 @@ body[data-page="case-study"] {
    * caption keeps the reading measure */
   font: var(--type-caption);
   letter-spacing: var(--type-caption-letter-spacing);
-  color: var(--text-secondary);
+  color: var(--text-caption);
 }
 
 .case-figure__caption a {
   color: var(--text-link); /* same treatment as .about-contact-link */
   text-decoration: underline;
+}
+
+/* Inline code chips in captions keep the primary text color: --text-caption
+ * on the --bg-placeholder chip is only 4.3:1, primary is 11.4:1. */
+.case-figure__caption .case-code-inline,
+.token-chain__caption .case-code-inline {
+  color: var(--text-primary);
 }
 
 /* Bare diagram — a diagram built in the site's own visual language
@@ -548,6 +626,38 @@ body[data-page="case-study"] {
   height: 100%;
   object-fit: cover;
   transform-origin: center;
+}
+
+/* --- Clip pause/play control (WCAG 2.2.2), added by clip-video.js to every
+ * case study clip and hero. Styled like the lightbox buttons: a round
+ * --bg-backdrop button with a white icon, --accent on hover and focus.
+ * No transition: the fill and the icon swap instantly. --- */
+
+.clip-control {
+  position: absolute;
+  right: var(--space-12);
+  bottom: var(--space-12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--size-tap-target);
+  height: var(--size-tap-target);
+  padding: 0;
+  color: var(--color-white);
+  background: var(--bg-backdrop);
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+}
+
+.clip-control:hover,
+.clip-control:focus-visible {
+  background: var(--accent);
+}
+
+.clip-control__icon {
+  width: var(--space-16);
+  height: var(--space-16);
 }
 
 .case-clip-video--datatable {
@@ -846,7 +956,7 @@ body[data-page="case-study"] {
   max-width: var(--layout-measure);
   font: var(--type-body);
   letter-spacing: var(--type-body-letter-spacing);
-  color: var(--text-secondary);
+  color: var(--text-caption);
 }
 
 @media (max-width: 600px) {

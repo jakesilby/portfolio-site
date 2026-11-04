@@ -17,6 +17,9 @@
     return rate;
   }
 
+  const PAUSE_ICON = '<svg class="clip-control__icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="3" y="2" width="3.5" height="12" fill="currentColor"/><rect x="9.5" y="2" width="3.5" height="12" fill="currentColor"/></svg>';
+  const PLAY_ICON = '<svg class="clip-control__icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 2l10 6-10 6z" fill="currentColor"/></svg>';
+
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // Videos that autoplay natively through the HTML attribute (case study
@@ -90,13 +93,45 @@
 
     // Scroll-triggered play/pause is motion, same as the hero's autoplay —
     // stay on the poster frame under reduced motion instead of observing.
+    // Nothing moves then, so no pause control either.
     if (reduceMotion) return;
+
+    // Pause/play control (WCAG 2.2.2) on every case study clip, hero
+    // included. The homepage grid clips sit inside links, where a button
+    // can't go, so they keep scroll-only behavior. A clip the visitor
+    // paused stays paused when it scrolls back into view.
+    let userPaused = false;
+    if (!wrap.closest('a')) {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'clip-control';
+      wrap.appendChild(button);
+
+      const sync = () => {
+        const playing = !video.paused;
+        button.setAttribute('aria-label', playing ? 'Pause video' : 'Play video');
+        button.innerHTML = playing ? PAUSE_ICON : PLAY_ICON;
+      };
+      video.addEventListener('play', sync);
+      video.addEventListener('pause', sync);
+      sync();
+
+      button.addEventListener('click', () => {
+        if (video.paused) {
+          userPaused = false;
+          video.play().catch(() => {});
+        } else {
+          userPaused = true;
+          video.pause();
+        }
+      });
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            video.play().catch(() => {});
+            if (!userPaused) video.play().catch(() => {});
           } else {
             video.pause();
           }

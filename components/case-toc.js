@@ -7,6 +7,10 @@
 // From 1100px the nav is a sticky column beside the article, and the
 // section being read gets aria-current (the link color). No animation:
 // the color swaps instantly.
+//
+// Below 1100px the nav sits after the hero as one closed "On this page"
+// row: a real button with aria-expanded that shows and hides the list.
+// The CSS shows either the plain label (wide) or the button (narrow).
 (function () {
   const nav = document.querySelector('.case-toc');
   const headings = [...document.querySelectorAll('.case-section__heading[id]')];
@@ -15,13 +19,18 @@
   nav.innerHTML = `
 <div class="case-toc__inner">
   <p class="case-toc__label">On this page</p>
-  <ul class="case-toc__list">
+  <button type="button" class="case-toc__toggle" aria-expanded="false" aria-controls="case-toc-list">On this page</button>
+  <ul class="case-toc__list" id="case-toc-list">
     ${headings.map((h) => `<li><a class="case-toc__link" href="#${h.id}">${h.innerHTML}</a></li>`).join('')}
   </ul>
 </div>`;
 
+  const toggle = nav.querySelector('.case-toc__toggle');
+  toggle.addEventListener('click', () => {
+    toggle.setAttribute('aria-expanded', String(toggle.getAttribute('aria-expanded') !== 'true'));
+  });
+
   const links = [...nav.querySelectorAll('.case-toc__link')];
-  const sections = headings.map((h) => h.closest('.case-section'));
   const wide = window.matchMedia('(min-width: 1100px)');
   let current = null;
 
@@ -38,27 +47,35 @@
     render();
   }
 
-  // A section is current while it overlaps the top third of the viewport.
-  // When several do, the first in reading order wins. A short last section
-  // may never reach the top third, so the bottom of the page marks it
-  // current.
-  const visible = new Set();
+  // The current section is the last one whose H2 has reached the top third
+  // of the viewport. Measuring the headings, not the sections, keeps the
+  // previous section's bottom padding and rule from holding on after the
+  // next heading is already in view. Before the first H2 reaches the line
+  // nothing is current. A short last section may never reach the top
+  // third, so the bottom of the page marks it current.
+  let queued = false;
 
   function update() {
+    queued = false;
     const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
-    const index = atBottom ? links.length - 1 : sections.findIndex((section) => visible.has(section));
+    const line = window.innerHeight / 3;
+    let index = -1;
+    if (atBottom) index = links.length - 1;
+    else headings.forEach((heading, i) => {
+      if (heading.getBoundingClientRect().top <= line) index = i;
+    });
     setCurrent(index === -1 ? null : links[index]);
   }
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) visible.add(entry.target);
-      else visible.delete(entry.target);
-    });
-    update();
-  }, { rootMargin: '0px 0px -66% 0px' });
-  sections.forEach((section) => observer.observe(section));
-  window.addEventListener('scroll', update, { passive: true });
+  function queueUpdate() {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(update);
+  }
+
+  window.addEventListener('scroll', queueUpdate, { passive: true });
+  window.addEventListener('resize', queueUpdate);
+  update();
 
   wide.addEventListener('change', render);
 })();
