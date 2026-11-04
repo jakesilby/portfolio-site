@@ -141,6 +141,7 @@
   --font-size-18: 18px;
   --font-size-20: 20px;
   --font-size-24: 24px;
+  --font-size-28: 28px; /* NEW — --type-h2, a clear step above the 20px --type-h3 */
   --font-size-32: 32px;
   --font-size-40: 40px; /* top of the --type-page-title clamp, at 1440px */
   --font-size-56: 56px; /* NEW (v2) — top of the --type-hero clamp, at 1440px */
@@ -150,6 +151,7 @@
   --line-height-24: 24px;
   --line-height-28: 28px; /* NEW (v2) — --type-body, --type-h3 */
   --line-height-32: 32px;
+  --line-height-36: 36px; /* NEW — --type-h2 */
   --line-height-40: 40px; /* NEW (v2) — bottom of the --type-hero and --type-page-title clamps, at 375px */
   --line-height-48: 48px;
   --line-height-64: 64px; /* NEW (v2) — top of the --type-hero clamp, at 1440px */
@@ -203,7 +205,8 @@
   --border-highlight-teal: var(--color-pulse-teal-700); /* NEW — Token Architecture card hover border. Reuses the exact swatch color the widget already demonstrates (pulse-teal.700), kept separate from the site accent so this hover treatment doesn't move if the site palette changes. */
 
   /* --- Size and motion (v2) --- */
-  --size-tap-target: var(--size-44); /* min-height on header and footer links */
+  --size-tap-target: var(--size-44); /* min-height on header and footer links,
+   * and the "On this page" toggle and links below 1100px */
   --duration-hover: var(--duration-150); /* hover/focus color change, always ease-out */
 
   /* --- Hero highlight (v2, .hero-mark). A low watercolor band behind the
@@ -357,8 +360,9 @@
 
   --type-h2-family: var(--font-family-sans);
   --type-h2-weight: var(--font-weight-semibold);
-  --type-h2-size: var(--font-size-24);
-  --type-h2-line-height: var(--line-height-32);
+  --type-h2-size: var(--font-size-28); /* 28 over the 20px h3: a 1.4 step, so a
+   * subheading never reads as another section heading */
+  --type-h2-line-height: var(--line-height-36);
   --type-h2-letter-spacing: var(--letter-spacing-tight-xs);
   --type-h2: var(--type-h2-weight) var(--type-h2-size)/var(--type-h2-line-height) var(--type-h2-family);
 

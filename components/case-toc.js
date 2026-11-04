@@ -7,6 +7,10 @@
 // From 1100px the nav is a sticky column beside the article, and the
 // section being read gets aria-current (the link color). No animation:
 // the color swaps instantly.
+//
+// Below 1100px the nav sits after the hero as one closed "On this page"
+// row: a real button with aria-expanded that shows and hides the list.
+// The CSS shows either the plain label (wide) or the button (narrow).
 (function () {
   const nav = document.querySelector('.case-toc');
   const headings = [...document.querySelectorAll('.case-section__heading[id]')];
@@ -15,10 +19,16 @@
   nav.innerHTML = `
 <div class="case-toc__inner">
   <p class="case-toc__label">On this page</p>
-  <ul class="case-toc__list">
+  <button type="button" class="case-toc__toggle" aria-expanded="false" aria-controls="case-toc-list">On this page</button>
+  <ul class="case-toc__list" id="case-toc-list">
     ${headings.map((h) => `<li><a class="case-toc__link" href="#${h.id}">${h.innerHTML}</a></li>`).join('')}
   </ul>
 </div>`;
+
+  const toggle = nav.querySelector('.case-toc__toggle');
+  toggle.addEventListener('click', () => {
+    toggle.setAttribute('aria-expanded', String(toggle.getAttribute('aria-expanded') !== 'true'));
+  });
 
   const links = [...nav.querySelectorAll('.case-toc__link')];
   const sections = headings.map((h) => h.closest('.case-section'));
