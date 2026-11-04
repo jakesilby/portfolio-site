@@ -179,11 +179,13 @@
 
   /* --- Color: text --- */
   --text-primary: var(--color-juniper-9); /* 14.1:1 on bg-page */
-  --text-secondary: var(--text-primary); /* captions and case study
-   * descriptions. Was elm-9, a near-black that read the same as primary. */
+  --text-secondary: var(--text-primary); /* case study intro descriptions.
+   * Was elm-9, a near-black that read the same as primary. */
   --text-on-accent: var(--color-white); /* on --accent-fill, 4.8:1 */
   --text-muted: var(--color-clay-7); /* 5.4:1 on bg-page, 4.8:1 on
    * bg-canvas and bg-surface */
+  --text-caption: var(--text-muted); /* figure and diagram captions, a step
+   * lighter than the case study text (5.4:1 on bg-page) */
   --text-label: var(--text-muted); /* footer, case study project names.
    * Was elm-8, a near-black teal. */
   --text-link: var(--accent);

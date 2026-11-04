@@ -531,12 +531,19 @@ body[data-page="case-study"] {
    * caption keeps the reading measure */
   font: var(--type-caption);
   letter-spacing: var(--type-caption-letter-spacing);
-  color: var(--text-secondary);
+  color: var(--text-caption);
 }
 
 .case-figure__caption a {
   color: var(--text-link); /* same treatment as .about-contact-link */
   text-decoration: underline;
+}
+
+/* Inline code chips in captions keep the primary text color: --text-caption
+ * on the --bg-placeholder chip is only 4.3:1, primary is 11.4:1. */
+.case-figure__caption .case-code-inline,
+.token-chain__caption .case-code-inline {
+  color: var(--text-primary);
 }
 
 /* Bare diagram — a diagram built in the site's own visual language
@@ -949,7 +956,7 @@ body[data-page="case-study"] {
   max-width: var(--layout-measure);
   font: var(--type-body);
   letter-spacing: var(--type-body-letter-spacing);
-  color: var(--text-secondary);
+  color: var(--text-caption);
 }
 
 @media (max-width: 600px) {

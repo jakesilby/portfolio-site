@@ -27,6 +27,7 @@ Typography (three families, fixed jobs)
 Color ("Clay + juniper" at faint warmth). All values live in tokens.css as clay / juniper / sand primitives behind these aliases:
 - --bg-page #faf9f7. --bg-surface #eeede9 (media wells, code backgrounds). --border-default #e3e2dd (hairlines).
 - --text-primary #1f2a26 (14.1:1 on page). --text-muted #5f6a64 (5.4:1).
+- --text-caption (points to --text-muted): figure and diagram captions (.case-figure__caption, .token-chain__caption), a step lighter than the case study text. Links in captions stay --text-link, and inline code chips in captions stay --text-primary (--text-muted on the chip background is only 4.3:1). The intro description stays --text-secondary and the Sources list keeps its own color.
 - --accent #2f5d4e (7.1:1): links, focus rings and --text-link-hover.
 - --accent-fill #567a6d (white text on it 4.8:1): the current nav pill and the work grid pill. --accent-fill-hover-subtle #e5e8e5: nav hover.
 - --highlight #dae9e1 and --highlight-2 #f0e3c9: the hero highlight only.
