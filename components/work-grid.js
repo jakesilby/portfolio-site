@@ -41,7 +41,7 @@ const workItems = [
     category: 'Personal project',
     year: '2026',
     href: 'ai-note-review.html',
-    // Grid-only clip: the screen inset on --color-sand-2 (#f0e3c9), baked into
+    // Grid-only clip: the screen inset on --color-juniper-2 (#c9dbcf), baked into
     // the video. The case study page uses the plain fn_no-source clip.
     video: {
       poster: 'videos/fn_no-source_grid-poster.jpg',
