@@ -432,11 +432,26 @@ body[data-page="case-study"] {
  * scrolls sideways (role="region", tabindex="0" so the keyboard can
  * scroll it; components/case-table.js drops the tab stop while nothing
  * overflows), so three columns of prose never squeeze to a word per line.
- * Rows are separated by hairlines, no fills or vertical rules. --- */
+ * Rows are separated by hairlines, no fills or vertical rules. The wrapper
+ * is a white card (--bg-table) with a hairline border and --radius-md;
+ * overflow clips the scrolling table to the rounded corners. It's a grid
+ * container so the right padding stays in the scroll area when the table
+ * scrolls sideways. Padding tightens below 768px, like .case-visual. --- */
 
 .case-table {
+  display: grid;
   width: 100%;
   overflow-x: auto;
+  padding: var(--space-16);
+  background: var(--bg-table);
+  border: var(--border-width-hairline) solid var(--border-default);
+  border-radius: var(--radius-md);
+}
+
+@media (max-width: 767px) {
+  .case-table {
+    padding: var(--space-12);
+  }
 }
 
 .case-table__table {
@@ -463,6 +478,11 @@ body[data-page="case-study"] {
 .case-table__head:last-child,
 .case-table__cell:last-child {
   padding-right: 0;
+}
+
+/* The card's border closes the table, so the last row drops its rule. */
+.case-table__table tbody tr:last-child .case-table__cell {
+  border-bottom: none;
 }
 
 /* --- Case study inline visual (bg-placeholder wrapper, no radius on the
