@@ -295,6 +295,7 @@
    * everything when focused. */
   --z-work-grid-pill: 1;
   --z-lightbox: 1000;
+  --z-lightbox-controls: 1; /* close and zoom buttons, above the zoomed image inside the lightbox */
   --z-skip-link: 1001;
   --focus-ring-width: var(--border-width-focus);
   --focus-ring-color: var(--accent); /* 7.1:1 on bg-page */

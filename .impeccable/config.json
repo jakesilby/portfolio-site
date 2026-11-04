@@ -83,6 +83,15 @@
         ],
         "createdAt": "2026-10-13T22:57:57.435Z",
         "reason": "Claude triage: index.html sets type through tokens (hero is --type-hero, 32 to 56px, against 14 to 16px meta/body, at least 2x); the hook can't resolve var() roles. No type sizes changed on this branch."
+      },
+      {
+        "rule": "flat-type-hierarchy",
+        "value": "*",
+        "files": [
+          "ai-note-review.html"
+        ],
+        "createdAt": "2026-11-03T21:41:40.727Z",
+        "reason": "Jake asked for this ignore on 2026-11-03: the static scanner can't resolve the nested var() font shorthand and reads every role as 16px; computed sizes are 35/24/18px. Same false positive on pre-infusion-assessment-flow.html."
       }
     ]
   }
