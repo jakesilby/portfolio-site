@@ -4,76 +4,13 @@
     "ignoreFiles": [],
     "ignoreValues": [
       {
-        "rule": "kicker-above-heading",
-        "value": "*",
-        "files": [
-          "onepulse-connect.html"
-        ],
-        "createdAt": "2026-09-04T19:56:16.618Z",
-        "reason": "User confirmed: intentional editorial convention, consistent with the already-accepted numbered section labels"
-      },
-      {
-        "rule": "kicker-above-heading",
-        "value": "*",
-        "files": [
-          "linking-documents-prescriptions.html"
-        ],
-        "createdAt": "2026-09-07T15:02:21.019Z",
-        "reason": "Extends the already-approved onepulse-connect.html exception (existing ignoreValues entry, user confirmed 2026-09-04): same CASE STUDY eyebrow-above-h1 convention applied consistently across every case study page"
-      },
-      {
-        "rule": "all-caps-body",
-        "value": "*",
-        "files": [
-          "linking-documents-prescriptions.html"
-        ],
-        "createdAt": "2026-09-07T15:02:34.160Z",
-        "reason": "Three instances triaged: (1) 189-char context line is a false positive -- .case-title-block__context overrides .type-meta's uppercase to text-transform:none, confirmed sentence-case in rendered screenshot; (2) 42-char TIMEFRAME meta item and (3) 90-char hero-placeholder label both match pre-existing .type-meta/.case-dashed-placeholder__label conventions already shipped identically in onepulse-connect.html"
-      },
-      {
-        "rule": "kicker-above-heading",
-        "value": "*",
-        "files": [
-          "pre-infusion-assessment-flow.html"
-        ],
-        "createdAt": "2026-09-10T15:43:48.228Z",
-        "reason": "existing sitewide pattern: identical CASE STUDY eyebrow + H1 structure already shipped on onepulse-connect.html and linking-documents-prescriptions.html, Figma-confirmed (see .case-title-block__eyebrow contrast-ratio comment) — this site's established case-study template, not a generated kicker"
-      },
-      {
         "rule": "flat-type-hierarchy",
         "value": "*",
         "files": [
           "about.html"
         ],
         "createdAt": "2026-09-14T15:51:54.353Z",
-        "reason": "Claude: the 16px role in this measurement is about.html's sr-only h1 (visually-hidden, never rendered) — it isn't part of the page's visible type hierarchy. Visible roles are body 14px and h2 18px, a 1.286:1 step that clears the 1.25 target on its own."
-      },
-      {
-        "rule": "wide-tracking",
-        "value": "*",
-        "files": [
-          "pre-infusion-assessment-flow.html"
-        ],
-        "createdAt": "2026-09-15T01:33:59.943Z",
-        "reason": "false positive: only 0.08em source on this page is .type-meta, already overridden to letter-spacing:none on .case-title-block__meta (tokens.css comment documents this exact readability fix); actual .type-body copy is letter-spacing:none. Same finding recurred unchanged across 4 prior sessions regardless of edit content."
-      },
-      {
-        "rule": "wide-tracking",
-        "value": "*",
-        "files": [
-          "onepulse-connect.html"
-        ],
-        "createdAt": "2026-09-15T02:44:27.301Z",
-        "reason": "false positive: only 0.08em source on this page is .type-meta, already overridden to letter-spacing:none on both .case-title-block__meta and .stat-tile__label, each with an explicit comment documenting the same wide-tracking-only-reads-correctly-on-all-caps fix. Actual .type-body copy is letter-spacing:none. Same finding recurred unchanged across 2+ prior sessions regardless of edit content, matching the identical pattern already suppressed on pre-infusion-assessment-flow.html."
-      },
-      {
-        "rule": "wide-tracking",
-        "value": "*",
-        "files": [
-          "linking-documents-prescriptions.html"
-        ],
-        "createdAt": "2026-09-15T02:58:39.443Z",
-        "reason": "false positive: same root cause already suppressed on onepulse-connect.html and pre-infusion-assessment-flow.html. The only 0.08em source on this page is .type-meta, already overridden to letter-spacing:none on .case-title-block__meta (line 77-79, explicit comment citing the same fix as .case-title-block__context and .stat-tile__label). Actual .type-body/.type-tagline copy is letter-spacing:none."
+        "reason": "Claude: the 16px role in this measurement is about.html's sr-only h1 (visually-hidden, never rendered) \u2014 it isn't part of the page's visible type hierarchy. Visible roles are body 14px and h2 18px, a 1.286:1 step that clears the 1.25 target on its own."
       },
       {
         "rule": "flat-type-hierarchy",
@@ -92,6 +29,15 @@
         ],
         "createdAt": "2026-11-03T21:41:40.727Z",
         "reason": "Jake asked for this ignore on 2026-11-03: the static scanner can't resolve the nested var() font shorthand and reads every role as 16px; computed sizes are 35/24/18px. Same false positive on pre-infusion-assessment-flow.html."
+      },
+      {
+        "rule": "flat-type-hierarchy",
+        "value": "*",
+        "files": [
+          "pre-infusion-assessment-flow.html"
+        ],
+        "createdAt": "2026-11-04T21:30:00.000Z",
+        "reason": "Jake asked for this ignore on 2026-11-04: same false positive as ai-note-review.html. The static scanner can't resolve the nested var() font shorthand and reads every role as 16px; computed sizes are 32/24/18px at 375 and 40/28/18px at 1440."
       }
     ]
   }

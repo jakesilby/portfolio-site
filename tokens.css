@@ -360,9 +360,10 @@
 
   --type-h2-family: var(--font-family-sans);
   --type-h2-weight: var(--font-weight-semibold);
-  --type-h2-size: var(--font-size-28); /* 28 over the 20px h3: a 1.4 step, so a
-   * subheading never reads as another section heading */
-  --type-h2-line-height: var(--line-height-36);
+  --type-h2-size: var(--font-size-24); /* 24/32 below 768 so it stays clear
+   * under the 32px phone page title; 28/36 from 768 (see the media block at
+   * the end), a 1.4 step over the 20px h3 */
+  --type-h2-line-height: var(--line-height-32);
   --type-h2-letter-spacing: var(--letter-spacing-tight-xs);
   --type-h2: var(--type-h2-weight) var(--type-h2-size)/var(--type-h2-line-height) var(--type-h2-family);
 
@@ -455,10 +456,14 @@
 }
 
 /* Page gutter steps (v2): 20px below 768, 32px from 768, 48px from 1024
- * (and at 1440). Breakpoints are literal because custom properties can't
+ * (and at 1440). --type-h2 also steps from 24/32 to 28/36 at 768. Breakpoints are literal because custom properties can't
  * be used inside a media query. */
 @media (min-width: 768px) {
-  :root { --layout-gutter: var(--space-32); }
+  :root {
+    --layout-gutter: var(--space-32);
+    --type-h2-size: var(--font-size-28);
+    --type-h2-line-height: var(--line-height-36);
+  }
 }
 @media (min-width: 1024px) {
   :root { --layout-gutter: var(--space-48); }

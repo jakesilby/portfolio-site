@@ -261,6 +261,7 @@ body[data-page="case-study"] {
 }
 
 .case-hero__placeholder {
+  position: relative; /* anchors the clip pause control */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -618,6 +619,38 @@ body[data-page="case-study"] {
   height: 100%;
   object-fit: cover;
   transform-origin: center;
+}
+
+/* --- Clip pause/play control (WCAG 2.2.2), added by clip-video.js to every
+ * case study clip and hero. Styled like the lightbox buttons: a round
+ * --bg-backdrop button with a white icon, --accent on hover and focus.
+ * No transition: the fill and the icon swap instantly. --- */
+
+.clip-control {
+  position: absolute;
+  right: var(--space-12);
+  bottom: var(--space-12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--size-tap-target);
+  height: var(--size-tap-target);
+  padding: 0;
+  color: var(--color-white);
+  background: var(--bg-backdrop);
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+}
+
+.clip-control:hover,
+.clip-control:focus-visible {
+  background: var(--accent);
+}
+
+.clip-control__icon {
+  width: var(--space-16);
+  height: var(--space-16);
 }
 
 .case-clip-video--datatable {
