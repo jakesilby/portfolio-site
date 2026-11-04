@@ -3,7 +3,7 @@
 
 ---
 
-A personal project on how a primary care clinician reviews and signs a visit note drafted by an AI scribe. I wrote a fictional visit and an AI draft with three realistic errors, then designed a review that scales with risk, shows the clinician where each line came from, and records what she checked when she signs. The patient, clinician and visit are fictional. You can [try the prototype](https://fieldnote-prototype.vercel.app/).
+A personal project on how a primary care clinician reviews and signs a visit note drafted by an AI scribe. My answer is that she should sign it the way she'd sign an order someone else wrote. I wrote a fictional visit and an AI draft with three realistic errors, then designed a review that scales with risk, shows the clinician where each line came from, and records what she checked when she signs. The patient, clinician and visit are fictional. You can [try the prototype](https://fieldnote-prototype.vercel.app/).
 
 > **[VISUAL — HERO, CLIP]** `videos/fn_dose-check.mp4`, poster `videos/fn_dose-check_poster.jpg`. The hero copy is aria-hidden; the body copy in "Worked example: Dennis's note" carries the label.
 
@@ -15,21 +15,21 @@ A primary care nurse practitioner finishes her last visit and opens a stack of u
 
 Most drafts are fine, which makes the bad ones easy to sign. When reviewers at UC San Diego Health checked AI-drafted notes during a pilot, they found omissions in 18% and hallucinations in 11.5%, and in a national survey of UK GPs who use scribes, 14% had seen errors with significant to critical implications.
 
-The errors read like correct documentation. At Kaiser Permanente, a physician talked about scheduling a prostate exam, and the scribe wrote it up as already done. A preprint audit of three commercial scribes found failures bunched in allergy and medication details. It also turned up a failure the authors couldn't place in any existing taxonomy: a treatment the clinician took back, recorded as care delivered. A wrong dose looks like any other dose, and a pertinent negative nobody asked about looks like template text. Omissions are harder, because they leave nothing on the page to catch.
+The errors read like correct documentation. At Kaiser Permanente, a physician talked about scheduling a prostate exam, and the scribe wrote it up as already done. A preprint audit of three commercial scribes found failures bunched in allergy and medication details. It also turned up a failure the authors couldn't place in any existing taxonomy: a treatment the clinician took back, recorded as care delivered. A wrong dose looks like any other dose, and a pertinent negative nobody asked about (a symptom the patient is recorded as not having) looks like template text. Omissions are harder, because they leave nothing on the page to catch.
 
 Researchers who compared notes from commercial scribes with notes written by clinicians concluded that AI notes are drafts and need review. The products I looked at hand that review to the clinician and stop there. Abridge's getting-started guide sums up the step as "review the generated draft, verify with Linked Evidence, and send directly to Epic." Linked Evidence ties a line to its moment in the transcript, and the guide describes nothing that confirms the review happened before the note goes out. Dragon Copilot pins a reminder at the top of every note telling clinicians to check AI content for mistakes. I set out to design the review step those products leave open.
 
 ---
 
-## Why this matters
+## One visit, three errors
 
-I wrote one routine visit to make the problem concrete. Dennis Kowalczyk is 58 and has type 2 diabetes and high blood pressure. He sees Dana Reyes, a nurse practitioner, for a ten-minute follow-up where she raises his metformin because his A1c went up, keeps his blood pressure medication where it is, orders labs, and refers him for an eye exam.
+I wrote one routine visit to make the problem concrete. Dennis Kowalczyk is 58 and has type 2 diabetes and high blood pressure. He sees Dana Reyes, a nurse practitioner, for a ten-minute follow-up where she raises his metformin because his A1c, a three-month average of blood sugar, went up, keeps his blood pressure medication where it is, orders labs, and refers him for an eye exam.
 
 The AI draft of that visit reads well. It has three errors, and each one mirrors a failure type from the published audits.
 
 **A dose she ruled out.** Dana floats 1,000 mg of metformin twice a day. Then she drops the idea, because Dennis had stomach trouble when he first started the drug, and settles on 1,000 mg in the morning and 500 mg at night, which she repeats in her recap. The draft kept the number she rejected. A pharmacist, a covering clinician, or Dennis reading his portal could follow it to 2,000 mg a day.
 
-**A screening that never happened.** According to the review of systems, Dennis denies chest pain and shortness of breath. Dana never asked. Diabetes and high blood pressure put him at high risk for heart trouble, and diabetes can blunt the warning signs. After she signs, the chart claims she screened him and found nothing, which gives the next clinician a reason to skip the question.
+**A screening that never happened.** According to the review of systems, the note's checklist of symptoms by body system, Dennis denies chest pain and shortness of breath. Dana never asked. Diabetes and high blood pressure put him at high risk for heart trouble, and diabetes can blunt the warning signs. After she signs, the chart claims she screened him and found nothing, which gives the next clinician a reason to skip the question.
 
 **A symptom that disappears.** Dennis mentions he gets woozy getting out of bed, and Dana tells him to call if it gets worse or if he falls. None of that is in the draft. In someone on lisinopril, lightheadedness on standing can mean his blood pressure drops when he gets up, and that bears directly on her choice to leave his medication alone. The signed note would say "controlled, no changes." Her instruction about falls would be gone.
 
@@ -52,6 +52,10 @@ Nobody signing a full day of notes reads every word. So I assumed attention woul
 | Skim | Chief complaint, history narrative, exam findings said aloud | Nothing. The source is there on request. |
 | Not in note | Things said in the visit that the draft left out | Add each one to the note or dismiss it |
 
+![The Fieldnote review screen. A rail on the left lists seven open items under the note's section names. The note sits as a white page on the right, with two suggested lines, an amber line with no source, and the selected metformin change.](images/fn-review.png)
+
+*The review screen with Dennis's note open. Each tier looks different: six checks, one amber line with no source, and two blue suggestions.*
+
 I picked these tiers as starting defaults. The validation plan tests them, and the open questions at the end ask whether clinicians should be able to move lines between them.
 
 **Must verify** covers lines that act on their own. A dose goes to the pharmacy. An order goes to the lab, and an allergy line decides what anyone can prescribe next. Errors here cost the most, so each of these lines gets an explicit check with its transcript source showing by default. Unchanged medications with a matching source stay quiet. Dennis's note ends up with six checks: the metformin change, the allergy line, three labs, and the eye referral.
@@ -63,6 +67,12 @@ I picked these tiers as starting defaults. The validation plan tests them, and t
 Until every check, flag, and omission has a decision, the sign button stays locked. No decision needs a justification. I wanted each choice to be visible and cheap, with nobody explaining themselves at 6 p.m.
 
 Checks still cost time, so each one has to earn its place. Error 1 shows where that gets hard. A verify button next to "1000 mg twice daily" is useless unless the clinician can see the number is wrong, and the worked example shows what the check does to make that possible.
+
+### What the design assumes the system can do
+
+Two features depend on matching the draft against the transcript: the No source flag and the Not in note suggestions. I assumed that matching works most of the time and fails in both directions. A false No source flag costs her a click, because she keeps the line and the record shows she kept it. A missed flag is worse, because an unsupported line then looks like every other line. That's why the must-verify tier doesn't depend on matching at all. Doses, allergies and orders get an explicit check whether or not the system found a source.
+
+I chose tiers by risk rather than by the model's confidence for the same reason. A model can be confident and still wrong about a dose, and a wrong dose does the same harm whatever the model thought. Confidence could still help inside a tier, for example to rank omission candidates, which is one of the open questions at the end.
 
 ---
 
@@ -79,10 +89,6 @@ Direction A ran review top to bottom through the note, with sources in a right p
 B guaranteed nothing got skipped. D kept review inside the note, and dropping a missing symptom into the exact spot it belongs was my best answer to "what happens to the comment the AI left out." I wanted both.
 
 **E combines them.** The rail lists every open item and holds the sign button, while the note stays one reading column. Picking an item scrolls to its line and opens the source right underneath. A header button opens the full transcript beside the note.
-
-![The Fieldnote review screen. A rail on the left lists seven open items under the note's section names. The note sits as a white page on the right, with two suggested lines, an amber line with no source, and the selected metformin change.](images/fn-review.png)
-
-*Direction E. The rail lists every open item and holds the sign button, and the note stays one reading column.*
 
 ### Making the rail and the note read as one thing
 
@@ -135,7 +141,7 @@ She edits the line to 1,000 mg with breakfast and 500 mg with dinner. The daily 
 
 The lightheadedness sits in the history as a suggested line, right after the sentence about Dennis walking his dog, about where Dana would have put it herself. It carries the timestamp and a note that she gave advice at 02:25. One click adds it.
 
-Dismissing it brings up a second look. The card quotes what she told Dennis at the time ("If it gets worse, or you ever fall or pass out, I want you to call me") and says that dismissing leaves her advice out of the signed note. Add is the primary button. Dismiss takes one more click and asks for no reason. The bikes comment just below goes away in one click. Dana did mention the bikes again later ("Your wife's onto something"). That was encouragement, and there's no advice for the note to carry.
+Dismissing it brings up a second look. The card quotes what she told Dennis at the time ("If it gets worse, or you ever fall or pass out, I want you to call me") and says that dismissing leaves her advice out of the signed note. Add is the primary button. Dismiss takes one more click and asks for no reason. The other suggestion just below, Dennis saying his wife wants them to get bikes, goes away in one click. Dana did mention the bikes again later ("Your wife's onto something"). That was encouragement, and there's no advice for the note to carry.
 
 > **[VISUAL — CLIP]** `videos/fn_second-look.mp4`. Label: "Pressing Dismiss on the lightheadedness suggestion opens a second look quoting the NP's advice at 02:25. Add here puts the line into the note."
 
@@ -160,7 +166,7 @@ I wanted the signature to carry a record of the review. Pressing Sign opens a su
 
 *Signing with all three errors caught. The summary lists what she changed, verified and dismissed, and what was only available to skim.*
 
-The attestation sentence is built from those counts. Dana's reads, "I verified 5 items, made 3 changes, and dismissed 1 suggestion. The note as edited reflects the visit." A clinician who verified two items and changed nothing would get a different sentence.
+The attestation sentence is built from those counts. Dana's reads, "I reviewed this AI-drafted note. I verified 5 items, made 3 changes, and dismissed 1 suggestion. The note as edited reflects the visit." A clinician who verified two items and changed nothing would get a different sentence.
 
 I care most about the skim line. Writing an attestation that implies she read everything would be easy. This one says what she checked and names the rest, and it claims nothing the review can't back up.
 
@@ -223,7 +229,7 @@ The review states are their own token collection in my shadcn library, each poin
 
 ![The Figma variables table for the review states collection. Verify, no source, not in note and verified each have their own tokens for text, fill, border or icon, with one column of values for the shadcn mode and one for the Fieldnote mode.](images/fn-review-states-tokens.png)
 
-*The review states collection. Each token points to a kit color, so most states needed no separate Fieldnote value. The theme change reached them through the colors they point to.*
+*The review states collection. Each token points to a kit color, so most states needed no separate Fieldnote value. The theme change reached them through the colors they point to. The state/verify/bar token is left over from an earlier version of the design.*
 
 ---
 
