@@ -360,7 +360,8 @@ body[data-page="case-study"] {
 /* --- Case study table. A real <table> that fills the article column like
  * a code block. Below --layout-measure it stops shrinking and the wrapper
  * scrolls sideways (role="region", tabindex="0" so the keyboard can
- * scroll it), so three columns of prose never squeeze to a word per line.
+ * scroll it; components/case-table.js drops the tab stop while nothing
+ * overflows), so three columns of prose never squeeze to a word per line.
  * Rows are separated by hairlines, no fills or vertical rules. --- */
 
 .case-table {
