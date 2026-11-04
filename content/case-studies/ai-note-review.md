@@ -221,9 +221,9 @@ With the hierarchy settled in grayscale, I wanted a visual layer a clinician cou
 
 The review states are their own token collection in my shadcn library, each pointing to a kit color and scoped to text, fill, or border. The Fieldnote theme is a mode across five collections (theme, colors, review states, corner radii, and typography). Switching a screen to that mode restyles it all the way down, including inside the kit's Button and Badge, without detaching anything.
 
-![The Figma variables panel showing the review states collection, with a token for each state and a Fieldnote mode beside the default.](images/fn-review-states-tokens.png)
+![The Figma variables table for the review states collection. Verify, no source, not in note and verified each have their own tokens for text, fill, border or icon, with one column of values for the shadcn mode and one for the Fieldnote mode.](images/fn-review-states-tokens.png)
 
-*The review states collection and the Fieldnote mode in the shadcn library.*
+*The review states collection. Each token points to a kit color, so most states needed no separate Fieldnote value. The theme change reached them through the colors they point to.*
 
 ---
 
@@ -307,6 +307,6 @@ In production, the hard part is telling real review from review that only looks 
 Not rendered.
 
 - **Images.** Figma export names map to site names: fig-01-directions-a-to-d → fn-directions-a-to-d, fig-02-review-e → fn-review, fig-03-rail-wording → fn-rail-wording-before-after, fig-04-metformin-check → fn-metformin-check, fig-05-transcript-drawer → fn-transcript-drawer, fig-06-second-look → fn-second-look, fig-07-review-and-sign → fn-review-and-sign, fig-08-f-and-f2 → fn-sign-all-caught-and-misses, fig-09-signed → fn-signed, fig-10-color-rebalance → fn-color-rebalance, fig-11-grayscale-and-fieldnote → fn-grayscale-and-fieldnote. fig-00-hero-f-and-f2 isn't used on the page.
-- **Figure 12** (fn-review-states-tokens) still needs a hand-taken screenshot of the library's variables panel.
+- **Figure 12** (fn-review-states-tokens) comes from images/review-states.png. It still lists state/verify/bar, a token the final screens no longer use.
 - **Clip placement.** Each clip sits where its behavior is discussed: dose-check after the dose edit (it replaced the metformin still, fn-metformin-check, which is no longer used), no-source after Error 2, second-look in place of the second-look still (fn-second-look is no longer used), and sign in place of the summary still (fn-review-and-sign is no longer used). The homepage tile uses fn_no-source, which shows the amber, blue and forest states.
 - **Clips.** From the prototype's clips folder: dose-check, second-look, no-source and sign become fn_dose-check, fn_second-look, fn_no-source and fn_sign, each with a webm and a poster. They run 6 to 14 seconds, longer than the site's 3 to 5 second guideline, because each shows a multi-step interaction. transcript.mp4 isn't used.

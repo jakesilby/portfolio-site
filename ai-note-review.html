@@ -320,11 +320,12 @@
         </figure>
         <h3 class="case-section__subheading">Building it into the system</h3>
         <p class="case-section__body">The review states are their own token collection in my shadcn library, each pointing to a kit color and scoped to text, fill, or border. The Fieldnote theme is a mode across five collections (theme, colors, review states, corner radii, and typography). Switching a screen to that mode restyles it all the way down, including inside the kit's Button and Badge, without detaching anything.</p>
-        <!-- Figure 12 goes here once its screenshot exists: images/fn-review-states-tokens
-             (+ images/large/ copy), alt "The Figma variables panel showing the review
-             states collection, with a token for each state and a Fieldnote mode beside
-             the default.", caption "The review states collection and the Fieldnote mode
-             in the shadcn library." Add its aspect-ratio modifier to components.css. -->
+        <figure class="case-figure">
+          <div class="case-visual">
+            <img class="case-visual__image case-visual__image--fn-review-states-tokens" src="images/fn-review-states-tokens.webp" alt="The Figma variables table for the review states collection. Verify, no source, not in note and verified each have their own tokens for text, fill, border or icon, with one column of values for the shadcn mode and one for the Fieldnote mode." loading="lazy" data-lightbox-src="images/large/fn-review-states-tokens.webp" tabindex="0" role="button">
+          </div>
+          <figcaption class="case-figure__caption">The review states collection. Each token points to a kit color, so most states needed no separate Fieldnote value. The theme change reached them through the colors they point to.</figcaption>
+        </figure>
       </section>
 
       <section class="case-section">
