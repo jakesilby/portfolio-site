@@ -442,7 +442,9 @@ body[data-page="case-study"] {
   display: grid;
   width: 100%;
   overflow-x: auto;
-  padding: var(--space-16);
+  /* Top and bottom stay small: the cells' own 12px padding already sets
+   * the first and last rows off the edge (4 + 12 = 16, matching the side). */
+  padding: var(--space-4) var(--space-16);
   background: var(--bg-table);
   border: var(--border-width-hairline) solid var(--border-default);
   border-radius: var(--radius-md);
@@ -450,7 +452,7 @@ body[data-page="case-study"] {
 
 @media (max-width: 767px) {
   .case-table {
-    padding: var(--space-12);
+    padding: var(--space-4) var(--space-12);
   }
 }
 
