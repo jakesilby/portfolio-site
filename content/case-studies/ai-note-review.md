@@ -3,7 +3,7 @@
 
 ---
 
-A personal project on how a primary care clinician reviews and signs a visit note drafted by an AI scribe. My answer is that she should sign it the way she'd sign an order someone else wrote. I wrote a fictional visit and an AI draft with three realistic errors, then designed a review that scales with risk, shows the clinician where each line came from, and records what she checked when she signs. The patient, clinician and visit are fictional. You can [try the prototype](https://fieldnote-prototype.vercel.app/).
+A personal project on how a primary care clinician reviews and signs a visit note drafted by an AI scribe. My answer is that she should sign it the way she'd sign an order someone else wrote. I wrote a fictional visit and an AI draft with three realistic errors, then designed a review that scales with risk, shows the clinician where each line came from, and records what she checked when she signs. The patient, clinician and visit are fictional. The project is in progress: the design and prototype are done, and the next step is testing them with primary care clinicians. You can [try the prototype](https://fieldnote-prototype.vercel.app/).
 
 > **[VISUAL — HERO, CLIP]** `videos/fn_dose-check.mp4`, poster `videos/fn_dose-check_poster.jpg`. The hero copy is aria-hidden; the body copy in "Worked example: Dennis's note" carries the label.
 
@@ -35,7 +35,7 @@ The AI draft of that visit reads well. It has three errors, and each one mirrors
 
 A fast read catches none of these. The harm reaches Dennis months later, but the responsibility is Dana's the moment she signs.
 
-**Scope.** I designed the review and sign-off: the review screen, how flagged items behave, what happens to things the note left out, and what signing records. Recording and transcription, EHR integration and orders, the patient's side, settings, and the note queue are out. I haven't tested any of this with clinicians, and the validation plan near the end covers how I would.
+**Scope.** I designed the review and sign-off: the review screen, how flagged items behave, what happens to things the note left out, and what signing records. Recording and transcription, EHR integration and orders, the patient's side, settings, and the note queue are out. I haven't tested any of this with clinicians yet. That's the next step, and the plan for it is near the end.
 
 **Why this project.** For four years I designed pharmacy software, and a big share of that work was guardrails. In a [pre-infusion assessment flow](https://jakesilby.xyz/pre-infusion-assessment-flow.html) I designed, answers like a refused consent trigger a hard stop on the spot, and the record shows the assessment couldn't be fully performed. An AI draft needs the same kind of guardrail before it reaches the chart, and the same honest record of what happened.
 
@@ -56,7 +56,7 @@ Nobody signing a full day of notes reads every word. So I assumed attention woul
 
 *The review screen with Dennis's note open. Each tier looks different: six checks, one amber line with no source, and two blue suggestions.*
 
-I picked these tiers as starting defaults. The validation plan tests them, and the open questions at the end ask whether clinicians should be able to move lines between them.
+I picked these tiers as starting defaults. The testing plan tests them, and the open questions at the end ask whether clinicians should be able to move lines between them.
 
 **Must verify** covers lines that act on their own. A dose goes to the pharmacy. An order goes to the lab, and an allergy line decides what anyone can prescribe next. Errors here cost the most, so each of these lines gets an explicit check with its transcript source showing by default. Unchanged medications with a matching source stay quiet. Dennis's note ends up with six checks: the metformin change, the allergy line, three labs, and the eye referral.
 
@@ -251,9 +251,9 @@ The prototype also runs from the keyboard. J and K move between open items, V ve
 
 ---
 
-## How I'd validate this
+## Next: testing with clinicians
 
-I haven't tested this with clinicians. So far it rests on published research, a look at how current scribe products handle sign-off, and four years of designing pharmacy software.
+This is where the project stands. I haven't tested it with clinicians yet. So far it rests on published research, a look at how current scribe products handle sign-off, and four years of designing pharmacy software. If you're a primary care clinician and could spare 30 minutes, I'd like to hear from you at [jake.r.silby@gmail.com](mailto:jake.r.silby@gmail.com).
 
 **Who and how.** Three to five primary care clinicians (physicians, nurse practitioners, physician assistants, or family medicine residents), in two rounds with one design change in between. Each session is 30 minutes on a video call:
 
@@ -288,7 +288,7 @@ In production, the hard part is telling real review from review that only looks 
 - **How reliably can a system tell advice from a passing acknowledgment?** The second look depends on it, and the bikes comment at 08:03 is the test case.
 - **Should clinicians be able to move a line between tiers?** Some will want to check every medication, unchanged ones included.
 
-**What I'd design next.** Clinician testing, as soon as I can recruit for it. Then the end-of-day queue, so a clinician can see which drafts have open items before opening any. And a flag for lines where the transcript mentions more than one value, which would put Error 1's kind of mistake in front of the clinician before she verifies.
+**What I'd design next.** After clinician testing, the end-of-day queue, so a clinician can see which drafts have open items before opening any. And a flag for lines where the transcript mentions more than one value, which would put Error 1's kind of mistake in front of the clinician before she verifies.
 
 **The short version.** Dana should sign an AI draft the way she'd sign an order someone else wrote. She checks what could hurt Dennis, sees where each line came from, and signs a record of what she actually did. You can [try the prototype](https://fieldnote-prototype.vercel.app/) and catch the dose yourself.
 
