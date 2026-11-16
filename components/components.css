@@ -690,12 +690,15 @@ body[data-page="case-study"] {
   aspect-ratio: 1520 / 1600; /* the encode's real size */
 }
 
+.case-clip-video--tabgroup {
+  aspect-ratio: 1200 / 278; /* the encode's real size */
+}
+
 /* --- Case study image ratios. One modifier per real image, set from the
  * file's pixel dimensions, grouped by page. --- */
 
 /* OnePulse Connect */
 .case-visual__image--figma-variables { aspect-ratio: 712 / 438; }
-.case-visual__image--tabgroup { aspect-ratio: 712 / 102; }
 .case-visual__image--celltypevariants { aspect-ratio: 712 / 479; }
 .case-visual__image--patientprofile,
 .case-visual__image--assessmentexample { aspect-ratio: 712 / 534; }

@@ -116,7 +116,12 @@
         <p class="case-section__body">I fully documented 25 atoms and 16 patterns. The 3 global components are in the coded library too, though less complete. Inline Drawer is furthest behind, and I get into why below.</p>
         <p class="case-section__body">Tab Group came straight out of an Orders problem. A single drug can have several NDCs, and regulatory and administrative rules say those have to stay together under one drug, even though different drugs each get their own tab. I built Tab Group to keep them grouped under one drug, and we caught the problem during design.</p>
         <div class="case-visual case-visual--transparent">
-          <img class="case-visual__image case-visual__image--tabgroup" src="images/ds_tabgroup.webp" alt="OnePulse Connect Tab Group component showing NDC-grouped tabs for a single drug, Atorvastatin, with dosage and quantity variants as separate tabs and a summary line below the active tab." loading="lazy" data-lightbox-src="images/large/ds-tabgroup.webp" tabindex="0" role="button">
+          <div class="case-clip-video case-clip-video--tabgroup" data-clip-video>
+            <video class="case-clip-video__media" role="img" preload="metadata" poster="videos/ds_tabgroup_poster.jpg" muted loop playsinline aria-label="OnePulse Connect Tab Group component showing NDC-grouped tabs for a single drug, Atorvastatin, with dosage and quantity variants as separate tabs and a summary line below the active tab.">
+              <source src="videos/ds_tabgroup.mp4" type="video/mp4">
+              <source src="videos/ds_tabgroup.webm" type="video/webm">
+            </video>
+          </div>
         </div>
         <p class="case-section__body">Each component's documentation lives on the component in Figma, next to the token file. It covers purpose, when to use it and when to skip it, every property, layout behavior, common usage patterns, dos and don'ts, and accessibility. The other two designers used the system without me in the room. Engineers built from the same Figma library, and so did the coded prototypes I made later.</p>
         <p class="case-section__body">Data Table carried the most weight, because orders, claims, dispensing, and inventory all live in dense tables. I built two types, Single Row and Tree Row, around AG Grid's capabilities from day one, since that's what engineering was building with.</p>
