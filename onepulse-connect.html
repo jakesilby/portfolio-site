@@ -85,7 +85,7 @@
           </span>
           <div class="problem-diagram__group">
             <div class="problem-diagram__image-frame">
-              <img class="problem-diagram__image" src="images/ds_colors.webp" alt="OnePulse Connect design system Colors foundation page, showing the full primitive color palette rows." loading="lazy">
+              <img class="problem-diagram__image" src="images/ds_colors.webp" alt="OnePulse Connect design system Color foundation page, showing the Pulse Teal brand primitive scale alongside grey and alpha ramps." loading="lazy">
             </div>
             <p class="problem-diagram__caption problem-diagram__caption--primary">One shared token &amp; component system</p>
           </div>
@@ -116,7 +116,12 @@
         <p class="case-section__body">I fully documented 25 atoms and 16 patterns. The 3 global components are in the coded library too, though less complete. Inline Drawer is furthest behind, and I get into why below.</p>
         <p class="case-section__body">Tab Group came straight out of an Orders problem. A single drug can have several NDCs, and regulatory and administrative rules say those have to stay together under one drug, even though different drugs each get their own tab. I built Tab Group to keep them grouped under one drug, and we caught the problem during design.</p>
         <div class="case-visual case-visual--transparent">
-          <img class="case-visual__image case-visual__image--tabgroup" src="images/ds_tabgroup.webp" alt="OnePulse Connect Tab Group component showing NDC-grouped tabs for a single drug, Atorvastatin, with dosage and quantity variants as separate tabs and a summary line below the active tab." loading="lazy" data-lightbox-src="images/large/ds-tabgroup.webp" tabindex="0" role="button">
+          <div class="case-clip-video case-clip-video--tabgroup" data-clip-video>
+            <video class="case-clip-video__media" role="img" preload="metadata" poster="videos/ds_tabgroup_poster.jpg" muted loop playsinline aria-label="OnePulse Connect Tab Group component showing NDC-grouped tabs for a single drug, Atorvastatin, with dosage and quantity variants as separate tabs and a summary line below the active tab.">
+              <source src="videos/ds_tabgroup.mp4" type="video/mp4">
+              <source src="videos/ds_tabgroup.webm" type="video/webm">
+            </video>
+          </div>
         </div>
         <p class="case-section__body">Each component's documentation lives on the component in Figma, next to the token file. It covers purpose, when to use it and when to skip it, every property, layout behavior, common usage patterns, dos and don'ts, and accessibility. The other two designers used the system without me in the room. Engineers built from the same Figma library, and so did the coded prototypes I made later.</p>
         <p class="case-section__body">Data Table carried the most weight, because orders, claims, dispensing, and inventory all live in dense tables. I built two types, Single Row and Tree Row, around AG Grid's capabilities from day one, since that's what engineering was building with.</p>
@@ -130,7 +135,7 @@
               </video>
             </div>
           </div>
-          <div class="case-visual case-visual--transparent">
+          <div class="case-visual">
             <img class="case-visual__image case-visual__image--celltypevariants" src="images/ds_datatable_celltypevariants.webp" alt="OnePulse Connect Data Table Cell Type Variants documentation, listing every supported grid cell type, text and sublabel, text label, numeric, date and time, avatar and name, avatar and link, link, chip, numeric badge, checkbox, radio, button group, button, overflow menu, and icon actions, with an example rendering of each." loading="lazy" data-lightbox-src="images/large/ds-datatable-celltypevariants.webp" tabindex="0" role="button">
           </div>
         </div>
@@ -143,13 +148,13 @@
         <div class="case-image-stack">
           <figure class="case-figure">
             <div class="case-visual">
-              <img class="case-visual__image case-visual__image--patientprofile" src="images/ds_patientprofile_example.webp" alt="OnePulse Connect Patient Profile Orders view for patient Sarah Chen, showing a medications table with status chips like In Progress, Active, Pending, and Dispensed alongside prescriber and copay details." loading="lazy" data-lightbox-src="images/large/ds-patientprofile-example.webp" tabindex="0" role="button">
+              <img class="case-visual__image case-visual__image--patientprofile" src="images/ds_patientprofile_example.webp" alt="OnePulse Connect Patient Profile Orders view for patient Sonia Chung, showing a medications table with status chips like In Progress, Active, Pending, and Dispensed alongside prescriber and copay details." loading="lazy" data-lightbox-src="images/large/ds-patientprofile-example.webp" tabindex="0" role="button">
             </div>
             <figcaption class="case-figure__caption">Patient Profile, Orders view. Designed from the system and in development by engineering when I left.</figcaption>
           </figure>
           <figure class="case-figure">
             <div class="case-visual">
-              <img class="case-visual__image case-visual__image--assessmentexample" src="images/ds_assessmentexample.webp" alt="OnePulse Connect Processing Assessments view for patient Sarah Chen, showing a multi-step Pre-Infusion Baseline form with medication verification and vitals fields alongside a Completed Assessments panel of status cards." loading="lazy" data-lightbox-src="images/large/ds-assessmentexample.webp" tabindex="0" role="button">
+              <img class="case-visual__image case-visual__image--assessmentexample" src="images/ds_assessmentexample.webp" alt="OnePulse Connect Processing Assessments view for patient Sonia Chung, showing a multi-step Pre-Infusion Baseline form with medication verification and vitals fields alongside a Completed Assessments panel of status cards." loading="lazy" data-lightbox-src="images/large/ds-assessmentexample.webp" tabindex="0" role="button">
             </div>
             <figcaption class="case-figure__caption">Processing Assessments, from the Pre-Infusion flow. Designed from the system for a flow that wasn't built into production, covered in my <a href="pre-infusion-assessment-flow.html">Pre-Infusion case study</a>. Patient, medication, and dose are sample data.</figcaption>
           </figure>
@@ -173,7 +178,7 @@
         <p class="case-section__body">React and Storybook never happened. That was supposed to be the next step, built on a mostly complete vanilla library.</p>
         <div class="case-visual">
           <div class="case-clip-video" data-clip-video>
-            <video class="case-clip-video__media" role="img" preload="metadata" poster="videos/ds_siteoverview_poster.jpg" muted loop playsinline aria-label="OnePulse Connect component library: clicking through the sidebar to load Alert, Data Table, Dialog, and Chip in the documentation viewer.">
+            <video class="case-clip-video__media" role="img" preload="metadata" poster="videos/ds_siteoverview_poster.jpg" muted loop playsinline aria-label="OnePulse Connect component library: opening the Color page and moving along the Pulse Teal tokens, following the alias chain from pulse-teal-500 to primary-main, then expanding an order in a tree-row Data Table.">
               <source src="videos/ds_siteoverview.mp4" type="video/mp4">
               <source src="videos/ds_siteoverview.webm" type="video/webm">
             </video>

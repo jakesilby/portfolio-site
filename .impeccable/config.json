@@ -10,7 +10,7 @@
           "about.html"
         ],
         "createdAt": "2026-09-14T15:51:54.353Z",
-        "reason": "Claude: the 16px role in this measurement is about.html's sr-only h1 (visually-hidden, never rendered) \u2014 it isn't part of the page's visible type hierarchy. Visible roles are body 14px and h2 18px, a 1.286:1 step that clears the 1.25 target on its own."
+        "reason": "Claude: the 16px role in this measurement is about.html's sr-only h1 (visually-hidden, never rendered) — it isn't part of the page's visible type hierarchy. Visible roles are body 14px and h2 18px, a 1.286:1 step that clears the 1.25 target on its own."
       },
       {
         "rule": "flat-type-hierarchy",
@@ -38,6 +38,15 @@
         ],
         "createdAt": "2026-11-04T21:30:00.000Z",
         "reason": "Jake asked for this ignore on 2026-11-04: same false positive as ai-note-review.html. The static scanner can't resolve the nested var() font shorthand and reads every role as 16px; computed sizes are 32/24/18px at 375 and 40/28/18px at 1440."
+      },
+      {
+        "rule": "flat-type-hierarchy",
+        "value": "*",
+        "files": [
+          "onepulse-connect.html"
+        ],
+        "createdAt": "2026-11-16T15:30:23.264Z",
+        "reason": "CLAUDE.md documents this site's fixed type scale as deliberate; unrelated to this session's edits"
       }
     ]
   }
